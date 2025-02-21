@@ -64,7 +64,7 @@ class AppTheme {
         ),
         titleLarge: TextStyle(
             fontSize: 19.20.sp,
-            fontWeight: FontWeight.w600,
+            fontWeight: FontWeight.w700,
             color: black(isDark: isDark)
         ),
         labelMedium: TextStyle(
@@ -82,7 +82,7 @@ class AppTheme {
 
       /// INPUT THEME
       inputDecorationTheme: InputDecorationTheme(
-        contentPadding: EdgeInsets.symmetric(horizontal: 16.sp, vertical: 12.sp),
+        contentPadding: EdgeInsets.symmetric(horizontal: 16.sp, vertical: 16.sp),
         isDense: true,
 
         hintStyle: TextStyle(
@@ -96,7 +96,7 @@ class AppTheme {
             color: stateColor10(isDark: isDark)
         ),
         focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: gray6(isDark: isDark), width: 1.sp),
+            borderSide: BorderSide(color: borderAppColor, width: 1.sp),
             borderRadius: BorderRadius.circular(8.r)
         ),
         enabledBorder: OutlineInputBorder(
@@ -117,7 +117,7 @@ class AppTheme {
             borderRadius: BorderRadius.circular(8.r)
         ),
         focusedErrorBorder:OutlineInputBorder(
-            borderSide: BorderSide(width: 1.sp, color:  red10(isDark: isDark)),
+            borderSide: BorderSide(width: 1.sp, color:  borderAppColor),
             borderRadius: BorderRadius.circular(8.r)
         ),
         filled: true,
@@ -165,34 +165,34 @@ InputDecoration appInputDecorator({
     contentPadding: EdgeInsets.symmetric(horizontal: 16.sp, vertical: 14.sp),
     isDense: true,
     hintStyle: TextStyle(
-      color: gray10(isDark: isAppDark()),
+      color: gray10(isDark: isAppDark(navigationService.context)),
       fontSize: 14.sp,
       fontWeight: FontWeight.normal,
     ),
     labelStyle: TextStyle(
         fontSize: 15.sp,
         fontWeight: FontWeight.normal,
-        color: gray10(isDark: isAppDark())
+        color: gray10(isDark: isAppDark(navigationService.context))
     ),
     focusedBorder: OutlineInputBorder(
         borderSide: BorderSide(color: borderAppColor, width: 1.sp),
         borderRadius: BorderRadius.circular(8.r)
     ),
     enabledBorder: OutlineInputBorder(
-        borderSide: BorderSide(width: 1.sp, color: green6(isDark: isAppDark())),
+        borderSide: BorderSide(width: 1.sp, color: green6(isDark: isAppDark(navigationService.context))),
         borderRadius: BorderRadius.circular(8.r)
     ),
     errorBorder:OutlineInputBorder(
-        borderSide: BorderSide(width: 1.sp, color:  red10(isDark: isAppDark())),
+        borderSide: BorderSide(width: 1.sp, color:  red10(isDark: isAppDark(navigationService.context))),
         borderRadius: BorderRadius.circular(8.r)
     ),
     errorStyle: TextStyle(
-      color: red12(isDark: isAppDark()),
+      color: red12(isDark: isAppDark(navigationService.context)),
       fontSize: 13.33.sp,
       fontWeight: FontWeight.w500,
     ),
     disabledBorder: OutlineInputBorder(
-        borderSide: BorderSide(width: 1.sp, color:  red10(isDark: isAppDark())),
+        borderSide: BorderSide(width: 1.sp, color:  red10(isDark: isAppDark(navigationService.context))),
         borderRadius: BorderRadius.circular(8.r)
     ),
     focusedErrorBorder:OutlineInputBorder(
@@ -200,7 +200,7 @@ InputDecoration appInputDecorator({
         borderRadius: BorderRadius.circular(8.r)
     ),
     filled: true,
-    fillColor: stateColor3(isDark: isAppDark()),
+    fillColor: stateColor3(isDark: isAppDark(navigationService.context)),
   );
 }
 

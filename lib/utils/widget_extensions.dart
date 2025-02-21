@@ -57,8 +57,8 @@ class SpaceH extends StatelessWidget {
   }
 }
 
-bool isAppDark() {
-  return Theme.of(navigationService.context).scaffoldBackgroundColor == const Color(0xFF111113);
+bool isAppDark(BuildContext context) {
+  return Theme.of(context).scaffoldBackgroundColor == const Color(0xFF111113);
 }
 
 class SpaceW extends StatelessWidget {

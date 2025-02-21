@@ -1,6 +1,5 @@
 import 'package:flutter/services.dart';
 
-import '../localization/locales.dart';
 import 'string_extensions.dart';
 
 const emailRegex = r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
@@ -21,24 +20,24 @@ String? Function(String?)? passwordValidator = (String? val) {
   RegExp smallRegex = RegExp(r"[a-z]");
   RegExp numberRegex = RegExp(r'\d');
   RegExp signRegex = RegExp(r'[!@#$%^&*(),\-_.?":;{}|<>]');
-  if (value.length < 7) {
-    return LocaleData.passwordShouldBeAtLeast8Characters.convertString();
-  } else if (!regex.hasMatch(value)){
-    return LocaleData.passwordShouldContainCapitalLetter.convertString();
+  if (!regex.hasMatch(value)){
+    return "Password should contain CAPITAL leters";
   } else if (!smallRegex.hasMatch(value)){
-    return LocaleData.passwordShouldContainAlphabet.convertString();
+    return "Password should contain alphabets";
   } else if (!numberRegex.hasMatch(value)){
-    return LocaleData.passwordShouldContainNumber.convertString();
+    return "Password should contain special Numbers (0123...89)";
   } else if (!signRegex.hasMatch(value)){
-    return LocaleData.passwordShouldContainSpecialCharacter.convertString();
+    return "Password should contain special character (%#\$*_-)";
+  } else if (value.length < 7) {
+    return "Password should contain at least 8 characters";
   }
-  return null;
+    return null;
 };
 
 String? Function(String?)? emptyValidator = (String? val) {
   String value = val??"";
   if(value.trim().isEmpty){
-    return LocaleData.emptyField.convertString();
+    return "This field cannot be empty";
   }
   return null;
 };

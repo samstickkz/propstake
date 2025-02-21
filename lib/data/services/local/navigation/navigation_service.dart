@@ -63,6 +63,10 @@ class NavigationService {
     navigatorKey.currentState?.popUntil((predicate) => predicate.settings.name == routeName);
   }
 
+  bool canPop() {
+    return navigatorKey.currentState?.canPop()?? false;
+  }
+
   // Go back to the previous screen
   void goBack({dynamic value}) {
     navigatorKey.currentState?.pop(value);

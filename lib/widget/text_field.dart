@@ -7,7 +7,6 @@ import 'package:propstake/widget/svg_builder.dart';
 
 import '../app_theme/palette.dart';
 import '../gen/assets.gen.dart';
-import '../localization/locales.dart';
 import '../utils/constants.dart';
 import '/utils/widget_extensions.dart';
 import 'apptexts.dart';
@@ -121,7 +120,7 @@ class _AppTextFieldState extends State<AppTextField> {
   @override
   Widget build(BuildContext context) {
 
-    bool isDark = Theme.of(context).primaryColor == const Color(0xFFEDF0F0);
+    bool isDark = isAppDark(context);
     double percentage = widget.percentage ?? 0;
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
@@ -136,9 +135,10 @@ class _AppTextFieldState extends State<AppTextField> {
                 Expanded(
                   child: AppText(
                     widget.hintText ?? "",
-                    size: widget.textSize ?? 15.sp,
+                    size: widget.textSize ?? 16.sp,
                     align: TextAlign.start,
                     weight: FontWeight.w500,
+                    color: stateColor12(isDark: isAppDark(context)),
                   ),
                 ),
                 if(widget.percentage!=null)...[
@@ -312,7 +312,6 @@ class CustomPhoneNumberInput extends StatelessWidget {
               signed: true,
               decimal: false,
             ),
-            locale: localeService.language,
             spaceBetweenSelectorAndTextField: 0,
             // initialValue: PhoneNumber(isoCode: 'US'),
             isEnabled: enabled,
@@ -324,7 +323,7 @@ class CustomPhoneNumberInput extends StatelessWidget {
               focusedBorder: InputBorder.none,
               errorBorder: InputBorder.none,
               focusedErrorBorder: InputBorder.none,
-              hintText: hint ?? LocaleData.inputYourPhoneNumber.convertString(),
+              hintText: hint ?? "Input Phone Number",
               errorStyle: TextStyle(fontSize: 0.sp),
               fillColor: Colors.transparent,
             ),
@@ -345,7 +344,7 @@ class CustomPhoneNumberInput extends StatelessWidget {
           Padding(
             padding: 16.sp.padL,
             child: AppText(
-              LocaleData.invalidPhoneNumber.convertString(),
+              "Invalid Phone Number",
               style: TextStyle(
                 color: Theme.of(context).inputDecorationTheme.errorStyle?.color,
                 fontSize: 13.33.sp,

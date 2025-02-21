@@ -66,11 +66,29 @@ class $AssetsFontsGen {
 class $AssetsSvgGen {
   const $AssetsSvgGen();
 
+  /// File path: assets/svg/apple_black.svg
+  String get appleBlack => 'assets/svg/apple_black.svg';
+
+  /// File path: assets/svg/apple_white.svg
+  String get appleWhite => 'assets/svg/apple_white.svg';
+
   /// File path: assets/svg/check.svg
   String get check => 'assets/svg/check.svg';
 
   /// File path: assets/svg/close_circle.svg
   String get closeCircle => 'assets/svg/close_circle.svg';
+
+  /// File path: assets/svg/google.svg
+  String get google => 'assets/svg/google.svg';
+
+  /// File path: assets/svg/microsoft.svg
+  String get microsoft => 'assets/svg/microsoft.svg';
+
+  /// File path: assets/svg/temp_logo.svg
+  String get tempLogo => 'assets/svg/temp_logo.svg';
+
+  /// File path: assets/svg/temp_logo_light.svg
+  String get tempLogoLight => 'assets/svg/temp_logo_light.svg';
 
   /// File path: assets/svg/visibility_off.svg
   String get visibilityOff => 'assets/svg/visibility_off.svg';
@@ -79,7 +97,18 @@ class $AssetsSvgGen {
   String get visible => 'assets/svg/visible.svg';
 
   /// List of all assets
-  List<String> get values => [check, closeCircle, visibilityOff, visible];
+  List<String> get values => [
+    appleBlack,
+    appleWhite,
+    check,
+    closeCircle,
+    google,
+    microsoft,
+    tempLogo,
+    tempLogoLight,
+    visibilityOff,
+    visible,
+  ];
 }
 
 class Assets {

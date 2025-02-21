@@ -1,12 +1,15 @@
 import 'package:get_it/get_it.dart';
 
-import 'data/services/local/locale.service.dart';
+import 'data/repository/repository.service.dart';
 import 'data/services/local/navigation/navigation_service.dart';
 import 'data/services/local/storage_service/auth_storage_service.dart';
 import 'data/services/local/storage_service/data_storage_service.dart';
 import 'data/services/local/theme.service.dart';
 import 'data/services/local/user.service.dart';
 import 'data/services/remote/authentication.service.dart';
+import 'ui/auth/auth.vm.dart';
+import 'ui/base/base-vm.dart';
+import 'ui/onboarding/splash/splash.vm.dart';
 
 GetIt locator = GetIt.I;
 
@@ -18,20 +21,19 @@ setupLocator() {
 setUpServices(){
   locator.registerLazySingleton<NavigationService>(() => NavigationService());
   locator.registerLazySingleton<AuthStorageService>(() => AuthStorageService());
-  // locator.registerLazySingleton<Repository>(() => Repository());
+  locator.registerLazySingleton<Repository>(() => Repository());
   // locator.registerLazySingleton<AppCache>(() => AppCache());
   locator.registerLazySingleton<UserService>(() => UserService());
   locator.registerLazySingleton<ThemeModel>(() => ThemeModel());
-  locator.registerLazySingleton<LocaleService>(() => LocaleService());
   locator.registerLazySingleton<DataStorageService>(() => DataStorageService());
   locator.registerLazySingleton<AuthenticationService>(() => AuthenticationService());
 }
 
 registerViewModel(){
   /* TODO Setup viewModels*/
-  // locator.registerFactory<BaseViewModel>(() => BaseViewModel());
-  // locator.registerFactory<LoginViewModel>(() => LoginViewModel());
-  // locator.registerFactory<ForgetPasswordViewModel>(() => ForgetPasswordViewModel());
+  locator.registerFactory<BaseViewModel>(() => BaseViewModel());
+  locator.registerFactory<SplashScreenViewModel>(() => SplashScreenViewModel());
+  locator.registerFactory<AuthViewModel>(() => AuthViewModel());
   // locator.registerFactory<SignUpViewModel>(() => SignUpViewModel());
   // locator.registerFactory<VerifyEmailViewModel>(() => VerifyEmailViewModel());
   // locator.registerFactory<PatientHomeViewModel>(() => PatientHomeViewModel());
