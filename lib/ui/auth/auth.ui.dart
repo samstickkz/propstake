@@ -117,7 +117,7 @@ class SignUpForm extends StatelessWidget {
           30.sp.sbH,
           AppButton.fullWidth(
             isLoading: model.isLoading,
-            onTap: model.createAccount,
+            onTap: model.formKey.currentState?.validate() ==true? model.createAccount: null,
             text: "Create Account",
           )
         ],
@@ -174,7 +174,7 @@ class SignInForm extends StatelessWidget {
           30.sp.sbH,
           AppButton.fullWidth(
             isLoading: model.isLoading,
-            onTap: model.login,
+            onTap: model.formKey2.currentState?.validate() ==true? model.login: null,
             text: "Log in",
           )
         ],

@@ -8,6 +8,7 @@ import 'data/services/local/theme.service.dart';
 import 'data/services/local/user.service.dart';
 import 'data/services/remote/authentication.service.dart';
 import 'ui/auth/auth.vm.dart';
+import 'ui/auth/verify/verify.vm.dart';
 import 'ui/base/base-vm.dart';
 import 'ui/onboarding/splash/splash.vm.dart';
 
@@ -34,7 +35,7 @@ registerViewModel(){
   locator.registerFactory<BaseViewModel>(() => BaseViewModel());
   locator.registerFactory<SplashScreenViewModel>(() => SplashScreenViewModel());
   locator.registerFactory<AuthViewModel>(() => AuthViewModel());
-  // locator.registerFactory<SignUpViewModel>(() => SignUpViewModel());
+  locator.registerFactory<VerifyUserViewModel>(() => VerifyUserViewModel());
   // locator.registerFactory<VerifyEmailViewModel>(() => VerifyEmailViewModel());
   // locator.registerFactory<PatientHomeViewModel>(() => PatientHomeViewModel());
   // locator.registerFactory<PatientSpecialistListViewModel>(() => PatientSpecialistListViewModel());

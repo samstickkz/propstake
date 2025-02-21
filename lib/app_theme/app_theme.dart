@@ -50,7 +50,7 @@ class AppTheme {
       textTheme: TextTheme(
         bodyMedium: TextStyle(
           color: gray11(isDark: isDark),
-          fontSize: 14.sp,
+          fontSize: 14.68.sp,
           fontWeight: FontWeight.normal,
         ),
         bodySmall: TextStyle(
@@ -68,12 +68,12 @@ class AppTheme {
             color: black(isDark: isDark)
         ),
         labelMedium: TextStyle(
-            fontSize: 15.sp,
+            fontSize: 14.68.sp,
             fontWeight: FontWeight.normal,
             color: gray10(isDark: isDark)
         ),
         labelSmall: TextStyle(
-            fontSize: 14.sp,
+            fontSize: 14.68.sp,
             fontWeight: FontWeight.normal,
             color: gray9(isDark: isDark)
         ),
