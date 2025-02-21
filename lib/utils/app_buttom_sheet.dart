@@ -17,11 +17,13 @@ Future<dynamic> bottomSheets({
   double? radius,
   bool centerTitle = false,
   String? subTitle,
-  bool noHeader = false
+  bool noHeader = false,
+  bool barrierDismissible = true
 }) async {
-  BuildContext context = contexts?? navigationService.navigatorKey.currentState!.context;
+  BuildContext context = contexts?? navigationService.context;
   return await showCupertinoModalSheet(
-      context: navigationService.navigatorKey.currentState!.context,
+      context: navigationService.context,
+      barrierDismissible: barrierDismissible,
       builder: (_){
         return Column(
               mainAxisAlignment: MainAxisAlignment.end,
@@ -36,6 +38,7 @@ Future<dynamic> bottomSheets({
                     )
                   ),
                   child: SafeArea(
+                    bottom: false,
                     child: Column(
                       children: [
 

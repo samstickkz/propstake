@@ -72,6 +72,9 @@ class $AssetsSvgGen {
   /// File path: assets/svg/apple_white.svg
   String get appleWhite => 'assets/svg/apple_white.svg';
 
+  /// File path: assets/svg/celebrate_grace.svg
+  String get celebrateGrace => 'assets/svg/celebrate_grace.svg';
+
   /// File path: assets/svg/check.svg
   String get check => 'assets/svg/check.svg';
 
@@ -100,6 +103,7 @@ class $AssetsSvgGen {
   List<String> get values => [
     appleBlack,
     appleWhite,
+    celebrateGrace,
     check,
     closeCircle,
     google,

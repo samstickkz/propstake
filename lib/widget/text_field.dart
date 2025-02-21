@@ -163,7 +163,7 @@ class _AppTextFieldState extends State<AppTextField> {
                 ]
               ],
             ),
-            5.0.sbH,
+            10.0.sbH,
           ],
         )
             : 0.0.sbH,

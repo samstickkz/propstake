@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:propstake/ui/base/base-vm.dart';
+import 'package:propstake/utils/constants.dart';
+
+import 'verify/verify.ui.dart';
 
 class AuthViewModel extends BaseViewModel {
 
@@ -34,7 +37,10 @@ class AuthViewModel extends BaseViewModel {
   }
 
   createAccount(){
-
+    navigationService.navigateToRoute(VerifyUserScreen(
+      reason: VerificationReason.login,
+      email: upEmailController.text.trim(),
+    ));
   }
 
   login(){
