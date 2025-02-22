@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'string_extensions.dart';
@@ -30,6 +31,16 @@ String? Function(String?)? passwordValidator = (String? val) {
     return "Password should contain special character (%#\$*_-)";
   } else if (value.length < 7) {
     return "Password should contain at least 8 characters";
+  }
+    return null;
+};
+
+String? Function(TextEditingController newPass,TextEditingController confirm) confirmPasswordValidator = (TextEditingController newPass,TextEditingController confirm) {
+  if(confirm.text.trim().isEmpty){
+    return "This field cannot be empty";
+  }
+  if(newPass.text.trim() != confirm.text.trim()){
+    return "Confirm password must be the same as password";
   }
     return null;
 };

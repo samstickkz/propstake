@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:propstake/ui/auth/forget_password/forget_password.ui.dart';
 import 'package:propstake/ui/base/base-vm.dart';
 import 'package:propstake/utils/constants.dart';
 
+import 'auth.ui.dart';
 import 'verify/verify.ui.dart';
 
 class AuthViewModel extends BaseViewModel {
@@ -26,6 +28,9 @@ class AuthViewModel extends BaseViewModel {
   TextEditingController inEmailController = TextEditingController();
   TextEditingController inPasswordController = TextEditingController();
 
+  TextEditingController newPasswordController = TextEditingController();
+  TextEditingController confirmPasswordController = TextEditingController();
+
   onChangedUp(String? val)async {
     formKey.currentState!.validate();
     notifyListeners();
@@ -47,8 +52,19 @@ class AuthViewModel extends BaseViewModel {
 
   }
 
-  forgotPassword(){
+  submitNewPassword(){
+    return navigationService.navigateToAndRemoveUntilWidget(const AuthHomeScreen());
+  }
 
+  startChangePassword(){
+    navigationService.navigateToRoute(VerifyUserScreen(
+      reason: VerificationReason.forgetPassword,
+      email: upEmailController.text.trim(),
+    ));
+  }
+
+  forgotPassword(){
+    navigationService.navigateToRoute(ForgotPasswordScreen());
   }
 
 }
