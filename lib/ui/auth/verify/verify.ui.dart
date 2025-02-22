@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -47,23 +48,27 @@ class VerifyUserScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     80.sp.sbH,
-                    AppText("Verify Code", size: 24.sp, isTitle: true,),
+                    FadeIn(child: AppText("Verify Code", size: 24.sp, isTitle: true,)),
                     20.sp.sbH,
                     AppText("Enter the verification code sent to your email.", size: 14.68.sp),
                     60.sp.sbH,
-                    AppTextField(
-                      controller: model.codeController,
-                      validator: emptyValidator,
-                      hintText: "Verification Code",
-                      hint: "Enter Verification Code",
-                      keyboardType: TextInputType.number,
-                      onChanged: model.onChanged,
+                    SlideInLeft(
+                      child: AppTextField(
+                        controller: model.codeController,
+                        validator: emptyValidator,
+                        hintText: "Verification Code",
+                        hint: "Enter Verification Code",
+                        keyboardType: TextInputType.number,
+                        onChanged: model.onChanged,
+                      ),
                     ),
                     40.sp.sbH,
-                    AppButton.fullWidth(
-                      isLoading: model.isLoading,
-                      onTap: model.formKey.currentState?.validate() ==true? ()=> model.confirm(reason): null,
-                      text: "Confirm",
+                    SlideInRight(
+                      child: AppButton.fullWidth(
+                        isLoading: model.isLoading,
+                        onTap: model.formKey.currentState?.validate() ==true? ()=> model.confirm(reason): null,
+                        text: "Confirm",
+                      ),
                     ),
                     40.sp.sbH,
                     RichText(
