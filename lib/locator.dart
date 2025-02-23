@@ -26,7 +26,7 @@ setUpServices(){
   // locator.registerLazySingleton<AppCache>(() => AppCache());
   locator.registerLazySingleton<UserService>(() => UserService());
   locator.registerLazySingleton<ThemeModel>(() => ThemeModel());
-  locator.registerLazySingleton<DataStorageService>(() => DataStorageService());
+  // locator.registerLazySingleton<DataStorageService>(() => DataStorageService());
   locator.registerLazySingleton<AuthenticationService>(() => AuthenticationService());
 }
 

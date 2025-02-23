@@ -14,7 +14,7 @@ UserService userService = locator<UserService>();
 AuthStorageService storageService = locator<AuthStorageService>();
 AuthenticationService authenticationService = locator<AuthenticationService>();
 NavigationService navigationService = locator<NavigationService>();
-DataStorageService dataStorage = locator<DataStorageService>();
+// DataStorageService dataStorage = locator<DataStorageService>();
 Repository repository = locator<Repository>();
 
 final GlobalKey<NavigatorState> navigatorKey1 = GlobalKey<NavigatorState>();
