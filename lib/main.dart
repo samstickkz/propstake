@@ -15,6 +15,7 @@ import 'package:provider/provider.dart';
 
 import 'app_theme/app_theme.dart';
 import 'data/cache/config.dart';
+import 'data/services/local/locale.service.dart';
 import 'data/services/local/navigation/navigation_service.dart';
 import 'data/services/local/theme.service.dart';
 import 'data/services/local/user.service.dart';
@@ -28,6 +29,8 @@ Future<void> main() async {
   await GetStorage.init();
 
   await setupLocator();
+
+  await locator<LocaleService>().init();
 
   SystemChrome.setPreferredOrientations(
     [
@@ -51,10 +54,52 @@ Future<void> main() async {
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+
+  configureLocalization() async {
+    final localeService = locator<LocaleService>();
+
+    // Listen to language changes
+    localeService.languageStream.listen((newLanguage) {
+      _onLanguageChanged();
+    });
+
+    // Set initial locale
+    await localeService.init();
+  }
+
+  Future<void> _onLanguageChanged() async {
+    // Update UI when language changes
+    setState(() {});
+  }
+
+  init()async{
+    FocusManager.instance.primaryFocus?.unfocus();
+    // Initialize and check login Status
+    await configureLocalization();
+    await locator<UserService>().initializer();
+  }
+
+  @override
+  void initState() {
+    init();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    final localeService = LocaleService();
+    localeService.dispose(); // Clean up when done
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
@@ -77,6 +122,8 @@ class MyApp extends StatelessWidget {
                         darkTheme: AppTheme.themeData(isDark: true),
                         themeMode: themeProvider.themeMode,
                         home: const SplashScreen(),
+                        supportedLocales: locator<LocaleService>().localization.supportedLocales,
+                        localizationsDelegates: locator<LocaleService>().localization.localizationsDelegates,
                       );
                     },
                   ));
@@ -85,30 +132,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
-class TestScreen extends StatelessWidget {
-  const TestScreen({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      // appBar: AuthAppBar(),
-      body: ListView(
-        padding: 16.sp.padA,
-        children: [
-          AppText("Hello"),
-          AppButton.fullWidth(
-            isLoading: false,
-            text: "Create Account",
-            onTap: (){},
-          ),
-          10.sp.sbH,
-          AppTextField(
-            hintText: "Password",
-          )
-        ],
-      ),
-    );
-  }
-}
-

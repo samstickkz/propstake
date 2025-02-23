@@ -1,6 +1,7 @@
 import 'package:get_it/get_it.dart';
 
 import 'data/repository/repository.service.dart';
+import 'data/services/local/locale.service.dart';
 import 'data/services/local/navigation/navigation_service.dart';
 import 'data/services/local/storage_service/auth_storage_service.dart';
 import 'data/services/local/storage_service/data_storage_service.dart';
@@ -23,7 +24,7 @@ setUpServices(){
   locator.registerLazySingleton<NavigationService>(() => NavigationService());
   locator.registerLazySingleton<AuthStorageService>(() => AuthStorageService());
   locator.registerLazySingleton<Repository>(() => Repository());
-  // locator.registerLazySingleton<AppCache>(() => AppCache());
+  locator.registerLazySingleton<LocaleService>(() => LocaleService());
   locator.registerLazySingleton<UserService>(() => UserService());
   locator.registerLazySingleton<ThemeModel>(() => ThemeModel());
   // locator.registerLazySingleton<DataStorageService>(() => DataStorageService());
