@@ -47,13 +47,13 @@ class DrawerAppBar extends StatelessWidget {
             alignment: Alignment.center,
             width: 40.sp,
             decoration: BoxDecoration(
-                color: stateColor3(isDark: isAppDark()),
+                color: stateColor3(isDark: isAppDark(context)),
                 shape: BoxShape.circle
             ),
             child: SvgBuilder(
               Assets.svg.closeCircle,
               size: 16.sp,
-              color: isAppDark()? Colors.white: Colors.black,
+              color: isAppDark(context)? Colors.white: Colors.black,
             ),
           ),
         )

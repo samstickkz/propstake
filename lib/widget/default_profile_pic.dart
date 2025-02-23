@@ -76,7 +76,7 @@ class ProfilePic extends StatelessWidget {
               width: size?? 42.sp,
               alignment: Alignment.center,
               decoration: BoxDecoration(
-                color: useGrayColor? stateColor3(isDark: isAppDark()):  stateColor12(isDark: isAppDark()),
+                color: useGrayColor? stateColor3(isDark: isAppDark(context)):  stateColor12(isDark: isAppDark(context)),
                 borderRadius: circleShape? BorderRadius.circular(size?? 42.sp) : BorderRadius.circular((size?? 42.sp)/5.25),
                 image: userImage == null? null: userImage!.startsWith("http")?
                 DecorationImage(
@@ -96,7 +96,7 @@ class ProfilePic extends StatelessWidget {
                   if(userImage != null) 0.0.sp.sbH else AppText(
                     getInitials(),
                     size: textSize?? (size?? 40.sp) * 0.4, weight: FontWeight.w700,
-                    color:useGrayColor? stateColor12(isDark: isAppDark()): white(isDark: isAppDark()),
+                    color:useGrayColor? stateColor12(isDark: isAppDark(context)): white(isDark: isAppDark(context)),
                   ),
                 ],
               )

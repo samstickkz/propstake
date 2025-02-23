@@ -85,7 +85,7 @@ class AppButton extends StatelessWidget {
       text: text,
       textColor: textColor,
       height: height ?? 48.0.sp,
-      borderRadius: 20.0.sp,
+      borderRadius: 8.0.sp,
       isLoading: isLoading,
       backGroundColor: color,
       borderWidth: borderWith?? (borderColor != null? 0.5.sp : 0.0),
@@ -191,7 +191,7 @@ class AppButton extends StatelessWidget {
       borderWidth: borderWith?? (borderColor != null? 1.sp : 0.0),
       useSecondaryColor: useSecondaryColor,
       borderColor: borderColor,
-      borderRadius: 32.r,
+      borderRadius: 8.r,
       backGroundColor: backgroundColor,
       gradient: false,
     );
@@ -199,12 +199,12 @@ class AppButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Color backgroundColor = backGroundColor ??(useSecondaryColor? Theme.of(context).colorScheme.secondary: stateColor12(isDark: isAppDark()));
+    final Color backgroundColor = backGroundColor ??(useSecondaryColor? Theme.of(context).colorScheme.secondary: primaryColor);
     final Color disabledBackgroundColor = backgroundColor.withOpacity(0.5);
     final Color borderClr =  borderColor ?? borderAppColor;
     final Color disabledBorderColor = borderClr.withOpacity(0.4);
     // final Color textColors = textColor ?? ( backgroundColor == Theme.of(context).colorScheme.secondary || backgroundColor ==  stateColor2(isAppDark(context))? black(isAppDark(context)): (backgroundColor == stateColor12(isAppDark(context))? Theme.of(context).cardColor: Theme.of(context).unselectedWidgetColor));
-    final Color textColors = textColor ?? (backgroundColor == stateColor4(isDark: isAppDark()) || backgroundColor == stateColor2(isDark: isAppDark())? black(isDark: isAppDark()): white());
+    final Color textColors = textColor ?? (backgroundColor == stateColor4(isDark: isAppDark(context)) || backgroundColor == stateColor2(isDark: isAppDark(context))? black(isDark: isAppDark(context)): Colors.white);
     final Color loadingTextColor = Colors.white.withOpacity(0.6);
 
     return isOutline || isTransparent? OutlinedButton(
@@ -220,7 +220,7 @@ class AppButton extends StatelessWidget {
           ),
           fixedSize: (isExpanded && widths == null && height == null) ? null : Size(widths ?? double.infinity, height ?? 52.sp),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(borderRadius ?? 32.r),
+            borderRadius: BorderRadius.circular(borderRadius ?? 8.r),
           ),
         ),
         child: isLoading? SpinKitDualRing(
@@ -250,7 +250,7 @@ class AppButton extends StatelessWidget {
                 8.sp.sbW,
                 AppText(
                   text??"",
-                  color: onTap != null? (textColor != null? textColors:  borderClr) : (textColor != null? loadingTextColor: disabledBorderColor),
+                  color: onTap != null? (textColor != null? textColors:  stateColor12(isDark: isAppDark(context))) : (textColor != null? loadingTextColor: disabledBorderColor),
                   weight: fontWeight?? FontWeight.w700,
                   size: textSize?? 16.sp,
                   align: TextAlign.center,
@@ -260,7 +260,7 @@ class AppButton extends StatelessWidget {
           ):
             AppText(
           text??"",
-          color: onTap != null? (textColor != null? textColors:  borderClr) : (textColor != null? loadingTextColor: disabledBorderColor),
+          color: onTap != null? (textColor != null? textColors:  stateColor12(isDark: isAppDark(context))) : (textColor != null? loadingTextColor: disabledBorderColor),
           weight: fontWeight?? FontWeight.w700,
           size: textSize?? 16.sp,
           align: TextAlign.center,
@@ -280,7 +280,7 @@ class AppButton extends StatelessWidget {
         elevation: 0.sp,
         shape: RoundedRectangleBorder(
 
-          borderRadius: BorderRadius.circular(borderRadius ?? 32.r),
+          borderRadius: BorderRadius.circular(borderRadius ?? 8.r),
           side: transparent? BorderSide.none:  BorderSide(
             color: borderColor ?? (isOutline ? (borderClr) : Colors.transparent),
             width: borderWidth ?? 1.5.sp,

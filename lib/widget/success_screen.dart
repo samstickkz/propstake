@@ -3,7 +3,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '/utils/string_extensions.dart';
 import '/utils/widget_extensions.dart';
-import '../localization/locales.dart';
 import 'app_button.dart';
 import 'apptexts.dart';
 
@@ -61,7 +60,7 @@ class SuccessScreen extends StatelessWidget {
             )),
             AppButton(
               isLoading: false,
-              text: buttonText?? LocaleData.continues.convertString(),
+              text: buttonText?? "Continue",
               onTap: onTap,
             )
           ],

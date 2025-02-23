@@ -3,7 +3,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:propstake/utils/string_extensions.dart';
 
 import '../app_theme/palette.dart';
-import '../localization/locales.dart';
 import '../utils/widget_extensions.dart';
 import 'app_button.dart';
 import 'apptexts.dart';
@@ -59,14 +58,14 @@ class ActionBottomSheet extends StatelessWidget {
                 child: Container(
                   width: width?? 250.sp,
                   decoration: BoxDecoration(
-                    color: useGradient? null : white(isDark: isAppDark()),
+                    color: useGradient? null : white(isDark: isAppDark(context)),
                     border: Border.all(
                       width: 2.sp,
                       color: Theme.of(context).cardColor
                     ),
                     gradient: !useGradient? null:  LinearGradient(
                       colors: [
-                        isAppDark()?
+                        isAppDark(context)?
                         const Color(0xFFE4F1FC):
                         const Color(0xFF303235),
                         Theme.of(context).cardColor,
@@ -88,7 +87,7 @@ class ActionBottomSheet extends StatelessWidget {
                           10.sp.sbH,
                           AppText(title??"", size: 20.sp, weight: FontWeight.w600, isTitle: true, align: TextAlign.start,),
                           10.sp.sbH,
-                          AppText(subTitle??"${LocaleData.areYouSureYouWantTo.convertString()}${(title??"").toLowerCase()}?", isHeader: true, size: 14.sp, align: TextAlign.start, weight: FontWeight.w400,),
+                          AppText(subTitle??"Are you sure you want to ${(title??"").toLowerCase()}?", isHeader: true, size: 14.sp, align: TextAlign.start, weight: FontWeight.w400,),
                           40.sp.sbH
                         ],
                       ),
@@ -99,15 +98,15 @@ class ActionBottomSheet extends StatelessWidget {
                             child: AppButton.fullWidth(
                               isLoading: false,
                               height: 48.sp,
-                              backgroundColor: stateColor3(isDark: isAppDark()),
+                              backgroundColor: stateColor3(isDark: isAppDark(context)),
                               fontWeight: FontWeight.w600,
-                              textColor: stateColor12(isDark: isAppDark()),
-                              text: cancelButtonText?? LocaleData.cancel.convertString(),
+                              textColor: stateColor12(isDark: isAppDark(context)),
+                              text: cancelButtonText?? "Cancel",
                               onTap: (){
                                 Navigator.of(context).pop();
                                 cancelTap ==null? null: cancelTap!();
                               },
-                              borderColor: stateColor4(isDark: isAppDark()),
+                              borderColor: stateColor4(isDark: isAppDark(context)),
                             ),
                           ),
                           10.0.sbW,
@@ -115,7 +114,7 @@ class ActionBottomSheet extends StatelessWidget {
                             child: AppButton.fullWidth(
                               isLoading: false,
                               fontWeight: FontWeight.w600,
-                              text: doItButtonText?? LocaleData.continues.convertString(),
+                              text: doItButtonText?? "Continue",
                               onTap: ()async{
                                 Navigator.of(context).pop();
                                 onTap ==null? null: onTap!();
