@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:propstake/app_theme/palette.dart';
+import 'package:propstake/utils/widget_extensions.dart';
 
 class AppText extends Text {
   final String text;
@@ -50,16 +52,18 @@ class AppText extends Text {
     return Text(
       text,
       style: style ?? (isTitle? Theme.of(context).textTheme.titleLarge: isLabel?  Theme.of(context).textTheme.labelMedium: Theme.of(context).textTheme.bodyMedium)?.copyWith(
-        fontSize: size ?? 14.sp,
+        fontSize: size,
         height: height,
         decoration: decoration,
-        letterSpacing: letterSpacing?? -0.11,
+        letterSpacing: letterSpacing,
+        decorationColor: stateColor11(isDark: isAppDark(context)),
+        decorationThickness: 0.5,
         fontFamily: family,
         color: color,
         // fontFamily: family,
         overflow: overflow,
         fontStyle: fontStyle,
-        fontWeight: weight ?? (isBold == true ? FontWeight.w700 : FontWeight.w400)
+        fontWeight: weight ?? (isBold == true ? FontWeight.w700 : null)
       ),
       textAlign: align ?? TextAlign.start,
       selectionColor: Colors.grey.withOpacity(0.5),

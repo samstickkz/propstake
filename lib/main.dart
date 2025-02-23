@@ -6,23 +6,28 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:oktoast/oktoast.dart';
 import 'package:propstake/locator.dart';
+import 'package:propstake/utils/widget_extensions.dart';
+import 'package:propstake/widget/app_button.dart';
+import 'package:propstake/widget/apptexts.dart';
+import 'package:propstake/widget/auth_appbar.dart';
+import 'package:propstake/widget/text_field.dart';
 import 'package:provider/provider.dart';
 
 import 'app_theme/app_theme.dart';
 import 'data/cache/config.dart';
-import 'data/services/local/locale.service.dart';
 import 'data/services/local/navigation/navigation_service.dart';
 import 'data/services/local/theme.service.dart';
 import 'data/services/local/user.service.dart';
+import 'ui/onboarding/splash/splash.ui.dart';
 
+Future<void> main() async {
 
-Future<void> main () async {
   WidgetsFlutterBinding.ensureInitialized();
-  await setupLocator();
+
   await dotenv.load(fileName: ".env");
   await GetStorage.init();
-  await locator<LocaleService>().init();
 
+  await setupLocator();
 
   SystemChrome.setPreferredOrientations(
     [
@@ -39,63 +44,15 @@ Future<void> main () async {
   //setup different deployment environment
   Config.appFlavor = Flavor.development;
 
+  // Initialize and check login Status
+  await locator<UserService>().initializer();
+
 
   runApp(const MyApp());
-      (dynamic error, dynamic stack) {
-    if (kDebugMode) {
-      print(error);
-      print(stack);
-    }
-  };
 }
 
-class MyApp extends StatefulWidget {
+class MyApp extends StatelessWidget {
   const MyApp({super.key});
-
-  @override
-  State<MyApp> createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
-
-
-  configureLocalization() async {
-    final localeService = locator<LocaleService>();
-
-    // Listen to language changes
-    localeService.languageStream.listen((newLanguage) {
-      _onLanguageChanged();
-    });
-
-    // Set initial locale
-    await localeService.init();
-  }
-
-  Future<void> _onLanguageChanged() async {
-    // Update UI when language changes
-    setState(() {});
-  }
-
-  init()async{
-    FocusManager.instance.primaryFocus?.unfocus();
-    // Initialize and check login Status
-    await configureLocalization();
-    await locator<UserService>().initializer();
-  }
-
-  @override
-  void initState() {
-    init();
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    final localeService = LocaleService();
-// ... Use the service
-    localeService.dispose(); // Clean up when done
-    super.dispose();
-  }
 
   // This widget is the root of your application.
   @override
@@ -117,14 +74,9 @@ class _MyAppState extends State<MyApp> {
                         scaffoldMessengerKey: locator<NavigationService>().snackBarKey,
                         title: "ProStake",
                         theme: AppTheme.themeData(isDark: false),
-                        darkTheme: AppTheme.themeData(isDark: false),
+                        darkTheme: AppTheme.themeData(isDark: true),
                         themeMode: themeProvider.themeMode,
-                        // onGenerateRoute: Routers.generateRoute,
-                        supportedLocales: locator<LocaleService>().localization.supportedLocales,
-                        localizationsDelegates: locator<LocaleService>().localization.localizationsDelegates,
-                        // home:  const AppBottomNavScreen(),
-                        home: const TestScreen(),
-                        // home:  const AppBottomNavScreen(),
+                        home: const SplashScreen(),
                       );
                     },
                   ));
@@ -140,8 +92,21 @@ class TestScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-
+      // appBar: AuthAppBar(),
+      body: ListView(
+        padding: 16.sp.padA,
+        children: [
+          AppText("Hello"),
+          AppButton.fullWidth(
+            isLoading: false,
+            text: "Create Account",
+            onTap: (){},
+          ),
+          10.sp.sbH,
+          AppTextField(
+            hintText: "Password",
+          )
+        ],
       ),
     );
   }
