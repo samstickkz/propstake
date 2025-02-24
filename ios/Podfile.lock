@@ -4,11 +4,12 @@ PODS:
     - Flutter
   - flutter_localization (0.0.1):
     - Flutter
-  - flutter_secure_storage (3.3.1):
-    - Flutter
   - libphonenumber_plugin (0.0.1):
     - Flutter
     - PhoneNumberKit
+  - local_auth_darwin (0.0.1):
+    - Flutter
+    - FlutterMacOS
   - path_provider_foundation (0.0.1):
     - Flutter
     - FlutterMacOS
@@ -33,8 +34,8 @@ DEPENDENCIES:
   - Flutter (from `Flutter`)
   - flutter_local_notifications (from `.symlinks/plugins/flutter_local_notifications/ios`)
   - flutter_localization (from `.symlinks/plugins/flutter_localization/ios`)
-  - flutter_secure_storage (from `.symlinks/plugins/flutter_secure_storage/ios`)
   - libphonenumber_plugin (from `.symlinks/plugins/libphonenumber_plugin/ios`)
+  - local_auth_darwin (from `.symlinks/plugins/local_auth_darwin/darwin`)
   - path_provider_foundation (from `.symlinks/plugins/path_provider_foundation/darwin`)
   - permission_handler_apple (from `.symlinks/plugins/permission_handler_apple/ios`)
   - PhoneNumberKit (~> 3.3)
@@ -53,10 +54,10 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/flutter_local_notifications/ios"
   flutter_localization:
     :path: ".symlinks/plugins/flutter_localization/ios"
-  flutter_secure_storage:
-    :path: ".symlinks/plugins/flutter_secure_storage/ios"
   libphonenumber_plugin:
     :path: ".symlinks/plugins/libphonenumber_plugin/ios"
+  local_auth_darwin:
+    :path: ".symlinks/plugins/local_auth_darwin/darwin"
   path_provider_foundation:
     :path: ".symlinks/plugins/path_provider_foundation/darwin"
   permission_handler_apple:
@@ -72,8 +73,8 @@ SPEC CHECKSUMS:
   Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
   flutter_local_notifications: df98d66e515e1ca797af436137b4459b160ad8c9
   flutter_localization: f43b18844a2b3d2c71fd64f04ffd6b1e64dd54d4
-  flutter_secure_storage: 7953c38a04c3fdbb00571bcd87d8e3b5ceb9daec
   libphonenumber_plugin: 48bf4078546377eedaab4aa54978cd0f6fa23072
+  local_auth_darwin: 66e40372f1c29f383a314c738c7446e2f7fdadc3
   path_provider_foundation: 2b6b4c569c0fb62ec74538f866245ac84301af46
   permission_handler_apple: 9878588469a2b0d0fc1e048d9f43605f92e6cec2
   PhoneNumberKit: ec00ab8cef5342c1dc49fadb99d23fa7e66cf0ef

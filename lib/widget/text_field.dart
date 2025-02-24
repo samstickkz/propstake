@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_localization/flutter_localization.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
+import 'package:propstake/localization/locales.dart';
 import 'package:propstake/utils/string_extensions.dart';
 import 'package:propstake/widget/svg_builder.dart';
 
@@ -446,6 +448,80 @@ class NewDropDownSelect extends StatelessWidget {
           ),
         )
       ],
+    );
+  }
+}
+
+
+class LanguageDropDown extends StatelessWidget {
+  final String? hint;
+  final double? height;
+  final double? textSize;
+  final Color? hintColor;
+  final Color? fillColor;
+  final bool useBorder;
+  final Widget? prefix;
+  final String? value;
+  final EdgeInsetsGeometry? contentPadding;
+  final String? Function(String?)? validator;
+  final List<TextInputFormatter>? inputFormatters;
+  final Function(String? value)? onChanged;
+  const LanguageDropDown({super.key,
+    this.hint,
+    this.value,
+    this.onChanged, this.validator, this.inputFormatters, this.height,
+    this.textSize, this.hintColor, this.prefix,
+    this.contentPadding, this.fillColor, this.useBorder = true
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: 37.h,
+      child: DropdownButtonFormField<String>(
+        borderRadius: BorderRadius.circular(8.r),
+        style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontSize: 12.sp),
+        icon: const Icon(Icons.keyboard_arrow_down),
+        value: localeService.language,
+        items: locales.map((e) => DropdownMenuItem(
+          value: e.languageCode,
+          child: Row(
+            children: [
+              Expanded(
+                child: Text(
+                  e.languageCode == "en"? LocaleData.english.convertString(): "",
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 1,
+                  softWrap: false,
+                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontSize: 12.sp),
+                ),
+              ),
+            ],
+          ),
+        ))
+            .toList(),
+        onChanged: onChanged,
+        isExpanded: true,
+        dropdownColor: Theme.of(context).cardColor,
+        validator: validator,
+        decoration: InputDecoration(
+          errorMaxLines: 3,
+          border: InputBorder.none,
+          prefixIconConstraints: BoxConstraints.tight(Size(20.sp, 20.sp)),
+          prefixIcon: Padding(
+            padding: 5.sp.padL,
+            child: SvgBuilder(
+              Assets.svg.globe,
+              size: 16.sp,
+            ),
+          ),
+          isDense: true,
+          hintText: hint,
+          filled: true,
+          fillColor: fillColor,
+          contentPadding: contentPadding,
+        ),
+      ),
     );
   }
 }
