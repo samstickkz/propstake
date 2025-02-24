@@ -3,10 +3,16 @@ import 'package:propstake/ui/auth/forget_password/forget_password.ui.dart';
 import 'package:propstake/ui/base/base-vm.dart';
 import 'package:propstake/utils/constants.dart';
 
+import '../home/bottom_nav.ui.dart';
 import 'auth.ui.dart';
 import 'verify/verify.ui.dart';
 
 class AuthViewModel extends BaseViewModel {
+
+  onInit(bool? isSignIn){
+    changeScreen(isSignIn == true? screens[1]: screens[0]);
+    notifyListeners();
+  }
 
   String screen = "Sign Up";
 
@@ -48,8 +54,12 @@ class AuthViewModel extends BaseViewModel {
     ));
   }
 
-  login(){
+  goHome(){
+    navigationService.navigateToAndRemoveUntilWidget(BottomNavigationScreen());
+  }
 
+  login(){
+    goHome();
   }
 
   submitNewPassword(){

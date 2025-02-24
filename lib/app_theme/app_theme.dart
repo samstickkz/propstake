@@ -131,8 +131,8 @@ class AppTheme {
         elevation: 0.0,
         scrolledUnderElevation: 0.0,
         systemOverlayStyle: isDark == true? SystemUiOverlayStyle.light: SystemUiOverlayStyle.dark,
-        color: Colors.transparent,
         foregroundColor: stateColor12(isDark: isDark),
+        backgroundColor: Colors.transparent,
         iconTheme: IconThemeData(color: stateColor12(isDark: isDark)),
         titleTextStyle: TextStyle(
           fontSize: 19.20.sp,

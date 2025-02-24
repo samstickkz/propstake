@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:propstake/localization/locales.dart';
 
 import 'string_extensions.dart';
 
@@ -22,25 +23,25 @@ String? Function(String?)? passwordValidator = (String? val) {
   RegExp numberRegex = RegExp(r'\d');
   RegExp signRegex = RegExp(r'[!@#$%^&*(),\-_.?":;{}|<>]');
   if (!regex.hasMatch(value)){
-    return "Password should contain CAPITAL leters";
+    return LocaleData.passwordShouldContainCapitalLetter.convertString();
   } else if (!smallRegex.hasMatch(value)){
-    return "Password should contain alphabets";
+    return LocaleData.passwordShouldContainAlphabet.convertString();
   } else if (!numberRegex.hasMatch(value)){
-    return "Password should contain special Numbers (0123...89)";
+    return LocaleData.passwordShouldContainNumber.convertString();
   } else if (!signRegex.hasMatch(value)){
-    return "Password should contain special character (%#\$*_-)";
+    return LocaleData.passwordShouldContainSpecialCharacter;
   } else if (value.length < 7) {
-    return "Password should contain at least 8 characters";
+    return LocaleData.passwordShouldBeAtLeast8Characters.convertString();
   }
     return null;
 };
 
 String? Function(TextEditingController newPass,TextEditingController confirm) confirmPasswordValidator = (TextEditingController newPass,TextEditingController confirm) {
   if(confirm.text.trim().isEmpty){
-    return "This field cannot be empty";
+    return LocaleData.emptyField.convertString();
   }
   if(newPass.text.trim() != confirm.text.trim()){
-    return "Confirm password must be the same as password";
+    return LocaleData.passwordShouldBeTheSame.convertString();
   }
     return null;
 };
@@ -48,7 +49,7 @@ String? Function(TextEditingController newPass,TextEditingController confirm) co
 String? Function(String?)? emptyValidator = (String? val) {
   String value = val??"";
   if(value.trim().isEmpty){
-    return "This field cannot be empty";
+    return LocaleData.emptyField.convertString();
   }
   return null;
 };
