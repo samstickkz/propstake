@@ -26,20 +26,17 @@ class AppAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      leading: Padding(
-        padding: 10.w.padL,
-        child: leading ?? (navigationService.canPop()? InkWell(
-          onTap: Navigator.of(context).pop,
-          child: Container(
-            height: 32.sp,
-            width: 32.sp,
-            alignment: Alignment.center,
-            child: SvgBuilder(Assets.svg.closeCircle, size: 16.sp, color: stateColor11(isDark: isAppDark(context)),),
-          ),
-        ): 0.0.sbH
+      leading: leading ?? (navigationService.canPop()? InkWell(
+        onTap: Navigator.of(context).pop,
+        child: Container(
+          height: 32.sp,
+          width: 32.sp,
+          alignment: Alignment.center,
+          child: SvgBuilder(Assets.svg.closeCircle, size: 16.sp, color: stateColor11(isDark: isAppDark(context)),),
         ),
+      ): 0.0.sbH
       ),
-      leadingWidth: 81.w + 10.w,
+      leadingWidth: 32.w + 32.w,
 
       title: title?? (text.isNotEmpty? Text(text): null),
       actions: actions,

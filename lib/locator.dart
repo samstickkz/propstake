@@ -1,4 +1,5 @@
 import 'package:get_it/get_it.dart';
+import 'package:propstake/ui/home/bottom_nav.vm.dart';
 
 import 'data/repository/repository.service.dart';
 import 'data/services/local/locale.service.dart';
@@ -9,6 +10,7 @@ import 'data/services/local/theme.service.dart';
 import 'data/services/local/user.service.dart';
 import 'data/services/remote/authentication.service.dart';
 import 'ui/auth/auth.vm.dart';
+import 'ui/auth/local_authentication/local_authentication.vm.dart';
 import 'ui/auth/verify/verify.vm.dart';
 import 'ui/base/base-vm.dart';
 import 'ui/onboarding/splash/splash.vm.dart';
@@ -37,8 +39,8 @@ registerViewModel(){
   locator.registerFactory<SplashScreenViewModel>(() => SplashScreenViewModel());
   locator.registerFactory<AuthViewModel>(() => AuthViewModel());
   locator.registerFactory<VerifyUserViewModel>(() => VerifyUserViewModel());
-  // locator.registerFactory<VerifyEmailViewModel>(() => VerifyEmailViewModel());
-  // locator.registerFactory<PatientHomeViewModel>(() => PatientHomeViewModel());
+  locator.registerFactory<LocalAuthViewModel>(() => LocalAuthViewModel());
+  locator.registerFactory<BottomNavigationViewModel>(() => BottomNavigationViewModel());
   // locator.registerFactory<PatientSpecialistListViewModel>(() => PatientSpecialistListViewModel());
   // locator.registerFactory<PatientDashBoardViewModel>(() => PatientDashBoardViewModel());
   // locator.registerFactory<ProfileSpecialistProfileViewModel>(() => ProfileSpecialistProfileViewModel());
