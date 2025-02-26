@@ -2,9 +2,12 @@ import 'package:animate_do/animate_do.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:propstake/localization/locales.dart';
 import 'package:propstake/ui/base/base-ui.dart';
 import 'package:propstake/utils/constants.dart';
+import 'package:propstake/utils/string_extensions.dart';
 import 'package:propstake/utils/validator.dart';
+import 'package:propstake/widget/custom_pinfield.dart';
 
 import '../../../gen/assets.gen.dart';
 import '../../../utils/widget_extensions.dart';
@@ -27,16 +30,9 @@ class VerifyUserScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BaseView<VerifyUserViewModel>(
+      onModelReady: (model)=> model.checkBiometricType(),
       builder: (model, theme)=> Scaffold(
-        appBar: AppAppBar(
-          leading: InkWell(
-            onTap: navigationService.canPop() ? navigationService.goBack: null,
-            child: SvgBuilder(
-              isAppDark(context)? Assets.svg.tempLogo: Assets.svg.tempLogoLight,
-              width: 81.w, height: 27.h,
-            ),
-          ),
-        ),
+        appBar: AppAppBar(),
         body: Padding(
           padding: 16.sp.padA,
           child: Form(
@@ -47,19 +43,20 @@ class VerifyUserScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    80.sp.sbH,
-                    FadeIn(child: AppText("Verify Code", size: 24.sp, isTitle: true,)),
+                    40.sp.sbH,
+                    FadeIn(child: AppText(LocaleData.verifyCode.convertString(), size: 24.sp, isTitle: true,)),
                     20.sp.sbH,
-                    AppText("Enter the verification code sent to your email.", size: 14.68.sp),
+                    AppText(LocaleData.enterCodeSentToEmail.convertString(), size: 14.68.sp),
                     60.sp.sbH,
                     SlideInLeft(
-                      child: AppTextField(
-                        controller: model.codeController,
-                        validator: emptyValidator,
-                        hintText: "Verification Code",
-                        hint: "Enter Verification Code",
-                        keyboardType: TextInputType.number,
+                      child: CustomPinTextField(
+                        title: LocaleData.verificationCode.convertString(),
                         onChanged: model.onChanged,
+                        controller: model.codeController,
+                        validator: (val){
+                          if(model.codeController.text.trim().length != 6) return "";
+                          return null;
+                        },
                       ),
                     ),
                     40.sp.sbH,
@@ -67,7 +64,7 @@ class VerifyUserScreen extends StatelessWidget {
                       child: AppButton.fullWidth(
                         isLoading: model.isLoading,
                         onTap: model.formKey.currentState?.validate() ==true? ()=> model.confirm(reason): null,
-                        text: "Confirm",
+                        text: LocaleData.confirm.convertString(),
                       ),
                     ),
                     40.sp.sbH,
@@ -75,11 +72,11 @@ class VerifyUserScreen extends StatelessWidget {
                       text: TextSpan(
                         children: [
                           TextSpan(
-                            text: "Didn’t receive code? ",
+                            text: "${LocaleData.didntReceiveCode.convertString()} ",
                             style: Theme.of(context).textTheme.bodyMedium,
                           ),
                           TextSpan(
-                              text: "Resend",
+                              text: LocaleData.resend.convertString(),
                               style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                                   color: Theme.of(context).primaryColor,
                                   fontWeight: FontWeight.w700

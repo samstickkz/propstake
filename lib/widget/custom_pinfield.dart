@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pinput/pinput.dart';
 
 import '../app_theme/palette.dart';
+import '../utils/widget_extensions.dart';
 import 'apptexts.dart';
 
 class CustomPinTextField extends StatelessWidget {
@@ -34,7 +35,7 @@ class CustomPinTextField extends StatelessWidget {
   });
   final Widget? prefixIcon;
   final Widget? suffixIcon;
-  final Function(String?)? validator;
+  final String? Function(String?)? validator;
   final Function(String)? onDone;
   final Widget Function(String?, String)? errorBuilder;
   final String? hintText;
@@ -59,22 +60,29 @@ class CustomPinTextField extends StatelessWidget {
     final themeData = Theme.of(context);
     bool isDark = Theme.of(context).primaryColor == const Color(0xFFEDF0F0);
     return Column(
+
       children: [
-        if (title != null)
-          Padding(
-            padding: EdgeInsets.only(bottom: 5.sp),
-            child: AppText(
-              title!,
-              size: 15.sp,
-              weight: FontWeight.w500,
-            ),
+        if (title != null)...[
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              AppText(
+                title ?? "",
+                size:  16.sp,
+                align: TextAlign.start,
+                weight: FontWeight.w500,
+                color: stateColor12(isDark: isAppDark(context)),
+              ),
+            ],
           ),
+          10.sp.sbH,
+        ],
         Pinput(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           defaultPinTheme: PinTheme(
             height: 52.h,
-            width: 58.w,
+            width: 49.w,
             constraints: BoxConstraints(
               minHeight: 7.h,
               minWidth: 12.w,
@@ -95,7 +103,7 @@ class CustomPinTextField extends StatelessWidget {
           errorBuilder: errorBuilder,
           submittedPinTheme: PinTheme(
             height: 52.h,
-            width: 58.w,
+            width: 49.w,
             textStyle: Theme.of(context).textTheme.bodyMedium?.copyWith(
               fontSize: 16.sp,
               fontWeight: FontWeight.w600,
@@ -112,7 +120,7 @@ class CustomPinTextField extends StatelessWidget {
           ),
           errorPinTheme: PinTheme(
             height: 52.h,
-            width: 58.w,
+            width: 49.w,
             textStyle: Theme.of(context).textTheme.bodyMedium?.copyWith(
               fontSize: 16.sp,
               fontWeight: FontWeight.w600,
@@ -141,7 +149,7 @@ class CustomPinTextField extends StatelessWidget {
             fontWeight: FontWeight.w600,
           ),
           forceErrorState: forceErrorState,
-          validator: (val)=> validator!(val),
+          validator: validator,
         ),
       ],
     );

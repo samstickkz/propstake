@@ -77,7 +77,8 @@ mixin LocaleData {
   static const String earnConsistentReturns = 'earnConsistentReturns';
   static const String startWithJust100 = 'startWithJust100';
   static const String noLargeDownPayments = 'noLargeDownPayments';
-  static const String joinPropertyStake = 'joinPropertyStake';
+  static const String join = 'join';
+  static const String propertyStake = 'PropertyStake';
   static const String enterPassword = 'enterPassword';
   static const String termsOfService = 'termsOfService';
   static const String privacyPolicy = 'privacyPolicy';
@@ -130,11 +131,27 @@ mixin LocaleData {
   static const String manageNotifications = 'manageNotifications';
   static const String changeLanguage = 'changeLanguage';
   static const String viewProfile = 'viewProfile';
+  static const String signUp = 'signUp';
+  static const String signIn = 'signIn';
+  static const String english = 'english';
+  static const String byClicking = 'byClicking';
+  static const String and = 'and';
+  static const String notNow = 'notNow';
+  static const String setUp = 'setUp';
+  static const String pleaseAutenticateToProceed = 'pleaseAutenticateToProceed';
 
   static const Map<String, dynamic> en = {
     completed: "Completed",
+    byClicking: "By clicking Get started, you agree to our ",
+    signUp: "Sign Up",
+    and: "and ",
+    signIn: "Sign In",
     no: "No",
-    forgetPassword: "Forgot Password",
+    notNow: "Not now",
+    setUp: "Set up",
+    pleaseAutenticateToProceed: "'Please Authenticate to proceed'",
+    english: "English",
+    forgetPassword: "Forgot Password?",
     skip: "Skip",
     confirmNewPassword: "Confirm New Password",
     chooseNewPassword: "Choose New Password",
@@ -195,7 +212,8 @@ mixin LocaleData {
     earnConsistentReturns: "Earn consistent returns through rental income and property appreciation. Your investments work for you while we handle the management.",
     startWithJust100: "Start with Just \$100",
     noLargeDownPayments: "No large down payments or complex paperwork—get started today and build your real estate portfolio effortlessly.",
-    joinPropertyStake: "Join Property Stake",
+    join: "Join ",
+    propertyStake: "Property Stake",
     enterPassword: "Enter Password",
     termsOfService: "Terms of Service",
     privacyPolicy: "Privacy Policy",

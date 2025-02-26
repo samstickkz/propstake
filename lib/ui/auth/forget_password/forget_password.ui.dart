@@ -22,15 +22,7 @@ class ForgotPasswordScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BaseView<AuthViewModel>(
       builder: (model, theme)=> Scaffold(
-        appBar: AppAppBar(
-          leading: InkWell(
-            onTap: navigationService.canPop() ? navigationService.goBack: null,
-            child: SvgBuilder(
-              isAppDark(context)? Assets.svg.tempLogo: Assets.svg.tempLogoLight,
-              width: 81.w, height: 27.h,
-            ),
-          ),
-        ),
+        appBar: AppAppBar(),
         body: Form(
           key: model.formKey,
           child: Padding(
