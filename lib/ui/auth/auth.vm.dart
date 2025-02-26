@@ -24,6 +24,7 @@ class AuthViewModel extends BaseViewModel {
 
   TextEditingController upEmailController = TextEditingController();
   TextEditingController upPasswordController = TextEditingController();
+  TextEditingController upConfirmPasswordController = TextEditingController();
 
   TextEditingController inEmailController = TextEditingController();
   TextEditingController inPasswordController = TextEditingController();

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:propstake/localization/locales.dart';
+import 'package:propstake/utils/string_extensions.dart';
 import 'package:propstake/utils/widget_extensions.dart';
 
 import '../../../utils/validator.dart';
@@ -25,8 +27,8 @@ class SignUpForm extends StatelessWidget {
           AppTextField(
             controller: model.upEmailController,
             validator: emailValidator,
-            hintText: "Email",
-            hint: "Enter Email Address",
+            hintText: LocaleData.email.convertString(),
+            hint: LocaleData.enterEmailAddress.convertString(),
             onChanged: model.onChangedUp,
           ),
           20.sp.sbH,
@@ -34,15 +36,24 @@ class SignUpForm extends StatelessWidget {
             controller: model.upPasswordController,
             validator: passwordValidator,
             isPassword: true,
-            hintText: "Password",
-            hint: "Enter Password",
+            hintText: LocaleData.password.convertString(),
+            hint: LocaleData.enterPassword.convertString(),
+            onChanged: model.onChangedUp,
+          ),
+          20.sp.sbH,
+          AppTextField(
+            controller: model.upConfirmPasswordController,
+            validator: (val)=> confirmPasswordValidator(model.upPasswordController, model.upConfirmPasswordController),
+            isPassword: true,
+            hintText: LocaleData.confirmPassword.convertString(),
+            hint: LocaleData.enterPassword.convertString(),
             onChanged: model.onChangedUp,
           ),
           30.sp.sbH,
           AppButton.fullWidth(
             isLoading: model.isLoading,
             onTap: model.formKey.currentState?.validate() ==true? model.createAccount: null,
-            text: "Create Account",
+            text: LocaleData.createAccount.convertString(),
           )
         ],
 
