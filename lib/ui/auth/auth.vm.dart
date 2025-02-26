@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:propstake/ui/auth/forget_password/forget_password.ui.dart';
 import 'package:propstake/ui/base/base-vm.dart';
 import 'package:propstake/utils/constants.dart';
+import 'package:propstake/utils/dartz.x.dart';
+import 'package:propstake/utils/snack_message.dart';
 
 import '../home/bottom_nav.ui.dart';
 import 'auth.ui.dart';
@@ -59,8 +61,23 @@ class AuthViewModel extends BaseViewModel {
     navigationService.navigateToAndRemoveUntilWidget(BottomNavigationScreen());
   }
 
-  login(){
-    goHome();
+  login() async {
+    startLoader();
+    try{
+      var res = await authenticationService.login(
+          email: inEmailController.text.trim(),
+          password: inPasswordController.text.trim(),
+      );
+      if(res.isRight()){
+        stopLoader();
+        showCustomToast(res.asRight().message??"");
+        goHome();
+      } else {
+        stopLoader();
+      }
+    }catch(err){
+      stopLoader();
+    }
   }
 
   submitNewPassword(){
@@ -76,6 +93,26 @@ class AuthViewModel extends BaseViewModel {
 
   forgotPassword(){
     navigationService.navigateToRoute(ForgotPasswordScreen());
+  }
+
+  signUp()async{
+    startLoader();
+    try{
+      var res = await authenticationService.signUp(
+        email: upEmailController.text.trim(),
+        password: upPasswordController.text.trim(),
+        confirmPassword: upConfirmPasswordController.text.trim()
+      );
+      if(res.isRight()){
+        stopLoader();
+        showCustomToast(res.asRight().message??"");
+        createAccount();
+      } else {
+        stopLoader();
+      }
+    }catch(err){
+      stopLoader();
+    }
   }
 
 }
