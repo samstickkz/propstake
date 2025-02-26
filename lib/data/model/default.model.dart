@@ -9,14 +9,16 @@ dynamic resModelDataToJson(String data) => json.decode(data);
 class ResModel {
   String? message;
   String? status;
+  bool? successful;
   String? token;
   dynamic data;
 
-  ResModel({this.message, this.token, this.status, this.data});
+  ResModel({this.message, this.token, this.successful, this.status, this.data});
 
   ResModel.fromJson(Map<String, dynamic> json) {
     status = json['status'];
     message = json['message'];
+    successful = json['successful'];
     token = json['token'];
     data = json["data"];
   }
@@ -25,6 +27,7 @@ class ResModel {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['message'] = message;
     data['status'] = status;
+    data['successful'] = successful;
     data['token'] = token;
     data['data'] = data;
     return data;

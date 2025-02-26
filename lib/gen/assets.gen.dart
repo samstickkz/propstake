@@ -68,6 +68,9 @@ class $AssetsFontsGen {
 class $AssetsPngGen {
   const $AssetsPngGen();
 
+  /// File path: assets/png/logo_name.png
+  AssetGenImage get logoName => const AssetGenImage('assets/png/logo_name.png');
+
   /// File path: assets/png/onboard_one.png
   AssetGenImage get onboardOne =>
       const AssetGenImage('assets/png/onboard_one.png');
@@ -81,7 +84,12 @@ class $AssetsPngGen {
       const AssetGenImage('assets/png/onboard_two.png');
 
   /// List of all assets
-  List<AssetGenImage> get values => [onboardOne, onboardThree, onboardTwo];
+  List<AssetGenImage> get values => [
+    logoName,
+    onboardOne,
+    onboardThree,
+    onboardTwo,
+  ];
 }
 
 class $AssetsSvgGen {
@@ -102,11 +110,47 @@ class $AssetsSvgGen {
   /// File path: assets/svg/close_circle.svg
   String get closeCircle => 'assets/svg/close_circle.svg';
 
+  /// File path: assets/svg/face_id.svg
+  String get faceId => 'assets/svg/face_id.svg';
+
+  /// File path: assets/svg/fingerprint.svg
+  String get fingerprint => 'assets/svg/fingerprint.svg';
+
+  /// File path: assets/svg/globe.svg
+  String get globe => 'assets/svg/globe.svg';
+
   /// File path: assets/svg/google.svg
   String get google => 'assets/svg/google.svg';
 
+  /// File path: assets/svg/logo_name.svg
+  String get logoName => 'assets/svg/logo_name.svg';
+
   /// File path: assets/svg/microsoft.svg
   String get microsoft => 'assets/svg/microsoft.svg';
+
+  /// File path: assets/svg/my_investment.svg
+  String get myInvestment => 'assets/svg/my_investment.svg';
+
+  /// File path: assets/svg/my_investment_active.svg
+  String get myInvestmentActive => 'assets/svg/my_investment_active.svg';
+
+  /// File path: assets/svg/profile.svg
+  String get profile => 'assets/svg/profile.svg';
+
+  /// File path: assets/svg/profile_active.svg
+  String get profileActive => 'assets/svg/profile_active.svg';
+
+  /// File path: assets/svg/properties.svg
+  String get properties => 'assets/svg/properties.svg';
+
+  /// File path: assets/svg/properties_active.svg
+  String get propertiesActive => 'assets/svg/properties_active.svg';
+
+  /// File path: assets/svg/reward.svg
+  String get reward => 'assets/svg/reward.svg';
+
+  /// File path: assets/svg/reward_active.svg
+  String get rewardActive => 'assets/svg/reward_active.svg';
 
   /// File path: assets/svg/temp_logo.svg
   String get tempLogo => 'assets/svg/temp_logo.svg';
@@ -120,6 +164,12 @@ class $AssetsSvgGen {
   /// File path: assets/svg/visible.svg
   String get visible => 'assets/svg/visible.svg';
 
+  /// File path: assets/svg/wallet.svg
+  String get wallet => 'assets/svg/wallet.svg';
+
+  /// File path: assets/svg/wallet_active.svg
+  String get walletActive => 'assets/svg/wallet_active.svg';
+
   /// List of all assets
   List<String> get values => [
     appleBlack,
@@ -127,12 +177,26 @@ class $AssetsSvgGen {
     celebrateGrace,
     check,
     closeCircle,
+    faceId,
+    fingerprint,
+    globe,
     google,
+    logoName,
     microsoft,
+    myInvestment,
+    myInvestmentActive,
+    profile,
+    profileActive,
+    properties,
+    propertiesActive,
+    reward,
+    rewardActive,
     tempLogo,
     tempLogoLight,
     visibilityOff,
     visible,
+    wallet,
+    walletActive,
   ];
 }
 
