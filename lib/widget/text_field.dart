@@ -493,7 +493,7 @@ class LanguageDropDown extends StatelessWidget {
                   overflow: TextOverflow.ellipsis,
                   maxLines: 1,
                   softWrap: false,
-                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontSize: 12.sp),
+                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontSize: 12.sp, color: Colors.white, fontWeight: FontWeight.w700),
                 ),
               ),
             ],
@@ -506,13 +506,41 @@ class LanguageDropDown extends StatelessWidget {
         validator: validator,
         decoration: InputDecoration(
           errorMaxLines: 3,
-          border: InputBorder.none,
+          border: OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.white, width: 1.5.sp),
+            borderRadius: BorderRadius.circular(8.r)
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.white, width: 1.5.sp),
+            borderRadius: BorderRadius.circular(8.r)
+          ),
+          enabledBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.white, width: 1.5.sp),
+            borderRadius: BorderRadius.circular(8.r)
+          ),
+          errorBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.white, width: 1.5.sp),
+            borderRadius: BorderRadius.circular(8.r)
+          ),
+          disabledBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.white, width: 1.5.sp),
+            borderRadius: BorderRadius.circular(8.r)
+          ),
+          focusedErrorBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.white, width: 1.5.sp),
+            borderRadius: BorderRadius.circular(8.r)
+          ),
+          // border: OutlineInputBorder(
+          //   borderSide: BorderSide(color: Colors.white, width: 1.sp),
+          //   borderRadius: BorderRadius.circular(8.r)
+          // ),
           prefixIconConstraints: BoxConstraints.tight(Size(20.sp, 20.sp)),
           prefixIcon: Padding(
             padding: 5.sp.padL,
             child: SvgBuilder(
               Assets.svg.globe,
-              size: 16.sp,
+              size: 18.sp,
+              color: Colors.white,
             ),
           ),
           isDense: true,

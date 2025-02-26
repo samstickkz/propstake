@@ -9,6 +9,7 @@ import '../../../utils/app_logger.dart';
 import '../../cache/config.dart';
 import '../../../utils/constants.dart';
 import '../../cache/database_keys.dart';
+import '../../model/default.model.dart';
 
 String? newToken;
 
@@ -51,10 +52,7 @@ connect({bool? useFormData}) {
         AppLogger.debug("SERVER RESPONSE::: ${response.data}");
         return handler.next(response);
       },
-      onError: (DioException e, handler) async {
-        AppLogger.error("Error Response::: ${jsonDecode(jsonEncode(e.response?.data))}", "");
-        return handler.next(e);
-      },
+      onError: errorHandler,
     ),
   );
 
@@ -107,17 +105,7 @@ refresh() {
         log("SERVER RESPONSE::: ${response.data}");
         return handler.next(response);
       },
-      onError: (DioException e, handler) async {
-        AppLogger.error("${e.response?.statusCode.toString()}", "");
-        AppLogger.error("${e.response?.data.toString()}", "");
-        AppLogger.error("${e.response?.statusMessage}", "");
-
-        if(e.response!.statusMessage.toString().toUpperCase().contains("unauthorized")){
-          await userService.logout();
-        }
-
-        return handler.next(e);
-      },
+      onError: errorHandler,
     ),
   );
 
@@ -154,4 +142,106 @@ Future<bool> refreshAuthToken() async {
   } catch (e) {
     return false;
   }
+}
+
+errorHandler(DioException e,  ErrorInterceptorHandler handler) async {
+  AppLogger.debug("STATUS CODE::: ${e.response?.statusCode}");
+  switch (e.type) {
+    case DioExceptionType.connectionError:
+    case DioExceptionType.sendTimeout:
+    case DioExceptionType.receiveTimeout:
+    case DioExceptionType.connectionTimeout:
+      return handler.next(DioException(response: Response(data: {"message": "Your internet connection is unstable"},
+          requestOptions: e.requestOptions), requestOptions:  e.requestOptions)
+      );
+    case DioExceptionType.cancel:
+      return handler.next(DioException(response: Response(data: {"message": "Request cancelled"},
+          requestOptions: e.requestOptions), requestOptions:  e.requestOptions)
+      );
+
+    case DioExceptionType.unknown:
+      return handler.next(DioException(response: Response(data: {"message": "An unknown error occurred"},
+          requestOptions: e.requestOptions), requestOptions:  e.requestOptions)
+      );
+
+    case DioExceptionType.badResponse:
+      if (e.response == null) {
+        return handler.next(DioException(response: Response(data: {"message": "An unknown error occurred"},
+            requestOptions: e.requestOptions), requestOptions:  e.requestOptions)
+        );
+      }
+      switch (e.response!.statusCode) {
+        case 409:
+          return handler.next(DioException(response: Response(data: {"message": _getErrorMessage(e)},
+              requestOptions: e.requestOptions), requestOptions:  e.requestOptions)
+          );
+        case 400:
+          return handler.next(DioException(response: Response(data: {"message": _getErrorMessage(e)},
+              requestOptions: e.requestOptions), requestOptions:  e.requestOptions)
+          );
+        case 401:
+          return handler.next(DioException(response: Response(data: {"message": "Authorization error"},
+              requestOptions: e.requestOptions), requestOptions:  e.requestOptions)
+          );
+
+        case 404:
+          return handler.next(DioException(response: Response(data: {"message": "Resource not found"},
+              requestOptions: e.requestOptions), requestOptions:  e.requestOptions)
+          );
+        case 411:
+          return handler.next(DioException(response: Response(data: {"message": _getErrorMessage(e)},
+              requestOptions: e.requestOptions), requestOptions:  e.requestOptions)
+          );
+        case 500:
+          return handler.next(DioException(response: Response(data:{"message": _getErrorMessage(e)},
+              requestOptions: e.requestOptions), requestOptions:  e.requestOptions)
+          );
+        default:
+          return handler.next(DioException(response: Response(data: {"message": "Oops something went wrong"},
+              requestOptions: e.requestOptions), requestOptions:  e.requestOptions)
+          );
+      }
+
+    default:
+      return handler.next(DioException(response: Response(data: {"message": "An unknown error occurred"},
+          requestOptions: e.requestOptions), requestOptions:  e.requestOptions)
+      );
+  }
+}
+
+String _getErrorMessage(DioException exception) {
+
+  AppLogger.debug("error: ${exception.response?.data}");
+  String? message;
+
+  try {
+    dynamic responseData = exception.response?.data;
+
+    // Decode the response data if it's a JSON string
+    if (responseData is String && isJson(responseData)) {
+      responseData = jsonDecode(responseData);
+    }
+
+    // Check if the response data is a map
+    if (responseData is Map<String, dynamic>) {
+      final errorMap = ResModel.fromJson(responseData);
+
+      if (errorMap.data == null) {
+        message = errorMap.message;
+      } else  if(errorMap.data.runtimeType == String){
+        message = errorMap.data;
+      }else {
+        message = errorMap.data["error"];
+      }
+    } else {
+      message = "Unexpected error format";
+    }
+
+    AppLogger.debug("Message: $message");
+  } catch (e) {
+    // Log the error for debugging
+    AppLogger.debug("Error parsing server response: $e");
+    message = "An error occurred while processing the error response";
+  }
+  return message ?? "Unknown error occurred";
 }

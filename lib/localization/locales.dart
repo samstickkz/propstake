@@ -137,14 +137,24 @@ mixin LocaleData {
   static const String byClicking = 'byClicking';
   static const String and = 'and';
   static const String notNow = 'notNow';
-  static const String setUp = 'setUp';
   static const String pleaseAutenticateToProceed = 'pleaseAutenticateToProceed';
+  static const String setUp = 'setUp';
+  static const String profile = 'profile';
+  static const String reward = 'reward';
+  static const String myInvestment = 'myInvestment';
+  static const String wallet = 'wallet';
+  static const String properties = 'properties';
 
   static const Map<String, dynamic> en = {
     completed: "Completed",
     byClicking: "By clicking Get started, you agree to our ",
     signUp: "Sign Up",
     and: "and ",
+    profile: "Profile",
+    reward: "Reward",
+    myInvestment: "My Investment",
+    wallet: "Wallet",
+    properties: "Properties",
     signIn: "Sign In",
     no: "No",
     notNow: "Not now",

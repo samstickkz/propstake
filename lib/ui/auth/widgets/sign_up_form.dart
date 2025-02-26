@@ -9,7 +9,6 @@ import 'package:propstake/utils/widget_extensions.dart';
 import '../../../gen/assets.gen.dart';
 import '../../../utils/validator.dart';
 import '../../../widget/app_button.dart';
-import '../../../widget/apptexts.dart';
 import '../../../widget/or_builder.dart';
 import '../../../widget/text_field.dart';
 import '../auth.vm.dart';
@@ -37,10 +36,10 @@ class SignUpForm extends StatelessWidget {
                     style: Theme.of(context).textTheme.titleLarge,
                   ),
                   TextSpan(
-                      text: LocaleData.propertyStake.convertString(),
-                      style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                          color: Theme.of(context).primaryColor,
-                      ),
+                    text: LocaleData.propertyStake.convertString(),
+                    style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                        color: Theme.of(context).primaryColor,
+                    ),
                   ),
                 ],
               ),
@@ -64,10 +63,19 @@ class SignUpForm extends StatelessWidget {
             hint: LocaleData.enterPassword.convertString(),
             onChanged: model.onChangedUp,
           ),
+          20.sp.sbH,
+          AppTextField(
+            controller: model.upConfirmPasswordController,
+            validator: (val)=> confirmPasswordValidator(model.upPasswordController, model.upConfirmPasswordController),
+            isPassword: true,
+            hintText: LocaleData.confirmPassword.convertString(),
+            hint: LocaleData.enterPassword.convertString(),
+            onChanged: model.onChangedUp,
+          ),
           30.sp.sbH,
           AppButton.fullWidth(
             isLoading: model.isLoading,
-            onTap: model.formKey.currentState?.validate() ==true? model.createAccount: null,
+            onTap: model.formKey.currentState?.validate() ==true? model.signUp: null,
             text: LocaleData.createAccount.convertString(),
           ),
           20.sp.sbH,

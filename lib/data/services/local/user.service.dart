@@ -27,7 +27,6 @@ class UserService extends ChangeNotifier {
     if(refreshToken!=null){
       await storageService.storeItem(key: StorageKey.refreshTokenKey, value: refreshToken);
     }
-
     isUserLoggedIn = true;
     notifyListeners();
   }

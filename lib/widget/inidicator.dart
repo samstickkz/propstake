@@ -7,20 +7,44 @@ import '../utils/widget_extensions.dart';
 class Indicators extends StatelessWidget {
   final int total;
   final int current;
+  final bool withFullWidth;
   final Function(int)? onChange;
-  const Indicators({super.key, required this.total, required this.current, this.onChange});
+  final Color? inactiveColor;
+  final Color? activeColor;
+  const Indicators({super.key, required this.total, required this.current, this.onChange, this.withFullWidth = false, this.inactiveColor, this.activeColor});
 
   @override
   Widget build(BuildContext context) {
     return Row(
         mainAxisAlignment: MainAxisAlignment.center,
-        children: _indicatorContent(context)
+        children: _indicatorContent(context, withFullWidth)
     );
   }
 
-  List<Widget> _indicatorContent(BuildContext context) {
+  List<Widget> _indicatorContent(BuildContext context, bool withFullWidth) {
     return List<Widget>.generate(total, (int index) {
-        return GestureDetector(
+        return withFullWidth?
+        Expanded(
+          child: GestureDetector(
+            onTap: (){
+              if(onChange != null){
+                onChange!(index);
+              }
+            },
+            child: Container(
+              width: 28.sp,
+              height: 4.sp,
+              margin: EdgeInsets.symmetric(horizontal: 3.sp, vertical: 0.sp),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(7.5.sp),
+                color: current == index
+                    ? (activeColor ?? Theme.of(context).primaryColor)
+                    : (inactiveColor ?? Color(0x808F8F8F)),
+              ),
+            ),
+          ),
+        ):
+        GestureDetector(
           onTap: (){
             if(onChange != null){
               onChange!(index);
@@ -37,7 +61,8 @@ class Indicators extends StatelessWidget {
                   : Color(0x808F8F8F),
             ),
           ),
-        );
+        )
+        ;
       });
   }
 }

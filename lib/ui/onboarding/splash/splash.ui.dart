@@ -35,9 +35,12 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Padding(
-                padding: 70.sp.padA,
-                child: ImageBuilder(
-                  Assets.png.logoName.path
+                padding: 70.sp.padB,
+                child: Padding(
+                  padding: 70.sp.padA,
+                  child: ImageBuilder(
+                    Assets.png.logoName.path
+                  ),
                 ),
               )
             ],
