@@ -47,7 +47,7 @@ class DrawerAppBar extends StatelessWidget {
             alignment: Alignment.center,
             width: 40.sp,
             decoration: BoxDecoration(
-                color: stateColor3(isDark: isAppDark(context)),
+                color: stateColor3(isAppDark(context)),
                 shape: BoxShape.circle
             ),
             child: SvgBuilder(

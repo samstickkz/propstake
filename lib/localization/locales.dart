@@ -137,14 +137,74 @@ mixin LocaleData {
   static const String byClicking = 'byClicking';
   static const String and = 'and';
   static const String notNow = 'notNow';
-  static const String setUp = 'setUp';
   static const String pleaseAutenticateToProceed = 'pleaseAutenticateToProceed';
+  static const String setUp = 'setUp';
+  static const String profile = 'profile';
+  static const String reward = 'reward';
+  static const String myInvestment = 'myInvestment';
+  static const String wallet = 'wallet';
+  static const String properties = 'properties';
+  static const String myAccount = 'myAccount';
+  static const String securityPrivacyPolicy = 'securityPrivacyPolicy';
+  static const String aboutUs = 'aboutUs';
+  static const String termsConditions = 'termsConditions';
+  static const String contactUs = 'contactUs';
+  static const String faq = 'faq';
+  static const String investmentLimit = 'investmentLimit';
+  static const String address = 'address';
+  static const String totalInvestment = 'totalInvestment';
+  static const String availableToInvest = 'availableToInvest';
+  static const String estimatedROI5Years = 'estimatedROI5Years';
+  static const String estimatedROI10Years = 'estimatedROI10Years';
+  static const String availableROI = 'availableROI';
+  static const String investmentRenewalInfo = 'investmentRenewalInfo';
+  static const String professionalInvestorInfo = 'professionalInvestorInfo';
+  static const String loremIpsumPlaceholder = 'loremIpsumPlaceholder';
+  static const String yourName = 'yourName';
+  static const String yourMessage = 'yourMessage';
+  static const String messageSent = 'messageSent';
+  static const String done = 'done';
+  static const String faqQuestion1 = 'faqQuestion1';
+  static const String faqAnswer1 = 'faqAnswer1';
+  static const String faqQuestion2 = 'faqQuestion2';
+  static const String faqQuestion3 = 'faqQuestion3';
+  static const String faqQuestion4 = 'faqQuestion4';
+  static const String logoutPrompt = 'logoutPrompt';
+  static const String chooseYourCurrency = 'chooseYourCurrency';
+  static const String chooseYourLanguage = 'chooseYourLanguage';
+  static const String pushNotification = 'pushNotification';
+  static const String notificationSettings = 'notificationSettings';
+  static const String currency = 'currency';
+  static const String appLanguage = 'appLanguage';
+  static const String getTimelyNewFeatureUpdate = 'getTimelyNewFeatureUpdate';
+  static const String productUpdates = 'productUpdates';
+  static const String trackTheProgressOfProperties = 'trackTheProgressOfProperties';
+  static const String investmentUpdates = 'investmentUpdates';
+  static const String beInTheKnowAboutNewProperty = 'beInTheKnowAboutNewProperty';
+  static const String propertyLaunches = 'propertyLaunches';
 
   static const Map<String, dynamic> en = {
     completed: "Completed",
+    getTimelyNewFeatureUpdate: "Get timely new feature update of our App ",
+    productUpdates: "Product updates",
+    trackTheProgressOfProperties: "Track the progress of properties in your portfolio",
+    investmentUpdates: "Investment updates",
+    beInTheKnowAboutNewProperty: "Be in the know about new property launches globally.",
+    propertyLaunches: "Property Launches",
+    currency: "Currency",
+    notificationSettings: "Notification Settings",
+    pushNotification: "Push notification",
+    chooseYourLanguage: "Choose your language",
+    chooseYourCurrency: "Choose your currency",
+    appLanguage: "App language",
     byClicking: "By clicking Get started, you agree to our ",
     signUp: "Sign Up",
     and: "and ",
+    profile: "Profile",
+    reward: "Reward",
+    myInvestment: "My Investment",
+    wallet: "Wallet",
+    properties: "Properties",
     signIn: "Sign In",
     no: "No",
     notNow: "Not now",
@@ -265,7 +325,33 @@ mixin LocaleData {
     manageBeneficiaries: "Add and manage beneficiary accounts",
     manageNotifications: "Manage push notifications, emails",
     changeLanguage: "Change your language preference",
-    viewProfile: "View Profile"
+    viewProfile: "View Profile",
+    myAccount: "My account",
+    securityPrivacyPolicy: "Security & Privacy Policy",
+    aboutUs: "About us",
+    termsConditions: "Terms & conditions",
+    contactUs: "Contact us",
+    faq: "FAQ",
+    investmentLimit: "Investment Limit",
+    address: "23 Abak road, Uyo",
+    totalInvestment: "Total investment: \$200",
+    availableToInvest: "Available to invest: \$1000",
+    estimatedROI5Years: "Total Estimated ROI in 5 years: \$1000",
+    estimatedROI10Years: "Total Estimated ROI in 10 years: \$1000",
+    availableROI: "Available ROI: \$20",
+    investmentRenewalInfo: "Your annual investment limit will renew on 1st January 2026.",
+    professionalInvestorInfo: "To upgrade to a professional investor, you need assets over USD 1 million. Contact support to start the process and gain unlimited investment access with credit card funding.",
+    loremIpsumPlaceholder: "Lorem ipsum dolor sit amet consectetur. Rutrum elementum vis et sit quis vitae.",
+    yourName: "Your name",
+    yourMessage: "Your message",
+    messageSent: "Message sent",
+    done: "Done",
+    faqQuestion1: "What is the purpose of the investment limit?",
+    faqAnswer1: "The investment limit ensures compliance with financial regulations and responsible investing. It helps protect investors while maintaining platform integrity.",
+    faqQuestion2: "How is my investment limit calculated?",
+    faqQuestion3: "When does my annual investment limit reset?",
+    faqQuestion4: "Can I increase my investment limit?",
+    logoutPrompt: "Log out of your account?",
 
   };
 

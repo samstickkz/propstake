@@ -6,6 +6,7 @@ import 'package:propstake/utils/string_extensions.dart';
 import '../../../utils/constants.dart';
 import '../../auth/auth.ui.dart';
 import '../../base/base-vm.dart';
+import '../../home/bottom_nav.ui.dart';
 import '../onboarding/onboarding.ui.dart';
 
 class SplashScreenViewModel extends BaseViewModel {
@@ -34,7 +35,7 @@ class SplashScreenViewModel extends BaseViewModel {
   Future<Object> appRelaunch() async {
 
     if(userService.isUserLoggedIn){
-      return navigationService.navigateToAndRemoveUntilWidget(const Scaffold());
+      return navigationService.navigateToAndRemoveUntilWidget(const BottomNavigationScreen());
     }else{
       // return navigationService.navigateToAndRemoveUntilWidget(const AppBottomNavScreen());
       return navigationService.navigateToAndRemoveUntilWidget(const OnBoardingScreen());
