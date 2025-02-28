@@ -32,7 +32,7 @@ class AppAppBar extends StatelessWidget implements PreferredSizeWidget {
           height: 32.sp,
           width: 32.sp,
           alignment: Alignment.center,
-          child: SvgBuilder(Assets.svg.closeCircle, size: 16.sp, color: stateColor11(isDark: isAppDark(context)),),
+          child: SvgBuilder(Assets.svg.closeCircle, size: 16.sp, color: stateColor11(isAppDark(context)),),
         ),
       ): 0.0.sbH
       ),
@@ -70,7 +70,7 @@ class AppAppBar extends StatelessWidget implements PreferredSizeWidget {
     //                         height: 32.sp,
     //                         width: 32.sp,
     //                         alignment: Alignment.center,
-    //                         child: SvgBuilder(Assets.svg.closeCircle, size: 16.sp, color: stateColor11(isDark: isAppDark(context)),),
+    //                         child: SvgBuilder(Assets.svg.closeCircle, size: 16.sp, color: stateColor11(isAppDark(context)),),
     //                       ),
     //                     )
     //                   ],
@@ -86,7 +86,7 @@ class AppAppBar extends StatelessWidget implements PreferredSizeWidget {
     //                   child: AppText(
     //                     text,
     //                     size: 16.sp,
-    //                     color: textColor ?? (goTo == null? stateColor9(isDark: isAppDark(context)): const Color(0xFF3E63DD)),
+    //                     color: textColor ?? (goTo == null? stateColor9(isAppDark(context)): const Color(0xFF3E63DD)),
     //                   ),
     //                 ),
     //               )

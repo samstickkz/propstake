@@ -115,13 +115,13 @@ class SignUpForm extends StatelessWidget {
                     text: LocaleData.byClicking.convertString(),
                     style: Theme.of(context).textTheme.labelSmall?.copyWith(
                         fontSize: 12.sp,
-                      color: stateColor11(),
+                      color: stateColor11(isAppDark(context)),
                     ),
                   ),
                   TextSpan(
                     text: LocaleData.termsOfService.convertString(),
                     style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                      color: stateColor12(),
+                      color: stateColor12(isAppDark(context)),
                       fontWeight: FontWeight.w700,
                       fontSize: 12.sp
                     ),
@@ -130,13 +130,13 @@ class SignUpForm extends StatelessWidget {
                     text: " ${LocaleData.and.convertString()}",
                     style: Theme.of(context).textTheme.labelSmall?.copyWith(
                         fontSize: 12.sp,
-                        color: stateColor11(),
+                        color: stateColor11(isAppDark(context)),
                     ),
                   ),
                   TextSpan(
                     text: LocaleData.privacyPolicy.convertString(),
                     style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                        color: stateColor12(),
+                        color: stateColor12(isAppDark(context)),
                         fontWeight: FontWeight.w700,
                         fontSize: 12.sp
                     ),

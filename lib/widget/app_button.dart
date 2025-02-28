@@ -204,7 +204,7 @@ class AppButton extends StatelessWidget {
     final Color borderClr =  borderColor ?? borderAppColor;
     final Color disabledBorderColor = borderClr.withOpacity(0.4);
     // final Color textColors = textColor ?? ( backgroundColor == Theme.of(context).colorScheme.secondary || backgroundColor ==  stateColor2(isAppDark(context))? black(isAppDark(context)): (backgroundColor == stateColor12(isAppDark(context))? Theme.of(context).cardColor: Theme.of(context).unselectedWidgetColor));
-    final Color textColors = textColor ?? (backgroundColor == stateColor4(isDark: isAppDark(context)) || backgroundColor == stateColor2(isDark: isAppDark(context))? black(isDark: isAppDark(context)): Colors.white);
+    final Color textColors = textColor ?? (backgroundColor == stateColor4(isAppDark(context)) || backgroundColor == stateColor2(isAppDark(context))? black(isAppDark(context)): Colors.white);
     final Color loadingTextColor = Colors.white.withOpacity(0.6);
 
     return isOutline || isTransparent? OutlinedButton(
@@ -250,7 +250,7 @@ class AppButton extends StatelessWidget {
                 8.sp.sbW,
                 AppText(
                   text??"",
-                  color: onTap != null? (textColor != null? textColors:  stateColor12(isDark: isAppDark(context))) : (textColor != null? loadingTextColor: disabledBorderColor),
+                  color: onTap != null? (textColor != null? textColors:  stateColor12(isAppDark(context))) : (textColor != null? loadingTextColor: disabledBorderColor),
                   weight: fontWeight?? FontWeight.w700,
                   size: textSize?? 16.sp,
                   align: TextAlign.center,
@@ -260,7 +260,7 @@ class AppButton extends StatelessWidget {
           ):
             AppText(
           text??"",
-          color: onTap != null? (textColor != null? textColors:  stateColor12(isDark: isAppDark(context))) : (textColor != null? loadingTextColor: disabledBorderColor),
+          color: onTap != null? (textColor != null? textColors:  stateColor12(isAppDark(context))) : (textColor != null? loadingTextColor: disabledBorderColor),
           weight: fontWeight?? FontWeight.w700,
           size: textSize?? 16.sp,
           align: TextAlign.center,

@@ -95,11 +95,23 @@ class $AssetsPngGen {
 class $AssetsSvgGen {
   const $AssetsSvgGen();
 
+  /// File path: assets/svg/Call.svg
+  String get call => 'assets/svg/Call.svg';
+
+  /// File path: assets/svg/about_us.svg
+  String get aboutUs => 'assets/svg/about_us.svg';
+
   /// File path: assets/svg/apple_black.svg
   String get appleBlack => 'assets/svg/apple_black.svg';
 
   /// File path: assets/svg/apple_white.svg
   String get appleWhite => 'assets/svg/apple_white.svg';
+
+  /// File path: assets/svg/arrow_right.svg
+  String get arrowRight => 'assets/svg/arrow_right.svg';
+
+  /// File path: assets/svg/camera.svg
+  String get camera => 'assets/svg/camera.svg';
 
   /// File path: assets/svg/celebrate_grace.svg
   String get celebrateGrace => 'assets/svg/celebrate_grace.svg';
@@ -107,11 +119,26 @@ class $AssetsSvgGen {
   /// File path: assets/svg/check.svg
   String get check => 'assets/svg/check.svg';
 
+  /// File path: assets/svg/check_circle.svg
+  String get checkCircle => 'assets/svg/check_circle.svg';
+
   /// File path: assets/svg/close_circle.svg
   String get closeCircle => 'assets/svg/close_circle.svg';
 
+  /// File path: assets/svg/currency.svg
+  String get currency => 'assets/svg/currency.svg';
+
+  /// File path: assets/svg/edit.svg
+  String get edit => 'assets/svg/edit.svg';
+
+  /// File path: assets/svg/email.svg
+  String get email => 'assets/svg/email.svg';
+
   /// File path: assets/svg/face_id.svg
   String get faceId => 'assets/svg/face_id.svg';
+
+  /// File path: assets/svg/faq.svg
+  String get faq => 'assets/svg/faq.svg';
 
   /// File path: assets/svg/fingerprint.svg
   String get fingerprint => 'assets/svg/fingerprint.svg';
@@ -122,8 +149,17 @@ class $AssetsSvgGen {
   /// File path: assets/svg/google.svg
   String get google => 'assets/svg/google.svg';
 
+  /// File path: assets/svg/language.svg
+  String get language => 'assets/svg/language.svg';
+
+  /// File path: assets/svg/location.svg
+  String get location => 'assets/svg/location.svg';
+
   /// File path: assets/svg/logo_name.svg
   String get logoName => 'assets/svg/logo_name.svg';
+
+  /// File path: assets/svg/logout.svg
+  String get logout => 'assets/svg/logout.svg';
 
   /// File path: assets/svg/microsoft.svg
   String get microsoft => 'assets/svg/microsoft.svg';
@@ -133,6 +169,15 @@ class $AssetsSvgGen {
 
   /// File path: assets/svg/my_investment_active.svg
   String get myInvestmentActive => 'assets/svg/my_investment_active.svg';
+
+  /// File path: assets/svg/notification.svg
+  String get notification => 'assets/svg/notification.svg';
+
+  /// File path: assets/svg/privacy_policy.svg
+  String get privacyPolicy => 'assets/svg/privacy_policy.svg';
+
+  /// File path: assets/svg/prof.svg
+  String get prof => 'assets/svg/prof.svg';
 
   /// File path: assets/svg/profile.svg
   String get profile => 'assets/svg/profile.svg';
@@ -151,6 +196,18 @@ class $AssetsSvgGen {
 
   /// File path: assets/svg/reward_active.svg
   String get rewardActive => 'assets/svg/reward_active.svg';
+
+  /// File path: assets/svg/search.svg
+  String get search => 'assets/svg/search.svg';
+
+  /// File path: assets/svg/security.svg
+  String get security => 'assets/svg/security.svg';
+
+  /// File path: assets/svg/setting.svg
+  String get setting => 'assets/svg/setting.svg';
+
+  /// File path: assets/svg/social_login.svg
+  String get socialLogin => 'assets/svg/social_login.svg';
 
   /// File path: assets/svg/temp_logo.svg
   String get tempLogo => 'assets/svg/temp_logo.svg';
@@ -172,25 +229,44 @@ class $AssetsSvgGen {
 
   /// List of all assets
   List<String> get values => [
+    call,
+    aboutUs,
     appleBlack,
     appleWhite,
+    arrowRight,
+    camera,
     celebrateGrace,
     check,
+    checkCircle,
     closeCircle,
+    currency,
+    edit,
+    email,
     faceId,
+    faq,
     fingerprint,
     globe,
     google,
+    language,
+    location,
     logoName,
+    logout,
     microsoft,
     myInvestment,
     myInvestmentActive,
+    notification,
+    privacyPolicy,
+    prof,
     profile,
     profileActive,
     properties,
     propertiesActive,
     reward,
     rewardActive,
+    search,
+    security,
+    setting,
+    socialLogin,
     tempLogo,
     tempLogoLight,
     visibilityOff,

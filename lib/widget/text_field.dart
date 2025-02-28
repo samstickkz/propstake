@@ -140,7 +140,7 @@ class _AppTextFieldState extends State<AppTextField> {
                     size: widget.textSize ?? 16.sp,
                     align: TextAlign.start,
                     weight: FontWeight.w500,
-                    color: stateColor12(isDark: isAppDark(context)),
+                    color: stateColor12(isAppDark(context)),
                   ),
                 ),
                 if(widget.percentage!=null)...[
@@ -156,7 +156,7 @@ class _AppTextFieldState extends State<AppTextField> {
                           Container(
                             height: 6.sp,
                             width: 80.sp * (widget.percentage??0)/100,
-                            color: widget.percentage == null || percentage < 50? Colors.red : percentage==50 || percentage < 75? amber7(isDark: isDark): green8(isDark: isDark),
+                            color: widget.percentage == null || percentage < 50? Colors.red : percentage==50 || percentage < 75? amber7(isDark): green8(isDark),
                           ),
                         ],
                       ),
