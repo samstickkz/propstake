@@ -13,6 +13,7 @@ import 'package:propstake/widget/svg_builder.dart';
 import '../../../gen/assets.gen.dart';
 import '../../../widget/appbar_widget.dart';
 import '../../base/base-ui.dart';
+import 'my_account/my_account.ui.dart';
 import 'profile_home.vm.dart';
 
 class ProfileHomeScreen extends StatelessWidget {
@@ -36,25 +37,28 @@ class ProfileHomeScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                SizedBox(
-                  height: 137.sp,
-                  width: 137.sp,
-                  child: Stack(
-                    children: [
-                      ProfilePic(
-                        user: userService.user,
-                        size: 137.sp,
-                      ),
-                      Align(
-                        alignment: Alignment.bottomRight,
-                        child: Padding(
-                          padding: 5.sp.padA,
-                          child: SvgBuilder(
-                            Assets.svg.camera
-                          ),
+                Hero(
+                  tag: "image",
+                  child: SizedBox(
+                    height: 137.sp,
+                    width: 137.sp,
+                    child: Stack(
+                      children: [
+                        ProfilePic(
+                          user: userService.user,
+                          size: 137.sp,
                         ),
-                      )
-                    ],
+                        Align(
+                          alignment: Alignment.bottomRight,
+                          child: Padding(
+                            padding: 5.sp.padA,
+                            child: SvgBuilder(
+                              Assets.svg.camera
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
                   ),
                 ),
                 40.sp.sbH,
@@ -67,7 +71,7 @@ class ProfileHomeScreen extends StatelessWidget {
                     children: [
                       ProfileOptionCard(
                         isLast: false,
-                        onTap: (){},
+                        onTap: model.goToMyAccount,
                         text: LocaleData.myAccount.convertString(),
                         svg: Assets.svg.profile,
                       ),
@@ -79,7 +83,7 @@ class ProfileHomeScreen extends StatelessWidget {
                       ),
                       ProfileOptionCard(
                         isLast: true,
-                        onTap: (){},
+                        onTap: model.goToSecurity,
                         text: LocaleData.securityPrivacyPolicy.convertString(),
                         svg: Assets.svg.security,
                       ),
@@ -96,25 +100,25 @@ class ProfileHomeScreen extends StatelessWidget {
                     children: [
                       ProfileOptionCard(
                         isLast: false,
-                        onTap: (){},
+                        onTap: model.goToAboutUs,
                         text: LocaleData.aboutUs.convertString(),
                         svg: Assets.svg.aboutUs,
                       ),
                       ProfileOptionCard(
                         isLast: false,
-                        onTap: (){},
+                        onTap: model.goToTermsAndCondition,
                         text: LocaleData.termsConditions.convertString(),
                         svg: Assets.svg.security,
                       ),
                       ProfileOptionCard(
                         isLast: false,
-                        onTap: (){},
+                        onTap: model.goToContactUs,
                         text: LocaleData.contactUs.convertString(),
                         svg: Assets.svg.call,
                       ),
                       ProfileOptionCard(
                         isLast: true,
-                        onTap: (){},
+                        onTap: model.goToFAQ,
                         text: LocaleData.faq.convertString(),
                         svg: Assets.svg.faq,
                       ),
@@ -122,23 +126,11 @@ class ProfileHomeScreen extends StatelessWidget {
                   ),
                 ),
                 30.sp.sbH,
-                AppCard(
-                  padding: EdgeInsets.symmetric(
-                    vertical: 10.sp, horizontal: 16.sp
-                  ),
-                  radius: 8.r,
-                  child: Column(
-                    children: [
-                      ProfileOptionCard(
-                        isLast: true,
-                        onTap: model.popLogout,
-                        text: LocaleData.logout.convertString(),
-                        svg: Assets.svg.logout,
-                      ),
-                    ],
-                  ),
+                SingleOptionCard(
+                  onTap: model.popLogout,
+                  text: LocaleData.logout.convertString(),
+                  svg: Assets.svg.logout,
                 ),
-
               ],
             ),
           ),

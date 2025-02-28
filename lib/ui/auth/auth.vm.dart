@@ -70,8 +70,13 @@ class AuthViewModel extends BaseViewModel {
       );
       if(res.isRight()){
         stopLoader();
-        showCustomToast(res.asRight().message??"");
-        goHome();
+
+        if(res.asRight().successful == true){
+          showCustomToast(res.asRight().message??"", success: true);
+          goHome();
+        }else{
+          showCustomToast(res.asRight().message??"");
+        }
       } else {
         stopLoader();
       }

@@ -182,9 +182,49 @@ mixin LocaleData {
   static const String investmentUpdates = 'investmentUpdates';
   static const String beInTheKnowAboutNewProperty = 'beInTheKnowAboutNewProperty';
   static const String propertyLaunches = 'propertyLaunches';
+  static const String upgrade = 'upgrade';
+  static const String howCanWeHelpYou = 'howCanWeHelpYou';
+  static const String biometricAuthentication = 'biometricAuthentication';
+  static const String realInvestor = 'realInvestor';
+  static const String socialLogin = 'socialLogin';
+  static const String noActiveSocialLogin = 'noActiveSocialLogin';
+  static const String introduction = 'introduction';
+  static const String welcomeToThePropStake = 'welcomeToThePropStake';
+  static const String eligibility = 'eligibility';
+  static const String userMustBeAtLeast18 = 'userMustBeAtLeast18';
+  static const String byUsingTheAppYouConfirm = 'byUsingTheAppYouConfirm';
+  static const String theSecurityOfAccountCredentialIsTheUser = 'theSecurityOfAccountCredentialIsTheUser';
+  static const String userMustProvideAccurateAndUpToDate = 'userMustProvideAccurateAndUpToDate';
+  static const String accountRegistration = 'accountRegistration';
+  static const String theCompanyReservesTheRightToSuspend = 'theCompanyReservesTheRightToSuspend';
+  static const String investmentTerms = 'investmentTerms';
+  static const String userCanInvestInPropertiesListed = 'userCanInvestInPropertiesListed';
+  static const String investmentAreSubjectToAvailability = 'investmentAreSubjectToAvailability';
+  static const String returnsOnInvestmentAreGoverned = 'returnsOnInvestmentAreGoverned';
+  static const String byUsingTheProStakeAppYouAcknowledge = 'byUsingTheProStakeAppYouAcknowledge';
+  // static const String accountRegistration = 'accountRegistration';
 
   static const Map<String, dynamic> en = {
     completed: "Completed",
+    upgrade: "Upgrade",
+    introduction: "introduction",
+    eligibility: "Eligibility",
+    byUsingTheProStakeAppYouAcknowledge: "By using the PropStake App, you acknowledge that you have read, understood, and agreed to these Terms and Conditions.",
+    returnsOnInvestmentAreGoverned: "Returns on investment are governed by separate investment agreements.",
+    investmentAreSubjectToAvailability: "Investments are subject to availability and acceptance by PropStake.",
+    userCanInvestInPropertiesListed: "Users can invest in properties listed within the App.",
+    investmentTerms: "INVESTMENT TERMS",
+    theCompanyReservesTheRightToSuspend: "The Company reserves the right to suspend or terminate accounts for violations of these Terms.",
+    theSecurityOfAccountCredentialIsTheUser: "The security of account credentials is the user’s responsibility.",
+    userMustProvideAccurateAndUpToDate: "Users must provide accurate and up-to-date information during registration.",
+    accountRegistration: "ACCOUNT REGISTRATION",
+    byUsingTheAppYouConfirm: "By using the App, you confirm that you meet the eligibility requirements.",
+    userMustBeAtLeast18: "Users must be at least 18 years old to register and invest",
+    welcomeToThePropStake: "Welcome to the PropStake mobile application (\"App\"). By downloading, accessing, or using this App, you agree to be bound by these Terms and Conditions (\"Terms\"). If you do not agree to these Terms, please do not use the App.",
+    noActiveSocialLogin: "No active social logins",
+    socialLogin: "Social logins",
+    biometricAuthentication: "Biometric authentication",
+    howCanWeHelpYou: "How can we help you?",
     getTimelyNewFeatureUpdate: "Get timely new feature update of our App ",
     productUpdates: "Product updates",
     trackTheProgressOfProperties: "Track the progress of properties in your portfolio",
@@ -192,6 +232,7 @@ mixin LocaleData {
     beInTheKnowAboutNewProperty: "Be in the know about new property launches globally.",
     propertyLaunches: "Property Launches",
     currency: "Currency",
+    realInvestor: "Retail Investor",
     notificationSettings: "Notification Settings",
     pushNotification: "Push notification",
     chooseYourLanguage: "Choose your language",
@@ -352,6 +393,7 @@ mixin LocaleData {
     faqQuestion3: "When does my annual investment limit reset?",
     faqQuestion4: "Can I increase my investment limit?",
     logoutPrompt: "Log out of your account?",
+
 
   };
 
