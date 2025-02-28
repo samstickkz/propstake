@@ -9,9 +9,4 @@ class SettingsViewModel extends BaseViewModel {
     notifyListeners();
   }
 
-  Future<bool> getFuture() async {
-    await Future.delayed(const Duration(microseconds: 10));
-    return !isActive;
-  }
-
 }

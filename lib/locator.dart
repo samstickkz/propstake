@@ -1,5 +1,4 @@
 import 'package:get_it/get_it.dart';
-import 'package:propstake/ui/home/bottom_nav.vm.dart';
 
 import 'data/repository/repository.service.dart';
 import 'data/services/local/locale.service.dart';
@@ -13,8 +12,14 @@ import 'ui/auth/auth.vm.dart';
 import 'ui/auth/local_authentication/local_authentication.vm.dart';
 import 'ui/auth/verify/verify.vm.dart';
 import 'ui/base/base-vm.dart';
+import 'ui/home/bottom_nav.vm.dart';
+import 'ui/home/profile/about_us/about_us.vm.dart';
+import 'ui/home/profile/contact_us/contact_us.vm.dart';
+import 'ui/home/profile/my_account/my_account.vm.dart';
 import 'ui/home/profile/profile_home.vm.dart';
+import 'ui/home/profile/security/security.vm.dart';
 import 'ui/home/profile/settings/settings.vm.dart';
+import 'ui/home/profile/terms_condition/terms_condition.vm.dart';
 import 'ui/onboarding/splash/splash.vm.dart';
 
 GetIt locator = GetIt.I;
@@ -45,10 +50,11 @@ registerViewModel(){
   locator.registerFactory<BottomNavigationViewModel>(() => BottomNavigationViewModel());
   locator.registerFactory<ProfileHomeViewModel>(() => ProfileHomeViewModel());
   locator.registerFactory<SettingsViewModel>(() => SettingsViewModel());
-  // locator.registerFactory<ProfileSpecialistProfileViewModel>(() => ProfileSpecialistProfileViewModel());
-  // locator.registerFactory<BookSessionViewModel>(() => BookSessionViewModel());
-  // locator.registerFactory<PatientWalletViewModel>(() => PatientWalletViewModel());
-  // locator.registerFactory<PatientAppointmentHomeViewModel>(() => PatientAppointmentHomeViewModel());
+  locator.registerFactory<SecurityViewModel>(() => SecurityViewModel());
+  locator.registerFactory<MyAccountViewModel>(() => MyAccountViewModel());
+  locator.registerFactory<AboutUsViewModel>(() => AboutUsViewModel());
+  locator.registerFactory<TermsAndConditionViewModel>(() => TermsAndConditionViewModel());
+  locator.registerFactory<ContactUsViewModel>(() => ContactUsViewModel());
   // locator.registerFactory<AccountSettingsHomeViewModel>(() => AccountSettingsHomeViewModel());
   // locator.registerFactory<PatientsPreferencesViewModel>(() => PatientsPreferencesViewModel());
   // locator.registerFactory<PatientsAccountProfileViewModel>(() => PatientsAccountProfileViewModel());

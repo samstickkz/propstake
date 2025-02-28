@@ -52,7 +52,7 @@ class AppCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        borderRadius: borderRadius??  BorderRadius.circular(radius != null? (radius! - 0.5.r)  : 15.r),
+        borderRadius: borderRadius??  BorderRadius.circular(radius != null? (radius! - 0.5.r)  : 8.r),
         boxShadow: useShadow != true ? null : [
           BoxShadow(
               color: Theme.of(context).shadowColor,
@@ -63,12 +63,12 @@ class AppCard extends StatelessWidget {
         ],
       ),
       child: ClipRRect(
-        borderRadius: borderRadius??  BorderRadius.circular(radius != null? (radius! - 0.5.r)  : 15.r),
+        borderRadius: borderRadius??  BorderRadius.circular(radius != null? (radius! - 0.5.r)  : 8.r),
         child: Container(
           alignment: alignment,
           decoration: decoration?? BoxDecoration(
             color: color?? (backgroundColor!=null ? backgroundColor!.withOpacity(0.9): (isAppDark(context)? Colors.black: Color(0xFFF6F6F6))),
-            borderRadius: borderRadius??  BorderRadius.circular(radius ?? 16.r),
+            borderRadius: borderRadius??  BorderRadius.circular(radius ?? 9.r),
             border: bordered == true
               ? Border.all(
               color: borderColor ?? Theme.of(context).shadowColor.withOpacity(0.6),
@@ -80,7 +80,7 @@ class AppCard extends StatelessWidget {
             color: Colors.transparent,
             child: InkWell(
               onTap: onTap,
-              borderRadius: borderRadius?? BorderRadius.circular(radius ?? 16.r),
+              borderRadius: borderRadius?? BorderRadius.circular(radius ?? 9.r),
               child: Container(
                 height: heights,
                 width: widths ?? (expandable == true ? null : width(context)),
