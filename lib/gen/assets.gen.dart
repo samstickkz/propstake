@@ -107,8 +107,14 @@ class $AssetsSvgGen {
   /// File path: assets/svg/apple_white.svg
   String get appleWhite => 'assets/svg/apple_white.svg';
 
+  /// File path: assets/svg/arrow_down.svg
+  String get arrowDown => 'assets/svg/arrow_down.svg';
+
   /// File path: assets/svg/arrow_right.svg
   String get arrowRight => 'assets/svg/arrow_right.svg';
+
+  /// File path: assets/svg/arrow_up.svg
+  String get arrowUp => 'assets/svg/arrow_up.svg';
 
   /// File path: assets/svg/camera.svg
   String get camera => 'assets/svg/camera.svg';
@@ -233,7 +239,9 @@ class $AssetsSvgGen {
     aboutUs,
     appleBlack,
     appleWhite,
+    arrowDown,
     arrowRight,
+    arrowUp,
     camera,
     celebrateGrace,
     check,

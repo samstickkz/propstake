@@ -46,7 +46,9 @@ class AuthenticationService {
         "password": password
       });
       LoginAuthModel loginResponse = LoginAuthModel.fromJson(jsonDecode(response.data));
-      await userService.storeToken(accessToken: loginResponse.data);
+      if(loginResponse.data != null && (loginResponse.data??"").isNotEmpty){
+        await userService.storeToken(accessToken: loginResponse.data);
+      }
       return Right(loginResponse);
     } on DioException catch (e) {
       return Left(resModelFromJson(e.response?.data));

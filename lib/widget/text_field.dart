@@ -140,7 +140,7 @@ class _AppTextFieldState extends State<AppTextField> {
                     size: widget.textSize ?? 16.sp,
                     align: TextAlign.start,
                     weight: FontWeight.w500,
-                    color: stateColor12(isAppDark(context)),
+                    color: widget.hintColor?? stateColor12(isAppDark(context)),
                   ),
                 ),
                 if(widget.percentage!=null)...[
@@ -219,6 +219,14 @@ class _AppTextFieldState extends State<AppTextField> {
                             ))
                         : widget.suffixIcon
                     ),
+                    suffixIconConstraints: BoxConstraints(maxHeight: 25.sp, maxWidth: 25.sp),
+                    prefixIconConstraints: BoxConstraints(maxHeight: 25.sp, maxWidth: 25.sp),
+                    enabledBorder: !widget.useBorder? InputBorder.none : null,
+                    errorBorder: !widget.useBorder? InputBorder.none : null,
+                    focusedErrorBorder: !widget.useBorder? InputBorder.none : null,
+                    focusedBorder: !widget.useBorder? InputBorder.none : null,
+                    disabledBorder: !widget.useBorder? InputBorder.none : null,
+                    border: !widget.useBorder? InputBorder.none : null,
                     label: widget.label,
                     labelText: widget.labelText,
                     contentPadding: widget.contentPadding,
