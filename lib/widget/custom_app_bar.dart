@@ -64,7 +64,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       backgroundColor: backgroundColor ?? appBarTheme.backgroundColor,
       leading: leading ??
           IconButton(
-            icon: Navigator.canPop(context) ? Icon(Icons.arrow_back_ios_rounded, color: stateColor12(isDark: isAppDark(context)),) : const SizedBox.shrink(),
+            icon: Navigator.canPop(context) ? Icon(Icons.arrow_back_ios_rounded, color: stateColor12(isAppDark(context)),) : const SizedBox.shrink(),
             onPressed: () {
               if (Navigator.canPop(context)) {
                 if (onBackPressed != null) {

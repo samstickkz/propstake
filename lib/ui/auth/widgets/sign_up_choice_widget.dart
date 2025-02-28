@@ -24,7 +24,7 @@ class SignUpChoiceWidget extends StatelessWidget {
         alignment: Alignment.center,
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8.sp),
-            color: fadeBackground(isDark: isAppDark(context))
+            color: fadeBackground(isAppDark(context))
         ),
         child: Row(
           children: List.generate(
@@ -47,7 +47,7 @@ class SignUpChoiceWidget extends StatelessWidget {
                       child: AppText(
                         tabs[index],
                         size: 13.33.sp,
-                        color: tabs[index] == activeScreen? Colors.white:  black(isDark: isAppDark(context)),
+                        color: tabs[index] == activeScreen? Colors.white:  black(isAppDark(context)),
                         weight: FontWeight.w500,
                       ),
                     ),

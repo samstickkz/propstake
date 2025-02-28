@@ -33,7 +33,7 @@ class ValidationDetailView extends StatelessWidget {
               text,
               weight: FontWeight.w500,
               size: 13.33.sp,
-              color: isValid == null? stateColor10(isDark: isAppDark(context)): (value? green9(isDark: isAppDark(context)): red10(isDark: isAppDark(context))),
+              color: isValid == null? stateColor10(isAppDark(context)): (value? green9(isAppDark(context)): red10(isAppDark(context))),
             ),
           )
         ],

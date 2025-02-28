@@ -58,7 +58,7 @@ class ActionBottomSheet extends StatelessWidget {
                 child: Container(
                   width: width?? 250.sp,
                   decoration: BoxDecoration(
-                    color: useGradient? null : white(isDark: isAppDark(context)),
+                    color: useGradient? null : white(isAppDark(context)),
                     border: Border.all(
                       width: 2.sp,
                       color: Theme.of(context).cardColor
@@ -98,15 +98,15 @@ class ActionBottomSheet extends StatelessWidget {
                             child: AppButton.fullWidth(
                               isLoading: false,
                               height: 48.sp,
-                              backgroundColor: stateColor3(isDark: isAppDark(context)),
+                              backgroundColor: stateColor3(isAppDark(context)),
                               fontWeight: FontWeight.w600,
-                              textColor: stateColor12(isDark: isAppDark(context)),
+                              textColor: stateColor12(isAppDark(context)),
                               text: cancelButtonText?? "Cancel",
                               onTap: (){
                                 Navigator.of(context).pop();
                                 cancelTap ==null? null: cancelTap!();
                               },
-                              borderColor: stateColor4(isDark: isAppDark(context)),
+                              borderColor: stateColor4(isAppDark(context)),
                             ),
                           ),
                           10.0.sbW,

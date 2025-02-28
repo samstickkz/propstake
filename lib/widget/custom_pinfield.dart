@@ -71,7 +71,7 @@ class CustomPinTextField extends StatelessWidget {
                 size:  16.sp,
                 align: TextAlign.start,
                 weight: FontWeight.w500,
-                color: stateColor12(isDark: isAppDark(context)),
+                color: stateColor12(isAppDark(context)),
               ),
             ],
           ),
@@ -90,12 +90,12 @@ class CustomPinTextField extends StatelessWidget {
             textStyle: Theme.of(context).textTheme.bodyMedium?.copyWith(
               fontSize: 16.sp,
               fontWeight: FontWeight.w600,
-              color: stateColor10(isDark: isDark),
+              color: stateColor10(isDark),
             ),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(7),
               border: Border.all(
-                color: stateColor7(isDark: isDark),
+                color: stateColor7(isDark),
                 width: 1.sp,
               ),
             ),
@@ -107,11 +107,11 @@ class CustomPinTextField extends StatelessWidget {
             textStyle: Theme.of(context).textTheme.bodyMedium?.copyWith(
               fontSize: 16.sp,
               fontWeight: FontWeight.w600,
-              color: stateColor11(isDark: isDark),
+              color: stateColor11(isDark),
             ),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(7),
-              color: stateColor3(isDark: isDark),
+              color: stateColor3(isDark),
               border: Border.all(
                 color: const Color(0xFF3E63DD),
                 width: 1.sp,
@@ -124,13 +124,13 @@ class CustomPinTextField extends StatelessWidget {
             textStyle: Theme.of(context).textTheme.bodyMedium?.copyWith(
               fontSize: 16.sp,
               fontWeight: FontWeight.w600,
-              color: red9(isDark: isDark),
+              color: red9(isDark),
             ),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(7),
-              color: stateColor3(isDark: isDark),
+              color: stateColor3(isDark),
               border: Border.all(
-                color: red9(isDark: isDark),
+                color: red9(isDark),
                 width: 1.sp,
               ),
             ),
