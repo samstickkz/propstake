@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:propstake/app_theme/palette.dart';
 
 import '../../utils/widget_extensions.dart';
 
@@ -66,7 +67,7 @@ class AppCard extends StatelessWidget {
         child: Container(
           alignment: alignment,
           decoration: decoration?? BoxDecoration(
-            color: color??(backgroundColor!=null ? backgroundColor!.withOpacity(0.9): Colors.transparent),
+            color: color?? (backgroundColor!=null ? backgroundColor!.withOpacity(0.9): (isAppDark(context)? Colors.black: Color(0xFFF6F6F6))),
             borderRadius: borderRadius??  BorderRadius.circular(radius ?? 16.r),
             border: bordered == true
               ? Border.all(
@@ -83,7 +84,7 @@ class AppCard extends StatelessWidget {
               child: Container(
                 height: heights,
                 width: widths ?? (expandable == true ? null : width(context)),
-                padding: padding ?? 16.0.padA,
+                padding: padding ?? 12.0.padA,
                 child: child,
               ),
             ),

@@ -14,6 +14,7 @@ import 'ui/auth/local_authentication/local_authentication.vm.dart';
 import 'ui/auth/verify/verify.vm.dart';
 import 'ui/base/base-vm.dart';
 import 'ui/home/profile/profile_home.vm.dart';
+import 'ui/home/profile/settings/settings.vm.dart';
 import 'ui/onboarding/splash/splash.vm.dart';
 
 GetIt locator = GetIt.I;
@@ -43,7 +44,7 @@ registerViewModel(){
   locator.registerFactory<LocalAuthViewModel>(() => LocalAuthViewModel());
   locator.registerFactory<BottomNavigationViewModel>(() => BottomNavigationViewModel());
   locator.registerFactory<ProfileHomeViewModel>(() => ProfileHomeViewModel());
-  // locator.registerFactory<PatientDashBoardViewModel>(() => PatientDashBoardViewModel());
+  locator.registerFactory<SettingsViewModel>(() => SettingsViewModel());
   // locator.registerFactory<ProfileSpecialistProfileViewModel>(() => ProfileSpecialistProfileViewModel());
   // locator.registerFactory<BookSessionViewModel>(() => BookSessionViewModel());
   // locator.registerFactory<PatientWalletViewModel>(() => PatientWalletViewModel());

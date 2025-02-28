@@ -51,7 +51,7 @@ Future<dynamic> bottomSheets({
                                 height: 6.sp,
                                 width: 50.sp,
                                 decoration: BoxDecoration(
-                                  color: stateColor8(isDark: isAppDark(context)),
+                                  color: stateColor8(isAppDark(context)),
                                   borderRadius: BorderRadius.circular(5.r)
                                 ),
                               )
@@ -118,7 +118,7 @@ Future<dynamic> appBottomSheet({
                               height: 6.sp, 
                               width: 50.sp,
                               decoration: BoxDecoration(
-                                color: stateColor8(isDark: isAppDark(context)),
+                                color: stateColor8(isAppDark(context)),
                                 borderRadius: BorderRadius.circular(5.r)
                               ),
                             )

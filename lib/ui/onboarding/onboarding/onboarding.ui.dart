@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:propstake/gen/assets.gen.dart';
 
@@ -56,6 +57,8 @@ class OnBoardingScreen extends StatelessWidget {
                       ],
                     )
                   ],
+                  centerTitle: false,
+                  systemOverlayStyle: SystemUiOverlayStyle.light,
                 ),
                 body: Column(
                   children: [
@@ -83,7 +86,8 @@ class OnBoardingScreen extends StatelessWidget {
                               model.onboardingData[i].title,
                               isTitle: true,
                               size: 32.sp,
-                              align: TextAlign.start
+                              align: TextAlign.start,
+                              color: Colors.white,
                             ),
                           ),
                           16.sp.sbH,
@@ -126,9 +130,9 @@ class ButtonWidget extends StatelessWidget {
         AppButton.fullWidth(
           isLoading: false,
           onTap: ()=> toLogin(true),
-          backgroundColor: fadeBackground(isDark: isAppDark(context)),
+          backgroundColor: fadeBackground(isAppDark(context)),
           text: LocaleData.signIn.convertString(),
-          textColor: stateColor12(isDark: isAppDark(context)),
+          textColor: stateColor12(isAppDark(context)),
           height: 65.h,
         ),
       ],

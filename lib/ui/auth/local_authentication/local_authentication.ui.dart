@@ -54,9 +54,9 @@ class LocalAuthScreen extends StatelessWidget {
                   AppButton.fullWidth(
                     isLoading: false,
                     onTap: model.goHome,
-                    backgroundColor: fadeBackground(),
+                    backgroundColor: fadeBackground(isAppDark(context)),
                     text: LocaleData.notNow.convertString(),
-                    textColor: stateColor12(),
+                    textColor: stateColor12(isAppDark(context)),
                     height: 65.h,
                   ),
                 ],

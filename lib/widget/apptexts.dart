@@ -56,7 +56,7 @@ class AppText extends Text {
         height: height,
         decoration: decoration,
         letterSpacing: letterSpacing,
-        decorationColor: stateColor11(isDark: isAppDark(context)),
+        decorationColor: stateColor11(isAppDark(context)),
         decorationThickness: 0.5,
         fontFamily: family,
         color: color,
