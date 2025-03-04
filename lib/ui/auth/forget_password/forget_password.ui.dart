@@ -54,7 +54,7 @@ class ForgotPasswordScreen extends StatelessWidget {
                 SlideInUp(
                   child: AppButton.fullWidth(
                     isLoading: model.isLoading,
-                    onTap: model.formKey.currentState?.validate() ==true? model.startChangePassword: null,
+                    onTap: model.formKey.currentState?.validate() ==true? model.forgotPasswordApi: null,
                     text: "Confirm",
                   ),
                 ),

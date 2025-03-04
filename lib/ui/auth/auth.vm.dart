@@ -89,6 +89,29 @@ class AuthViewModel extends BaseViewModel {
     return navigationService.navigateToAndRemoveUntilWidget(const AuthHomeScreen());
   }
 
+  forgotPasswordApi()async{
+    startLoader();
+    try{
+      var res = await authenticationService.forgotPassword(
+          email: upEmailController.text.trim(),
+      );
+      if(res.isRight()){
+        stopLoader();
+
+        if(res.asRight().successful == true){
+          showCustomToast(res.asRight().message??"", success: true);
+          startChangePassword();
+        }else{
+          showCustomToast(res.asRight().message??"");
+        }
+      } else {
+        stopLoader();
+      }
+    }catch(err){
+      stopLoader();
+    }
+  }
+
   startChangePassword(){
     navigationService.navigateToRoute(VerifyUserScreen(
       reason: VerificationReason.forgetPassword,

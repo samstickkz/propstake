@@ -36,6 +36,22 @@ class AuthenticationService {
     }
   }
 
+  Future<Either<ResModel, ResModel>> forgotPassword({
+    required String email
+  }) async {
+    try {
+      Response response = await connect().post("ForgotPassword", data: {
+        "email": email
+      });
+      ResModel signUpResponse = ResModel.fromJson(jsonDecode(response.data));
+      return Right(signUpResponse);
+    } on DioException catch (e) {
+      return Left(resModelFromJson(e.response?.data));
+    } catch (e) {
+      return Left(ResModel(message: e.toString()));
+    }
+  }
+
   Future<Either<ResModel, LoginAuthModel>> login({
     required String email,
     required String password,
