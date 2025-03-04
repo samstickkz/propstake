@@ -35,11 +35,66 @@ class TermsAndConditionViewModel extends BaseViewModel {
       ]
     ),
     TermsModel(
+      title: LocaleData.paymentsAndWithdrawals.convertString(),
+      point: [
+        LocaleData.allFinancialTransactionsWithinTheApp.convertString(),
+        LocaleData.usersMayAttributeTheirEarningsBasedOnTheTerms.convertString(),
+      ]
+    ),
+    TermsModel(
+      title: LocaleData.userResponsibility.convertString(),
+      point: [
+        LocaleData.usersShallNotUseTheAppFoIllegal.convertString(),
+        LocaleData.anyAttemptToManipulateHackOrDisrupt.convertString(),
+      ]
+    ),
+    TermsModel(
+      title: LocaleData.privacyPolicy.convertString(),
+      point: [
+        LocaleData.theAppCollectsAndProcessesUserData.convertString(),
+        LocaleData.byUsingTheAppYouConsentToTheCOllection.convertString(),
+      ]
+    ),
+    TermsModel(
+      title: LocaleData.limitationOfLiability.convertString(),
+      point: [
+        LocaleData.theCompanyShallNotBeLiableForAnyLosses.convertString(),
+        LocaleData.usersAcknowledgeThatInvestmentsCarryInherentRisk.convertString(),
+      ]
+    ),
+    TermsModel(
+      title: LocaleData.termination.convertString(),
+      point: [
+        LocaleData.theCompanyReserveTheRightToTerminateUserAccounts.convertString(),
+        LocaleData.usersMayDeleteTheirAccountsAtAnyTimeByFollowing.convertString(),
+      ]
+    ),
+    TermsModel(
+      title: LocaleData.changesToTerms.convertString(),
+      point: [
+        LocaleData.theCompanyMayUpdateTheseTermsAnytime.convertString(),
+        LocaleData.continuedUseOfTheAppAfterImplementingChanges.convertString(),
+      ]
+    ),
+    TermsModel(
+      title: LocaleData.governingLaw.convertString(),
+      point: [
+        LocaleData.theseTermsShallBeGovernedByAndConstructed.convertString(),
+      ]
+    ),
+    TermsModel(
+      title: LocaleData.contactInformation.convertString(),
+      point: [
+        LocaleData.forAnyQuestionsOrConcernsRegardingTheseTerms.convertString(),
+      ]
+    ),
+    TermsModel(
       title: "",
       point: [
         LocaleData.byUsingTheProStakeAppYouAcknowledge.convertString(),
       ]
     ),
+
 
 
   ];

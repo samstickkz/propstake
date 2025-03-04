@@ -68,6 +68,14 @@ class $AssetsFontsGen {
 class $AssetsPngGen {
   const $AssetsPngGen();
 
+  /// File path: assets/png/backgroud_temp.png
+  AssetGenImage get backgroudTemp =>
+      const AssetGenImage('assets/png/backgroud_temp.png');
+
+  /// File path: assets/png/house_frame.png
+  AssetGenImage get houseFrame =>
+      const AssetGenImage('assets/png/house_frame.png');
+
   /// File path: assets/png/logo_name.png
   AssetGenImage get logoName => const AssetGenImage('assets/png/logo_name.png');
 
@@ -85,6 +93,8 @@ class $AssetsPngGen {
 
   /// List of all assets
   List<AssetGenImage> get values => [
+    backgroudTemp,
+    houseFrame,
     logoName,
     onboardOne,
     onboardThree,
@@ -116,6 +126,9 @@ class $AssetsSvgGen {
   /// File path: assets/svg/arrow_up.svg
   String get arrowUp => 'assets/svg/arrow_up.svg';
 
+  /// File path: assets/svg/bed.svg
+  String get bed => 'assets/svg/bed.svg';
+
   /// File path: assets/svg/camera.svg
   String get camera => 'assets/svg/camera.svg';
 
@@ -134,6 +147,12 @@ class $AssetsSvgGen {
   /// File path: assets/svg/currency.svg
   String get currency => 'assets/svg/currency.svg';
 
+  /// File path: assets/svg/document.svg
+  String get document => 'assets/svg/document.svg';
+
+  /// File path: assets/svg/documents.svg
+  String get documents => 'assets/svg/documents.svg';
+
   /// File path: assets/svg/edit.svg
   String get edit => 'assets/svg/edit.svg';
 
@@ -145,6 +164,9 @@ class $AssetsSvgGen {
 
   /// File path: assets/svg/faq.svg
   String get faq => 'assets/svg/faq.svg';
+
+  /// File path: assets/svg/filter.svg
+  String get filter => 'assets/svg/filter.svg';
 
   /// File path: assets/svg/fingerprint.svg
   String get fingerprint => 'assets/svg/fingerprint.svg';
@@ -166,6 +188,12 @@ class $AssetsSvgGen {
 
   /// File path: assets/svg/logout.svg
   String get logout => 'assets/svg/logout.svg';
+
+  /// File path: assets/svg/love.svg
+  String get love => 'assets/svg/love.svg';
+
+  /// File path: assets/svg/love_outline.svg
+  String get loveOutline => 'assets/svg/love_outline.svg';
 
   /// File path: assets/svg/microsoft.svg
   String get microsoft => 'assets/svg/microsoft.svg';
@@ -215,6 +243,9 @@ class $AssetsSvgGen {
   /// File path: assets/svg/social_login.svg
   String get socialLogin => 'assets/svg/social_login.svg';
 
+  /// File path: assets/svg/stars.svg
+  String get stars => 'assets/svg/stars.svg';
+
   /// File path: assets/svg/temp_logo.svg
   String get tempLogo => 'assets/svg/temp_logo.svg';
 
@@ -242,16 +273,20 @@ class $AssetsSvgGen {
     arrowDown,
     arrowRight,
     arrowUp,
+    bed,
     camera,
     celebrateGrace,
     check,
     checkCircle,
     closeCircle,
     currency,
+    document,
+    documents,
     edit,
     email,
     faceId,
     faq,
+    filter,
     fingerprint,
     globe,
     google,
@@ -259,6 +294,8 @@ class $AssetsSvgGen {
     location,
     logoName,
     logout,
+    love,
+    loveOutline,
     microsoft,
     myInvestment,
     myInvestmentActive,
@@ -275,6 +312,7 @@ class $AssetsSvgGen {
     security,
     setting,
     socialLogin,
+    stars,
     tempLogo,
     tempLogoLight,
     visibilityOff,

@@ -4,6 +4,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 
+import '../../../ui/auth/auth.ui.dart';
 import '../../../utils/constants.dart';
 import '../../cache/database_keys.dart';
 
@@ -63,12 +64,13 @@ class UserService extends ChangeNotifier {
 
   /// LOGOUT FUNCTION
   logout() async {
-
-    await storageService.deleteAllItems();
+    await storageService.deleteItem(key: StorageKey.userTableKey);
+    await storageService.deleteItem(key: StorageKey.refreshTokenKey);
+    await storageService.deleteItem(key: StorageKey.tokenTableKey);
     isUserLoggedIn = false;
     user = User();
     notifyListeners();
-    // navigationService.navigateToAndRemoveUntilWidget(const LoginScreen());
+    navigationService.navigateToAndRemoveUntilWidget(const AuthHomeScreen(isSignIn: true,));
   }
 
 

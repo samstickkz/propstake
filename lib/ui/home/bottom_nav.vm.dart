@@ -5,6 +5,7 @@ import 'package:propstake/ui/base/base-vm.dart';
 import 'package:propstake/utils/string_extensions.dart';
 
 import 'profile/profile_home.ui.dart';
+import 'properties/properies.ui.dart';
 
 class BottomNavigationViewModel extends BaseViewModel {
 
@@ -44,7 +45,7 @@ class BottomNavigationViewModel extends BaseViewModel {
   }
 
   List<Widget> screens = [
-    Placeholder(),
+    PropertiesHomeScreen(),
     Placeholder(),
     Placeholder(),
     Placeholder(),

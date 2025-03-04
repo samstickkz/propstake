@@ -34,6 +34,8 @@ class SplashScreenViewModel extends BaseViewModel {
 
   Future<Object> appRelaunch() async {
 
+    // return navigationService.navigateToAndRemoveUntilWidget(const BottomNavigationScreen());
+
     if(userService.isUserLoggedIn){
       return navigationService.navigateToAndRemoveUntilWidget(const BottomNavigationScreen());
     }else{

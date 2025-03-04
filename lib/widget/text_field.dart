@@ -206,21 +206,25 @@ class _AppTextFieldState extends State<AppTextField> {
                     suffixIconColor: widget.overrideIconColor ==true? null: const Color(0xFF2A2A2A),
                     prefixIcon: widget.prefixIcon?? (widget.prefix==null? null : SizedBox(height: 30.sp, width: 30.sp ,child: Align(alignment: Alignment.center, child: widget.prefix))),
                     suffixIcon: widget.suffixIcon ?? (widget.isPassword
-                        ? IconButton(
-                        onPressed: () {
-                          setState(() {
-                            isVisible = !isVisible;
-                          });
-                        },
-                        icon: widget.suffixIcon ??
+                        ? InkWell(
+                      onTap: () {
+                        setState(() {
+                          isVisible = !isVisible;
+                        });
+                      },
+                      child: Padding(
+                        padding: 16.sp.padR,
+                        child: widget.suffixIcon ??
                             SvgBuilder(isVisible
                                 ? Assets.svg.visibilityOff
                                 : Assets.svg.visible, size: 20.sp,
-                            ))
+                            ),
+                      ),
+                    )
                         : widget.suffixIcon
                     ),
-                    suffixIconConstraints: BoxConstraints(maxHeight: 25.sp, maxWidth: 25.sp),
-                    prefixIconConstraints: BoxConstraints(maxHeight: 25.sp, maxWidth: 25.sp),
+                    suffixIconConstraints: BoxConstraints(maxHeight: 25.sp, maxWidth: 40.sp),
+                    prefixIconConstraints: BoxConstraints(maxHeight: 25.sp, maxWidth: 40.sp),
                     enabledBorder: !widget.useBorder? InputBorder.none : null,
                     errorBorder: !widget.useBorder? InputBorder.none : null,
                     focusedErrorBorder: !widget.useBorder? InputBorder.none : null,

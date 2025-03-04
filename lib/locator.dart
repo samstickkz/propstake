@@ -20,6 +20,7 @@ import 'ui/home/profile/profile_home.vm.dart';
 import 'ui/home/profile/security/security.vm.dart';
 import 'ui/home/profile/settings/settings.vm.dart';
 import 'ui/home/profile/terms_condition/terms_condition.vm.dart';
+import 'ui/home/properties/properies.vm.dart';
 import 'ui/onboarding/splash/splash.vm.dart';
 
 GetIt locator = GetIt.I;
@@ -55,7 +56,7 @@ registerViewModel(){
   locator.registerFactory<AboutUsViewModel>(() => AboutUsViewModel());
   locator.registerFactory<TermsAndConditionViewModel>(() => TermsAndConditionViewModel());
   locator.registerFactory<ContactUsViewModel>(() => ContactUsViewModel());
-  // locator.registerFactory<AccountSettingsHomeViewModel>(() => AccountSettingsHomeViewModel());
+  locator.registerFactory<PropertiesViewModel>(() => PropertiesViewModel());
   // locator.registerFactory<PatientsPreferencesViewModel>(() => PatientsPreferencesViewModel());
   // locator.registerFactory<PatientsAccountProfileViewModel>(() => PatientsAccountProfileViewModel());
   // locator.registerFactory<PatientsSecurityViewModel>(() => PatientsSecurityViewModel());
