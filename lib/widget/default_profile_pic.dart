@@ -1,4 +1,6 @@
+import 'dart:convert';
 import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -6,6 +8,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 
 import '../app_theme/palette.dart';
+import '../data/model/get_user_model.dart';
 import '../data/services/local/user.service.dart';
 import '../utils/widget_extensions.dart';
 import 'apptexts.dart';
@@ -40,9 +43,38 @@ class ProfilePic extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
+    // String getInitials(String fullName) {
+    //   if (fullName.trim().isEmpty) {
+    //     // Return "NU" if the username is empty or only contains spaces
+    //     return " ";
+    //   }
+    //
+    //   List<String> names = fullName.split(' '); // Split the names by space
+    //   String result = '';
+    //
+    //   if (names.length == 1) {
+    //     // If there's only 1 name, return the first letter of that name
+    //     result = names[0].substring(0, 1).toUpperCase();
+    //   } else if (names.length == 2) {
+    //     // If there are exactly 2 names, return the first letter of each
+    //     result = names[0].substring(0, 1).toUpperCase() + names[1].substring(0, 1).toUpperCase();
+    //   } else if (names.length > 2) {
+    //     // If there are more than 2 names, return the first letter of the first two names
+    //     result = names[0].substring(0, 1).toUpperCase() + names[1].substring(0, 1).toUpperCase();
+    //   }
+    //
+    //   return result;
+    // }
+
+    Uint8List decodeBase64Image(String base64String) {
+      return base64Decode(base64String);
+    }
+
+
     String getInitials() {
-      List<String> names = username != null? username!.split(" ") : ("${user.firstName??""} ${user.lastName??""}").split(' '); // Split the names by space
+      List<String> names = username != null? username!.split(" ") : (user.fname==null? []:  ("${user.fname??""} ${user.lname??""}").split(' ')); // Split the names by space
       String result = '';
+
 
       if (names.length == 1) {
         // If there's only 1 name, return the first letter of that name
@@ -60,7 +92,7 @@ class ProfilePic extends StatelessWidget {
       return result;
     }
 
-    String? userImage = picture?? user.profilePictureUrl;
+    String? userImage = picture?? user.imageUrl;
 
 
     return InkWell(
@@ -77,9 +109,11 @@ class ProfilePic extends StatelessWidget {
               alignment: Alignment.center,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                color: useGrayColor? stateColor3(isAppDark(context)):  stateColor12(isAppDark(context)),
+                color: primaryColor,
                 // borderRadius: circleShape? BorderRadius.circular(size?? 42.sp) : BorderRadius.circular((size?? 42.sp)/5.25),
-                image: userImage == null? null: userImage!.startsWith("http")?
+                image: userImage == null? null:
+                // user.img !=null?
+                userImage.startsWith("http")?
                 DecorationImage(
                   image:  CachedNetworkImageProvider(
                       userImage,
@@ -97,7 +131,8 @@ class ProfilePic extends StatelessWidget {
                   if(userImage != null) 0.0.sp.sbH else AppText(
                     getInitials(),
                     size: textSize?? (size?? 40.sp) * 0.4, weight: FontWeight.w700,
-                    color:useGrayColor? stateColor12(isAppDark(context)): white(isAppDark(context)),
+                    color: Colors.white,
+
                   ),
                 ],
               )

@@ -66,3 +66,45 @@ class Indicators extends StatelessWidget {
       });
   }
 }
+
+class DotIndicators extends StatelessWidget {
+  final int total;
+  final int current;
+  final Function(int)? onChange;
+  final Color? inactiveColor;
+  final Color? activeColor;
+  const DotIndicators({super.key, required this.total, required this.current, this.onChange, this.inactiveColor, this.activeColor});
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: _indicatorContent(context)
+    );
+  }
+
+  List<Widget> _indicatorContent(BuildContext context) {
+    return List<Widget>.generate(total, (int index) {
+        return
+        GestureDetector(
+          onTap: (){
+            if(onChange != null){
+              onChange!(index);
+            }
+          },
+          child: Container(
+            width: 6.sp,
+            height: 6.sp,
+            margin: EdgeInsets.symmetric(horizontal: 3.sp, vertical: 0.sp),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(7.5.sp),
+              color: current == index
+                  ? Theme.of(context).primaryColor
+                  : Color(0x808F8F8F),
+            ),
+          ),
+        )
+        ;
+      });
+  }
+}

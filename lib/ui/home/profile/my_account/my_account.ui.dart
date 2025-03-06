@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:propstake/app_theme/palette.dart';
 import 'package:propstake/localization/locales.dart';
 import 'package:propstake/utils/string_extensions.dart';
@@ -44,16 +45,21 @@ class MyAccountScreen extends StatelessWidget {
                     child: Stack(
                       children: [
                         ProfilePic(
-                          user: userService.user,
+                          user: model.user,
                           size: 81.sp,
+                          picture: model.image?.path,
+                          onTap: model.takePicture,
                         ),
                         Align(
                           alignment: Alignment.bottomRight,
                           child: Padding(
                             padding: 2.sp.padA,
-                            child: SvgBuilder(
-                              Assets.svg.camera,
-                              size: 20.sp,
+                            child: InkWell(
+                              onTap: ()=> model.takePicture(source: ImageSource.camera),
+                              child: SvgBuilder(
+                                Assets.svg.camera,
+                                size: 20.sp,
+                              ),
                             ),
                           ),
                         ),
@@ -92,6 +98,7 @@ class MyAccountScreen extends StatelessWidget {
                       title: ProfileTextField(
                         formKey: model.formKey,
                         svg: Assets.svg.email,
+                        hint: LocaleData.fullName.convertString(),
                         submit: (val)=> model.getText(val, ProfileEdited.name),
                         controller: model.nameController,
                         validator: fullNameValidator,
@@ -102,28 +109,76 @@ class MyAccountScreen extends StatelessWidget {
                       endIcon: false,
                       title: ProfileTextField(
                         formKey: model.formKey,
-                        svg: Assets.svg.call,
-                        submit: (val)=> model.getText(val, ProfileEdited.phone),
-                        controller: model.phoneController,
-                        validator: emptyValidator,
-                      ),
-                    ),
-                    ProfileOptionCard(
-                      isLast: true,
-                      endIcon: false,
-                      title: ProfileTextField(
-                        formKey: model.formKey,
-                        svg: Assets.svg.location,
+                        svg: Assets.svg.email,
+                        hint: LocaleData.organisation.convertString(),
                         submit: (val)=> model.getText(val, ProfileEdited.address),
                         controller: model.addressController,
                         validator: emptyValidator,
+                      ),
+                    ),
+                    // ProfileOptionCard(
+                    //   isLast: false,
+                    //   endIcon: false,
+                    //   title: ProfileTextField(
+                    //     formKey: model.formKey,
+                    //     hint: LocaleData.phoneNumber.convertString(),
+                    //     svg: Assets.svg.call,
+                    //     submit: (val)=> model.getText(val, ProfileEdited.phone),
+                    //     controller: model.phoneController,
+                    //     validator: emptyValidator,
+                    //   ),
+                    // ),
+                    // ProfileOptionCard(
+                    //   isLast: false,
+                    //   endIcon: false,
+                    //   title: ProfileTextField(
+                    //     formKey: model.formKey,
+                    //     hint: LocaleData.address.convertString(),
+                    //     svg: Assets.svg.location,
+                    //     submit: (val)=> model.getText(val, ProfileEdited.address),
+                    //     controller: model.addressController,
+                    //     validator: emptyValidator,
+                    //   ),
+                    // ),
+                    ProfileOptionCard(
+                      isLast: true,
+                      endIcon: false,
+                      title: AppTextField(
+                        useBorder: false,
+                        controller: model.dateOfBirthController,
+                        contentPadding: 12.sp.padH,
+                        hint: LocaleData.dateOfBirth.convertString(),
+                        readonly: true,
+                        onTap: model.isReadOnly? (){}: ()=> model.pickToDateTime(picDate: true, context: context),
+                        validator: emptyValidator,
+                        prefixIcon: Padding(
+                          padding: 8.sp.padR,
+                          child: Icon(
+                            CupertinoIcons.calendar,
+                            size: 21.sp,
+                            color: primaryColor,
+                          ),
+                        ),
+                          suffixIcon: InkWell(
+                            onTap: ()=> model.pickToDateTime(picDate: true, context: context),
+                            child: SvgBuilder(
+                              Assets.svg.edit,
+                              size: 21.sp,
+                            ),
+                          )
                       ),
                     ),
                   ],
                 ),
               ),
             ),
-            30.sp.sbH,
+            AppButton.fullWidth(
+                height: 31.sp,
+                text: LocaleData.submit.convertString(),
+                onTap: model.formKey.currentState?.validate()== true? model.updateProfile : null,
+                isLoading: model.isLoading
+            ),
+            40.sp.sbH,
             SingleOptionCard(
               onTap: (){},
               text: LocaleData.investmentLimit.convertString(),
@@ -199,9 +254,10 @@ class ProfileTextField extends StatefulWidget {
   final Function(String) submit;
   final GlobalKey<FormState> formKey;
   final String svg;
+  final String? hint;
   final TextEditingController controller;
   const ProfileTextField({
-    super.key, this.validator, required this.formKey, required this.svg, required this.submit, required this.controller,
+    super.key, this.validator, required this.formKey, required this.svg, required this.submit, required this.controller, this.hint,
   });
 
   @override
@@ -222,7 +278,9 @@ class _ProfileTextFieldState extends State<ProfileTextField> {
 
   onChanged(String? val){
     widget.formKey.currentState!.validate();
-    setState(() {});
+    setState(() {
+      widget.submit(controller.text);
+    });
   }
 
   TextEditingController controller = TextEditingController();
@@ -241,6 +299,7 @@ class _ProfileTextFieldState extends State<ProfileTextField> {
       validator: widget.validator,
       controller: controller,
       prefix: SvgBuilder(widget.svg),
+      hint: widget.hint,
       readonly: isReadOnly,
       suffixIcon: isReadOnly? InkWell(
         onTap: changeReadOnly,
@@ -252,7 +311,6 @@ class _ProfileTextFieldState extends State<ProfileTextField> {
         onTap: (){
           isReadOnly = true;
           setState(() {});
-          widget.submit(controller.text);
         },
         child: Icon(
           Icons.send,

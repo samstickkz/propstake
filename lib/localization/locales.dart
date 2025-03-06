@@ -202,10 +202,85 @@ mixin LocaleData {
   static const String investmentAreSubjectToAvailability = 'investmentAreSubjectToAvailability';
   static const String returnsOnInvestmentAreGoverned = 'returnsOnInvestmentAreGoverned';
   static const String byUsingTheProStakeAppYouAcknowledge = 'byUsingTheProStakeAppYouAcknowledge';
-  // static const String accountRegistration = 'accountRegistration';
+  static const String byUsingTheAppYouConsentToTheCOllection = 'byUsingTheAppYouConsentToTheCOllection';
+  static const String theAppCollectsAndProcessesUserData = 'theAppCollectsAndProcessesUserData';
+  static const String anyAttemptToManipulateHackOrDisrupt = 'anyAttemptToManipulateHackOrDisrupt';
+  static const String usersShallNotUseTheAppFoIllegal = 'usersShallNotUseTheAppFoIllegal';
+  static const String userResponsibility = 'userResponsibility';
+  static const String usersMayAttributeTheirEarningsBasedOnTheTerms = 'usersMayAttributeTheirEarningsBasedOnTheTerms';
+  static const String allFinancialTransactionsWithinTheApp = 'allFinancialTransactionsWithinTheApp';
+  static const String paymentsAndWithdrawals = 'paymentsAndWithdrawals';
+  static const String continuedUseOfTheAppAfterImplementingChanges = 'continuedUseOfTheAppAfterImplementingChanges';
+  static const String theCompanyMayUpdateTheseTermsAnytime = 'theCompanyMayUpdateTheseTermsAnytime';
+  static const String changesToTerms = 'changesToTerms';
+  static const String usersMayDeleteTheirAccountsAtAnyTimeByFollowing = 'usersMayDeleteTheirAccountsAtAnyTimeByFollowing';
+  static const String theCompanyReserveTheRightToTerminateUserAccounts = 'theCompanyReserveTheRightToTerminateUserAccounts';
+  static const String termination = 'termination';
+  static const String usersAcknowledgeThatInvestmentsCarryInherentRisk = 'usersAcknowledgeThatInvestmentsCarryInherentRisk';
+  static const String theCompanyShallNotBeLiableForAnyLosses = 'theCompanyShallNotBeLiableForAnyLosses';
+  static const String limitationOfLiability = 'limitationOfLiability';
+  static const String forAnyQuestionsOrConcernsRegardingTheseTerms = 'forAnyQuestionsOrConcernsRegardingTheseTerms';
+  static const String contactInformation = 'contactInformation';
+  static const String theseTermsShallBeGovernedByAndConstructed = 'theseTermsShallBeGovernedByAndConstructed';
+  static const String governingLaw = 'governingLaw';
+  static const String searchForProperties = 'searchForProperties';
+  static const String favouriteProperies = 'favouriteProperies';
+  static const String bedsNumber = 'bedsNumber';
+  static const String fullyFunded = 'fullyFunded';
+  static const String latestListing = 'latestListing';
+  static const String update = 'update';
+  static const String hi = 'hi';
+  static const String fullName = 'fullName';
+  static const String percentageFunded = 'percentageFunded';
+  static const String dateOfBirth = 'dateOfBirth';
+  static const String organisation = 'organisation';
+  static const String selectDateOfBirth = 'selectDateOfBirth';
+  static const String updatePassword = 'updatePassword';
+  static const String enterNewPassword = 'enterNewPassword';
+  // static const String selectDateOfBirth = 'selectDateOfBirth';
+  static const String enterYourEmailWeWillSend = 'enterYourEmailWeWillSend';
+  static const String troubleLoginIn = 'troubleLoginIn';
 
   static const Map<String, dynamic> en = {
     completed: "Completed",
+    organisation: "Organisation",
+    updatePassword: "Update password",
+    enterNewPassword: "New Password",
+    enterYourEmailWeWillSend: "Enter your email address and we’ll send you a \nlink to help you get back into your account",
+    // organisation: "Organisation",
+    troubleLoginIn: "Trouble Logging In?",
+    favouriteProperies: "Favorite Properties",
+    bedsNumber: "%a Beds",
+    percentageFunded: "%a% Funded",
+    fullyFunded: "Fully Funded",
+    latestListing: "Latest Listings",
+    update: "Update",
+    fullName: "Full Name",
+    dateOfBirth: "Date of Birth",
+    selectDateOfBirth: "Select Date of Birth",
+    searchForProperties: "Search for properties",
+    hi: "Hi %a",
+    forAnyQuestionsOrConcernsRegardingTheseTerms: "For any questions or concerns regarding these Terms, please contact us at [Support Email].",
+    contactInformation: "CONTACT INFORMATION",
+    theseTermsShallBeGovernedByAndConstructed: "These Terms shall be governed by and construed by the laws of [Jurisdiction].",
+    governingLaw: "GOVERNING LAW",
+    continuedUseOfTheAppAfterImplementingChanges: "Continued use of the App after implementing changes constitutes acceptance of the updated Terms.",
+    theCompanyMayUpdateTheseTermsAnytime: "The Company may update these Terms anytime, with notice provided via the App.",
+    changesToTerms: "CHANGES TO TERMS",
+    usersMayDeleteTheirAccountsAtAnyTimeByFollowing: "Users may delete their accounts at any time by following the provided procedures",
+    theCompanyReserveTheRightToTerminateUserAccounts: "The Company reserves the right to terminate user accounts for violations of these Terms.",
+    termination: "TERMINATION",
+    usersAcknowledgeThatInvestmentsCarryInherentRisk: "Users acknowledge that investments carry inherent risks and that past performance does not guarantee future returns.",
+    theCompanyShallNotBeLiableForAnyLosses: "The Company shall not be liable for any losses or damages resulting from the use of the App, including but not limited to investment losses.",
+    limitationOfLiability: "LIMITATION OF LIABILITY",
+    byUsingTheAppYouConsentToTheCOllection: "By using the App, you consent to the collection and use of your data as described in the Privacy Policy.",
+    theAppCollectsAndProcessesUserData: "The App collects and processes user data in accordance with our Privacy Policy.",
+    anyAttemptToManipulateHackOrDisrupt: "Any attempt to manipulate, hack, or disrupt the App’s services will result in immediate termination.",
+    usersShallNotUseTheAppFoIllegal: "Users shall not use the App for illegal or fraudulent activities.",
+    userResponsibility: "USER RESPONSIBILITIES",
+    usersMayAttributeTheirEarningsBasedOnTheTerms: "Users may withdraw their earnings based on the terms outlined in their investment agreements.",
+    allFinancialTransactionsWithinTheApp: "All financial transactions within the App shall be processed through approved payment gateways.",
+    paymentsAndWithdrawals: "PAYMENTS AND WITHDRAWALS",
     upgrade: "Upgrade",
     introduction: "introduction",
     eligibility: "Eligibility",
@@ -374,7 +449,7 @@ mixin LocaleData {
     contactUs: "Contact us",
     faq: "FAQ",
     investmentLimit: "Investment Limit",
-    address: "23 Abak road, Uyo",
+    address: "Your address",
     totalInvestment: "Total investment: \$200",
     availableToInvest: "Available to invest: \$1000",
     estimatedROI5Years: "Total Estimated ROI in 5 years: \$1000",

@@ -17,11 +17,14 @@ import 'my_account/my_account.ui.dart';
 import 'profile_home.vm.dart';
 
 class ProfileHomeScreen extends StatelessWidget {
-  const ProfileHomeScreen({super.key});
+  final bool goToEdit;
+  const ProfileHomeScreen({super.key, this.goToEdit = false});
 
   @override
   Widget build(BuildContext context) {
     return BaseView<ProfileHomeViewModel>(
+      onModelReady: (m)=> m.init(),
+      onMount: (m)=> goToEdit? m.delayFirst(): null,
       builder: (model, theme)=> Scaffold(
         appBar: AppBars(
           text: LocaleData.profile.convertString(),
@@ -48,15 +51,15 @@ class ProfileHomeScreen extends StatelessWidget {
                           user: userService.user,
                           size: 137.sp,
                         ),
-                        Align(
-                          alignment: Alignment.bottomRight,
-                          child: Padding(
-                            padding: 5.sp.padA,
-                            child: SvgBuilder(
-                              Assets.svg.camera
-                            ),
-                          ),
-                        )
+                        // Align(
+                        //   alignment: Alignment.bottomRight,
+                        //   child: Padding(
+                        //     padding: 5.sp.padA,
+                        //     child: SvgBuilder(
+                        //       Assets.svg.camera
+                        //     ),
+                        //   ),
+                        // )
                       ],
                     ),
                   ),

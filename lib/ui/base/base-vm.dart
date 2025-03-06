@@ -1,14 +1,18 @@
+import 'dart:io';
 import 'dart:math';
+import 'dart:typed_data';
 
 import 'package:cupertino_modal_sheet/cupertino_modal_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:native_image_cropper/native_image_cropper.dart';
 
 import '../../data/cache/view_state.dart';
 import '../../utils/app_logger.dart';
 import '../../utils/constants.dart';
 import '../../utils/widget_extensions.dart';
 import '../../widget/action_widget.dart';
+import '../../widget/cropper_for_immage.dart';
 
 class BaseViewModel extends ChangeNotifier {
   ViewState _viewState = ViewState.loading;
@@ -40,6 +44,25 @@ class BaseViewModel extends ChangeNotifier {
     // navigationService.navigateToRoute(const ProfileHomeScreen());
   }
 
+  Future<Uint8List> convertFileToBytes(File file) async {
+    try {
+      Uint8List bytes = await file.readAsBytes();
+      return bytes;
+    } catch (e) {
+      AppLogger.debug("Error reading file: $e");
+      return Uint8List(0);
+    }
+  }
+
+  Future<String?> pickCroppedImage(File imageFile, {double aspectRatio = 1/1, CropMode mode = CropMode.oval}) async {
+    try {
+      return await navigationService.navigateToRoute(DefaultPage(bytes: await convertFileToBytes(imageFile), aspectRatio: aspectRatio, mode: mode));
+    } catch (e) {
+      AppLogger.debug("Error cropping image: $e");
+      return null;
+    }
+  }
+
   showLogout()async{
     popDialog(
       onTap: userService.logout,
@@ -53,7 +76,7 @@ class BaseViewModel extends ChangeNotifier {
   getUser() async {
     startLoader();
     try{
-      // var res = await repository.getUser();
+      var res = await authenticationService.getUser();
     }catch(err){
       AppLogger.debug(err.toString());
     }

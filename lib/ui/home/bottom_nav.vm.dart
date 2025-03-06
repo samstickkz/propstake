@@ -5,8 +5,10 @@ import 'package:propstake/ui/base/base-vm.dart';
 import 'package:propstake/utils/string_extensions.dart';
 
 import 'profile/profile_home.ui.dart';
+import 'properties/properies.ui.dart';
 
 class BottomNavigationViewModel extends BaseViewModel {
+
 
   List<NavType> navs = [
     NavType(
@@ -43,8 +45,13 @@ class BottomNavigationViewModel extends BaseViewModel {
     notifyListeners();
   }
 
+  init(int startIndex){
+    index = startIndex;
+    notifyListeners();
+  }
+
   List<Widget> screens = [
-    Placeholder(),
+    PropertiesHomeScreen(),
     Placeholder(),
     Placeholder(),
     Placeholder(),

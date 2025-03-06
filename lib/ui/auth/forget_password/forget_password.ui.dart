@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:propstake/localization/locales.dart';
+import 'package:propstake/utils/string_extensions.dart';
 import 'package:propstake/utils/validator.dart';
 import 'package:propstake/utils/widget_extensions.dart';
 import 'package:propstake/widget/app_button.dart';
 import 'package:propstake/widget/apptexts.dart';
 import 'package:propstake/widget/auth_appbar.dart';
-import 'package:propstake/widget/svg_builder.dart';
 import 'package:animate_do/animate_do.dart';
 
-import '../../../gen/assets.gen.dart';
-import '../../../utils/constants.dart';
 import '../../../widget/text_field.dart';
 import '../../base/base-ui.dart';
 import '../auth.vm.dart';
@@ -32,11 +31,11 @@ class ForgotPasswordScreen extends StatelessWidget {
               children: [
                 40.sp.sbH,
                 FadeIn(
-                  child: AppText("Trouble Logging In?", size: 24.sp, isTitle: true,)
+                  child: AppText(LocaleData.troubleLoginIn.convertString(), size: 24.sp, isTitle: true,)
                 ),
                 20.sp.sbH,
                 AppText(
-                  "Enter your email address and we’ll send you a \nlink to help you get back into your account",
+                  LocaleData.enterYourEmailWeWillSend.convertString(),
                   size: 14.68.sp,
                   align: TextAlign.center,
                 ),
@@ -45,8 +44,8 @@ class ForgotPasswordScreen extends StatelessWidget {
                   child: AppTextField(
                     controller: model.upEmailController,
                     validator: emailValidator,
-                    hintText: "Email",
-                    hint: "Enter Email Address",
+                    hintText: LocaleData.email.convertString(),
+                    hint: LocaleData.enterEmailAddress.convertString(),
                     onChanged: model.onChangedUp,
                   ),
                 ),
@@ -54,8 +53,8 @@ class ForgotPasswordScreen extends StatelessWidget {
                 SlideInUp(
                   child: AppButton.fullWidth(
                     isLoading: model.isLoading,
-                    onTap: model.formKey.currentState?.validate() ==true? model.startChangePassword: null,
-                    text: "Confirm",
+                    onTap: model.formKey.currentState?.validate() ==true? model.forgotPasswordApi: null,
+                    text: LocaleData.confirm.convertString(),
                   ),
                 ),
                 80.sp.sbH,

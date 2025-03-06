@@ -42,7 +42,7 @@ class AppTheme {
           color: stateColor11(isDark)
       ),
       dividerTheme: DividerThemeData(
-          color: gray7(isDark),
+          color: stateColor3(isDark),
           thickness: 1.5.h
       ),
 

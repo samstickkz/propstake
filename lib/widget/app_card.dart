@@ -6,6 +6,7 @@ import '../../utils/widget_extensions.dart';
 
 class AppCard extends StatelessWidget {
   final Color? backgroundColor;
+  final String? backgroundImage;
   final Color? color;
   final Color? borderColor;
   final Color? splashColor;
@@ -46,6 +47,7 @@ class AppCard extends StatelessWidget {
     this.borderRadius,
     this.color,
     this.splashColor, this.alignment,
+    this.backgroundImage,
   });
 
   @override
@@ -67,8 +69,12 @@ class AppCard extends StatelessWidget {
         child: Container(
           alignment: alignment,
           decoration: decoration?? BoxDecoration(
-            color: color?? (backgroundColor!=null ? backgroundColor!.withOpacity(0.9): (isAppDark(context)? Colors.black: Color(0xFFF6F6F6))),
+            color: backgroundImage != null? null: color?? (backgroundColor!=null ? backgroundColor!.withOpacity(0.9): (isAppDark(context)? Colors.black: Color(0xFFF6F6F6))),
             borderRadius: borderRadius??  BorderRadius.circular(radius ?? 9.r),
+            image: backgroundImage==null? null: DecorationImage(
+              image: AssetImage(backgroundImage!),
+              fit: BoxFit.fill
+            ),
             border: bordered == true
               ? Border.all(
               color: borderColor ?? Theme.of(context).shadowColor.withOpacity(0.6),
@@ -76,16 +82,19 @@ class AppCard extends StatelessWidget {
               : null
           ),
           margin: margin ?? 0.0.padH,
-          child: Material(
-            color: Colors.transparent,
-            child: InkWell(
-              onTap: onTap,
-              borderRadius: borderRadius?? BorderRadius.circular(radius ?? 9.r),
-              child: Container(
-                height: heights,
-                width: widths ?? (expandable == true ? null : width(context)),
-                padding: padding ?? 12.0.padA,
-                child: child,
+          child: ClipRRect(
+            borderRadius: borderRadius??  BorderRadius.circular(radius != null? (radius! - 0.5.r)  : 8.r),
+            child: Material(
+              color: Colors.transparent,
+              child: InkWell(
+                onTap: onTap,
+                borderRadius: borderRadius?? BorderRadius.circular(radius ?? 9.r),
+                child: Container(
+                  height: heights,
+                  width: widths ?? (expandable == true ? null : width(context)),
+                  padding: padding ?? 12.0.padA,
+                  child: child,
+                ),
               ),
             ),
           ),

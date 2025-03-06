@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:propstake/localization/locales.dart';
+import 'package:propstake/utils/string_extensions.dart';
 import 'package:propstake/utils/validator.dart';
 import 'package:propstake/utils/widget_extensions.dart';
 import 'package:propstake/widget/app_button.dart';
@@ -16,21 +18,15 @@ import '../auth.vm.dart';
 
 
 class UpdatePasswordScreen extends StatelessWidget {
-  const UpdatePasswordScreen({super.key});
+  final String code;
+  final String email;
+  const UpdatePasswordScreen({super.key, required this.code, required this.email});
 
   @override
   Widget build(BuildContext context) {
     return BaseView<AuthViewModel>(
       builder: (model, theme)=> Scaffold(
-        appBar: AppAppBar(
-          leading: InkWell(
-            onTap: navigationService.canPop() ? navigationService.goBack: null,
-            child: SvgBuilder(
-              isAppDark(context)? Assets.svg.tempLogo: Assets.svg.tempLogoLight,
-              width: 81.w, height: 27.h,
-            ),
-          ),
-        ),
+        appBar: AppAppBar(),
         body: Form(
           key: model.formKey,
           child: Padding(
@@ -40,15 +36,15 @@ class UpdatePasswordScreen extends StatelessWidget {
               children: [
                 40.sp.sbH,
                 FadeIn(
-                  child: AppText("Update password", size: 24.sp, isTitle: true,)
+                  child: AppText(LocaleData.updatePassword.convertString(), size: 24.sp, isTitle: true,)
                 ),
                 40.sp.sbH,
                 SlideInRight(
                   child: AppTextField(
                     controller: model.newPasswordController,
                     validator: passwordValidator,
-                    hintText: "New Password",
-                    hint: "Enter New Password",
+                    hintText: LocaleData.newPassword.convertString(),
+                    hint: LocaleData.enterNewPassword.convertString(),
                     isPassword: true,
                     onChanged: model.onChangedUp,
                   ),
@@ -58,8 +54,8 @@ class UpdatePasswordScreen extends StatelessWidget {
                   child: AppTextField(
                     controller: model.confirmPasswordController,
                     validator: (val)=> confirmPasswordValidator(model.newPasswordController, model.confirmPasswordController),
-                    hintText: "Confirm Password",
-                    hint: "Enter New Password Again",
+                    hintText: LocaleData.confirmPassword.convertString(),
+                    hint: LocaleData.enterNewPassword.convertString(),
                     isPassword: true,
                     onChanged: model.onChangedUp,
                   ),
@@ -68,8 +64,8 @@ class UpdatePasswordScreen extends StatelessWidget {
                 SlideInUp(
                   child: AppButton.fullWidth(
                     isLoading: model.isLoading,
-                    onTap: model.formKey.currentState?.validate() ==true? model.submitNewPassword: null,
-                    text: "Confirm",
+                    onTap: model.formKey.currentState?.validate() == true? ()=> model.submitNewPassword(email, code): null,
+                    text: LocaleData.confirm.convertString(),
                   ),
                 ),
                 80.sp.sbH,

@@ -57,8 +57,8 @@ class AuthViewModel extends BaseViewModel {
     ));
   }
 
-  goHome(){
-    navigationService.navigateToAndRemoveUntilWidget(BottomNavigationScreen());
+  goHome({required bool goToSetUpProfile}){
+    navigationService.navigateToAndRemoveUntilWidget(BottomNavigationScreen(initialIndex: goToSetUpProfile? 4 : 0, goToProfile: goToSetUpProfile,));
   }
 
   login() async {
@@ -72,8 +72,11 @@ class AuthViewModel extends BaseViewModel {
         stopLoader();
 
         if(res.asRight().successful == true){
-          showCustomToast(res.asRight().message??"", success: true);
-          goHome();
+          await userService.storeToken(accessToken: res.asRight().data);
+          bool goToEdit = await getUsers(
+              res.asRight().message??""
+          );
+          goHome(goToSetUpProfile: !goToEdit);
         }else{
           showCustomToast(res.asRight().message??"");
         }
@@ -85,8 +88,92 @@ class AuthViewModel extends BaseViewModel {
     }
   }
 
-  submitNewPassword(){
-    return navigationService.navigateToAndRemoveUntilWidget(const AuthHomeScreen());
+  Future<bool> onboardChecker() async {
+    startLoader();
+    try{
+      var res = await authenticationService.onboardChecker();
+      if(res.isRight()){
+        stopLoader();
+
+        if(res.asRight().successful == true){
+          if(res.asRight().data?.onboardingLevel == 1){
+            return true;
+          }
+        }
+      }
+      return false;
+    }catch(err){
+      stopLoader();
+      return false;
+    }
+  }
+
+  Future<bool> getUsers(
+      String message
+      ) async {
+    startLoader();
+    try{
+      var res = await authenticationService.getUser();
+      if(res.isRight()){
+        stopLoader();
+        if(res.asRight().successful == true){
+          showCustomToast(message, success: true);
+          return true;
+        }
+      }
+      return false;
+    }catch(err){
+      stopLoader();
+      return false;
+    }
+  }
+
+  submitNewPassword(String email, String code)async{
+    startLoader();
+    try{
+      var res = await authenticationService.setNewPassword(
+        email: email,
+        code: code,
+        password: newPasswordController.text.trim()
+      );
+      if(res.isRight()){
+        stopLoader();
+        if(res.asRight().successful == true){
+          showCustomToast(res.asRight().message??"", success: true);
+          return navigationService.navigateToAndRemoveUntilWidget(const AuthHomeScreen(isSignIn: true,));
+        }else{
+          showCustomToast(res.asRight().message??"");
+        }
+      } else {
+        showCustomToast(res.asLeft().message??"");
+        stopLoader();
+      }
+    }catch(err){
+      stopLoader();
+    }
+  }
+
+  forgotPasswordApi()async{
+    startLoader();
+    try{
+      var res = await authenticationService.forgotPassword(
+          email: upEmailController.text.trim(),
+      );
+      if(res.isRight()){
+        stopLoader();
+
+        if(res.asRight().successful == true){
+          showCustomToast(res.asRight().message??"", success: true);
+          startChangePassword();
+        }else{
+          showCustomToast(res.asRight().message??"");
+        }
+      } else {
+        stopLoader();
+      }
+    }catch(err){
+      stopLoader();
+    }
   }
 
   startChangePassword(){
