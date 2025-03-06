@@ -43,7 +43,9 @@ connect({bool? useFormData}) {
           }
         }
 
-        log("Request Data::: ${jsonEncode(options.data)}");
+        if(useFormData != true){
+          log("Request Data::: ${jsonEncode(options.data)}");
+        }
         log("Request Path::: ${jsonEncode(options.uri.path)}");
         log("Request Path::: ${jsonEncode(options.headers)}");
         return handler.next(options);

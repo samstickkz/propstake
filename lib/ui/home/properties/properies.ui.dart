@@ -31,10 +31,10 @@ class PropertiesHomeScreen extends StatelessWidget {
           noLeading: true,
           title: Row(
             children: [
-              ProfilePic(user: userService.user, size: 40.sp,),
+              ProfilePic(user: userService.user, size: 40.sp),
               16.sp.sbW,
               AppText(
-                convertListString(LocaleData.hi.convertString(), data: [userService.user.firstName??""]),
+                convertListString(LocaleData.hi.convertString(), data: [userService.user.fname??""]),
                 size: 16.sp,
                 weight: FontWeight.w500,
                 color: stateColor12(isAppDark(context)),

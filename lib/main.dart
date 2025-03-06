@@ -84,7 +84,6 @@ class _MyAppState extends State<MyApp> {
     FocusManager.instance.primaryFocus?.unfocus();
     // Initialize and check login Status
     await configureLocalization();
-    await locator<UserService>().initializer();
   }
 
   @override

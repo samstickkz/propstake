@@ -30,7 +30,10 @@ class VerifyUserScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BaseView<VerifyUserViewModel>(
-      onModelReady: (model)=> model.checkBiometricType(),
+      onModelReady: (model)=> model.checkBiometricType(
+        reasons: reason,
+        emails: email
+      ),
       builder: (model, theme)=> Scaffold(
         appBar: AppAppBar(),
         body: Padding(
@@ -63,7 +66,7 @@ class VerifyUserScreen extends StatelessWidget {
                     SlideInRight(
                       child: AppButton.fullWidth(
                         isLoading: model.isLoading,
-                        onTap: model.formKey.currentState?.validate() ==true? ()=> model.confirm(reason): null,
+                        onTap: model.formKey.currentState?.validate() ==true? model.confirm: null,
                         text: LocaleData.confirm.convertString(),
                       ),
                     ),
@@ -82,7 +85,7 @@ class VerifyUserScreen extends StatelessWidget {
                                   fontWeight: FontWeight.w700
                               ),
                               recognizer: TapGestureRecognizer()
-                                ..onTap = model.resendCode
+                                ..onTap = model.resentConfirmEmail
                           ),
                         ],
                       ),

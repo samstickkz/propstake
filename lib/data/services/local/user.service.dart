@@ -3,14 +3,17 @@ import 'dart:developer';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:propstake/utils/app_logger.dart';
+import 'package:propstake/utils/dartz.x.dart';
 
 import '../../../ui/auth/auth.ui.dart';
 import '../../../utils/constants.dart';
 import '../../cache/database_keys.dart';
+import '../../model/get_user_model.dart';
 
 
 class UserService extends ChangeNotifier {
-  User user = User(firstName: "Emmanuel", lastName: "Ekpenyong", profilePictureUrl: "https://i.pravatar.cc/150?img=33",);
+  User user = User();
   bool isUserLoggedIn = false;
   bool isDoctor = false;
   bool rememberMe = false;
@@ -29,6 +32,7 @@ class UserService extends ChangeNotifier {
       await storageService.storeItem(key: StorageKey.refreshTokenKey, value: refreshToken);
     }
     isUserLoggedIn = true;
+    user = User();
     notifyListeners();
   }
 
@@ -38,6 +42,7 @@ class UserService extends ChangeNotifier {
       var res = await storageService.storeItem(key: StorageKey.userTableKey, value: jsonEncode(users));
       if(res){
         user = users;
+        AppLogger.debug("Name: ${user.email}");
       }
     }
     notifyListeners();
@@ -55,9 +60,6 @@ class UserService extends ChangeNotifier {
     log("ACCESS TOKEN (AUTH)::: $userToken");
     log("Is User Logged In:::: $isUserLoggedIn");
 
-
-    //REMOVE AFTER
-    user = User(firstName: "Emmanuel", lastName: "Ekpenyong", profilePictureUrl: "https://i.pravatar.cc/150?img=33",);
     notifyListeners();
   }
 
@@ -77,35 +79,23 @@ class UserService extends ChangeNotifier {
   Future<User?> getStoreUser()  async {
     String? data = await storageService.readItem(key: StorageKey.userTableKey);
     if(data==null){
-      // var response = await authenticationService.getUser();
-      // if(response.isRight()){
-      //   user = response.asRight();
-      //   notifyListeners();
-      //   return user;
-      // }else{
-      //   user = User();
-      //   await logout();
-      //   notifyListeners();
-      //   return null;
-      // }
-      // notifyListeners();
-      // return null;
+      var response = await authenticationService.getUser();
+      if(response.isRight()){
+        notifyListeners();
+        return user;
+      }else{
+        user = User();
+        notifyListeners();
+        return null;
+      }
     }else{
-      // User userResponse = User.fromJson(jsonDecode(data));
-      // user = userResponse;
-      // authenticationService.getUser();
+      AppLogger.debug("User Data: $data");
+      User userResponse = User.fromJson(jsonDecode(data));
+      user = userResponse;
       notifyListeners();
+      authenticationService.getUser();
       return user;
     }
   }
 
-}
-
-
-class User{
-  String? firstName;
-  String? lastName;
-  String? profilePictureUrl;
-
-  User({this.firstName, this.lastName, this.profilePictureUrl});
 }

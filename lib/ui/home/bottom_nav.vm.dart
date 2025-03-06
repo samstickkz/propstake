@@ -9,6 +9,7 @@ import 'properties/properies.ui.dart';
 
 class BottomNavigationViewModel extends BaseViewModel {
 
+
   List<NavType> navs = [
     NavType(
       name: LocaleData.properties.convertString(),
@@ -41,6 +42,11 @@ class BottomNavigationViewModel extends BaseViewModel {
 
   changeIndex(int val){
     index = val;
+    notifyListeners();
+  }
+
+  init(int startIndex){
+    index = startIndex;
     notifyListeners();
   }
 

@@ -230,16 +230,34 @@ mixin LocaleData {
   static const String latestListing = 'latestListing';
   static const String update = 'update';
   static const String hi = 'hi';
+  static const String fullName = 'fullName';
   static const String percentageFunded = 'percentageFunded';
+  static const String dateOfBirth = 'dateOfBirth';
+  static const String organisation = 'organisation';
+  static const String selectDateOfBirth = 'selectDateOfBirth';
+  static const String updatePassword = 'updatePassword';
+  static const String enterNewPassword = 'enterNewPassword';
+  // static const String selectDateOfBirth = 'selectDateOfBirth';
+  static const String enterYourEmailWeWillSend = 'enterYourEmailWeWillSend';
+  static const String troubleLoginIn = 'troubleLoginIn';
 
   static const Map<String, dynamic> en = {
     completed: "Completed",
+    organisation: "Organisation",
+    updatePassword: "Update password",
+    enterNewPassword: "New Password",
+    enterYourEmailWeWillSend: "Enter your email address and we’ll send you a \nlink to help you get back into your account",
+    // organisation: "Organisation",
+    troubleLoginIn: "Trouble Logging In?",
     favouriteProperies: "Favorite Properties",
     bedsNumber: "%a Beds",
     percentageFunded: "%a% Funded",
     fullyFunded: "Fully Funded",
     latestListing: "Latest Listings",
     update: "Update",
+    fullName: "Full Name",
+    dateOfBirth: "Date of Birth",
+    selectDateOfBirth: "Select Date of Birth",
     searchForProperties: "Search for properties",
     hi: "Hi %a",
     forAnyQuestionsOrConcernsRegardingTheseTerms: "For any questions or concerns regarding these Terms, please contact us at [Support Email].",
@@ -431,7 +449,7 @@ mixin LocaleData {
     contactUs: "Contact us",
     faq: "FAQ",
     investmentLimit: "Investment Limit",
-    address: "23 Abak road, Uyo",
+    address: "Your address",
     totalInvestment: "Total investment: \$200",
     availableToInvest: "Available to invest: \$1000",
     estimatedROI5Years: "Total Estimated ROI in 5 years: \$1000",

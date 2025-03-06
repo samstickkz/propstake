@@ -9,7 +9,7 @@ class ContactUsViewModel extends BaseViewModel {
   TextEditingController messageController = TextEditingController();
 
   init(){
-    nameController.text = "${userService.user.firstName??""} ${userService.user.lastName??""}";
+    nameController.text = "${userService.user.fname??""} ${userService.user.lname??""}";
     notifyListeners();
   }
 

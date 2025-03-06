@@ -34,6 +34,12 @@ class ProfileHomeViewModel extends BaseViewModel {
     navigationService.navigateToRoute(AboutUsScreen());
   }
 
+  delayFirst(){
+    Future.delayed(Duration(milliseconds: 200), (){
+      goToMyAccount();
+    });
+  }
+
   goToMyAccount(){
     navigationService.navigateToRoute(MyAccountScreen());
   }
@@ -42,6 +48,9 @@ class ProfileHomeViewModel extends BaseViewModel {
     navigationService.navigateToRoute(SecurityScreen());
   }
 
+  init(){
+    getUser();
+  }
   
   List<FaqModel> faqs = [
     FaqModel(title: LocaleData.faqQuestion1.convertString(), body: LocaleData.faqAnswer1.convertString()),
