@@ -220,7 +220,7 @@ class AuthenticationService {
 
       String? img;
 
-      if(imageUrl == null){
+      if(imageUrl != null){
         var res = await uploadImage(image: imageUrl!);
         if(res.isRight()){
           img = res.asRight();

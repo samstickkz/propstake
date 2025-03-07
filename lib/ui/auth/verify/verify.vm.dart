@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:local_auth/local_auth.dart';
+import 'package:propstake/ui/auth/auth.ui.dart';
 import 'package:propstake/ui/base/base-vm.dart';
 import 'package:propstake/ui/home/bottom_nav.ui.dart';
 import 'package:propstake/utils/app_buttom_sheet.dart';
@@ -82,7 +83,7 @@ class VerifyUserViewModel extends BaseViewModel {
             barrierDismissible: false,
             noHeader: true,
             child: SuccessAuthVerification(
-              onTap: ()=> navigationService.navigateToAndRemoveUntilWidget(bioType== null? BottomNavigationScreen(): LocalAuthScreen()),
+              onTap: ()=> navigationService.navigateToAndRemoveUntilWidget(bioType== null? AuthHomeScreen(isSignIn: true,): LocalAuthScreen()),
             )
           );
         }

@@ -61,6 +61,12 @@ dependencies:
   intl: ^0.19.0
   flutter_svg: ^2.0.17
   aws_s3_upload_lite: ^0.1.6
+  firebase_core: ^3.12.1
+  firebase_auth: ^5.5.1
+  sign_in_with_apple: ^6.1.4
+  google_sign_in: ^6.2.2
+  firebase_messaging: ^15.2.4
+  flutter_background_service: ^5.1.0
 
 dev_dependencies:
   flutter_test:
