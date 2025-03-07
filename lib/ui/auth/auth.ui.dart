@@ -17,12 +17,13 @@ import 'widgets/sign_up_form.dart';
 
 class AuthHomeScreen extends StatelessWidget {
   final bool? isSignIn;
-  const AuthHomeScreen({super.key, this.isSignIn});
+  final String? email;
+  const AuthHomeScreen({super.key, this.isSignIn, this.email});
 
   @override
   Widget build(BuildContext context) {
     return BaseView<AuthViewModel>(
-      onModelReady: (m)=> m.onInit(isSignIn),
+      onModelReady: (m)=> m.onInit(isSignIn, email),
       builder: (model, theme)=> Scaffold(
         appBar: AppAppBar(),
         body: Padding(

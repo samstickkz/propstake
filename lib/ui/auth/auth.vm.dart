@@ -11,7 +11,14 @@ import 'verify/verify.ui.dart';
 
 class AuthViewModel extends BaseViewModel {
 
-  onInit(bool? isSignIn){
+  onInit(bool? isSignIn, String? email){
+    if(email!=null){
+      if(isSignIn == true){
+        inEmailController.text = email;
+      }else {
+        upEmailController.text = email;
+      }
+    }
     changeScreen(isSignIn == true? screens[1]: screens[0]);
     notifyListeners();
   }
@@ -140,7 +147,7 @@ class AuthViewModel extends BaseViewModel {
         stopLoader();
         if(res.asRight().successful == true){
           showCustomToast(res.asRight().message??"", success: true);
-          return navigationService.navigateToAndRemoveUntilWidget(const AuthHomeScreen(isSignIn: true,));
+          return navigationService.navigateToAndRemoveUntilWidget(AuthHomeScreen(isSignIn: true, email: email,));
         }else{
           showCustomToast(res.asRight().message??"");
         }
