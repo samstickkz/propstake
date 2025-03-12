@@ -1,4 +1,4 @@
-package com.example.propstake
+package com.prostake.app
 
 import io.flutter.embedding.android.FlutterFragmentActivity
 

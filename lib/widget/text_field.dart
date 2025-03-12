@@ -493,7 +493,7 @@ class LanguageDropDown extends StatelessWidget {
       child: DropdownButtonFormField<String>(
         borderRadius: BorderRadius.circular(8.r),
         style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontSize: 12.sp),
-        icon: const Icon(Icons.keyboard_arrow_down),
+        icon: Icon(Icons.keyboard_arrow_down, color: Colors.white),
         value: localeService.language,
         items: locales.map((e) => DropdownMenuItem(
           value: e.languageCode,
@@ -514,7 +514,7 @@ class LanguageDropDown extends StatelessWidget {
             .toList(),
         onChanged: onChanged,
         isExpanded: true,
-        dropdownColor: Theme.of(context).cardColor,
+        dropdownColor: stateColor12(false),
         validator: validator,
         decoration: InputDecoration(
           errorMaxLines: 3,
