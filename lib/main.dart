@@ -121,7 +121,7 @@ class _MyAppState extends State<MyApp> {
                         debugShowCheckedModeBanner: false,
                         navigatorKey: locator<NavigationService>().navigatorKey,
                         scaffoldMessengerKey: locator<NavigationService>().snackBarKey,
-                        title: "ProStake",
+                        title: "PropStake",
                         theme: AppTheme.themeData(false),
                         darkTheme: AppTheme.themeData(true),
                         themeMode: themeProvider.themeMode,

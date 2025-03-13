@@ -185,7 +185,7 @@ class PropertiesHomeScreen extends StatelessWidget {
                                                       Spacer(),
                                                       PriceWidget(
                                                         currency: Currency.dollar,
-                                                        value: 2095.toString(),
+                                                        value: 2095,
                                                         weight: FontWeight.w900,
                                                         roundUp: true,
                                                         color: Colors.white,
@@ -361,7 +361,7 @@ class PropertiesHomeScreen extends StatelessWidget {
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [
                                     PriceWidget(
-                                      value: 2095.toString(),
+                                      value: 2095,
                                       currency: Currency.dollar,
                                       color: primaryColor,
                                       size: 16.49.sp,
