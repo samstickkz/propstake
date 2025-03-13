@@ -41,6 +41,9 @@ Future<void> main() async {
     ],
   );
 
+  // Ensure the app is edge-to-edge
+  SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
+
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
     statusBarColor: Colors.transparent,
     statusBarIconBrightness: Brightness.light,
