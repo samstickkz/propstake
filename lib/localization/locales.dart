@@ -237,17 +237,79 @@ mixin LocaleData {
   static const String selectDateOfBirth = 'selectDateOfBirth';
   static const String updatePassword = 'updatePassword';
   static const String enterNewPassword = 'enterNewPassword';
-  // static const String selectDateOfBirth = 'selectDateOfBirth';
+  static const String myPortfolio = 'myPortfolio';
   static const String enterYourEmailWeWillSend = 'enterYourEmailWeWillSend';
   static const String troubleLoginIn = 'troubleLoginIn';
+  static const String frequentlyAskedQuestion = 'frequentlyAskedQuestion';
+  static const String seeAll = 'seeAll';
+  static const String transactionHistory = 'transactionHistory';
+  static const String withdraw = 'withdraw';
+  static const String deposit = 'deposit';
+  static const String recent = 'recent';
+  static const String invest = 'invest';
+  static const String totalBalance = 'totalBalance';
+  static const String bankTransfer = 'bankTransfer';
+  static const String chooseAPaymentMethodThatWorksBestForYou = 'chooseAPaymentMethodThatWorksBestForYou';
+  static const String chooseAPlanAndLetsHandleTheRest = 'chooseAPlanAndLetsHandleTheRest';
+  static const String autoInvest = 'autoInvest';
+  static const String accountNumber = 'accountNumber';
+  static const String accountName = 'accountName';
+  static const String amount = 'amount';
+  static const String enterYourBankDetailsToReceivePayment = 'enterYourBankDetailsToReceivePayment';
+  static const String iHaveMadeTheTransfer = 'iHaveMadeTheTransfer';
+  static const String createHereAfterYouHaveMadeATransfer = 'createHereAfterYouHaveMadeATransfer';
+  static const String addMemoPleaseAddMemoToTheTransaction = 'addMemoPleaseAddMemoToTheTransaction';
+  static const String bankName = 'bankName';
+  // static const String bankName = 'bankName';
+  // static const String bankName = 'bankName';
+  static const String yuan = 'yuan';
+  static const String gbp = 'gbp';
+  static const String eur = 'eur';
+  static const String ngn = 'ngn';
+  static const String usd = 'usd';
+  static const String copyDetailsAndMakePayment = 'copyDetailsAndMakePayment';
+  static const String accountDetails = 'accountDetails';
+  static const String transferFundsFromYourLocalOrInternationalBankAccounts = 'transferFundsFromYourLocalOrInternationalBankAccounts';
+  static const String browseThroughAVarietyOfProperties = 'browseThroughAVarietyOfProperties';
 
   static const Map<String, dynamic> en = {
     completed: "Completed",
+    // completed: "Completed",
+    // completed: "Completed",
+    yuan: "CNY",
+    gbp: "GBP",
+    eur: "EUR",
+    ngn: "NGN",
+    usd: "USD",
     organisation: "Organisation",
+    recent: "Recent",
+    enterYourBankDetailsToReceivePayment: "Enter your bank details to receive payment",
+    iHaveMadeTheTransfer: "I have made the transfer",
+    createHereAfterYouHaveMadeATransfer: "Click here after you have made the transfer",
+    addMemoPleaseAddMemoToTheTransaction: "Add Memo (please add memo to the transaction)",
+    bankName: "Bank Name",
+    accountNumber: "Account Number",
+    accountName: "Account Name",
+    amount: "Amount",
+    copyDetailsAndMakePayment: "Copy details and make payment",
+    accountDetails: "Account details",
+    transferFundsFromYourLocalOrInternationalBankAccounts: "Transfer funds from your local or international bank account directly into your wallet.",
+    bankTransfer: "Bank Transfer",
+    chooseAPaymentMethodThatWorksBestForYou: "Choose a payment method that works best for you.",
+    chooseAPlanAndLetsHandleTheRest: "Choose a plan and let us handle the rest.",
+    autoInvest: "Auto invest",
+    browseThroughAVarietyOfProperties: "Browse through a variety of properties",
+    frequentlyAskedQuestion: "Frequently Asked Question",
+    seeAll: "See all",
+    transactionHistory: "Transaction history",
+    withdraw: "Withdraw",
+    deposit: "Deposit",
+    invest: "Invest",
+    totalBalance: "Total Balance",
     updatePassword: "Update password",
     enterNewPassword: "New Password",
     enterYourEmailWeWillSend: "Enter your email address and we’ll send you a \nlink to help you get back into your account",
-    // organisation: "Organisation",
+    myPortfolio: "My Portfolio",
     troubleLoginIn: "Trouble Logging In?",
     favouriteProperies: "Favorite Properties",
     bedsNumber: "%a Beds",

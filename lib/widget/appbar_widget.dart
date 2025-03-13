@@ -20,6 +20,7 @@ class AppBars extends StatelessWidget implements PreferredSizeWidget {
   final Color? backgroundColor;
   final Color? buttonBackgroundColor;
   final Color? textAppColor;
+  final bool centerTitle;
   final PreferredSizeWidget? bottom;
   final List<Widget>? actions;
   const AppBars({super.key,
@@ -27,6 +28,7 @@ class AppBars extends StatelessWidget implements PreferredSizeWidget {
     this.actions, this.flexibleSpace,
     this.bottom, this.text,
     this.hasNotification,
+    this.centerTitle = true,
     this.leading, this.elevation,
     this.backgroundColor, this.systemOverlayStyle,
     this.textAppColor, this.buttonBackgroundColor, this.noLeading
@@ -45,7 +47,7 @@ class AppBars extends StatelessWidget implements PreferredSizeWidget {
       actions: actions,
       systemOverlayStyle: systemOverlayStyle,
       scrolledUnderElevation: 0.0,
-      centerTitle: true,
+      centerTitle: centerTitle,
       elevation: elevation,
     );
   }

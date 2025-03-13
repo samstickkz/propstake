@@ -13,6 +13,7 @@ import 'ui/auth/local_authentication/local_authentication.vm.dart';
 import 'ui/auth/verify/verify.vm.dart';
 import 'ui/base/base-vm.dart';
 import 'ui/home/bottom_nav.vm.dart';
+import 'ui/home/my_investment/my_investment.vm.dart';
 import 'ui/home/profile/about_us/about_us.vm.dart';
 import 'ui/home/profile/contact_us/contact_us.vm.dart';
 import 'ui/home/profile/my_account/my_account.vm.dart';
@@ -57,7 +58,7 @@ registerViewModel(){
   locator.registerFactory<TermsAndConditionViewModel>(() => TermsAndConditionViewModel());
   locator.registerFactory<ContactUsViewModel>(() => ContactUsViewModel());
   locator.registerFactory<PropertiesViewModel>(() => PropertiesViewModel());
-  // locator.registerFactory<PatientsPreferencesViewModel>(() => PatientsPreferencesViewModel());
+  locator.registerFactory<MyInvestHomeViewModel>(() => MyInvestHomeViewModel());
   // locator.registerFactory<PatientsAccountProfileViewModel>(() => PatientsAccountProfileViewModel());
   // locator.registerFactory<PatientsSecurityViewModel>(() => PatientsSecurityViewModel());
   // locator.registerFactory<PatientsEMRViewModel>(() => PatientsEMRViewModel());

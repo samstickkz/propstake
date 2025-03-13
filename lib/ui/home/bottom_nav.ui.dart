@@ -5,7 +5,6 @@ import 'package:propstake/ui/base/base-ui.dart';
 import 'package:propstake/utils/widget_extensions.dart';
 import 'package:propstake/widget/app_card.dart';
 import 'package:propstake/widget/apptexts.dart';
-import 'package:propstake/widget/auth_appbar.dart';
 import 'package:propstake/widget/svg_builder.dart';
 
 import 'bottom_nav.vm.dart';

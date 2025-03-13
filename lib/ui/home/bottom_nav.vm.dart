@@ -4,6 +4,7 @@ import 'package:propstake/localization/locales.dart';
 import 'package:propstake/ui/base/base-vm.dart';
 import 'package:propstake/utils/string_extensions.dart';
 
+import 'my_investment/my_investment.ui.dart';
 import 'profile/profile_home.ui.dart';
 import 'properties/properies.ui.dart';
 
@@ -16,11 +17,11 @@ class BottomNavigationViewModel extends BaseViewModel {
       activeIcon: Assets.svg.propertiesActive,
       inActiveIcon: Assets.svg.properties
     ),
-    NavType(
-      name: LocaleData.wallet.convertString(),
-      activeIcon: Assets.svg.walletActive,
-      inActiveIcon: Assets.svg.wallet
-    ),
+    // NavType(
+    //   name: LocaleData.wallet.convertString(),
+    //   activeIcon: Assets.svg.walletActive,
+    //   inActiveIcon: Assets.svg.wallet
+    // ),
     NavType(
       name: LocaleData.myInvestment.convertString(),
       activeIcon: Assets.svg.myInvestmentActive,
@@ -52,8 +53,8 @@ class BottomNavigationViewModel extends BaseViewModel {
 
   List<Widget> screens = [
     PropertiesHomeScreen(),
-    Placeholder(),
-    Placeholder(),
+    MyInvestHomeScreen(),
+    // Placeholder(),
     Placeholder(),
     ProfileHomeScreen(),
   ];
