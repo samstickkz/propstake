@@ -52,7 +52,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyBgVyKH1Z3Q65qP_GZGnEHCZ33qX_2i3GQ',
-    appId: '1:1061435600391:android:0bb348e5bc64fb7db604a2',
+    appId: '1:1061435600391:android:3ed19717a9d5c8ffb604a2',
     messagingSenderId: '1061435600391',
     projectId: 'propstake-67d27',
     storageBucket: 'propstake-67d27.firebasestorage.app',
@@ -60,13 +60,13 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyBo70hlZFKyQ198Zw47MgrM2bdSsXyRRdY',
-    appId: '1:1061435600391:ios:091d597f3cbd7538b604a2',
+    appId: '1:1061435600391:ios:82216e85c09eb0c6b604a2',
     messagingSenderId: '1061435600391',
     projectId: 'propstake-67d27',
     storageBucket: 'propstake-67d27.firebasestorage.app',
     androidClientId: '1061435600391-bpj04dhr27njan2ci910ff5ibtv7gsf4.apps.googleusercontent.com',
-    iosClientId: '1061435600391-joeu690dkl1lbhpdjobpgk9eilgrnj3l.apps.googleusercontent.com',
-    iosBundleId: 'com.example.propstake',
+    iosClientId: '1061435600391-vbkgg27ft38mgh98i4dt7tvb8tc7j9r5.apps.googleusercontent.com',
+    iosBundleId: 'com.prostake.app',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
