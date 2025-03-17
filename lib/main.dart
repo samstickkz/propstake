@@ -1,4 +1,4 @@
-import 'package:flutter/foundation.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -6,24 +6,25 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:oktoast/oktoast.dart';
 import 'package:propstake/locator.dart';
-import 'package:propstake/utils/widget_extensions.dart';
-import 'package:propstake/widget/app_button.dart';
-import 'package:propstake/widget/apptexts.dart';
-import 'package:propstake/widget/auth_appbar.dart';
-import 'package:propstake/widget/text_field.dart';
 import 'package:provider/provider.dart';
 
 import 'app_theme/app_theme.dart';
 import 'data/cache/config.dart';
 import 'data/services/local/locale.service.dart';
 import 'data/services/local/navigation/navigation_service.dart';
+import 'data/services/local/notification.service.dart';
 import 'data/services/local/theme.service.dart';
 import 'data/services/local/user.service.dart';
+import 'firebase_options.dart';
 import 'ui/onboarding/splash/splash.ui.dart';
 
 Future<void> main() async {
 
   WidgetsFlutterBinding.ensureInitialized();
+
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
 
   await dotenv.load(fileName: ".env");
   await GetStorage.init();
@@ -31,6 +32,7 @@ Future<void> main() async {
   await setupLocator();
 
   await locator<LocaleService>().init();
+  await NotificationService.initialize();
 
   SystemChrome.setPreferredOrientations(
     [
@@ -38,6 +40,9 @@ Future<void> main() async {
       DeviceOrientation.portraitDown,
     ],
   );
+
+  // Ensure the app is edge-to-edge
+  SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
 
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
     statusBarColor: Colors.transparent,
@@ -84,7 +89,6 @@ class _MyAppState extends State<MyApp> {
     FocusManager.instance.primaryFocus?.unfocus();
     // Initialize and check login Status
     await configureLocalization();
-    await locator<UserService>().initializer();
   }
 
   @override
@@ -117,7 +121,7 @@ class _MyAppState extends State<MyApp> {
                         debugShowCheckedModeBanner: false,
                         navigatorKey: locator<NavigationService>().navigatorKey,
                         scaffoldMessengerKey: locator<NavigationService>().snackBarKey,
-                        title: "ProStake",
+                        title: "PropStake",
                         theme: AppTheme.themeData(false),
                         darkTheme: AppTheme.themeData(true),
                         themeMode: themeProvider.themeMode,

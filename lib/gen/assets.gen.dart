@@ -68,6 +68,12 @@ class $AssetsFontsGen {
 class $AssetsPngGen {
   const $AssetsPngGen();
 
+  /// File path: assets/png/back_one.png
+  AssetGenImage get backOne => const AssetGenImage('assets/png/back_one.png');
+
+  /// File path: assets/png/back_two.png
+  AssetGenImage get backTwo => const AssetGenImage('assets/png/back_two.png');
+
   /// File path: assets/png/backgroud_temp.png
   AssetGenImage get backgroudTemp =>
       const AssetGenImage('assets/png/backgroud_temp.png');
@@ -78,6 +84,9 @@ class $AssetsPngGen {
 
   /// File path: assets/png/logo_name.png
   AssetGenImage get logoName => const AssetGenImage('assets/png/logo_name.png');
+
+  /// File path: assets/png/logo_pro.png
+  AssetGenImage get logoPro => const AssetGenImage('assets/png/logo_pro.png');
 
   /// File path: assets/png/onboard_one.png
   AssetGenImage get onboardOne =>
@@ -91,14 +100,21 @@ class $AssetsPngGen {
   AssetGenImage get onboardTwo =>
       const AssetGenImage('assets/png/onboard_two.png');
 
+  /// File path: assets/png/pro_logo.png
+  AssetGenImage get proLogo => const AssetGenImage('assets/png/pro_logo.png');
+
   /// List of all assets
   List<AssetGenImage> get values => [
+    backOne,
+    backTwo,
     backgroudTemp,
     houseFrame,
     logoName,
+    logoPro,
     onboardOne,
     onboardThree,
     onboardTwo,
+    proLogo,
   ];
 }
 
@@ -110,6 +126,9 @@ class $AssetsSvgGen {
 
   /// File path: assets/svg/about_us.svg
   String get aboutUs => 'assets/svg/about_us.svg';
+
+  /// File path: assets/svg/add_icon.svg
+  String get addIcon => 'assets/svg/add_icon.svg';
 
   /// File path: assets/svg/apple_black.svg
   String get appleBlack => 'assets/svg/apple_black.svg';
@@ -123,8 +142,17 @@ class $AssetsSvgGen {
   /// File path: assets/svg/arrow_right.svg
   String get arrowRight => 'assets/svg/arrow_right.svg';
 
+  /// File path: assets/svg/arrow_right_white.svg
+  String get arrowRightWhite => 'assets/svg/arrow_right_white.svg';
+
   /// File path: assets/svg/arrow_up.svg
   String get arrowUp => 'assets/svg/arrow_up.svg';
+
+  /// File path: assets/svg/auto_invest.svg
+  String get autoInvest => 'assets/svg/auto_invest.svg';
+
+  /// File path: assets/svg/bank_transfer.svg
+  String get bankTransfer => 'assets/svg/bank_transfer.svg';
 
   /// File path: assets/svg/bed.svg
   String get bed => 'assets/svg/bed.svg';
@@ -144,6 +172,12 @@ class $AssetsSvgGen {
   /// File path: assets/svg/close_circle.svg
   String get closeCircle => 'assets/svg/close_circle.svg';
 
+  /// File path: assets/svg/coming_soon.svg
+  String get comingSoon => 'assets/svg/coming_soon.svg';
+
+  /// File path: assets/svg/copy.svg
+  String get copy => 'assets/svg/copy.svg';
+
   /// File path: assets/svg/currency.svg
   String get currency => 'assets/svg/currency.svg';
 
@@ -159,6 +193,9 @@ class $AssetsSvgGen {
   /// File path: assets/svg/email.svg
   String get email => 'assets/svg/email.svg';
 
+  /// File path: assets/svg/explore_properties.svg
+  String get exploreProperties => 'assets/svg/explore_properties.svg';
+
   /// File path: assets/svg/face_id.svg
   String get faceId => 'assets/svg/face_id.svg';
 
@@ -171,11 +208,20 @@ class $AssetsSvgGen {
   /// File path: assets/svg/fingerprint.svg
   String get fingerprint => 'assets/svg/fingerprint.svg';
 
+  /// File path: assets/svg/fund.svg
+  String get fund => 'assets/svg/fund.svg';
+
   /// File path: assets/svg/globe.svg
   String get globe => 'assets/svg/globe.svg';
 
   /// File path: assets/svg/google.svg
   String get google => 'assets/svg/google.svg';
+
+  /// File path: assets/svg/invest.svg
+  String get invest => 'assets/svg/invest.svg';
+
+  /// File path: assets/svg/invest_up_down.svg
+  String get investUpDown => 'assets/svg/invest_up_down.svg';
 
   /// File path: assets/svg/language.svg
   String get language => 'assets/svg/language.svg';
@@ -198,6 +244,9 @@ class $AssetsSvgGen {
   /// File path: assets/svg/microsoft.svg
   String get microsoft => 'assets/svg/microsoft.svg';
 
+  /// File path: assets/svg/money.svg
+  String get money => 'assets/svg/money.svg';
+
   /// File path: assets/svg/my_investment.svg
   String get myInvestment => 'assets/svg/my_investment.svg';
 
@@ -206,6 +255,9 @@ class $AssetsSvgGen {
 
   /// File path: assets/svg/notification.svg
   String get notification => 'assets/svg/notification.svg';
+
+  /// File path: assets/svg/out_icon.svg
+  String get outIcon => 'assets/svg/out_icon.svg';
 
   /// File path: assets/svg/privacy_policy.svg
   String get privacyPolicy => 'assets/svg/privacy_policy.svg';
@@ -224,6 +276,9 @@ class $AssetsSvgGen {
 
   /// File path: assets/svg/properties_active.svg
   String get propertiesActive => 'assets/svg/properties_active.svg';
+
+  /// File path: assets/svg/referral_reward.svg
+  String get referralReward => 'assets/svg/referral_reward.svg';
 
   /// File path: assets/svg/reward.svg
   String get reward => 'assets/svg/reward.svg';
@@ -268,28 +323,38 @@ class $AssetsSvgGen {
   List<String> get values => [
     call,
     aboutUs,
+    addIcon,
     appleBlack,
     appleWhite,
     arrowDown,
     arrowRight,
+    arrowRightWhite,
     arrowUp,
+    autoInvest,
+    bankTransfer,
     bed,
     camera,
     celebrateGrace,
     check,
     checkCircle,
     closeCircle,
+    comingSoon,
+    copy,
     currency,
     document,
     documents,
     edit,
     email,
+    exploreProperties,
     faceId,
     faq,
     filter,
     fingerprint,
+    fund,
     globe,
     google,
+    invest,
+    investUpDown,
     language,
     location,
     logoName,
@@ -297,15 +362,18 @@ class $AssetsSvgGen {
     love,
     loveOutline,
     microsoft,
+    money,
     myInvestment,
     myInvestmentActive,
     notification,
+    outIcon,
     privacyPolicy,
     prof,
     profile,
     profileActive,
     properties,
     propertiesActive,
+    referralReward,
     reward,
     rewardActive,
     search,

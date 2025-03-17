@@ -5,25 +5,27 @@ import 'package:propstake/ui/base/base-ui.dart';
 import 'package:propstake/utils/widget_extensions.dart';
 import 'package:propstake/widget/app_card.dart';
 import 'package:propstake/widget/apptexts.dart';
-import 'package:propstake/widget/auth_appbar.dart';
 import 'package:propstake/widget/svg_builder.dart';
 
 import 'bottom_nav.vm.dart';
+import 'profile/profile_home.ui.dart';
 
 class BottomNavigationScreen extends StatelessWidget {
   final int initialIndex;
-  const BottomNavigationScreen({super.key, this.initialIndex = 0});
+  final bool goToProfile;
+  const BottomNavigationScreen({super.key, this.initialIndex = 0, this.goToProfile = false});
 
   @override
   Widget build(BuildContext context) {
     return BaseView<BottomNavigationViewModel>(
+      onModelReady: (m)=> m.init(initialIndex),
       builder: (model, theme)=> Scaffold(
         body: Stack(
           children: [
             SizedBox(
               height: height(context),
               width: width(context),
-              child: model.screens[model.index],
+              child: model.index == 4? ProfileHomeScreen(goToEdit: goToProfile,): model.screens[model.index],
             ),
             Align(
               alignment: Alignment.bottomCenter,

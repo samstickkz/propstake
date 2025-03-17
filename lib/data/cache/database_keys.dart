@@ -6,6 +6,7 @@ class StorageKey {
   static const String bioDataInfo = '/bioDataInfo';
   static const String refreshTokenKey = '/refresh_token';
   static const String appFirstTimeKey = 'isFirstTime';
+  static const String fcmToken = 'FCMTOKEN';
   static const String isDarkModeKey = 'isAppOnDarkMode';
   static const String onboardingTableKey = 'onboarding';
   static const String languageCode = 'languageCode';

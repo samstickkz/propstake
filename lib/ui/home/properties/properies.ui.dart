@@ -31,10 +31,10 @@ class PropertiesHomeScreen extends StatelessWidget {
           noLeading: true,
           title: Row(
             children: [
-              ProfilePic(user: userService.user, size: 40.sp,),
+              ProfilePic(user: userService.user, size: 40.sp),
               16.sp.sbW,
               AppText(
-                convertListString(LocaleData.hi.convertString(), data: [userService.user.firstName??""]),
+                convertListString(LocaleData.hi.convertString(), data: [userService.user.fname??""]),
                 size: 16.sp,
                 weight: FontWeight.w500,
                 color: stateColor12(isAppDark(context)),
@@ -72,7 +72,7 @@ class PropertiesHomeScreen extends StatelessWidget {
           headerSliverBuilder: (context, innerBoxIsScrolled) {
             return <Widget>[
               SliverAppBar(
-                expandedHeight: 350.sp,
+                expandedHeight: 353.sp,
                 automaticallyImplyLeading: false,
                 floating: false,
                 foregroundColor: Colors.white,
@@ -185,7 +185,7 @@ class PropertiesHomeScreen extends StatelessWidget {
                                                       Spacer(),
                                                       PriceWidget(
                                                         currency: Currency.dollar,
-                                                        value: 2095.toString(),
+                                                        value: 2095,
                                                         weight: FontWeight.w900,
                                                         roundUp: true,
                                                         color: Colors.white,
@@ -361,7 +361,7 @@ class PropertiesHomeScreen extends StatelessWidget {
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [
                                     PriceWidget(
-                                      value: 2095.toString(),
+                                      value: 2095,
                                       currency: Currency.dollar,
                                       color: primaryColor,
                                       size: 16.49.sp,

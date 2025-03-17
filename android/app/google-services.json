@@ -1,0 +1,90 @@
+{
+  "project_info": {
+    "project_number": "1061435600391",
+    "project_id": "propstake-67d27",
+    "storage_bucket": "propstake-67d27.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1061435600391:android:0bb348e5bc64fb7db604a2",
+        "android_client_info": {
+          "package_name": "com.example.propstake"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1061435600391-bpj04dhr27njan2ci910ff5ibtv7gsf4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.propstake",
+            "certificate_hash": "46d2b6d984461965ff98e5d2d1f3677ec84c859c"
+          }
+        },
+        {
+          "client_id": "1061435600391-3i5sssu9jl6mdgh8hsm227qddoi8753s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBgVyKH1Z3Q65qP_GZGnEHCZ33qX_2i3GQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1061435600391-3i5sssu9jl6mdgh8hsm227qddoi8753s.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1061435600391-joeu690dkl1lbhpdjobpgk9eilgrnj3l.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.propstake"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1061435600391:android:3ed19717a9d5c8ffb604a2",
+        "android_client_info": {
+          "package_name": "com.prostake.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1061435600391-3i5sssu9jl6mdgh8hsm227qddoi8753s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBgVyKH1Z3Q65qP_GZGnEHCZ33qX_2i3GQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1061435600391-3i5sssu9jl6mdgh8hsm227qddoi8753s.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1061435600391-joeu690dkl1lbhpdjobpgk9eilgrnj3l.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.propstake"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

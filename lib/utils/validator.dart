@@ -29,7 +29,7 @@ String? Function(String?)? passwordValidator = (String? val) {
   } else if (!numberRegex.hasMatch(value)){
     return LocaleData.passwordShouldContainNumber.convertString();
   } else if (!signRegex.hasMatch(value)){
-    return LocaleData.passwordShouldContainSpecialCharacter;
+    return LocaleData.passwordShouldContainSpecialCharacter.convertString();
   } else if (value.length < 7) {
     return LocaleData.passwordShouldBeAtLeast8Characters.convertString();
   }
