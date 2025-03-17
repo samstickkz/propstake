@@ -69,7 +69,7 @@ class AppCard extends StatelessWidget {
         child: Container(
           alignment: alignment,
           decoration: decoration?? BoxDecoration(
-            color: backgroundImage != null? null: color?? (backgroundColor!=null ? backgroundColor!.withOpacity(0.9): (isAppDark(context)? Colors.black: Color(0xFFF6F6F6))),
+            color: backgroundImage != null? null: color?? (backgroundColor!=null ? backgroundColor!.withOpacity(0.9): (stateColor3(isAppDark(context)))),
             borderRadius: borderRadius??  BorderRadius.circular(radius ?? 9.r),
             image: backgroundImage==null? null: DecorationImage(
               image: AssetImage(backgroundImage!),

@@ -72,7 +72,7 @@ class PropertiesHomeScreen extends StatelessWidget {
           headerSliverBuilder: (context, innerBoxIsScrolled) {
             return <Widget>[
               SliverAppBar(
-                expandedHeight: 350.sp,
+                expandedHeight: 353.sp,
                 automaticallyImplyLeading: false,
                 floating: false,
                 foregroundColor: Colors.white,

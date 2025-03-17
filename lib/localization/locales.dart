@@ -260,8 +260,8 @@ mixin LocaleData {
   static const String createHereAfterYouHaveMadeATransfer = 'createHereAfterYouHaveMadeATransfer';
   static const String addMemoPleaseAddMemoToTheTransaction = 'addMemoPleaseAddMemoToTheTransaction';
   static const String bankName = 'bankName';
-  // static const String bankName = 'bankName';
-  // static const String bankName = 'bankName';
+  static const String copiedToClipboard = 'copiedToClipboard';
+  static const String older = 'older';
   static const String yuan = 'yuan';
   static const String gbp = 'gbp';
   static const String eur = 'eur';
@@ -269,13 +269,17 @@ mixin LocaleData {
   static const String usd = 'usd';
   static const String copyDetailsAndMakePayment = 'copyDetailsAndMakePayment';
   static const String accountDetails = 'accountDetails';
+  static const String comingSoon = 'comingSoon';
+  static const String clickHereAfterYouMakeTheTransfer = 'clickHereAfterYouMakeTheTransfer';
   static const String transferFundsFromYourLocalOrInternationalBankAccounts = 'transferFundsFromYourLocalOrInternationalBankAccounts';
   static const String browseThroughAVarietyOfProperties = 'browseThroughAVarietyOfProperties';
 
   static const Map<String, dynamic> en = {
     completed: "Completed",
-    // completed: "Completed",
-    // completed: "Completed",
+    copiedToClipboard: " Copied to clipboard",
+    older: "Older",
+    comingSoon: "Coming Soon",
+    clickHereAfterYouMakeTheTransfer: "Click here after you have made the transfer",
     yuan: "CNY",
     gbp: "GBP",
     eur: "EUR",

@@ -1,24 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:propstake/localization/locales.dart';
+import 'package:propstake/widget/svg_builder.dart';
 
+import '../gen/assets.gen.dart';
 import '/utils/string_extensions.dart';
 import '/utils/widget_extensions.dart';
 import 'app_button.dart';
+import 'appbar_widget.dart';
 import 'apptexts.dart';
 
 class SuccessScreen extends StatelessWidget {
   final VoidCallback onTap;
   final String? title;
-  final String? body;
-  final String? image;
+  final String body;
+  final String? svg;
   final String? buttonText;
   final Widget? icon;
   const SuccessScreen({
     super.key,
     required this.onTap,
     this.title,
-    this.body,
-    this.image,
+    required this.body,
+    this.svg,
     this.icon,
     this.buttonText
   });
@@ -26,7 +30,6 @@ class SuccessScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 16.sp, vertical: 25.sp),
         child: Column(
@@ -36,33 +39,38 @@ class SuccessScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                // SvgPicture.asset(
-                //   AppImages.checkMark,
-                //   width: 50.sp,
-                //   height: 40.sp,
-                // ),
-                60.sp.sbH,
-                AppText(
-                  title??"",
-                  size: 25.sp,
-                  weight: FontWeight.w700,
-                  align: TextAlign.center,
-                ),
-                5.sp.sbH,
-                AppText(
-                  body??"",
-                  size: 20.sp,
-                  weight: FontWeight.w400,
-                  align: TextAlign.center,
+                SvgBuilder(svg?? Assets.svg.celebrateGrace, size: 227.sp,),
+                40.sp.sbH,
+                if(title != null)...[
+                  AppText(
+                    title??"",
+                    size: 25.sp,
+                    weight: FontWeight.w500,
+                    align: TextAlign.center,
+                    isTitle: true,
+                  ),
+                  5.sp.sbH,
+                ],
+                if(body.isNotEmpty)
+                Padding(
+                  padding: 40.sp.padH,
+                  child: AppText(
+                    body,
+                    size: 16.sp,
+                    weight: FontWeight.w400,
+                    align: TextAlign.center,
+                  ),
                 ),
 
               ],
             )),
-            AppButton(
+            30.sp.sbH,
+            AppButton.fullWidth(
               isLoading: false,
-              text: buttonText?? "Continue",
+              text: buttonText?? LocaleData.done.convertString(),
               onTap: onTap,
-            )
+            ),
+            30.sp.sbH,
           ],
         ),
       ),

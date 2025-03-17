@@ -151,6 +151,9 @@ class $AssetsSvgGen {
   /// File path: assets/svg/auto_invest.svg
   String get autoInvest => 'assets/svg/auto_invest.svg';
 
+  /// File path: assets/svg/bank_transfer.svg
+  String get bankTransfer => 'assets/svg/bank_transfer.svg';
+
   /// File path: assets/svg/bed.svg
   String get bed => 'assets/svg/bed.svg';
 
@@ -171,6 +174,9 @@ class $AssetsSvgGen {
 
   /// File path: assets/svg/coming_soon.svg
   String get comingSoon => 'assets/svg/coming_soon.svg';
+
+  /// File path: assets/svg/copy.svg
+  String get copy => 'assets/svg/copy.svg';
 
   /// File path: assets/svg/currency.svg
   String get currency => 'assets/svg/currency.svg';
@@ -325,6 +331,7 @@ class $AssetsSvgGen {
     arrowRightWhite,
     arrowUp,
     autoInvest,
+    bankTransfer,
     bed,
     camera,
     celebrateGrace,
@@ -332,6 +339,7 @@ class $AssetsSvgGen {
     checkCircle,
     closeCircle,
     comingSoon,
+    copy,
     currency,
     document,
     documents,

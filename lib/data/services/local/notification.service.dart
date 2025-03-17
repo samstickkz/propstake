@@ -1,5 +1,7 @@
+import 'dart:convert';
 import 'dart:io';
 
+import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:propstake/data/cache/database_keys.dart';
@@ -8,7 +10,8 @@ import 'package:propstake/utils/constants.dart';
 
 Future<void> handleBackgroundMessage(RemoteMessage message) async{
 
-  print("NOTIFICATION RECIEVED");
+  await Firebase.initializeApp();
+  AppLogger.debug("NOTIFICATION RECIEVED::: ${jsonEncode(message.data)}");
 
   NotificationService.handleMessage(message);
 }
@@ -98,7 +101,7 @@ class NotificationService{
       channelDescription: "prostake",
       playSound: true,
       icon: 'mipmap/ic_launcher',
-      sound: RawResourceAndroidNotificationSound('sounds'),
+      sound: RawResourceAndroidNotificationSound('sound'),
       importance: Importance.max,
       priority: Priority.high,
     );

@@ -68,12 +68,16 @@ class PriceWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
+    double formattedValue = 0;
 
-    double formattedValue = value == null
-        ? 0.00
-        : roundUp
-        ? (value * (10 * decimalPlaces)).ceil() / (10 * decimalPlaces)
-        : double.parse(value.toStringAsFixed(decimalPlaces));
+    if(value.runtimeType == String){
+      roundUp ? ((num.tryParse(value)?? 0) * (10 * decimalPlaces)).ceil() / (10 * decimalPlaces)
+          : double.parse((num.tryParse(value)?? 0).toStringAsFixed(decimalPlaces));
+    } else {
+      formattedValue = value == null ? 0.00
+          : roundUp ? (value * (10 * decimalPlaces)).ceil() / (10 * decimalPlaces)
+          : double.parse(value.toStringAsFixed(decimalPlaces));
+    }
 
     // Get currency symbol based on selected currency
     String currencySymbol = getCurrencySymbol(currency);
