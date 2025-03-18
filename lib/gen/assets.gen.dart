@@ -103,6 +103,14 @@ class $AssetsPngGen {
   /// File path: assets/png/pro_logo.png
   AssetGenImage get proLogo => const AssetGenImage('assets/png/pro_logo.png');
 
+  /// File path: assets/png/reward_image.png
+  AssetGenImage get rewardImage =>
+      const AssetGenImage('assets/png/reward_image.png');
+
+  /// File path: assets/png/three_d_rotation.png
+  AssetGenImage get threeDRotation =>
+      const AssetGenImage('assets/png/three_d_rotation.png');
+
   /// List of all assets
   List<AssetGenImage> get values => [
     backOne,
@@ -115,6 +123,8 @@ class $AssetsPngGen {
     onboardThree,
     onboardTwo,
     proLogo,
+    rewardImage,
+    threeDRotation,
   ];
 }
 
@@ -151,11 +161,17 @@ class $AssetsSvgGen {
   /// File path: assets/svg/auto_invest.svg
   String get autoInvest => 'assets/svg/auto_invest.svg';
 
+  /// File path: assets/svg/auto_stars.svg
+  String get autoStars => 'assets/svg/auto_stars.svg';
+
   /// File path: assets/svg/bank_transfer.svg
   String get bankTransfer => 'assets/svg/bank_transfer.svg';
 
   /// File path: assets/svg/bed.svg
   String get bed => 'assets/svg/bed.svg';
+
+  /// File path: assets/svg/bronze.svg
+  String get bronze => 'assets/svg/bronze.svg';
 
   /// File path: assets/svg/camera.svg
   String get camera => 'assets/svg/camera.svg';
@@ -208,20 +224,35 @@ class $AssetsSvgGen {
   /// File path: assets/svg/fingerprint.svg
   String get fingerprint => 'assets/svg/fingerprint.svg';
 
+  /// File path: assets/svg/forward.svg
+  String get forward => 'assets/svg/forward.svg';
+
   /// File path: assets/svg/fund.svg
   String get fund => 'assets/svg/fund.svg';
 
   /// File path: assets/svg/globe.svg
   String get globe => 'assets/svg/globe.svg';
 
+  /// File path: assets/svg/gold.svg
+  String get gold => 'assets/svg/gold.svg';
+
   /// File path: assets/svg/google.svg
   String get google => 'assets/svg/google.svg';
+
+  /// File path: assets/svg/heart_black.svg
+  String get heartBlack => 'assets/svg/heart_black.svg';
 
   /// File path: assets/svg/invest.svg
   String get invest => 'assets/svg/invest.svg';
 
   /// File path: assets/svg/invest_up_down.svg
   String get investUpDown => 'assets/svg/invest_up_down.svg';
+
+  /// File path: assets/svg/ios_share.svg
+  String get iosShare => 'assets/svg/ios_share.svg';
+
+  /// File path: assets/svg/join_promotion.svg
+  String get joinPromotion => 'assets/svg/join_promotion.svg';
 
   /// File path: assets/svg/language.svg
   String get language => 'assets/svg/language.svg';
@@ -259,6 +290,9 @@ class $AssetsSvgGen {
   /// File path: assets/svg/out_icon.svg
   String get outIcon => 'assets/svg/out_icon.svg';
 
+  /// File path: assets/svg/platnum.svg
+  String get platnum => 'assets/svg/platnum.svg';
+
   /// File path: assets/svg/privacy_policy.svg
   String get privacyPolicy => 'assets/svg/privacy_policy.svg';
 
@@ -276,6 +310,9 @@ class $AssetsSvgGen {
 
   /// File path: assets/svg/properties_active.svg
   String get propertiesActive => 'assets/svg/properties_active.svg';
+
+  /// File path: assets/svg/question-circle.svg
+  String get questionCircle => 'assets/svg/question-circle.svg';
 
   /// File path: assets/svg/referral_reward.svg
   String get referralReward => 'assets/svg/referral_reward.svg';
@@ -295,6 +332,9 @@ class $AssetsSvgGen {
   /// File path: assets/svg/setting.svg
   String get setting => 'assets/svg/setting.svg';
 
+  /// File path: assets/svg/silver.svg
+  String get silver => 'assets/svg/silver.svg';
+
   /// File path: assets/svg/social_login.svg
   String get socialLogin => 'assets/svg/social_login.svg';
 
@@ -306,6 +346,9 @@ class $AssetsSvgGen {
 
   /// File path: assets/svg/temp_logo_light.svg
   String get tempLogoLight => 'assets/svg/temp_logo_light.svg';
+
+  /// File path: assets/svg/user-multiple.svg
+  String get userMultiple => 'assets/svg/user-multiple.svg';
 
   /// File path: assets/svg/visibility_off.svg
   String get visibilityOff => 'assets/svg/visibility_off.svg';
@@ -331,8 +374,10 @@ class $AssetsSvgGen {
     arrowRightWhite,
     arrowUp,
     autoInvest,
+    autoStars,
     bankTransfer,
     bed,
+    bronze,
     camera,
     celebrateGrace,
     check,
@@ -350,11 +395,16 @@ class $AssetsSvgGen {
     faq,
     filter,
     fingerprint,
+    forward,
     fund,
     globe,
+    gold,
     google,
+    heartBlack,
     invest,
     investUpDown,
+    iosShare,
+    joinPromotion,
     language,
     location,
     logoName,
@@ -367,22 +417,26 @@ class $AssetsSvgGen {
     myInvestmentActive,
     notification,
     outIcon,
+    platnum,
     privacyPolicy,
     prof,
     profile,
     profileActive,
     properties,
     propertiesActive,
+    questionCircle,
     referralReward,
     reward,
     rewardActive,
     search,
     security,
     setting,
+    silver,
     socialLogin,
     stars,
     tempLogo,
     tempLogoLight,
+    userMultiple,
     visibilityOff,
     visible,
     wallet,

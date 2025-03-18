@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 import 'dart:math';
 import 'dart:typed_data';
@@ -6,6 +7,7 @@ import 'package:cupertino_modal_sheet/cupertino_modal_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:native_image_cropper/native_image_cropper.dart';
+import 'package:propstake/utils/dartz.x.dart';
 
 import '../../data/cache/view_state.dart';
 import '../../utils/app_logger.dart';
@@ -82,6 +84,24 @@ class BaseViewModel extends ChangeNotifier {
     }
     stopLoader();
     notifyListeners();
+  }
+
+  Future<num?> getWallet() async {
+    try{
+      var res = await walletService.getWallet();
+      if(res.isRight()){
+        notifyListeners();
+
+        return res.asRight().data ?? 0;
+      } else{
+        notifyListeners();
+        return null;
+      }
+    }catch(err){
+      AppLogger.debug(err.toString());
+      notifyListeners();
+      return null;
+    }
   }
 
   set viewState(ViewState newState) {

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:propstake/ui/auth/forget_password/forget_password.ui.dart';
 import 'package:propstake/ui/base/base-vm.dart';
+import 'package:propstake/utils/app_logger.dart';
 import 'package:propstake/utils/constants.dart';
 import 'package:propstake/utils/dartz.x.dart';
 import 'package:propstake/utils/snack_message.dart';
@@ -62,6 +63,15 @@ class AuthViewModel extends BaseViewModel {
       reason: VerificationReason.login,
       email: upEmailController.text.trim(),
     ));
+  }
+
+  signInWithGoogle() async {
+    try{
+      var res = await socialService.signInWithGoogle();
+    }catch(err){
+      notifyListeners();
+      AppLogger.debug("Error :: $err");
+    }
   }
 
   goHome({required bool goToSetUpProfile}){
@@ -204,9 +214,12 @@ class AuthViewModel extends BaseViewModel {
       );
       if(res.isRight()){
         stopLoader();
-        showCustomToast(res.asRight().message??"");
-        createAccount();
+        showCustomToast(res.asRight().message??"", success: res.isRight());
+        if(res.asRight().successful == true){
+          createAccount();
+        }
       } else {
+        showCustomToast(res.asLeft().message??"",);
         stopLoader();
       }
     }catch(err){

@@ -9,7 +9,7 @@ import '../../locator.dart';
 import 'base-vm.dart';
 
 class BaseView<T extends BaseViewModel> extends StatefulWidget {
-  final bool notDefaultLoading;
+  final bool useFullScreenLoader;
   final Color? loaderColor;
   final Widget Function(T model, ThemeModel theme)? builder;
   final Function(T)? onModelReady;
@@ -18,7 +18,7 @@ class BaseView<T extends BaseViewModel> extends StatefulWidget {
   final Function(AppLifecycleState, T)? didChangeAppLifecycleState;
 
   const BaseView(
-      {Key? key, this.builder, this.onModelReady, this.onDisposeModel, this.notDefaultLoading=false, this.onMount, this.loaderColor, this.didChangeAppLifecycleState})
+      {Key? key, this.builder, this.onModelReady, this.onDisposeModel, this.useFullScreenLoader=false, this.onMount, this.loaderColor, this.didChangeAppLifecycleState})
       : super(key: key);
 
   @override
@@ -75,7 +75,7 @@ class _BaseViewState<T extends BaseViewModel> extends State<BaseView<T>> with Wi
                   ],
                 ),
               ),
-              model.isLoading && widget.notDefaultLoading==true?
+              model.isLoading && widget.useFullScreenLoader==true?
               SmallLoader(color: widget.loaderColor,) : 0.0.sbH ,
             ],
             //widget.builder!,

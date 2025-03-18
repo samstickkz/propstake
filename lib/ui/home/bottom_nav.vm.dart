@@ -7,6 +7,7 @@ import 'package:propstake/utils/string_extensions.dart';
 import 'my_investment/my_investment.ui.dart';
 import 'profile/profile_home.ui.dart';
 import 'properties/properies.ui.dart';
+import 'reward/reward_home.ui.dart';
 
 class BottomNavigationViewModel extends BaseViewModel {
 
@@ -48,6 +49,7 @@ class BottomNavigationViewModel extends BaseViewModel {
 
   init(int startIndex){
     index = startIndex;
+    getWallet();
     notifyListeners();
   }
 
@@ -55,7 +57,7 @@ class BottomNavigationViewModel extends BaseViewModel {
     PropertiesHomeScreen(),
     MyInvestHomeScreen(),
     // Placeholder(),
-    Placeholder(),
+    RewardHomeScreen(),
     ProfileHomeScreen(),
   ];
 

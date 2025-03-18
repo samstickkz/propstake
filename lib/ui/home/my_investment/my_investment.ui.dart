@@ -23,6 +23,8 @@ class MyInvestHomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BaseView<MyInvestHomeViewModel>(
+      useFullScreenLoader: true,
+      onModelReady: (m)=> m.init(),
       builder: (model, theme)=> Scaffold(
         appBar: AppBars(
           noLeading: true,
@@ -35,9 +37,6 @@ class MyInvestHomeScreen extends StatelessWidget {
               height: 158.sp,
               width: width(context),
               child: ListView.builder(
-                // itemExtentBuilder: (index, value){
-                //   print(index);
-                // },
                 scrollDirection: Axis.horizontal,
                 padding: 16.sp.padL,
                 itemCount: model.myBalance.length,
@@ -63,7 +62,6 @@ class MyInvestHomeScreen extends StatelessWidget {
                           isTitle: true,
                           color: Colors.white,
                           useSymbol: false,
-                          roundUp: true,
                         )
                       ],
                     ),
@@ -188,7 +186,7 @@ class MyInvestHomeScreen extends StatelessWidget {
                     padding: 0.sp.padA,
                     child: Column(
                       children: List.generate(
-                        model.transactions.length,
+                        model.transactionsData.length,
                         (index){
                           return Container(
                             padding: EdgeInsets.symmetric(
@@ -197,20 +195,20 @@ class MyInvestHomeScreen extends StatelessWidget {
                             ),
                             decoration: BoxDecoration(
                               border: Border(
-                                bottom: index == (model.transactions.length-1)? BorderSide.none : BorderSide(color: stateColor4(isAppDark(context)))
+                                bottom: index == (model.transactionsData.length-1)? BorderSide.none : BorderSide(color: stateColor4(isAppDark(context)))
                               )
                             ),
                             child: Row(
                               spacing: 16.sp,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                SvgBuilder(model.transactions[index]["image"], size: 32.sp,),
+                                SvgBuilder(Assets.svg.invest, size: 32.sp,),
                                 Expanded(child: Column(
                                   spacing: 4.sp,
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     AppText(
-                                      model.transactions[index]["title"],
+                                      model.transactionsData[index].description??"",
                                       weight: FontWeight.w500,
                                       size: 14.sp,
                                     ),
@@ -218,14 +216,14 @@ class MyInvestHomeScreen extends StatelessWidget {
                                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                       children: [
                                         PriceWidget(
-                                          value: model.transactions[index]["value"],
+                                          value: model.transactionsData[index].rewardAmount,
                                           size: 12.sp,
                                           currency: Currency.dollar,
                                           roundUp: true,
                                           useSymbol: false,
                                         ),
                                         AppText(
-                                          model.getTextFromDateTime(model.transactions[index]["dateTime"]),
+                                          model.getTextFromDateTime(DateTime.parse(model.transactionsData[index].createdAt?? DateTime.now().toString())),
                                           size: 10.sp,
                                         )
                                       ],
