@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:propstake/app_theme/palette.dart';
 import 'package:propstake/utils/widget_extensions.dart';
+import 'package:propstake/widget/svg_builder.dart';
 
 import '../utils/constants.dart';
 import 'apptexts.dart';
@@ -76,10 +77,50 @@ class BackButtons extends StatelessWidget {
           padding: 7.0.padA,
           alignment: Alignment.center,
           decoration: BoxDecoration(
+            color: Theme.of(context).scaffoldBackgroundColor,
               borderRadius: BorderRadius.circular(12.r),
               border: Border.all(color: fadeBackground(isAppDark(context)), width: 1.sp)
           ),
           child: Icon(Icons.arrow_back_ios_new_outlined, size: 20.sp,),
+        ),
+      ),
+    );
+  }
+}
+
+class AppBarButton extends StatelessWidget {
+  final VoidCallback onTap;
+  final Color? backgroundColor;
+  final Color? iconColor;
+  final String svg;
+  const AppBarButton({
+    super.key,
+    required this.onTap,
+    this.backgroundColor,
+    this.iconColor,
+    required this.svg
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Align(
+      alignment: Alignment.center,
+      child: Container(
+        margin: 16.0.padL,
+        child: InkWell(
+          onTap: onTap,
+          borderRadius: BorderRadius.circular(16.sp),
+          child: Container(
+            width: 32.sp,
+            height: 32.sp,
+            alignment: Alignment.center,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: backgroundColor ?? Theme.of(context).scaffoldBackgroundColor,
+              // border: Border.all(color: fadeBackground(isAppDark(context)), width: 1.sp)
+            ),
+            child: SvgBuilder(svg, size: 18.sp, color: iconColor?? black(isAppDark(context)),),
+          ),
         ),
       ),
     );

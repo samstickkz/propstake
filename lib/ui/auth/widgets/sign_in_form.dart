@@ -79,7 +79,7 @@ class SignInForm extends StatelessWidget {
               Expanded(
                 child: AppButton.outline(
                   svgImage: Assets.svg.google,
-                  onTap: (){},
+                  onTap: model.signInWithGoogle,
                 ),
               ),
               Expanded(

@@ -64,7 +64,7 @@ android {
 dependencies {
     // For AGP 7.4+
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.0.3")
-    implementation("androidx.activity:activity-ktx:1.8.0")
+    implementation 'com.google.firebase:firebase-firestore:24.7.1'
 }
 
 flutter {

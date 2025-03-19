@@ -137,6 +137,23 @@ class AuthenticationService {
     }
   }
 
+  Future<Either<ResModel, LoginAuthModel>> getReferralCode() async {
+    try {
+      Response response = await connect().get("User/user-referral-code");
+      ResModel defaultRes = ResModel.fromJson(jsonDecode(response.data));
+      LoginAuthModel signUpResponse = LoginAuthModel.fromJson(jsonDecode(response.data));
+      if(defaultRes.successful == true){
+        await userService.saveReferralCode(signUpResponse);
+        return Right(signUpResponse);
+      }
+      return Left(defaultRes);
+    } on DioException catch (e) {
+      return Left(ResModel.fromJson(e.response?.data));
+    } catch (e) {
+      return Left(ResModel(message: e.toString()));
+    }
+  }
+
   Future<Either<ResModel, GetUserModel>> getUser() async {
     try {
       Response response = await connect().get("User/userdetails");
@@ -243,9 +260,14 @@ class AuthenticationService {
       }
 
 
-      Response response = await connect(useFormData: true).post(
+      Response response = await connect(useFormData: userService.user.lname != null? true: false).post(
           userService.user.lname == null? "Profiles/Establish-Profile": "Profiles/Update-Profile",
-          data: formData
+          data: userService.user.lname == null? {
+            "firstName": firstName,
+            "lastName": lastName,
+            "organisationName": organisation,
+            "dob": dob,
+          }:formData
       );
       UpdateUserModel loginResponse = UpdateUserModel.fromJson(jsonDecode(response.data));
       return Right(loginResponse);

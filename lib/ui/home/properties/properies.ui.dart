@@ -1,4 +1,5 @@
 import 'package:animate_do/animate_do.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:propstake/app_theme/palette.dart';
@@ -26,6 +27,8 @@ class PropertiesHomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BaseView<PropertiesViewModel>(
+      useFullScreenLoader: true,
+      onModelReady: (m)=> m.init(),
       builder: (model, theme)=> Scaffold(
         appBar: AppBars(
           noLeading: true,
@@ -46,12 +49,21 @@ class PropertiesHomeScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 AppCard(
-                  onTap: (){},
+                  onTap: model.goToBookMark,
                   heights: 35.sp,
                   widths: 35.sp,
                   padding: 5.5.sp.padA,
                   radius: 40.r,
-                  child: SvgBuilder(Assets.svg.loveOutline),
+                  child: SvgBuilder(Assets.svg.loveOutline, color: black(theme.isDark),),
+                ),
+                16.sp.sbW,
+                AppCard(
+                  onTap: model.goToCart,
+                  heights: 35.sp,
+                  widths: 35.sp,
+                  padding: 5.5.sp.padA,
+                  radius: 40.r,
+                  child: SvgBuilder(Assets.svg.cart, color: black(theme.isDark),),
                 ),
                 16.sp.sbW,
                 AppCard(
@@ -60,7 +72,7 @@ class PropertiesHomeScreen extends StatelessWidget {
                   widths: 35.sp,
                   padding: 5.5.sp.padA,
                   radius: 40.r,
-                  child: SvgBuilder(Assets.svg.loveOutline),
+                  child: SvgBuilder(Assets.svg.notificationBell, color: black(theme.isDark),),
                 ),
                 16.sp.sbW,
               ],
@@ -72,7 +84,7 @@ class PropertiesHomeScreen extends StatelessWidget {
           headerSliverBuilder: (context, innerBoxIsScrolled) {
             return <Widget>[
               SliverAppBar(
-                expandedHeight: 350.sp,
+                expandedHeight: 353.sp,
                 automaticallyImplyLeading: false,
                 floating: false,
                 foregroundColor: Colors.white,
@@ -140,76 +152,74 @@ class PropertiesHomeScreen extends StatelessWidget {
                             SizedBox(
                               height: 103.sp,
                               width: width(context),
-                              child: PageView.builder(
-                                  itemCount: 3,
-                                  controller: PageController(initialPage: 0, viewportFraction: 0.7),
-                                  scrollDirection: Axis.horizontal,
-                                  onPageChanged: model.onChangeIndex,
-                                  itemBuilder: (_, i){
-                                    return AppCard(
-                                      backgroundImage: Assets.png.houseFrame.path,
-                                      widths: 286.sp,
-                                      margin: 16.sp.padR,
-                                      padding: 0.0.padA,
-                                      child: Container(
-                                        height: height(context),
-                                        width: width(context),
-                                        decoration: BoxDecoration(
-                                            gradient: LinearGradient(colors: [Colors.transparent, Colors.black87])
-                                        ),
-                                        child: Row(
-                                          children: [
-                                            Expanded(
-                                                flex: 3,
-                                                child: 0.sp.sbH
-                                            ),
-                                            Expanded(
-                                                flex: 2,
-                                                child: Padding(
-                                                  padding: 8.sp.padV,
-                                                  child: Column(
-                                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                                    children: [
-                                                      AppText(
-                                                        "Palm Harbor",
-                                                        color: Colors.white,
-                                                        size: 13.61.sp,
-                                                        weight: FontWeight.w700,
-                                                      ),
-                                                      AppText(
-                                                        "2699 Green Valley, Highland Lake, FL",
-                                                        color: Colors.white,
-                                                        size: 8.67.sp,
-                                                        weight: FontWeight.w500,
-                                                      ),
-                                                      Spacer(),
-                                                      PriceWidget(
-                                                        currency: Currency.dollar,
-                                                        value: 2095,
-                                                        weight: FontWeight.w900,
-                                                        roundUp: true,
-                                                        color: Colors.white,
-                                                      ),
-                                                      AppText(
-                                                        convertListString(LocaleData.percentageFunded.convertString(), data: ["20"]),
-                                                        color: Colors.white,
-                                                        size: 8.67.sp,
-                                                        weight: FontWeight.w500,
-                                                      ),
-
-                                                    ],
-                                                  ),
-                                                )
-                                            )
-                                          ],
-                                        ),
+                              child: ListView.builder(
+                                padding: 16.sp.padL,
+                                itemCount: model.properties.length,
+                                scrollDirection: Axis.horizontal,
+                                itemBuilder: (_, i){
+                                  TempProperties property = model.properties[i];
+                                  return AppCard(
+                                    backgroundImage: property.coverImage,
+                                    widths: 286.sp,
+                                    margin: 16.sp.padR,
+                                    padding: 0.0.padA,
+                                    child: Container(
+                                      height: height(context),
+                                      width: width(context),
+                                      decoration: BoxDecoration(
+                                          gradient: LinearGradient(colors: [Colors.transparent, Colors.black87])
                                       ),
-                                    );
-                                  }
+                                      child: Row(
+                                        children: [
+                                          Expanded(
+                                              flex: 3,
+                                              child: 0.sp.sbH
+                                          ),
+                                          Expanded(
+                                              flex: 2,
+                                              child: Padding(
+                                                padding: 8.sp.padV,
+                                                child: Column(
+                                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                                  children: [
+                                                    AppText(
+                                                      property.name,
+                                                      color: Colors.white,
+                                                      size: 13.61.sp,
+                                                      weight: FontWeight.w700,
+                                                    ),
+                                                    AppText(
+                                                      property.location,
+                                                      color: Colors.white,
+                                                      size: 8.67.sp,
+                                                      weight: FontWeight.w500,
+                                                    ),
+                                                    Spacer(),
+                                                    PriceWidget(
+                                                      currency: property.currency,
+                                                      value: 2095,
+                                                      weight: FontWeight.w900,
+                                                      roundUp: true,
+                                                      color: Colors.white,
+                                                    ),
+                                                    AppText(
+                                                      convertListString(LocaleData.percentageFunded.convertString(), data: [((property.amountFunded/property.totalCost)*100).toInt()]),
+                                                      color: Colors.white,
+                                                      size: 8.67.sp,
+                                                      weight: FontWeight.w500,
+                                                    ),
+
+                                                  ],
+                                                ),
+                                              )
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                  );
+                                }
                               ),
                             ),
-                            10.sp.sbH,
-                            DotIndicators(total: 3, current: model.initialIndex),
                             20.sp.sbH,
                             Padding(
                               padding: 16.sp.padH,
@@ -248,9 +258,11 @@ class PropertiesHomeScreen extends StatelessWidget {
           },
           body: ListView.builder(
             padding: EdgeInsets.only(left: 16.sp, right: 16.sp, top: 16.sp, bottom: 120.sp),
-            itemCount: 3,
+            itemCount: model.properties.length,
             itemBuilder: (_, i){
+              TempProperties property = model.properties[i];
               return AppCard(
+                onTap: ()=> model.goToPropertyDetail(i),
                 heights: 385.h,
                 bordered: true,
                 margin: 20.sp.padB,
@@ -259,21 +271,31 @@ class PropertiesHomeScreen extends StatelessWidget {
                 borderColor: Theme.of(context).disabledColor.withValues(alpha: 0.3),
                 child: Column(
                   children: [
-                    Container(
-                      padding: 16.sp.padA,
-                      height: 168.h,
-                      width: width(context),
-                      decoration: BoxDecoration(
-                        image: DecorationImage(
-                          image: AssetImage(Assets.png.backgroudTemp.path),
-                          fit: BoxFit.fill
-                        )
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        children: [
-                          SvgBuilder(Assets.svg.love)
-                        ],
+                    Hero(
+                      tag: property.coverImage,
+                      child: Container(
+                        padding: 16.sp.padA,
+                        height: 168.h,
+                        width: width(context),
+                        decoration: BoxDecoration(
+                          image: DecorationImage(
+                            image: CachedNetworkImageProvider(property.coverImage),
+                            fit: BoxFit.fill
+                          )
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            InkWell(
+                              onTap: ()=> model.saveUnsavedProperties(property),
+                              child: SvgBuilder(
+                                Assets.svg.love,
+                                size: 25.sp,
+                                color: userService.bookMarks.any((test)=> test.id == property.id)? red9(isAppDark(context)): null,
+                              ),
+                            )
+                          ],
+                        ),
                       ),
                     ),
                     Expanded(
@@ -311,7 +333,7 @@ class PropertiesHomeScreen extends StatelessWidget {
                                       ),
                                       5.sp.sbW,
                                       AppText(
-                                        "Rented",
+                                        property.propertyType == PropertyType.rented? LocaleData.rented.convertString(): LocaleData.sale.convertString(),
                                         size: 13.sp,
                                         weight: FontWeight.w500,
                                         color: stateColor12(isAppDark(context)),
@@ -329,7 +351,7 @@ class PropertiesHomeScreen extends StatelessWidget {
                                       ),
                                       5.sp.sbW,
                                       AppText(
-                                        "USA",
+                                        property.country,
                                         size: 13.sp,
                                         weight: FontWeight.w500,
                                         color: stateColor12(isAppDark(context)),
@@ -344,13 +366,13 @@ class PropertiesHomeScreen extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.stretch,
                               children: [
                                 AppText(
-                                  "Palm Harbor",
+                                  property.name,
                                   size: 15.6.sp,
                                   weight: FontWeight.w700,
                                   color: stateColor12(theme.isDark),
                                 ),
                                 AppText(
-                                  "2699 Green Valley, Highland Lake, FL",
+                                  property.location,
                                   size: 10.99.sp,
                                   weight: FontWeight.w500,
                                   color: stateColor11(theme.isDark),
@@ -361,15 +383,15 @@ class PropertiesHomeScreen extends StatelessWidget {
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [
                                     PriceWidget(
-                                      value: 2095,
-                                      currency: Currency.dollar,
+                                      value: property.amountFunded,
+                                      currency: property.currency,
                                       color: primaryColor,
                                       size: 16.49.sp,
                                       weight: FontWeight.w900,
                                       roundUp: true,
                                     ),
                                     AppText(
-                                      convertListString(LocaleData.percentageFunded.convertString(), data: [20]),
+                                      convertListString(LocaleData.percentageFunded.convertString(), data: [((property.amountFunded/property.totalCost)*100).toInt()]),
                                       size: 10.99.sp,
                                       weight: FontWeight.w500,
                                       color: stateColor11(theme.isDark),
@@ -385,15 +407,23 @@ class PropertiesHomeScreen extends StatelessWidget {
                                     crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
                                       Expanded(
-                                        child: AppCard(
-                                          heights: 5.sp,
-                                          color: primaryColor,
+                                        child: LayoutBuilder(
+                                          builder: (context, constraint) {
+                                            double width =  (property.amountFunded/property.totalCost) * constraint.maxWidth;
+                                            return Row(
+                                              mainAxisAlignment: MainAxisAlignment.start,
+                                              children: [
+                                                AppCard(
+                                                  expandable: true,
+                                                  heights: 5.sp,
+                                                  widths: width,
+                                                  color: primaryColor,
+                                                ),
+                                              ],
+                                            );
+                                          }
                                         ),
                                       ),
-                                      Expanded(
-                                        flex: ((80/100)*4).toInt(),
-                                        child: 0.0.sbH
-                                      )
                                     ],
                                   ),
                                 ),
@@ -408,13 +438,13 @@ class PropertiesHomeScreen extends StatelessWidget {
                                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                         children: [
                                           AppText(
-                                            "5 year total return",
+                                            LocaleData.fiveYearTotalReturn.convertString(),
                                             size: 10.99.sp,
                                             weight: FontWeight.w500,
                                             color: stateColor11(theme.isDark),
                                           ),
                                           AppText(
-                                            "50%",
+                                            property.returnPercentageFiveYears.toStringAsFixed(0),
                                             size: 10.99.sp,
                                             weight: FontWeight.w500,
                                             color: stateColor11(theme.isDark),
@@ -426,13 +456,13 @@ class PropertiesHomeScreen extends StatelessWidget {
                                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                         children: [
                                           AppText(
-                                            "Yearly return",
+                                            LocaleData.yearlyReturns.convertString(),
                                             size: 10.99.sp,
                                             weight: FontWeight.w500,
                                             color: stateColor11(theme.isDark),
                                           ),
                                           AppText(
-                                            "20%",
+                                            property.returnPercentagePerYear.toStringAsFixed(0),
                                             size: 10.99.sp,
                                             weight: FontWeight.w500,
                                             color: stateColor11(theme.isDark),

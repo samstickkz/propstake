@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:propstake/app_theme/palette.dart';
@@ -69,9 +70,14 @@ class AppCard extends StatelessWidget {
         child: Container(
           alignment: alignment,
           decoration: decoration?? BoxDecoration(
-            color: backgroundImage != null? null: color?? (backgroundColor!=null ? backgroundColor!.withOpacity(0.9): (isAppDark(context)? Colors.black: Color(0xFFF6F6F6))),
+            color: backgroundImage != null? null: color?? (backgroundColor ?? (stateColor3(isAppDark(context)))),
             borderRadius: borderRadius??  BorderRadius.circular(radius ?? 9.r),
-            image: backgroundImage==null? null: DecorationImage(
+            image: backgroundImage==null? null:
+                (backgroundImage??"").startsWith("http")? DecorationImage(
+                    image: CachedNetworkImageProvider(backgroundImage!),
+                    fit: BoxFit.fill
+                ):
+            DecorationImage(
               image: AssetImage(backgroundImage!),
               fit: BoxFit.fill
             ),

@@ -260,8 +260,8 @@ mixin LocaleData {
   static const String createHereAfterYouHaveMadeATransfer = 'createHereAfterYouHaveMadeATransfer';
   static const String addMemoPleaseAddMemoToTheTransaction = 'addMemoPleaseAddMemoToTheTransaction';
   static const String bankName = 'bankName';
-  // static const String bankName = 'bankName';
-  // static const String bankName = 'bankName';
+  static const String copiedToClipboard = 'copiedToClipboard';
+  static const String older = 'older';
   static const String yuan = 'yuan';
   static const String gbp = 'gbp';
   static const String eur = 'eur';
@@ -269,13 +269,120 @@ mixin LocaleData {
   static const String usd = 'usd';
   static const String copyDetailsAndMakePayment = 'copyDetailsAndMakePayment';
   static const String accountDetails = 'accountDetails';
+  static const String comingSoon = 'comingSoon';
+  static const String clickHereAfterYouMakeTheTransfer = 'clickHereAfterYouMakeTheTransfer';
   static const String transferFundsFromYourLocalOrInternationalBankAccounts = 'transferFundsFromYourLocalOrInternationalBankAccounts';
   static const String browseThroughAVarietyOfProperties = 'browseThroughAVarietyOfProperties';
+  static const String aboutTiers = 'aboutTiers';
+  static const String journeyToEliteRewards = 'journeyToEliteRewards';
+  static const String bronzeTier = 'bronzeTier';
+  static const String silverTier = 'silverTier';
+  static const String goldTier = 'goldTier';
+  static const String platinumTier = 'platinumTier';
+  static const String amountInvested = 'amountInvested';
+  static const String investToReach = 'investToReach';
+  static const String benefits = 'benefits';
+  static const String cashbackOnInvestments = 'cashbackOnInvestments';
+  static const String basicSupport = 'basicSupport';
+  static const String prioritySupport = 'prioritySupport';
+  static const String referralBonusBoost = 'referralBonusBoost';
+  static const String higherCashbackReturns = 'higherCashbackReturns';
+  static const String premiumSupport = 'premiumSupport';
+  static const String earlyAccessToNewDeals = 'earlyAccessToNewDeals';
+  static const String enhancedReferralRewards = 'enhancedReferralRewards';
+  static const String howToUpgrade = 'howToUpgrade';
+  static const String investMore = 'investMore';
+  static const String joinPromotions = 'joinPromotions';
+  static const String myEarnings = 'myEarnings';
+  static const String cashback = 'cashback';
+  static const String promotions = 'promotions';
+  static const String referAndEarn = 'referAndEarn';
+  static const String shareUniqueCode = 'shareUniqueCode';
+  static const String howToEarnMore = 'howToEarnMore';
+  static const String investingInNewProperties = 'investingInNewProperties';
+  static const String invitingFriends = 'invitingFriends';
+  static const String participatingInPromotions = 'participatingInPromotions';
+  static const String settingUpAutoInvestPlans = 'settingUpAutoInvestPlans';
+  static const String yourJourneyToEliteReward = 'yourJourneyToEliteReward';
+  static const String discoverHowYourTierSystem = 'discoverHowYourTierSystem';
+  static const String getStartedWithBasicBenefitsAsYouBegin = 'getStartedWithBasicBenefitsAsYouBegin';
+  static const String enjoyIncreasedCashBackAndBetter = 'enjoyIncreasedCashBackAndBetter';
+  static const String accessEarlyPropertyDealsPriority = 'accessEarlyPropertyDealsPriority';
+  static const String unlockTopTierBenefitsIncludingPersonalizedAdvice = 'unlockTopTierBenefitsIncludingPersonalizedAdvice';
+  static const String basicSupportInfo = 'basicSupportInfo';
+  static const String cashbackOnInvestmentsInfo = 'cashbackOnInvestmentsInfo';
+  static const String prioritySupportInfo = 'prioritySupportInfo';
+  static const String referralBonusBoostInfo = 'referralBonusBoostInfo';
+  static const String higherCashbackReturnsInfo = 'higherCashbackReturnsInfo';
+  static const String premiumSupportInfo = 'premiumSupportInfo';
+  static const String earlyAccessToNewDealsInfo = 'earlyAccessToNewDealsInfo';
+  static const String enhancedReferralRewardsInfo = 'enhancedReferralRewardsInfo';
+  static const String startInvestingToUpgradeYourTier = 'startInvestingToUpgradeYourTier';
+  static const String amountToBeInvestedIn12Months = 'amountToBeInvestedIn12Months';
+  static const String toReach = 'toReach';
+  static const String investedAbove = 'investedAbove';
+  static const String referralNumber = 'referralNumber';
+  static const String spreadTheWordAboutProstake = 'spreadTheWordAboutProstake';
+  static const String amountRequiredToUpgrade = 'amountRequiredToUpgrade';
+  static const String inviteFriend = 'inviteFriend';
+  static const String referralCodeCopped = 'referralCodeCopped';
+  static const String rented = 'rented';
+  static const String sale = 'sale';
+  static const String fiveYearTotalReturn = 'fiveYearTotalReturn';
+  static const String yearlyReturns = 'yearlyReturns';
+  static const String takeATour = 'takeATour';
+  static const String investors = 'Investors';
+  static const String remainingInvestmentAmount = 'remainingInvestmentAmount';
+  static const String cartAmount = 'cartAmount';
+  static const String remove = 'remove';
+  static const String addProperties = 'addProperties';
+  static const String checkOut = 'checkOut';
+  static const String addToCart = 'addToCart';
+  static const String favouriteProperties = 'favouriteProperties';
+  static const String yourSavedPropertiesAtAGlance = 'yourSavedPropertiesAtAGlance';
+  static const String selectAmount = 'selectAmount';
+  static const String propertyAlreadyInCart = 'propertyAlreadyInCart';
+  static const String propertyAddedToCart = 'propertyAddedToCart';
+
 
   static const Map<String, dynamic> en = {
     completed: "Completed",
-    // completed: "Completed",
-    // completed: "Completed",
+    propertyAlreadyInCart: "Property already in cart go to Cart to update",
+    propertyAddedToCart: "Property added to cart",
+    selectAmount: "Select Amount",
+    addToCart: "Add to Cart",
+    takeATour: "Tour the Property",
+    rented: "Rented",
+    favouriteProperties: "Favorite Properties",
+    yourSavedPropertiesAtAGlance: "Your saved properties at a glance. Easily access and invest in your top picks.",
+    investors: "Investors",
+    remainingInvestmentAmount: "Remaining investment amount",
+    cartAmount: "Cart(%a)",
+    remove: "Remove",
+    addProperties: "Add Properties",
+    checkOut: "Checkout",
+    sale: "Sale",
+    fiveYearTotalReturn: "5 year total return",
+    yearlyReturns: "Yearly return",
+    referralCodeCopped: "Referral Code Copied Successfully",
+    inviteFriend: "Invite Friends",
+    spreadTheWordAboutProstake: "Spread the word about Propstake",
+    amountRequiredToUpgrade: "\$%a investment is required to reach %a.",
+    referralNumber: "%a referrals",
+    investedAbove: "Invested Above",
+    toReach: "to Reach ",
+    yourJourneyToEliteReward: "Your Journey to Elite Rewards",
+    discoverHowYourTierSystem: "Discover how our tier system works and the exclusive benefits you can unlock as you invest more with us. Your tier not only reflects your commitment but also opens the door to enhanced rewards, higher cashback, and premium support.",
+    getStartedWithBasicBenefitsAsYouBegin: "Get started with basic benefits as you begin your investment journey.",
+    enjoyIncreasedCashBackAndBetter: "Enjoy increased cashback and better referral bonuses to boost your portfolio.",
+    accessEarlyPropertyDealsPriority: "Access early property deals, priority support, and higher rewards with every investment.",
+    unlockTopTierBenefitsIncludingPersonalizedAdvice: "Unlock top-tier benefits including personalized advice, exclusive events, and maximum rewards.",
+    copiedToClipboard: " Copied to clipboard",
+    older: "Older",
+    amountToBeInvestedIn12Months: "Amount to be invested in 12 months",
+    startInvestingToUpgradeYourTier: "Start investing to upgrade your tier",
+    comingSoon: "Coming Soon",
+    clickHereAfterYouMakeTheTransfer: "Click here after you have made the transfer",
     yuan: "CNY",
     gbp: "GBP",
     eur: "EUR",
@@ -530,6 +637,44 @@ mixin LocaleData {
     faqQuestion3: "When does my annual investment limit reset?",
     faqQuestion4: "Can I increase my investment limit?",
     logoutPrompt: "Log out of your account?",
+    aboutTiers: "About Tiers",
+    journeyToEliteRewards: "Your Journey to Elite Rewards",
+    bronzeTier: "Bronze Tier",
+    silverTier: "Silver Tier",
+    goldTier: "Gold Tier",
+    platinumTier: "Platinum Tier",
+    amountInvested: "Amount invested in the last 12 months",
+    investToReach: "Invest %a to reach %a",
+    benefits: "Benefits",
+    cashbackOnInvestments: "Cashback on Investments",
+    basicSupport: "Basic Support",
+    prioritySupport: "Priority Support",
+    referralBonusBoost: "Referral Bonus Boost",
+    higherCashbackReturns: "Higher Cashback Returns",
+    premiumSupport: "Premium Support",
+    earlyAccessToNewDeals: "Early Access to New Deals",
+    enhancedReferralRewards: "Enhanced Referral Rewards",
+    cashbackOnInvestmentsInfo: "Earn %a% back on every investment you make.",
+    basicSupportInfo: "Get email and in-app chat support for any inquiries.",
+    prioritySupportInfo: "Get faster response times from our support team, ensuring quicker assistance.",
+    referralBonusBoostInfo: "Earn better referral bonuses.",
+    higherCashbackReturnsInfo: "Earn a higher cashback percentage on your investments.",
+    premiumSupportInfo: "Enjoy expedited responses and dedicated support channels.",
+    earlyAccessToNewDealsInfo: "Get first dibs on select high-potential properties before they go public.",
+    enhancedReferralRewardsInfo: "Earn boosted referral bonuses for every successful invitation.",
+    howToUpgrade: "How to Upgrade",
+    investMore: "Invest More",
+    joinPromotions: "Join Promotions",
+    myEarnings: "My Earnings",
+    cashback: "Cashback",
+    promotions: "Promotions",
+    referAndEarn: "Refer and Earn",
+    shareUniqueCode: "Share your unique code with friends to earn more!",
+    howToEarnMore: "How to earn more",
+    investingInNewProperties: "Investing in new properties",
+    invitingFriends: "Inviting friends (referrals)",
+    participatingInPromotions: "Participating in promotional events",
+    settingUpAutoInvestPlans: "Setting up auto-invest plans",
 
 
   };

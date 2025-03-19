@@ -77,7 +77,7 @@ class VerifyUserViewModel extends BaseViewModel {
       );
       if(res.isRight()){
         stopLoader();
-        showCustomToast(res.asRight().message??"");
+        showCustomToast(res.asRight().message??"", success: res.isRight());
         if(res.asRight().successful == true){
           bottomSheets(
             barrierDismissible: false,

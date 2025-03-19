@@ -14,7 +14,7 @@ class SuccessAuthVerification extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: 650.sp,
       width: width(context),
       child: Column(

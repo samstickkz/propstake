@@ -1,19 +1,24 @@
 import 'package:get_it/get_it.dart';
+import 'package:propstake/ui/home/reward/reward_home.vm.dart';
 
 import 'data/repository/repository.service.dart';
 import 'data/services/local/locale.service.dart';
 import 'data/services/local/navigation/navigation_service.dart';
+import 'data/services/local/social.service.dart';
 import 'data/services/local/storage_service/auth_storage_service.dart';
 import 'data/services/local/storage_service/data_storage_service.dart';
 import 'data/services/local/theme.service.dart';
 import 'data/services/local/user.service.dart';
 import 'data/services/remote/authentication.service.dart';
+import 'data/services/remote/wallet_service.dart';
 import 'ui/auth/auth.vm.dart';
 import 'ui/auth/local_authentication/local_authentication.vm.dart';
 import 'ui/auth/verify/verify.vm.dart';
 import 'ui/base/base-vm.dart';
 import 'ui/home/bottom_nav.vm.dart';
+import 'ui/home/cart/cart_vm.dart';
 import 'ui/home/my_investment/my_investment.vm.dart';
+import 'ui/home/my_investment/withdraw/withdraw.vm.dart';
 import 'ui/home/profile/about_us/about_us.vm.dart';
 import 'ui/home/profile/contact_us/contact_us.vm.dart';
 import 'ui/home/profile/my_account/my_account.vm.dart';
@@ -21,6 +26,7 @@ import 'ui/home/profile/profile_home.vm.dart';
 import 'ui/home/profile/security/security.vm.dart';
 import 'ui/home/profile/settings/settings.vm.dart';
 import 'ui/home/profile/terms_condition/terms_condition.vm.dart';
+import 'ui/home/properties/product_detail/product_detail.vm.dart';
 import 'ui/home/properties/properies.vm.dart';
 import 'ui/onboarding/splash/splash.vm.dart';
 
@@ -38,7 +44,8 @@ setUpServices(){
   locator.registerLazySingleton<LocaleService>(() => LocaleService());
   locator.registerLazySingleton<UserService>(() => UserService());
   locator.registerLazySingleton<ThemeModel>(() => ThemeModel());
-  // locator.registerLazySingleton<DataStorageService>(() => DataStorageService());
+  locator.registerLazySingleton<SocialService>(() => SocialService());
+  locator.registerLazySingleton<WalletService>(() => WalletService());
   locator.registerLazySingleton<AuthenticationService>(() => AuthenticationService());
 }
 
@@ -59,9 +66,10 @@ registerViewModel(){
   locator.registerFactory<ContactUsViewModel>(() => ContactUsViewModel());
   locator.registerFactory<PropertiesViewModel>(() => PropertiesViewModel());
   locator.registerFactory<MyInvestHomeViewModel>(() => MyInvestHomeViewModel());
-  // locator.registerFactory<PatientsAccountProfileViewModel>(() => PatientsAccountProfileViewModel());
-  // locator.registerFactory<PatientsSecurityViewModel>(() => PatientsSecurityViewModel());
-  // locator.registerFactory<PatientsEMRViewModel>(() => PatientsEMRViewModel());
+  locator.registerFactory<WithdrawViewModel>(() => WithdrawViewModel());
+  locator.registerFactory<RewardHomeViewModel>(() => RewardHomeViewModel());
+  locator.registerFactory<ProductDetailViewModel>(() => ProductDetailViewModel());
+  locator.registerFactory<CartViewModel>(() => CartViewModel());
   // locator.registerFactory<DoctorAppointmentHomeViewModel>(() => DoctorAppointmentHomeViewModel());
   // locator.registerFactory<PatientNotificationViewModel>(() => PatientNotificationViewModel());
   // locator.registerFactory<DoctorHomeViewModel>(() => DoctorHomeViewModel());

@@ -69,11 +69,12 @@ class Indicators extends StatelessWidget {
 
 class DotIndicators extends StatelessWidget {
   final int total;
+  final double? size;
   final int current;
   final Function(int)? onChange;
   final Color? inactiveColor;
   final Color? activeColor;
-  const DotIndicators({super.key, required this.total, required this.current, this.onChange, this.inactiveColor, this.activeColor});
+  const DotIndicators({super.key, required this.total, required this.current, this.onChange, this.inactiveColor, this.activeColor, this.size});
 
   @override
   Widget build(BuildContext context) {
@@ -93,11 +94,11 @@ class DotIndicators extends StatelessWidget {
             }
           },
           child: Container(
-            width: 6.sp,
-            height: 6.sp,
+            width: size?? 6.sp,
+            height: size?? 6.sp,
             margin: EdgeInsets.symmetric(horizontal: 3.sp, vertical: 0.sp),
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(7.5.sp),
+              borderRadius: BorderRadius.circular(size == null? 7.5.sp: ((size??0)/2)),
               color: current == index
                   ? Theme.of(context).primaryColor
                   : Color(0x808F8F8F),
