@@ -4,12 +4,16 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:propstake/data/model/wallet_response_model.dart';
+import 'package:propstake/localization/locales.dart';
 import 'package:propstake/locator.dart';
 import 'package:propstake/ui/base/base-vm.dart';
 import 'package:propstake/utils/app_logger.dart';
 import 'package:propstake/utils/dartz.x.dart';
+import 'package:propstake/utils/snack_message.dart';
+import 'package:propstake/utils/string_extensions.dart';
 
 import '../../../ui/auth/auth.ui.dart';
+import '../../../ui/home/properties/properies.vm.dart';
 import '../../../utils/constants.dart';
 import '../../cache/database_keys.dart';
 import '../../model/get_user_model.dart';
@@ -25,6 +29,37 @@ class UserService extends ChangeNotifier {
   String? referralCode;
   num price = 10000;
   num? userBalance;
+  List<TempProperties> bookMarks = [];
+  List<TempCart> cartItems = [];
+
+  removeFromCart(TempCart cart){
+    cartItems.removeWhere((test)=> test.id == cart.id);
+    notifyListeners();
+  }
+
+  saveCart(TempCart cart){
+    if(cartItems.any((test)=> test.product.id == cart.product.id)){
+      showCustomToast(LocaleData.propertyAlreadyInCart.convertString());
+    }else{
+      cartItems.add(cart);
+      showCustomToast(LocaleData.propertyAddedToCart.convertString(), success: true);
+    }
+    notifyListeners();
+  }
+
+  update(List<TempCart> carts){
+    cartItems = carts;
+    notifyListeners();
+  }
+
+  saveUnSaveBookMark(TempProperties property){
+    if(bookMarks.any((test)=> test.id == property.id)){
+      bookMarks.removeWhere((test)=> test.id == property.id);
+    }else{
+      bookMarks.add(property);
+    }
+    notifyListeners();
+  }
 
 
   changeUserType(bool doctor){

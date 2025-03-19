@@ -176,6 +176,9 @@ class $AssetsSvgGen {
   /// File path: assets/svg/camera.svg
   String get camera => 'assets/svg/camera.svg';
 
+  /// File path: assets/svg/cart.svg
+  String get cart => 'assets/svg/cart.svg';
+
   /// File path: assets/svg/celebrate_grace.svg
   String get celebrateGrace => 'assets/svg/celebrate_grace.svg';
 
@@ -287,6 +290,9 @@ class $AssetsSvgGen {
   /// File path: assets/svg/notification.svg
   String get notification => 'assets/svg/notification.svg';
 
+  /// File path: assets/svg/notification_bell.svg
+  String get notificationBell => 'assets/svg/notification_bell.svg';
+
   /// File path: assets/svg/out_icon.svg
   String get outIcon => 'assets/svg/out_icon.svg';
 
@@ -347,6 +353,9 @@ class $AssetsSvgGen {
   /// File path: assets/svg/temp_logo_light.svg
   String get tempLogoLight => 'assets/svg/temp_logo_light.svg';
 
+  /// File path: assets/svg/trash.svg
+  String get trash => 'assets/svg/trash.svg';
+
   /// File path: assets/svg/user-multiple.svg
   String get userMultiple => 'assets/svg/user-multiple.svg';
 
@@ -379,6 +388,7 @@ class $AssetsSvgGen {
     bed,
     bronze,
     camera,
+    cart,
     celebrateGrace,
     check,
     checkCircle,
@@ -416,6 +426,7 @@ class $AssetsSvgGen {
     myInvestment,
     myInvestmentActive,
     notification,
+    notificationBell,
     outIcon,
     platnum,
     privacyPolicy,
@@ -436,6 +447,7 @@ class $AssetsSvgGen {
     stars,
     tempLogo,
     tempLogoLight,
+    trash,
     userMultiple,
     visibilityOff,
     visible,

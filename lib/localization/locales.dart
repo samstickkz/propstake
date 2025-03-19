@@ -338,13 +338,23 @@ mixin LocaleData {
   static const String addProperties = 'addProperties';
   static const String checkOut = 'checkOut';
   static const String addToCart = 'addToCart';
+  static const String favouriteProperties = 'favouriteProperties';
+  static const String yourSavedPropertiesAtAGlance = 'yourSavedPropertiesAtAGlance';
+  static const String selectAmount = 'selectAmount';
+  static const String propertyAlreadyInCart = 'propertyAlreadyInCart';
+  static const String propertyAddedToCart = 'propertyAddedToCart';
 
 
   static const Map<String, dynamic> en = {
     completed: "Completed",
+    propertyAlreadyInCart: "Property already in cart go to Cart to update",
+    propertyAddedToCart: "Property added to cart",
+    selectAmount: "Select Amount",
     addToCart: "Add to Cart",
     takeATour: "Tour the Property",
     rented: "Rented",
+    favouriteProperties: "Favorite Properties",
+    yourSavedPropertiesAtAGlance: "Your saved properties at a glance. Easily access and invest in your top picks.",
     investors: "Investors",
     remainingInvestmentAmount: "Remaining investment amount",
     cartAmount: "Cart(%a)",

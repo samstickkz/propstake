@@ -16,6 +16,7 @@ import 'ui/auth/local_authentication/local_authentication.vm.dart';
 import 'ui/auth/verify/verify.vm.dart';
 import 'ui/base/base-vm.dart';
 import 'ui/home/bottom_nav.vm.dart';
+import 'ui/home/cart/cart_vm.dart';
 import 'ui/home/my_investment/my_investment.vm.dart';
 import 'ui/home/my_investment/withdraw/withdraw.vm.dart';
 import 'ui/home/profile/about_us/about_us.vm.dart';
@@ -68,7 +69,7 @@ registerViewModel(){
   locator.registerFactory<WithdrawViewModel>(() => WithdrawViewModel());
   locator.registerFactory<RewardHomeViewModel>(() => RewardHomeViewModel());
   locator.registerFactory<ProductDetailViewModel>(() => ProductDetailViewModel());
-  // locator.registerFactory<PatientsEMRViewModel>(() => PatientsEMRViewModel());
+  locator.registerFactory<CartViewModel>(() => CartViewModel());
   // locator.registerFactory<DoctorAppointmentHomeViewModel>(() => DoctorAppointmentHomeViewModel());
   // locator.registerFactory<PatientNotificationViewModel>(() => PatientNotificationViewModel());
   // locator.registerFactory<DoctorHomeViewModel>(() => DoctorHomeViewModel());

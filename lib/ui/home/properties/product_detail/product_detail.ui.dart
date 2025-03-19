@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:propstake/utils/constants.dart';
 import 'package:propstake/widget/app_button.dart';
 import 'package:propstake/widget/appbar_widget.dart';
 import 'package:propstake/widget/inidicator.dart';
@@ -380,6 +381,7 @@ class ProductDetailScreen extends StatelessWidget {
                     ],
                   ),
                 ),
+                if(!userService.cartItems.any((cart)=> cart.product.id == property.id))
                 AppCard(
                   backgroundColor: white(isAppDark(context)),
                   heights: 115.sp,
@@ -388,28 +390,34 @@ class ProductDetailScreen extends StatelessWidget {
                     vertical: 16.sp,
                     horizontal: 25.sp
                   ),
-                  child: Row(
-                    spacing: 30.sp,
-                    crossAxisAlignment: CrossAxisAlignment.center,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Expanded(
-                        child: NewDropDownSelect(
-                          items: model.divideInto15(property.totalCost - property.amountFunded, property.currency),
-                          // prefix: AppText(getCurrencySymbol(property.currency)),
-                          onChanged: model.onchange,
-                          contentPadding: 10.sp.padA,
-                          value: model.currentPrice,
-                          fillColor: fadeBackground(isAppDark(context)),
-                        ),
+                      Row(
+                        spacing: 30.sp,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Expanded(
+                            child: NewDropDownSelect(
+                              items: model.divideInto15(property.totalCost - property.amountFunded, property.currency),
+                              // prefix: AppText(getCurrencySymbol(property.currency)),
+                              onChanged: model.onchange,
+                              contentPadding: 10.sp.padA,
+                              value: model.currentPrice,
+                              fillColor: fadeBackground(isAppDark(context)),
+                              hint: LocaleData.selectAmount.convertString(),
+                            ),
+                          ),
+                          Expanded(
+                            child: AppButton.fullWidth(
+                              isLoading: model.isLoading,
+                              text: LocaleData.addToCart.convertString(),
+                              onTap: model.currentPrice == null? null: ()=> model.addToCart(model.divideInto15(property.totalCost - property.amountFunded, property.currency)),
+                              height: 60.sp,
+                            )
+                          )
+                        ],
                       ),
-                      Expanded(
-                        child: AppButton.fullWidth(
-                          isLoading: model.isLoading,
-                          text: LocaleData.addToCart.convertString(),
-                          onTap: model.currentPrice == null? null: (){},
-                          height: 60.sp,
-                        )
-                      )
                     ],
                   ),
                 )
@@ -418,7 +426,12 @@ class ProductDetailScreen extends StatelessWidget {
           ),
           IntrinsicHeight(child: AppBars(
             actions: [
-              AppBarButton(onTap: (){}, svg: Assets.svg.heartBlack, ),
+              AppBarButton(
+                onTap: ()=> model.saveUnsavedProperties(property),
+                svg: Assets.svg.heartBlack,
+                backgroundColor: userService.bookMarks.any((test)=> test.id == property.id)? red9(isAppDark(context)): null,
+                iconColor: userService.bookMarks.any((test)=> test.id == property.id)? Colors.white: null,
+              ),
               AppBarButton(onTap: (){}, svg: Assets.svg.forward, ),
               AppBarButton(onTap: (){}, svg: Assets.svg.questionCircle, ),
               16.sp.sbW,

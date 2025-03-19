@@ -95,7 +95,8 @@ class OnBoardingScreen extends StatelessWidget {
                           16.sp.sbH,
                           ButtonWidget(
                             toLogin: model.goToAuth,
-                          )
+                          ),
+                          16.sp.sbH
 
                         ],
                       ),

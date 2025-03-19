@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:propstake/app_theme/palette.dart';
 import 'package:propstake/gen/assets.gen.dart';
 import 'package:propstake/localization/locales.dart';
+import 'package:propstake/ui/home/properties/properies.vm.dart';
 import 'package:propstake/utils/string_extensions.dart';
 import 'package:propstake/utils/widget_extensions.dart';
 import 'package:propstake/widget/app_button.dart';
@@ -19,7 +20,8 @@ import '../../../../widget/svg_builder.dart';
 import '../../bottom_nav.ui.dart';
 
 class AccountDetailScreen extends StatelessWidget {
-  const AccountDetailScreen({super.key});
+  final TempCart? cart;
+  const AccountDetailScreen({super.key, this.cart});
 
   @override
   Widget build(BuildContext context) {
@@ -34,8 +36,9 @@ class AccountDetailScreen extends StatelessWidget {
           16.sp.sbH,
           AccountOptionWidget(
             title: LocaleData.amount.convertString(),
-            value: "3000000",
+            value: cart?.amountSelected == null? "3000000" : (cart?.amountSelected??"").split(" ").last,
             isPrice: true,
+            currency: cart?.product.currency,
           ),
           AccountOptionWidget(
             title: LocaleData.accountName.convertString(),
@@ -52,7 +55,7 @@ class AccountDetailScreen extends StatelessWidget {
           ),
           AccountOptionWidget(
             title: LocaleData.addMemoPleaseAddMemoToTheTransaction.convertString(),
-            value: "prop-manny",
+            value: cart ==null? "prop-manny" : "${cart?.product.name} - ${cart?.product.location}",
             copy: true,
           ),
           30.sp.sbH,
@@ -121,21 +124,25 @@ class AccountOptionWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               if(isPrice)...[
-                PriceWidget(
-                  value: num.tryParse(value)??0,
-                  roundUp: true,
-                  weight: FontWeight.w700,
-                  isTitle: true,
-                  size: 16.sp,
-                  color: black(isAppDark(context)),
+                Expanded(
+                  child: PriceWidget(
+                    value: num.tryParse(value)??0,
+                    roundUp: true,
+                    weight: FontWeight.w700,
+                    isTitle: true,
+                    size: 16.sp,
+                    color: black(isAppDark(context)),
+                  ),
                 )
               ] else ...[
-                AppText(
-                  value,
-                  weight: FontWeight.w700,
-                  isTitle: true,
-                  size: 16.sp,
-                  color: black(isAppDark(context)),
+                Expanded(
+                  child: AppText(
+                    value,
+                    weight: FontWeight.w700,
+                    isTitle: true,
+                    size: 16.sp,
+                    color: black(isAppDark(context)),
+                  ),
                 )
               ],
               if(copy)...[

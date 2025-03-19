@@ -3,6 +3,8 @@ import 'package:propstake/ui/base/base-vm.dart';
 import 'package:propstake/utils/constants.dart';
 import 'package:propstake/widget/price_widget.dart';
 
+import '../cart/cart_ui.dart';
+import 'bookmarks/bookmark.ui.dart';
 import 'product_detail/product_detail.ui.dart';
 
 class PropertiesViewModel extends BaseViewModel {
@@ -82,6 +84,19 @@ class PropertiesViewModel extends BaseViewModel {
     navigationService.navigateToRoute(ProductDetailScreen(property: properties[index],));
   }
 
+  goToBookMark(){
+    navigationService.navigateToRoute(BookMarkScreen()).whenComplete(()=> notifyListeners());
+  }
+
+  goToCart(){
+    navigationService.navigateToRoute(CartScreen()).whenComplete(()=> notifyListeners());
+  }
+
+  saveUnsavedProperties(TempProperties property) async {
+    await userService.saveUnSaveBookMark(property);
+    notifyListeners();
+  }
+
 }
 
 class TempProperties {
@@ -116,4 +131,22 @@ class TempProperties {
 
 enum PropertyType {
   rented, sale
+}
+
+class TempCart {
+  String id;
+  String amountSelected;
+  TempProperties product;
+  List<String> amounts;
+
+  TempCart({
+    required this.id,
+    required this.amountSelected,
+    required this.product,
+    required this.amounts,
+  });
+
+  updateAmount(String amount){
+    amountSelected = amount;
+  }
 }

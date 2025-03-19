@@ -47,12 +47,21 @@ class PropertiesHomeScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 AppCard(
-                  onTap: (){},
+                  onTap: model.goToBookMark,
                   heights: 35.sp,
                   widths: 35.sp,
                   padding: 5.5.sp.padA,
                   radius: 40.r,
-                  child: SvgBuilder(Assets.svg.loveOutline),
+                  child: SvgBuilder(Assets.svg.loveOutline, color: black(theme.isDark),),
+                ),
+                16.sp.sbW,
+                AppCard(
+                  onTap: model.goToCart,
+                  heights: 35.sp,
+                  widths: 35.sp,
+                  padding: 5.5.sp.padA,
+                  radius: 40.r,
+                  child: SvgBuilder(Assets.svg.cart, color: black(theme.isDark),),
                 ),
                 16.sp.sbW,
                 AppCard(
@@ -61,7 +70,7 @@ class PropertiesHomeScreen extends StatelessWidget {
                   widths: 35.sp,
                   padding: 5.5.sp.padA,
                   radius: 40.r,
-                  child: SvgBuilder(Assets.svg.loveOutline),
+                  child: SvgBuilder(Assets.svg.notificationBell, color: black(theme.isDark),),
                 ),
                 16.sp.sbW,
               ],
@@ -148,7 +157,6 @@ class PropertiesHomeScreen extends StatelessWidget {
                                 itemBuilder: (_, i){
                                   TempProperties property = model.properties[i];
                                   return AppCard(
-
                                     backgroundImage: property.coverImage,
                                     widths: 286.sp,
                                     margin: 16.sp.padR,
@@ -276,7 +284,14 @@ class PropertiesHomeScreen extends StatelessWidget {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
-                            SvgBuilder(Assets.svg.love)
+                            InkWell(
+                              onTap: ()=> model.saveUnsavedProperties(property),
+                              child: SvgBuilder(
+                                Assets.svg.love,
+                                size: 25.sp,
+                                color: userService.bookMarks.any((test)=> test.id == property.id)? red9(isAppDark(context)): null,
+                              ),
+                            )
                           ],
                         ),
                       ),
