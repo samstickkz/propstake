@@ -22,6 +22,7 @@ class OnBoardingScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BaseView<SplashScreenViewModel>(
       builder: (model ,theme)=> Scaffold(
+        resizeToAvoidBottomInset: false,
         body: PageView.builder(
           itemCount: model.onboardingData.length,
           controller: model.controller,

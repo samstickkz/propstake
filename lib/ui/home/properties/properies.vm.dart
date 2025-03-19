@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:propstake/ui/base/base-vm.dart';
 import 'package:propstake/utils/constants.dart';
@@ -8,6 +9,24 @@ import 'bookmarks/bookmark.ui.dart';
 import 'product_detail/product_detail.ui.dart';
 
 class PropertiesViewModel extends BaseViewModel {
+  final FirebaseFirestore firestore = FirebaseFirestore.instance;
+
+  // Fetch list of users
+  Future<List<Map<String, dynamic>>> fetchProperties() async {
+    try {
+      QuerySnapshot querySnapshot = await firestore.collection("users").get();
+      List<Map<String, dynamic>> data = querySnapshot.docs.map((doc) => doc.data() as Map<String, dynamic>).toList();
+      print(data);
+      return data;
+    } catch (e) {
+      print("Error fetching users: $e");
+      return [];
+    }
+  }
+
+  init()async{
+    await fetchProperties();
+  }
 
   int initialIndex = 0;
   ScrollController scrollController = ScrollController();

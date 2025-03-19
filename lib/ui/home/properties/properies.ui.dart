@@ -27,6 +27,8 @@ class PropertiesHomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BaseView<PropertiesViewModel>(
+      useFullScreenLoader: true,
+      onModelReady: (m)=> m.init(),
       builder: (model, theme)=> Scaffold(
         appBar: AppBars(
           noLeading: true,
