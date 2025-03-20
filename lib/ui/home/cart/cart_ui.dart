@@ -9,6 +9,7 @@ import 'package:propstake/widget/app_button.dart';
 import 'package:propstake/widget/app_card.dart';
 import 'package:propstake/widget/apptexts.dart';
 
+import '../../../data/model/cart_model.dart';
 import '../../../widget/appbar_widget.dart';
 import '../../base/base-ui.dart';
 import '../properties/properies.vm.dart';
@@ -54,7 +55,7 @@ class CartScreen extends StatelessWidget {
                                     AppCard(
                                       heights: 94.sp,
                                       widths: 114.sp,
-                                      backgroundImage: cart.product.coverImage,
+                                      backgroundImage: cart.product?.images == null? Assets.png.houseFrame.path : cart.product?.images[0],
                                     ),
                                     Expanded(
                                       child: Column(
@@ -62,13 +63,13 @@ class CartScreen extends StatelessWidget {
                                         mainAxisAlignment: MainAxisAlignment.center,
                                         children: [
                                           AppText(
-                                            cart.product.name,
+                                            cart.product?.name??"",
                                             size: 20.06.sp,
                                             weight: FontWeight.w700,
                                             color: stateColor12(theme.isDark),
                                           ),
                                           AppText(
-                                            cart.product.location,
+                                            cart.product?.location??"",
                                             size: 14.44.sp,
                                             weight: FontWeight.w500,
                                             color: stateColor11(theme.isDark),
@@ -88,7 +89,7 @@ class CartScreen extends StatelessWidget {
                                       color: stateColor11(theme.isDark),
                                     ),
                                     AppText(
-                                      "${cart.product.returnPercentageFiveYears.toStringAsFixed(0)}%",
+                                      "${(cart.product?.returnPercentageFiveYears??0).toStringAsFixed(0)}%",
                                       size: 14.sp,
                                       weight: FontWeight.w500,
                                       color: stateColor11(theme.isDark),
@@ -126,7 +127,7 @@ class CartScreen extends StatelessWidget {
                                     backgroundColor: Colors.transparent,
                                     heights: 42.sp,
                                     child: Center(
-                                      child: AppText(cart.amountSelected, color: primaryColor, isTitle: true, size: 16.sp,),
+                                      child: AppText(cart.amountSelected??"0", color: primaryColor, isTitle: true, size: 16.sp, family: 'Inter',),
                                     ),
                                   ),
                                 ),
