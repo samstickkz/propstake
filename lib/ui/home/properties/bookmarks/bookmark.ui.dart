@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:propstake/data/model/propert_response.dart';
 import 'package:propstake/utils/constants.dart';
 import 'package:propstake/widget/appbar_widget.dart';
 
@@ -38,7 +39,7 @@ class BookMarkScreen extends StatelessWidget {
               padding: EdgeInsets.only(bottom: 120.sp),
               itemCount: userService.bookMarks.length,
               itemBuilder: (_, i){
-                TempProperties property = userService.bookMarks[i];
+                PropertyResponse property = userService.bookMarks[i];
                 return AppCard(
                   onTap: ()=> model.goToPropertyDetail(i),
                   heights: 385.h,
@@ -50,14 +51,14 @@ class BookMarkScreen extends StatelessWidget {
                   child: Column(
                     children: [
                       Hero(
-                        tag: property.coverImage,
+                        tag: property.images.isEmpty? "": property.images[0],
                         child: Container(
                           padding: 16.sp.padA,
                           height: 168.h,
                           width: width(context),
                           decoration: BoxDecoration(
                               image: DecorationImage(
-                                  image: CachedNetworkImageProvider(property.coverImage),
+                                  image: CachedNetworkImageProvider(property.images.isEmpty? "": property.images[0]),
                                   fit: BoxFit.fill
                               )
                           ),
@@ -111,7 +112,7 @@ class BookMarkScreen extends StatelessWidget {
                                           ),
                                           5.sp.sbW,
                                           AppText(
-                                            property.propertyType == PropertyType.rented? LocaleData.rented.convertString(): LocaleData.sale.convertString(),
+                                            property.forRent == true? LocaleData.rented.convertString(): LocaleData.sale.convertString(),
                                             size: 13.sp,
                                             weight: FontWeight.w500,
                                             color: stateColor12(isAppDark(context)),
@@ -129,7 +130,7 @@ class BookMarkScreen extends StatelessWidget {
                                           ),
                                           5.sp.sbW,
                                           AppText(
-                                            property.country,
+                                            property.country??"",
                                             size: 13.sp,
                                             weight: FontWeight.w500,
                                             color: stateColor12(isAppDark(context)),
@@ -144,13 +145,13 @@ class BookMarkScreen extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.stretch,
                                   children: [
                                     AppText(
-                                      property.name,
+                                      property.name??"",
                                       size: 15.6.sp,
                                       weight: FontWeight.w700,
                                       color: stateColor12(theme.isDark),
                                     ),
                                     AppText(
-                                      property.location,
+                                      property.location??"",
                                       size: 10.99.sp,
                                       weight: FontWeight.w500,
                                       color: stateColor11(theme.isDark),
@@ -162,14 +163,14 @@ class BookMarkScreen extends StatelessWidget {
                                       children: [
                                         PriceWidget(
                                           value: property.amountFunded,
-                                          currency: property.currency,
+                                          currency: Currency.naira,
                                           color: primaryColor,
                                           size: 16.49.sp,
                                           weight: FontWeight.w900,
                                           roundUp: true,
                                         ),
                                         AppText(
-                                          convertListString(LocaleData.percentageFunded.convertString(), data: [((property.amountFunded/property.totalCost)*100).toInt()]),
+                                          convertListString(LocaleData.percentageFunded.convertString(), data: [(((property.amountFunded??0)/(property.totalCost??0))*100).toInt()]),
                                           size: 10.99.sp,
                                           weight: FontWeight.w500,
                                           color: stateColor11(theme.isDark),
@@ -187,7 +188,7 @@ class BookMarkScreen extends StatelessWidget {
                                           Expanded(
                                             child: LayoutBuilder(
                                                 builder: (context, constraint) {
-                                                  double width =  (property.amountFunded/property.totalCost) * constraint.maxWidth;
+                                                  double width =  ((property.amountFunded??0)/(property.totalCost??0)) * constraint.maxWidth;
                                                   return Row(
                                                     mainAxisAlignment: MainAxisAlignment.start,
                                                     children: [
@@ -222,7 +223,7 @@ class BookMarkScreen extends StatelessWidget {
                                                 color: stateColor11(theme.isDark),
                                               ),
                                               AppText(
-                                                property.returnPercentageFiveYears.toStringAsFixed(0),
+                                                (property.returnPercentageFiveYears??0).toStringAsFixed(0),
                                                 size: 10.99.sp,
                                                 weight: FontWeight.w500,
                                                 color: stateColor11(theme.isDark),
@@ -240,7 +241,7 @@ class BookMarkScreen extends StatelessWidget {
                                                 color: stateColor11(theme.isDark),
                                               ),
                                               AppText(
-                                                property.returnPercentagePerYear.toStringAsFixed(0),
+                                                (property.returnPercentagePerYear??0).toStringAsFixed(0),
                                                 size: 10.99.sp,
                                                 weight: FontWeight.w500,
                                                 color: stateColor11(theme.isDark),

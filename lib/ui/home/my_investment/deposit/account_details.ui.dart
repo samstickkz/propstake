@@ -12,6 +12,7 @@ import 'package:propstake/widget/appbar_widget.dart';
 import 'package:propstake/widget/apptexts.dart';
 import 'package:propstake/widget/price_widget.dart';
 
+import '../../../../data/model/cart_model.dart';
 import '../../../../utils/constants.dart';
 import '../../../../utils/snack_message.dart';
 import '../../../../widget/app_card.dart';
@@ -38,7 +39,7 @@ class AccountDetailScreen extends StatelessWidget {
             title: LocaleData.amount.convertString(),
             value: cart?.amountSelected == null? "3000000" : (cart?.amountSelected??"").split(" ").last,
             isPrice: true,
-            currency: cart?.product.currency,
+            currency: Currency.naira,
           ),
           AccountOptionWidget(
             title: LocaleData.accountName.convertString(),
@@ -55,7 +56,7 @@ class AccountDetailScreen extends StatelessWidget {
           ),
           AccountOptionWidget(
             title: LocaleData.addMemoPleaseAddMemoToTheTransaction.convertString(),
-            value: cart ==null? "prop-manny" : "${cart?.product.name} - ${cart?.product.location}",
+            value: cart ==null? "prop-manny" : "${cart?.product?.name} - ${cart?.product?.location}",
             copy: true,
           ),
           30.sp.sbH,

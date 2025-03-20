@@ -8,6 +8,7 @@ import 'package:propstake/widget/inidicator.dart';
 import 'package:propstake/widget/text_field.dart';
 
 import '../../../../app_theme/palette.dart';
+import '../../../../data/model/propert_response.dart';
 import '../../../../gen/assets.gen.dart';
 import '../../../../localization/locales.dart';
 import '../../../../locator.dart';
@@ -23,7 +24,7 @@ import '../properies.vm.dart';
 import 'product_detail.vm.dart';
 
 class ProductDetailScreen extends StatelessWidget {
-  final TempProperties property;
+  final PropertyResponse property;
   const ProductDetailScreen({super.key, required this.property});
 
   @override
@@ -89,13 +90,13 @@ class ProductDetailScreen extends StatelessWidget {
                           children: [
                             30.sp.sbH,
                             AppText(
-                              property.name,
+                              property.name??"",
                               size: 20.06.sp,
                               weight: FontWeight.w700,
                               color: stateColor12(theme.isDark),
                             ),
                             AppText(
-                              property.location,
+                              property.location??"",
                               size: 14.44.sp,
                               weight: FontWeight.w500,
                               color: stateColor11(theme.isDark),
@@ -132,7 +133,7 @@ class ProductDetailScreen extends StatelessWidget {
                                       ),
                                       5.sp.sbW,
                                       AppText(
-                                        property.propertyType == PropertyType.rented? LocaleData.rented.convertString(): LocaleData.sale.convertString(),
+                                        property.forRent == true? LocaleData.rented.convertString(): LocaleData.sale.convertString(),
                                         size: 10.sp,
                                         color: stateColor12(isAppDark(context)),
                                       )
@@ -149,7 +150,7 @@ class ProductDetailScreen extends StatelessWidget {
                                       ),
                                       5.sp.sbW,
                                       AppText(
-                                        property.country,
+                                        property.country??"",
                                         size: 10.sp,
                                         color: stateColor12(isAppDark(context)),
                                       )
@@ -186,14 +187,14 @@ class ProductDetailScreen extends StatelessWidget {
                               children: [
                                 PriceWidget(
                                   value: property.amountFunded,
-                                  currency: property.currency,
+                                  currency: Currency.naira,
                                   color: primaryColor,
                                   size: 16.49.sp,
                                   weight: FontWeight.w900,
                                   roundUp: true,
                                 ),
                                 AppText(
-                                  convertListString(LocaleData.percentageFunded.convertString(), data: [((property.amountFunded/property.totalCost)*100).toInt()]),
+                                  convertListString(LocaleData.percentageFunded.convertString(), data: [(((property.amountFunded??0)/(property.totalCost??0))*100).toInt()]),
                                   size: 10.99.sp,
                                   weight: FontWeight.w500,
                                   color: stateColor11(theme.isDark),
@@ -211,7 +212,7 @@ class ProductDetailScreen extends StatelessWidget {
                                   Expanded(
                                     child: LayoutBuilder(
                                         builder: (context, constraint) {
-                                          double width =  (property.amountFunded/property.totalCost) * constraint.maxWidth;
+                                          double width =  ((property.amountFunded??0)/(property.totalCost??0)) * constraint.maxWidth;
                                           return Row(
                                             mainAxisAlignment: MainAxisAlignment.start,
                                             children: [
@@ -266,11 +267,11 @@ class ProductDetailScreen extends StatelessWidget {
                                         color: stateColor11(theme.isDark),
                                       ),
                                       PriceWidget(
-                                        value: property.totalCost - property.amountFunded,
+                                        value: (property.totalCost??0) - (property.amountFunded??0),
                                         size: 10.99.sp,
                                         roundUp: true,
                                         weight: FontWeight.w500,
-                                        currency: property.currency,
+                                        currency: Currency.naira,
                                         color: stateColor11(theme.isDark),
                                       ),
 
@@ -287,7 +288,7 @@ class ProductDetailScreen extends StatelessWidget {
                                         color: stateColor11(theme.isDark),
                                       ),
                                       AppText(
-                                        property.returnPercentageFiveYears.toStringAsFixed(0),
+                                        (property.returnPercentageFiveYears??0).toStringAsFixed(0),
                                         size: 10.99.sp,
                                         weight: FontWeight.w500,
                                         color: stateColor11(theme.isDark),
@@ -306,7 +307,7 @@ class ProductDetailScreen extends StatelessWidget {
                                         color: stateColor11(theme.isDark),
                                       ),
                                       AppText(
-                                        property.returnPercentagePerYear.toStringAsFixed(0),
+                                        (property.returnPercentagePerYear??0).toStringAsFixed(0),
                                         size: 10.99.sp,
                                         weight: FontWeight.w500,
                                         color: stateColor11(theme.isDark),
@@ -381,7 +382,7 @@ class ProductDetailScreen extends StatelessWidget {
                     ],
                   ),
                 ),
-                if(!userService.cartItems.any((cart)=> cart.product.id == property.id))
+                if(!userService.cartItems.any((cart)=> cart.product?.id == property.id))
                 AppCard(
                   backgroundColor: white(isAppDark(context)),
                   heights: 115.sp,
@@ -399,7 +400,7 @@ class ProductDetailScreen extends StatelessWidget {
                         children: [
                           Expanded(
                             child: NewDropDownSelect(
-                              items: model.divideInto15(property.totalCost - property.amountFunded, property.currency),
+                              items: model.divideInto15((property.totalCost??0) - (property.amountFunded??0), Currency.naira),
                               // prefix: AppText(getCurrencySymbol(property.currency)),
                               onChanged: model.onchange,
                               contentPadding: 10.sp.padA,
@@ -408,11 +409,12 @@ class ProductDetailScreen extends StatelessWidget {
                               hint: LocaleData.selectAmount.convertString(),
                             ),
                           ),
+                          //(property.amountFunded??0)/(property.totalCost??0)
                           Expanded(
                             child: AppButton.fullWidth(
                               isLoading: model.isLoading,
                               text: LocaleData.addToCart.convertString(),
-                              onTap: model.currentPrice == null? null: ()=> model.addToCart(model.divideInto15(property.totalCost - property.amountFunded, property.currency)),
+                              onTap: model.currentPrice == null? null: ()=> model.addToCart(model.divideInto15((property.totalCost??0) - (property.amountFunded??0), Currency.naira)),
                               height: 60.sp,
                             )
                           )

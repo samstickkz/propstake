@@ -16,8 +16,10 @@ import '../../../ui/auth/auth.ui.dart';
 import '../../../ui/home/properties/properies.vm.dart';
 import '../../../utils/constants.dart';
 import '../../cache/database_keys.dart';
+import '../../model/cart_model.dart';
 import '../../model/get_user_model.dart';
 import '../../model/login_auth_model.dart';
+import '../../model/propert_response.dart';
 
 
 class UserService extends ChangeNotifier {
@@ -29,7 +31,7 @@ class UserService extends ChangeNotifier {
   String? referralCode;
   num price = 10000;
   num? userBalance;
-  List<TempProperties> bookMarks = [];
+  List<PropertyResponse> bookMarks = [];
   List<TempCart> cartItems = [];
 
   removeFromCart(TempCart cart){
@@ -38,7 +40,7 @@ class UserService extends ChangeNotifier {
   }
 
   saveCart(TempCart cart){
-    if(cartItems.any((test)=> test.product.id == cart.product.id)){
+    if(cartItems.any((test)=> test.product?.id == cart.product?.id)){
       showCustomToast(LocaleData.propertyAlreadyInCart.convertString());
     }else{
       cartItems.add(cart);
@@ -52,7 +54,7 @@ class UserService extends ChangeNotifier {
     notifyListeners();
   }
 
-  saveUnSaveBookMark(TempProperties property){
+  saveUnSaveBookMark(PropertyResponse property){
     if(bookMarks.any((test)=> test.id == property.id)){
       bookMarks.removeWhere((test)=> test.id == property.id);
     }else{
