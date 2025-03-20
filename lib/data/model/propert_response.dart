@@ -11,6 +11,7 @@ class PropertyResponse {
   PropertyResponse({
     required this.id,
     required this.forRent,
+    required this.bedAmount,
     required this.country,
     required this.returnPercentagePerYear,
     required this.images,
@@ -27,6 +28,7 @@ class PropertyResponse {
   final num? returnPercentagePerYear;
   final List<String> images;
   final num? amountFunded;
+  final num? bedAmount;
   final String? name;
   final num? returnPercentageFiveYears;
   final String? location;
@@ -39,6 +41,7 @@ class PropertyResponse {
     num? returnPercentagePerYear,
     List<String>? images,
     num? amountFunded,
+    num? bedAmount,
     String? name,
     num? returnPercentageFiveYears,
     String? location,
@@ -48,6 +51,7 @@ class PropertyResponse {
       id: id ?? this.id,
       forRent: forRent ?? this.forRent,
       country: country ?? this.country,
+      bedAmount: bedAmount ?? this.bedAmount,
       returnPercentagePerYear: returnPercentagePerYear ?? this.returnPercentagePerYear,
       images: images ?? this.images,
       amountFunded: amountFunded ?? this.amountFunded,
@@ -63,6 +67,7 @@ class PropertyResponse {
       id: json["id"],
       forRent: json["forRent"],
       country: json["country"],
+      bedAmount: json["bedAmount"],
       returnPercentagePerYear: json["returnPercentagePerYear"],
       images: json["images"] == null ? [] : List<String>.from(json["images"]!.map((x) => x)),
       amountFunded: json["amountFunded"],
@@ -77,6 +82,7 @@ class PropertyResponse {
     "id": id,
     "forRent": forRent,
     "country": country,
+    "bedAmount": bedAmount,
     "returnPercentagePerYear": returnPercentagePerYear,
     "images": images.map((x) => x).toList(),
     "amountFunded": amountFunded,
@@ -88,6 +94,6 @@ class PropertyResponse {
 
   @override
   String toString(){
-    return "$id, $forRent, $country, $returnPercentagePerYear, $images, $amountFunded, $name, $returnPercentageFiveYears, $location, $totalCost, ";
+    return "$id, $forRent, $country, $bedAmount, $returnPercentagePerYear, $images, $amountFunded, $name, $returnPercentageFiveYears, $location, $totalCost, ";
   }
 }

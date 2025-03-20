@@ -116,7 +116,7 @@ class ProductDetailScreen extends StatelessWidget {
                                       ),
                                       5.sp.sbW,
                                       AppText(
-                                        convertListString(LocaleData.bedsNumber.convertString(), data: [3]),
+                                        convertListString(LocaleData.bedsNumber.convertString(), data: [property.bedAmount??0]),
                                         size: 10.sp,
                                         color: stateColor12(isAppDark(context)),
                                       )
