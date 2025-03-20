@@ -94,7 +94,7 @@ class BookMarkScreen extends StatelessWidget {
                                           ),
                                           5.sp.sbW,
                                           AppText(
-                                            convertListString(LocaleData.bedsNumber.convertString(), data: [3]),
+                                            convertListString(LocaleData.bedsNumber.convertString(), data: [property.bedAmount??0]),
                                             size: 13.sp,
                                             weight: FontWeight.w500,
                                             color: stateColor12(isAppDark(context)),
