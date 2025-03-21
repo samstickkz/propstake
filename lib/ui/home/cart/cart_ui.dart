@@ -108,16 +108,23 @@ class CartScreen extends StatelessWidget {
                             child: Row(
                               spacing: 20.sp,
                               children: [
-                                AppCard(
-                                  padding: 0.0.padA,
+                                // AppCard(
+                                //   padding: 0.0.padA,
+                                //   onTap: ()=> model.reduceAmount(cart),
+                                //   bordered: true,
+                                //   backgroundColor: Colors.transparent,
+                                //   heights: 42.sp,
+                                //   widths: 45.sp,
+                                //   child: Center(
+                                //     child: AppText("-", isTitle: true,),
+                                //   ),
+                                // ),
+                                AppButton.outline(
+                                  isLoading: model.isLoading,
                                   onTap: ()=> model.reduceAmount(cart),
-                                  bordered: true,
-                                  backgroundColor: Colors.transparent,
                                   heights: 42.sp,
-                                  widths: 45.sp,
-                                  child: Center(
-                                    child: AppText("-", isTitle: true,),
-                                  ),
+                                  isFullWidth: false,
+                                  text: "-",
                                 ),
                                 Expanded(
                                   child: AppCard(
@@ -131,17 +138,24 @@ class CartScreen extends StatelessWidget {
                                     ),
                                   ),
                                 ),
-                                AppCard(
+                                AppButton.outline(
+                                  isLoading: model.isLoading,
                                   onTap: ()=> model.increaseAmount(cart),
-                                  padding: 0.0.padA,
-                                  bordered: true,
-                                  backgroundColor: Colors.transparent,
                                   heights: 42.sp,
-                                  widths: 45.sp,
-                                  child: Center(
-                                    child: AppText("+", isTitle: true,),
-                                  ),
-                                ),
+                                  isFullWidth: false,
+                                  text: "+",
+                                )
+                                // AppCard(
+                                //   onTap: ()=> model.increaseAmount(cart),
+                                //   padding: 0.0.padA,
+                                //   bordered: true,
+                                //   backgroundColor: Colors.transparent,
+                                //   heights: 42.sp,
+                                //   widths: 45.sp,
+                                //   child: Center(
+                                //     child: AppText("+", isTitle: true,),
+                                //   ),
+                                // ),
                               ],
                             ),
                           ),

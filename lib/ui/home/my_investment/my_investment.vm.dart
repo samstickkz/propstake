@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:intl/intl.dart';
 import 'package:propstake/localization/locales.dart';
 import 'package:propstake/ui/base/base-vm.dart';
+import 'package:propstake/ui/home/my_investment/deposit/account_details.ui.dart';
 import 'package:propstake/ui/home/profile/profile_home.vm.dart';
 import 'package:propstake/utils/app_buttom_sheet.dart';
 import 'package:propstake/utils/app_logger.dart';
@@ -134,7 +135,7 @@ class MyInvestHomeViewModel extends BaseViewModel {
   }
 
   goToDeposit()async {
-    navigationService.navigateToRoute(DepositScreen());
+    navigationService.navigateToRoute(AccountDetailScreen());
   }
 
   goToWithdraw()async {

@@ -89,7 +89,7 @@ class WalletService {
     try {
       List<TempCart> properties = [];
 
-      QuerySnapshot querySnapshot = await firestore.collection("carts").get();
+      QuerySnapshot querySnapshot = await firestore.collection("carts").get(GetOptions(source: Source.server));
 
       List<Map<String, dynamic>> data = querySnapshot.docs.map((doc) {
         // Create a new map to avoid modifying Firestore's immutable data
@@ -110,6 +110,40 @@ class WalletService {
       return personalCart;
     } catch (e) {
       AppLogger.debug("Error fetching properties: $e");
+      return [];
+    }
+  }
+
+  // Fetch list of users
+  Future<List<PropertyResponse>> fetchProperties() async {
+    try {
+      List<PropertyResponse> propertiez = [];
+
+      QuerySnapshot querySnapshot = await firestore.collection("new").get(GetOptions(source: Source.server));
+
+      List<Map<String, dynamic>> data = querySnapshot.docs.map((doc) {
+        // Create a new map to avoid modifying Firestore's immutable data
+        Map<String, dynamic> docData = Map<String, dynamic>.from(doc.data() as Map<String, dynamic>);
+        docData['id'] = doc.id;  // Add document ID to the map
+        return docData;
+      }).toList();
+
+      AppLogger.debug("Property ::: ${data.length}");
+
+      for (var dat in data) {
+        AppLogger.debug("Property per ::: ${dat}");
+
+        try {
+          propertiez.add(PropertyResponse.fromJson(dat)); // Ensure this method works correctly
+        } catch (e) {
+          AppLogger.debug("Error parsing PropertyResponse: $e | Data: $dat");
+        }
+      }
+
+      AppLogger.debug("Property length ::: ${propertiez.length}");
+      return propertiez;
+    } catch (e) {
+      print("Error fetching properties: $e");
       return [];
     }
   }

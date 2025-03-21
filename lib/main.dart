@@ -32,7 +32,7 @@ Future<void> main() async {
   await setupLocator();
 
   await locator<LocaleService>().init();
-  await NotificationService.initialize();
+  // await NotificationService.initialize();
 
   SystemChrome.setPreferredOrientations(
     [

@@ -52,7 +52,7 @@ class AccountDetailScreen extends StatelessWidget {
           ),
           AccountOptionWidget(
             title: LocaleData.bankName.convertString(),
-            value: "Propstake Bank",
+            value: "FCMB Bank",
           ),
           AccountOptionWidget(
             title: LocaleData.addMemoPleaseAddMemoToTheTransaction.convertString(),

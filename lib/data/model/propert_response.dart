@@ -20,6 +20,7 @@ class PropertyResponse {
     required this.returnPercentageFiveYears,
     required this.location,
     required this.totalCost,
+    required this.totalInvestors,
   });
 
   final String? id;
@@ -33,6 +34,7 @@ class PropertyResponse {
   final num? returnPercentageFiveYears;
   final String? location;
   final num? totalCost;
+  final num? totalInvestors;
 
   PropertyResponse copyWith({
     String? id,
@@ -46,6 +48,7 @@ class PropertyResponse {
     num? returnPercentageFiveYears,
     String? location,
     num? totalCost,
+    num? totalInvestors,
   }) {
     return PropertyResponse(
       id: id ?? this.id,
@@ -59,6 +62,7 @@ class PropertyResponse {
       returnPercentageFiveYears: returnPercentageFiveYears ?? this.returnPercentageFiveYears,
       location: location ?? this.location,
       totalCost: totalCost ?? this.totalCost,
+      totalInvestors: totalInvestors ?? this.totalInvestors,
     );
   }
 
@@ -75,6 +79,7 @@ class PropertyResponse {
       returnPercentageFiveYears: json["returnPercentageFiveYears"],
       location: json["location"],
       totalCost: json["totalCost"],
+      totalInvestors: json["totalInvestors"],
     );
   }
 
@@ -90,10 +95,11 @@ class PropertyResponse {
     "returnPercentageFiveYears": returnPercentageFiveYears,
     "location": location,
     "totalCost": totalCost,
+    "totalInvestors": totalInvestors,
   };
 
   @override
   String toString(){
-    return "$id, $forRent, $country, $bedAmount, $returnPercentagePerYear, $images, $amountFunded, $name, $returnPercentageFiveYears, $location, $totalCost, ";
+    return "$id, $forRent, $totalInvestors, $country, $bedAmount, $returnPercentagePerYear, $images, $amountFunded, $name, $returnPercentageFiveYears, $location, $totalCost, ";
   }
 }

@@ -263,7 +263,7 @@ class PropertiesHomeScreen extends StatelessWidget {
             itemBuilder: (_, i){
               PropertyResponse property = model.properties[i];
               return AppCard(
-                onTap: ()=> model.goToPropertyDetail(i),
+                onTap: ()=> model.goToPropertyDetail(property),
                 heights: 385.h,
                 bordered: true,
                 margin: 20.sp.padB,
@@ -272,31 +272,28 @@ class PropertiesHomeScreen extends StatelessWidget {
                 borderColor: Theme.of(context).disabledColor.withValues(alpha: 0.3),
                 child: Column(
                   children: [
-                    Hero(
-                      tag: property.images.isEmpty? "": property.images[0],
-                      child: Container(
-                        padding: 16.sp.padA,
-                        height: 168.h,
-                        width: width(context),
-                        decoration: BoxDecoration(
-                            image: DecorationImage(
-                                image: CachedNetworkImageProvider(property.images.isEmpty? "": property.images[0]),
-                                fit: BoxFit.fill
-                            )
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: [
-                            InkWell(
-                              onTap: ()=> model.saveUnsavedProperties(property),
-                              child: SvgBuilder(
-                                Assets.svg.love,
-                                size: 25.sp,
-                                color: userService.bookMarks.any((test)=> test.id == property.id)? red9(isAppDark(context)): null,
-                              ),
-                            )
-                          ],
-                        ),
+                    Container(
+                      padding: 16.sp.padA,
+                      height: 168.h,
+                      width: width(context),
+                      decoration: BoxDecoration(
+                          image: DecorationImage(
+                              image: CachedNetworkImageProvider(property.images.isEmpty? "": property.images[0]),
+                              fit: BoxFit.fill
+                          )
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          InkWell(
+                            onTap: ()=> model.saveUnsavedProperties(property),
+                            child: SvgBuilder(
+                              Assets.svg.love,
+                              size: 25.sp,
+                              color: userService.bookMarks.any((test)=> test.id == property.id)? red9(isAppDark(context)): null,
+                            ),
+                          )
+                        ],
                       ),
                     ),
                     Expanded(
