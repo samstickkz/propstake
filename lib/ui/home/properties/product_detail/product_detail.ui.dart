@@ -377,7 +377,7 @@ class ProductDetailScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-                if((property.amountFunded??0) /(property.totalCost??0) > 0.95)...[
+                if((property.amountFunded??0) /(property.totalCost??0) < 0.95)...[
                   if(!userService.cartItems.any((cart)=> cart.product?.id == property.id))...[
                     AppCard(
                       backgroundColor: white(isAppDark(context)),
