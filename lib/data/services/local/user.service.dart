@@ -49,7 +49,7 @@ class UserService extends ChangeNotifier {
     notifyListeners();
   }
 
-  update(List<TempCart> carts){
+  updateCarts(List<TempCart> carts){
     cartItems = carts;
     notifyListeners();
   }

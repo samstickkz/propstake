@@ -187,13 +187,17 @@ class PropertiesHomeScreen extends StatelessWidget {
                                                       property.name??"",
                                                       color: Colors.white,
                                                       size: 13.61.sp,
+                                                      maxLine: 2,
                                                       weight: FontWeight.w700,
+                                                      height: 1.1,
                                                     ),
                                                     AppText(
                                                       property.location??"",
+                                                      maxLine: 2,
                                                       color: Colors.white,
                                                       size: 8.67.sp,
                                                       weight: FontWeight.w500,
+                                                      height: 1.1,
                                                     ),
                                                     Spacer(),
                                                     PriceWidget(
@@ -202,6 +206,7 @@ class PropertiesHomeScreen extends StatelessWidget {
                                                       weight: FontWeight.w900,
                                                       roundUp: true,
                                                       color: Colors.white,
+                                                      height: 1.1,
                                                     ),
                                                     AppText(
                                                       convertListString(LocaleData.percentageFunded.convertString(), data: [(((property.amountFunded??0)/(property.totalCost??0))*100).toInt()]),
