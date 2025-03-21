@@ -16,14 +16,6 @@ import '../../profile/profile_home.vm.dart';
 
 class ProductDetailViewModel extends BaseViewModel {
 
-
-  PropertyResponse? property;
-
-  init(PropertyResponse properti){
-    property = properti;
-    notifyListeners();
-  }
-
   saveUnsavedProperties(PropertyResponse property) async {
     await userService.saveUnSaveBookMark(property);
     notifyListeners();
@@ -31,7 +23,7 @@ class ProductDetailViewModel extends BaseViewModel {
 
 
 
-  addToCart(List<String> amounts) async {
+  addToCart(List<String> amounts, PropertyResponse property) async {
     startLoader();
     await walletService.addCartItem(amounts: amounts, currentPrice: currentPrice??"", property: property!).then((val) async {
       if(val){

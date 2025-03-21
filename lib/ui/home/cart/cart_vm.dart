@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:propstake/ui/base/base-vm.dart';
+import 'package:propstake/utils/app_logger.dart';
 import 'package:propstake/utils/constants.dart';
 
 import '../../../data/model/cart_model.dart';
@@ -20,13 +21,39 @@ class CartViewModel extends BaseViewModel {
     notifyListeners();
   }
 
-  removeFromCart(TempCart cart) async {
-    await userService.removeFromCart(cart);
-    notifyListeners();
+  Future<void> removeFromCart(TempCart cartId) async {
+    startLoader();
+    FirebaseFirestore firestore = FirebaseFirestore.instance;
+
+    try {
+      await firestore.collection("carts").doc(cartId.id).delete();
+      cartItems  = await walletService.fetchCarts();
+      stopLoader();
+      notifyListeners();
+    } catch (e) {
+      AppLogger.debug("Error removing cart item: $e");
+      stopLoader();
+      notifyListeners();
+    }
   }
+
 
   checkOut(){
     navigationService.navigateToRoute(AccountDetailScreen(cart: cartItems[0],));
+  }
+
+  Future<void> updateCartItem(TempCart cart) async {
+    startLoader();
+    FirebaseFirestore firestore = FirebaseFirestore.instance;
+
+    try {
+      await firestore.collection("carts").doc(cart.id).update(jsonDecode(jsonEncode(cart)));
+      AppLogger.debug("Cart item updated successfully!");
+    } catch (e) {
+      AppLogger.debug("Error updating cart item: $e");
+    }
+    stopLoader();
+    notifyListeners();
   }
 
   increaseAmount(TempCart cart) async {
@@ -38,7 +65,7 @@ class CartViewModel extends BaseViewModel {
       cart.updateAmount(cart.amounts[index+1]);
     }
     cartItems[i] = cart;
-    await userService.update(cartItems);
+    await updateCartItem(cart);
     notifyListeners();
   }
 
@@ -51,7 +78,7 @@ class CartViewModel extends BaseViewModel {
       cart.updateAmount(cart.amounts[index-1]);
     }
     cartItems[i] = cart;
-    await userService.update(cartItems);
+    await updateCartItem(cart);
     notifyListeners();
   }
 
