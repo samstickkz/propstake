@@ -2,10 +2,13 @@ import 'dart:convert';
 import 'dart:math' show Random;
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 import 'package:propstake/data/model/propert_response.dart';
+import 'package:propstake/localization/locales.dart';
 import 'package:propstake/ui/base/base-vm.dart';
 import 'package:propstake/ui/home/properties/product_detail/product_detail.ui.dart';
 import 'package:propstake/ui/home/properties/properies.vm.dart';
+import 'package:propstake/utils/string_extensions.dart';
 
 import '../../../../utils/app_logger.dart';
 import '../../../../utils/constants.dart';
@@ -23,9 +26,9 @@ class ProductDetailViewModel extends BaseViewModel {
 
 
 
-  addToCart(List<String> amounts, PropertyResponse property) async {
+  addToCart(PropertyResponse property) async {
     startLoader();
-    await walletService.addCartItem(amounts: amounts, currentPrice: currentPrice??"", property: property!).then((val) async {
+    await walletService.addCartItem(currentPrice: currentPrice.text.trim(), property: property!).then((val) async {
       if(val){
         await walletService.fetchCarts();
       }
@@ -48,11 +51,27 @@ class ProductDetailViewModel extends BaseViewModel {
     notifyListeners();
   }
 
-  String? currentPrice;
+  TextEditingController currentPrice = TextEditingController();
 
   onchange(String? value){
-    currentPrice = value;
+    formKey.currentState!.validate();
     notifyListeners();
+  }
+
+  String? validator(String? value, PropertyResponse property){
+    if(currentPrice.text.trim().isEmpty){
+      return LocaleData.emptyField.convertString();
+    }
+    if(num.tryParse(currentPrice.text.trim()) == null){
+      return "Value must be a number";
+    }
+    if(num.parse(currentPrice.text.trim()) == 0){
+      return "Value must be a greater than zero";
+    }
+    if(num.parse(currentPrice.text.trim()) > ((property.totalCost?? 0) -( property.amountFunded??0))){
+      return "Value must be less than or equal to ${((property.totalCost?? 0) -( property.amountFunded??0))}";
+    }
+    return null;
   }
 
   goFaqDetail(FaqModel faq)async {

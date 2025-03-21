@@ -61,7 +61,7 @@ class WalletService {
     return firstPart + middlePart + lastPart;
   }
 
-  Future<bool> addCartItem({required List<String> amounts, required PropertyResponse property, required String currentPrice}) async {
+  Future<bool> addCartItem({required PropertyResponse property, required String currentPrice}) async {
     try {
 
       // Create cart item object with item reference
@@ -70,12 +70,27 @@ class WalletService {
         "userId": userService.user.email,
         "product": jsonDecode(jsonEncode(property)),
         "amountSelected": currentPrice,    // Default quantity (can be updated)
-        "amounts" : amounts,    // Default quantity (can be updated)
         "addedAt": DateTime.now().toString() // Timestamp for tracking
       };
 
       // Add to "carts" collection
       await firestore.collection("carts").add(cartItem);
+
+      return true;
+    } catch (e) {
+      AppLogger.debug("Error adding cart item: $e");
+      return false;
+    }
+  }
+  
+  Future<bool> updateCartItem({required TempCart cart}) async {
+    try {
+
+      Map<String, dynamic> cartJson = jsonDecode(jsonEncode(cart));
+      cartJson.remove("id");
+
+      // Add to "carts" collection
+      await firestore.collection("carts").doc(cart.id).update(cartJson);
 
       return true;
     } catch (e) {
@@ -106,6 +121,7 @@ class WalletService {
         }
       }
       List<TempCart> personalCart = properties.where((test)=> test.userId == userService.user.email).toList();
+      userService.updateCarts(personalCart);
       AppLogger.debug("Carts length ::: ${properties.length}");
       return personalCart;
     } catch (e) {

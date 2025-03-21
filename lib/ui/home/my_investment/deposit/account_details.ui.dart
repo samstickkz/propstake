@@ -21,7 +21,7 @@ import '../../../../widget/svg_builder.dart';
 import '../../bottom_nav.ui.dart';
 
 class AccountDetailScreen extends StatelessWidget {
-  final TempCart? cart;
+  final List<TempCart>? cart;
   const AccountDetailScreen({super.key, this.cart});
 
   @override
@@ -37,17 +37,17 @@ class AccountDetailScreen extends StatelessWidget {
           16.sp.sbH,
           AccountOptionWidget(
             title: LocaleData.amount.convertString(),
-            value: cart?.amountSelected == null? "3000000" : (cart?.amountSelected??"").split(" ").last,
+            value: cart == null || (cart??[]).isEmpty? "": (cart??[]).fold(0, (sum, item) => sum + int.parse(item.amountSelected ?? "0")).toString(),
             isPrice: true,
             currency: Currency.naira,
           ),
           AccountOptionWidget(
             title: LocaleData.accountName.convertString(),
-            value: "Propstake",
+            value: "NPJ Luxury Properties Ltd",
           ),
           AccountOptionWidget(
             title: LocaleData.accountNumber.convertString(),
-            value: "0044556677",
+            value: "2004749140",
             copy: true,
           ),
           AccountOptionWidget(
@@ -56,7 +56,7 @@ class AccountDetailScreen extends StatelessWidget {
           ),
           AccountOptionWidget(
             title: LocaleData.addMemoPleaseAddMemoToTheTransaction.convertString(),
-            value: cart ==null? "prop-manny" : "${cart?.product?.name} - ${cart?.product?.location}",
+            value: cart == null? "prop-manny" : cart!.map((item) => item.id).join("-"),
             copy: true,
           ),
           30.sp.sbH,
@@ -131,6 +131,7 @@ class AccountOptionWidget extends StatelessWidget {
                     roundUp: true,
                     weight: FontWeight.w700,
                     isTitle: true,
+                    currency: currency!,
                     size: 16.sp,
                     color: black(isAppDark(context)),
                   ),
