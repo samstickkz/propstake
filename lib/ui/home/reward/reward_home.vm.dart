@@ -69,9 +69,9 @@ class RewardHomeViewModel extends BaseViewModel {
   }
 
   List<Bonus> bonuses = [
-    Bonus(name: LocaleData.cashback.convertString(), value: 500, currency: Currency.dollar),
-    Bonus(name: LocaleData.referrals.convertString(), value: 4000, currency: Currency.dollar),
-    Bonus(name: LocaleData.promotions.convertString(), value: 1000, currency: Currency.dollar),
+    Bonus(name: LocaleData.cashback.convertString(), value: 0, currency: Currency.naira),
+    Bonus(name: LocaleData.referrals.convertString(), value: 0, currency: Currency.naira),
+    Bonus(name: LocaleData.promotions.convertString(), value: 0, currency: Currency.naira),
   ];
   
   List<Earn> howToEarn = [

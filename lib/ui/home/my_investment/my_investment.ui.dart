@@ -218,7 +218,7 @@ class MyInvestHomeScreen extends StatelessWidget {
                                         PriceWidget(
                                           value: model.transactionsData[index].rewardAmount,
                                           size: 12.sp,
-                                          currency: Currency.dollar,
+                                          currency: Currency.naira,
                                           roundUp: true,
                                           useSymbol: false,
                                         ),
