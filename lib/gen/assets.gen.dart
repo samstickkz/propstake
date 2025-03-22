@@ -371,6 +371,9 @@ class $AssetsSvgGen {
   /// File path: assets/svg/wallet_active.svg
   String get walletActive => 'assets/svg/wallet_active.svg';
 
+  /// File path: assets/svg/whatsapp.svg
+  String get whatsapp => 'assets/svg/whatsapp.svg';
+
   /// List of all assets
   List<String> get values => [
     call,
@@ -453,6 +456,7 @@ class $AssetsSvgGen {
     visible,
     wallet,
     walletActive,
+    whatsapp,
   ];
 }
 

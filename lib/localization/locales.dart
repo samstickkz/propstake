@@ -166,9 +166,28 @@ mixin LocaleData {
   static const String done = 'done';
   static const String faqQuestion1 = 'faqQuestion1';
   static const String faqAnswer1 = 'faqAnswer1';
+  static const String faqAnswer11 = 'faqAnswer11';
+  static const String faqAnswer12 = 'faqAnswer12';
+  static const String faqAnswer10 = 'faqAnswer10';
+  static const String faqAnswer2 = 'faqAnswer2';
+  static const String faqAnswer3 = 'faqAnswer3';
+  static const String faqAnswer4 = 'faqAnswer4';
+  static const String faqAnswer5 = 'faqAnswer5';
+  static const String faqAnswer6 = 'faqAnswer6';
+  static const String faqAnswer7 = 'faqAnswer7';
+  static const String faqAnswer8 = 'faqAnswer8';
+  static const String faqAnswer9 = 'faqAnswer9';
   static const String faqQuestion2 = 'faqQuestion2';
   static const String faqQuestion3 = 'faqQuestion3';
   static const String faqQuestion4 = 'faqQuestion4';
+  static const String faqQuestion5 = 'faqQuestion5';
+  static const String faqQuestion6 = 'faqQuestion6';
+  static const String faqQuestion7 = 'faqQuestion7';
+  static const String faqQuestion8 = 'faqQuestion8';
+  static const String faqQuestion9 = 'faqQuestion9';
+  static const String faqQuestion10 = 'faqQuestion10';
+  static const String faqQuestion11 = 'faqQuestion11';
+  static const String faqQuestion12 = 'faqQuestion12';
   static const String logoutPrompt = 'logoutPrompt';
   static const String chooseYourCurrency = 'chooseYourCurrency';
   static const String chooseYourLanguage = 'chooseYourLanguage';
@@ -343,6 +362,8 @@ mixin LocaleData {
   static const String selectAmount = 'selectAmount';
   static const String propertyAlreadyInCart = 'propertyAlreadyInCart';
   static const String propertyAddedToCart = 'propertyAddedToCart';
+  static const String aboutUsInfo = 'aboutUsInfo';
+  static const String prostakeYourGatewayToSmart = 'prostakeYourGatewayToSmart';
 
 
   static const Map<String, dynamic> en = {
@@ -353,6 +374,7 @@ mixin LocaleData {
     addToCart: "Add to Cart",
     takeATour: "Tour the Property",
     rented: "Rented",
+    prostakeYourGatewayToSmart: "PropStake – Your Gateway to Smart Real Estate Investment.",
     favouriteProperties: "Favorite Properties",
     yourSavedPropertiesAtAGlance: "Your saved properties at a glance. Easily access and invest in your top picks.",
     investors: "Investors",
@@ -631,11 +653,30 @@ mixin LocaleData {
     yourMessage: "Your message",
     messageSent: "Message sent",
     done: "Done",
-    faqQuestion1: "What is the purpose of the investment limit?",
-    faqAnswer1: "The investment limit ensures compliance with financial regulations and responsible investing. It helps protect investors while maintaining platform integrity.",
-    faqQuestion2: "How is my investment limit calculated?",
-    faqQuestion3: "When does my annual investment limit reset?",
-    faqQuestion4: "Can I increase my investment limit?",
+    faqQuestion1: "What is PropStake?",
+    faqQuestion2: "How does PropStake work?",
+    faqQuestion3: "Who can invest with PropStake?",
+    faqQuestion4: "What is the minimum deposit to invest?",
+    faqQuestion5: "Can I invest multiple times?",
+    faqQuestion6: "What are the benefits of investing with PropStake?",
+    faqQuestion7: "How do I start investing?",
+    faqQuestion8: "How secure is my investment?",
+    faqQuestion9: "Can I sell my stake in a property?",
+    faqQuestion10: "How are returns distributed?",
+    faqQuestion11: "Are there any hidden fees?",
+    faqQuestion12: "How do I contact customer support?",
+    faqAnswer1: "PropStake is a real estate investment platform that allows individuals to invest in premium properties through fractional ownership. It is a product of NPJ, designed to make property investment accessible, secure, and rewarding.",
+    faqAnswer2: "PropStake enables users to invest in real estate by purchasing a stake in properties. Investors earn returns from rental income and potential property appreciation over time",
+    faqAnswer3: "Anyone above the legal age for investment in their country can invest in PropStake. Whether you're a first-time investor or an experienced one, our platform simplifies the process",
+    faqAnswer4: "The minimum amount required to start investing with PropStake is ₦50,000. This allows investors to take their first step into real estate with a small, manageable stake.",
+    faqAnswer5: "Yes! Investors can choose to invest multiple times in the same property or across different properties, increasing their stake and potential returns over time.",
+    faqAnswer6: ". Affordable entry into real estate investment \n. Passive income from rental earnings\n. Portfolio diversification\n. Hassle-free property management handled by NPJ",
+    faqAnswer7: "Simply sign up on our platform, browse available properties, choose your preferred investment, and purchase a stake. Your earnings will be credited periodically based on rental income and appreciation.",
+    faqAnswer8: "We prioritize transparency and security. Properties are legally verified, and all transactions are recorded on a secure system to ensure accountability.",
+    faqAnswer9: "Yes, PropStake allows investors to exit their investments by selling their stake to other investors or through buy-back options where applicable",
+    faqAnswer10: "Earnings from rental income are distributed periodically (monthly or quarterly) based on the investor’s stake percentage. Appreciation returns are realized when a property is sold or revalued.",
+    faqAnswer11: "No, we maintain a transparent fee structure. Any applicable charges, such as management or transaction fees, will be clearly outlined before you invest.",
+    faqAnswer12: "You can reach our support team via email, phone, or our in-app chat feature for any inquiries or assistance.",
     logoutPrompt: "Log out of your account?",
     aboutTiers: "About Tiers",
     journeyToEliteRewards: "Your Journey to Elite Rewards",
@@ -675,6 +716,7 @@ mixin LocaleData {
     invitingFriends: "Inviting friends (referrals)",
     participatingInPromotions: "Participating in promotional events",
     settingUpAutoInvestPlans: "Setting up auto-invest plans",
+    aboutUsInfo: "we believe in making real estate investment seamless, accessible, and rewarding. As a product of NPJ, we are committed to bridging the gap between property ownership and financial growth, offering individuals the opportunity to invest in premium real estate with ease. \n\nOur platform is designed to empower investors by providing fractional ownership options, transparent processes, and data-driven insights, ensuring that real estate investment is no longer limited to a select few. Whether you're a seasoned investor or just starting out, PropStake simplifies property investment, allowing you to grow your wealth with confidence.\n\nBacked by NPJ's expertise in property management and hospitality, we combine innovation with industry knowledge to deliver a secure, user-friendly, and profitable investment experience. Join us as we revolutionize real estate investment, one stake at a time.\n",
 
 
   };
