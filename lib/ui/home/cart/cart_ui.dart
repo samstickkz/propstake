@@ -8,6 +8,7 @@ import 'package:propstake/utils/widget_extensions.dart';
 import 'package:propstake/widget/app_button.dart';
 import 'package:propstake/widget/app_card.dart';
 import 'package:propstake/widget/apptexts.dart';
+import 'package:propstake/widget/text_field.dart';
 
 import '../../../data/model/cart_model.dart';
 import '../../../widget/appbar_widget.dart';
@@ -119,31 +120,38 @@ class CartScreen extends StatelessWidget {
                                 //     child: AppText("-", isTitle: true,),
                                 //   ),
                                 // ),
-                                AppButton.outline(
-                                  isLoading: model.isLoading,
-                                  onTap: ()=> model.reduceAmount(cart),
-                                  heights: 42.sp,
-                                  isFullWidth: false,
-                                  text: "-",
-                                ),
+                                // AppButton.outline(
+                                //   isLoading: model.isLoading,
+                                //   onTap: ()=> model.reduceAmount(cart),
+                                //   heights: 42.sp,
+                                //   isFullWidth: false,
+                                //   text: "-",
+                                // ),
                                 Expanded(
-                                  child: AppCard(
-                                    padding: 0.0.padA,
-                                    bordered: true,
-                                    borderColor: primaryColor,
-                                    backgroundColor: Colors.transparent,
-                                    heights: 42.sp,
-                                    child: Center(
-                                      child: AppText(cart.amountSelected??"0", color: primaryColor, isTitle: true, size: 16.sp, family: 'Inter',),
+                                  child: Form(
+                                    key: model.formKey,
+                                    child: AppTextField(
+                                      fillColor: fadeBackground(isAppDark(context)),
+                                      onChanged:(v)=> model.onchange(index, v),
+                                      controller: model.controllers[index],
+                                      validator: (v)=> model.validator(index, v),
+                                      prefixIcon: Padding(
+                                        padding: 8.sp.padH,
+                                        child: AppText(
+                                          "₦",
+                                          isTitle: true,
+                                          color: primaryColor,
+                                          family: "inter",
+                                        ),
+                                      ),
                                     ),
-                                  ),
+                                  )
                                 ),
-                                AppButton.outline(
+                                if(model.cartItems[index].amountSelected != model.values[index])
+                                AppButton.small(
                                   isLoading: model.isLoading,
-                                  onTap: ()=> model.increaseAmount(cart),
-                                  heights: 42.sp,
-                                  isFullWidth: false,
-                                  text: "+",
+                                  onTap: ()=> model.updateAmount(index),
+                                  text: "Submit",
                                 )
                                 // AppCard(
                                 //   onTap: ()=> model.increaseAmount(cart),

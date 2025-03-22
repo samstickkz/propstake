@@ -379,44 +379,58 @@ class ProductDetailScreen extends StatelessWidget {
                 ),
                 if((property.amountFunded??0) /(property.totalCost??0) < 0.95)...[
                   if(!userService.cartItems.any((cart)=> cart.product?.id == property.id))...[
-                    AppCard(
-                      backgroundColor: white(isAppDark(context)),
-                      heights: 115.sp,
-                      radius: 0.sp,
-                      padding: EdgeInsets.symmetric(
-                          vertical: 16.sp,
-                          horizontal: 25.sp
-                      ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Row(
-                            spacing: 30.sp,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Expanded(
-                                child: NewDropDownSelect(
-                                  items: model.divideInto15((property.totalCost??0) - (property.amountFunded??0), Currency.naira),
-                                  // prefix: AppText(getCurrencySymbol(property.currency)),
-                                  onChanged: model.onchange,
-                                  contentPadding: 10.sp.padA,
-                                  value: model.currentPrice,
-                                  fillColor: fadeBackground(isAppDark(context)),
-                                  hint: LocaleData.selectAmount.convertString(),
+                    Form(
+                      key: model.formKey,
+                      child: AppCard(
+                        backgroundColor: white(isAppDark(context)),
+                        heights: 115.sp,
+                        radius: 0.sp,
+                        padding: EdgeInsets.symmetric(
+                            vertical: 16.sp,
+                            horizontal: 25.sp
+                        ),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Row(
+                              spacing: 30.sp,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Expanded(
+                                  child: AppTextField(
+                                    // items: model.divideInto15((property.totalCost??0) - (property.amountFunded??0), Currency.naira),
+                                    // prefix: AppText(getCurrencySymbol(property.currency)),
+                                    onChanged: model.onchange,
+                                    contentPadding: 10.sp.padA,
+                                    prefixIcon: Padding(
+                                      padding: 8.sp.padH,
+                                      child: AppText(
+                                        "₦",
+                                        isTitle: true,
+                                        color: primaryColor,
+                                        family: "inter",
+                                      ),
+                                    ),
+                                    keyboardType: TextInputType.number,
+                                    controller: model.currentPrice,
+                                    validator: (v)=> model.validator(v, property),
+                                    fillColor: fadeBackground(isAppDark(context)),
+                                    hint: LocaleData.selectAmount.convertString(),
+                                  ),
                                 ),
-                              ),
-                              //(property.amountFunded??0)/(property.totalCost??0)
-                              Expanded(
-                                  child: AppButton.fullWidth(
-                                    isLoading: model.isLoading,
-                                    text: LocaleData.addToCart.convertString(),
-                                    onTap: model.currentPrice == null? null: ()=> model.addToCart(model.divideInto15((property.totalCost??0) - (property.amountFunded??0), Currency.naira), property),
-                                    height: 60.sp,
-                                  )
-                              )
-                            ],
-                          ),
-                        ],
+                                //(property.amountFunded??0)/(property.totalCost??0)
+                                Expanded(
+                                    child: AppButton.fullWidth(
+                                      isLoading: model.isLoading,
+                                      text: LocaleData.addToCart.convertString(),
+                                      onTap: model.formKey.currentState?.validate() != true? null: ()=> model.addToCart(property),
+                                      height: 60.sp,
+                                    )
+                                )
+                              ],
+                            ),
+                          ],
+                        ),
                       ),
                     )
                   ]
