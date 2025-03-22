@@ -364,10 +364,12 @@ mixin LocaleData {
   static const String propertyAddedToCart = 'propertyAddedToCart';
   static const String aboutUsInfo = 'aboutUsInfo';
   static const String prostakeYourGatewayToSmart = 'prostakeYourGatewayToSmart';
+  static const String contactUsOnWhatsapp = 'contactUsOnWhatsapp';
 
 
   static const Map<String, dynamic> en = {
     completed: "Completed",
+    contactUsOnWhatsapp: "Contact Us on Whatsapp",
     propertyAlreadyInCart: "Property already in cart go to Cart to update",
     propertyAddedToCart: "Property added to cart",
     selectAmount: "Select Amount",

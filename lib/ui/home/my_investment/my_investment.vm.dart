@@ -40,12 +40,7 @@ class MyInvestHomeViewModel extends BaseViewModel {
       {
         "title": LocaleData.totalBalance.convertString(),
         "value": balance ?? 0,
-        "currency": Currency.dollar
-      },
-      {
-        "title": "USD Balance",
-        "value": 0,
-        "currency": Currency.dollar
+        "currency": Currency.naira
       },
       {
         "title": "NGN Balance",
@@ -66,12 +61,12 @@ class MyInvestHomeViewModel extends BaseViewModel {
       {
         "title": LocaleData.totalBalance.convertString(),
         "value": balance ?? 0,
-        "currency": Currency.dollar
+        "currency": Currency.naira
       },
       {
         "title": "USD Balance",
         "value": 0,
-        "currency": Currency.dollar
+        "currency": Currency.naira
       },
       {
         "title": "NGN Balance",

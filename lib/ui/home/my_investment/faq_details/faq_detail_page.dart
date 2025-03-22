@@ -19,7 +19,7 @@ class FaqDetailPage extends StatelessWidget {
       body: ListView(
         padding: 16.sp.padA,
         children: [
-          AppText(faq.body, weight: FontWeight.w500,)
+          AppText(faq.body, weight: FontWeight.w500, family: "inter",)
         ],
       ),
     );
