@@ -96,6 +96,12 @@ class AuthViewModel extends BaseViewModel {
           goHome(goToSetUpProfile: !goToEdit);
         }else{
           showCustomToast(res.asRight().message??"");
+          if((res.asRight().message??"").toLowerCase().contains("is yet to confirm")){
+            navigationService.navigateToRoute(VerifyUserScreen(
+              reason: VerificationReason.reValidate,
+              email: inEmailController.text.trim(),
+            ));
+          }
         }
       } else {
         stopLoader();

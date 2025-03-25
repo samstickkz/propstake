@@ -105,4 +105,5 @@ class VerifyUserScreen extends StatelessWidget {
 enum VerificationReason {
   login,
   forgetPassword,
+  reValidate,
 }

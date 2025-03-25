@@ -108,6 +108,9 @@ class VerifyUserViewModel extends BaseViewModel {
     } else {
       notifyListeners();
     }
+    if(reasons == VerificationReason.reValidate){
+      await resentConfirmEmail();
+    }
     notifyListeners();
   }
 
