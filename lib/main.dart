@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -53,7 +55,7 @@ Future<void> main() async {
   await locator<UserService>().initializer();
 
 
-  runApp(const MyApp());
+  runApp(Platform.isMacOS? const DashboardHome(): const MyApp());
 }
 
 class MyApp extends StatefulWidget {
@@ -130,6 +132,34 @@ class _MyAppState extends State<MyApp> {
                   ));
             }
         )
+    );
+  }
+}
+
+
+class DashboardHome extends StatelessWidget {
+  const DashboardHome({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return ChangeNotifierProvider(
+      create: (_) => ThemeModel(),
+      child:Consumer<ThemeModel>(
+        builder: (context, themeProvider, child) {
+          return MaterialApp(
+            debugShowCheckedModeBanner: false,
+            navigatorKey: locator<NavigationService>().navigatorKey,
+            scaffoldMessengerKey: locator<NavigationService>().snackBarKey,
+            title: "PropStake",
+            theme: AppTheme.themeData(false),
+            darkTheme: AppTheme.themeData(true),
+            themeMode: themeProvider.themeMode,
+            home: const SplashScreen(),
+            supportedLocales: locator<LocaleService>().localization.supportedLocales,
+            localizationsDelegates: locator<LocaleService>().localization.localizationsDelegates,
+          );
+        },
+      ),
     );
   }
 }
