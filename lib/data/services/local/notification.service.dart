@@ -1,17 +1,19 @@
 import 'dart:convert';
 import 'dart:io';
+import 'dart:ui';
 
-import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:propstake/data/cache/database_keys.dart';
-import 'package:propstake/utils/app_logger.dart';
-import 'package:propstake/utils/constants.dart';
+import 'package:permission_handler/permission_handler.dart';
+
+import '../../../utils/app_logger.dart';
+import '../../../utils/constants.dart';
+import '../../cache/database_keys.dart';
 
 Future<void> handleBackgroundMessage(RemoteMessage message) async{
 
-  await Firebase.initializeApp();
-  AppLogger.debug("NOTIFICATION RECIEVED::: ${jsonEncode(message.data)}");
+  print("NOTIFICATION RECIEVED");
 
   NotificationService.handleMessage(message);
 }
@@ -22,7 +24,39 @@ class NotificationService{
   FlutterLocalNotificationsPlugin();
 
   static Future initialize() async {
-    await flutterLocalNotificationsPlugin
+    PermissionStatus status = await Permission.notification.request();
+    if(!status.isGranted){
+      if(Platform.isIOS && kDebugMode){}else{
+        await openAppSettings();
+      }
+    }else{
+      if(Platform.isIOS){
+        AppLogger.debug("Its ios");
+        var res = await FirebaseMessaging.instance.getAPNSToken();
+        if(res!=null){
+          var response  = await FirebaseMessaging.instance.getToken();
+          if(response!=null){
+            AppLogger.debug("FCM TOKEN:: $response");
+            await storageService.storeItem(key: StorageKey.fcmToken);
+          }else{
+            AppLogger.debug("NO FCM TOKEN");
+          }
+        }else{
+          AppLogger.debug("NO APN TOKEN");
+        }
+      }else {
+        AppLogger.debug("Its Android");
+        var response  = await FirebaseMessaging.instance.getToken();
+        if(response!=null){
+          AppLogger.debug("FCM TOKEN:: $response");
+          await storageService.storeItem(key: StorageKey.fcmToken);
+        }else{
+          AppLogger.debug("NO FCM TOKEN");
+        }
+      }
+    }
+
+    bool isAllowed =  await flutterLocalNotificationsPlugin
         .resolvePlatformSpecificImplementation<
         IOSFlutterLocalNotificationsPlugin>()
         ?.requestPermissions(
@@ -31,7 +65,9 @@ class NotificationService{
         sound: true,
         provisional: false,
         critical: false
-    );
+    )?? false;
+    print("Is notification allowed::: $isAllowed");
+
     var androidInitialize = const AndroidInitializationSettings('mipmap/ic_launcher');
     var iOSInitialize = DarwinInitializationSettings(
         requestAlertPermission: true,
@@ -51,54 +87,40 @@ class NotificationService{
     await flutterLocalNotificationsPlugin.initialize(initializationsSettings);
 
     FirebaseMessaging.onMessage.listen(handleMessage);
-    Platform.isIOS? FirebaseMessaging.onBackgroundMessage(handleBackgroundMessage): (){};
+    FirebaseMessaging.onBackgroundMessage(handleBackgroundMessage);
     await FirebaseMessaging.instance.setForegroundNotificationPresentationOptions(
       alert: true, // Required to display a heads up notification
       badge: true,
       sound: true,
     );
 
-    if(Platform.isIOS){
-      AppLogger.debug("Its ios");
-      var res = await FirebaseMessaging.instance.getAPNSToken();
-      if(res!=null){
-        var response  = await FirebaseMessaging.instance.getToken();
-        if(response!=null){
-          AppLogger.debug("FCM TOKEN:: $response");
-          await storageService.storeItem(key: StorageKey.fcmToken);
-        }else{
-          AppLogger.debug("NO FCM TOKEN");
-        }
-      }else{
-        AppLogger.debug("NO APN TOKEN");
-      }
-    }else {
-      AppLogger.debug("Its Android");
-      var response  = await FirebaseMessaging.instance.getToken();
-      if(response!=null){
-        AppLogger.debug("FCM TOKEN:: $response");
-        await storageService.storeItem(key: StorageKey.fcmToken);
-      }else{
-        AppLogger.debug("NO FCM TOKEN");
-      }
-    }
+    FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) async {
+      print("Tapped");
+    });
+
+    // FirebaseMessaging.onMessageOpenedApp
+
   }
 
+
   static handleMessage(RemoteMessage? message){
-    // print(jsonEncode(message?.notification));
     if (message!=null){
-      showBigTextNotification(title: "${message.notification?.title}", body: "${message.notification?.body}");
+      try{
+        showBigTextNotification(title: "${message.notification?.title}", body: "${message.notification?.body}", payload: jsonEncode(message.data));
+      }catch(err){
+        debugPrint(err.toString());
+      }
     }
   }
 
   static Future showBigTextNotification({var id =0,required String title, required String body,
-    var payload
+    String? payload
   } ) async {
     AndroidNotificationDetails androidPlatformChannelSpecifics =
     const  AndroidNotificationDetails(
-      'prostake', // id
-      'prostake', // title
-      channelDescription: "prostake",
+      'prop', // id
+      'prop', // title
+      channelDescription: "prop",
       playSound: true,
       icon: 'mipmap/ic_launcher',
       sound: RawResourceAndroidNotificationSound('sound'),

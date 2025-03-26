@@ -365,6 +365,12 @@ mixin LocaleData {
   static const String aboutUsInfo = 'aboutUsInfo';
   static const String prostakeYourGatewayToSmart = 'prostakeYourGatewayToSmart';
   static const String contactUsOnWhatsapp = 'contactUsOnWhatsapp';
+  static const String paymentInformation = 'paymentInformation';
+  static const String paymentDetailsInfo = 'paymentDetailsInfo';
+  static const String confirmPayment = 'confirmPayment';
+  static const String confirmPaymentInfo = 'confirmPaymentInfo';
+  static const String memeo = 'memeo';
+  static const String oncePaymentIsConfirmed = 'oncePaymentIsConfirmed';
 
 
   static const Map<String, dynamic> en = {
@@ -376,6 +382,12 @@ mixin LocaleData {
     addToCart: "Add to Cart",
     takeATour: "Tour the Property",
     rented: "Rented",
+    oncePaymentIsConfirmed: "Once payment is confirmed,  your wallet balance will be updated....",
+    memeo: "Id of payment to properties ",
+    confirmPayment: "Confirm Payment",
+    confirmPaymentInfo: "Check that you used the appropriate information",
+    paymentInformation: "Payment Information",
+    paymentDetailsInfo: "To make payment please add the exact amount on the page and in payment information please ad the memo as that is what we will use to confirm the items being paid for",
     prostakeYourGatewayToSmart: "PropStake – Your Gateway to Smart Real Estate Investment.",
     favouriteProperties: "Favorite Properties",
     yourSavedPropertiesAtAGlance: "Your saved properties at a glance. Easily access and invest in your top picks.",

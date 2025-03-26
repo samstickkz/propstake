@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 import 'package:propstake/localization/locales.dart';
 import 'package:propstake/ui/base/base-vm.dart';
@@ -8,11 +9,16 @@ import 'package:propstake/utils/app_buttom_sheet.dart';
 import 'package:propstake/utils/app_logger.dart';
 import 'package:propstake/utils/constants.dart';
 import 'package:propstake/utils/dartz.x.dart';
+import 'package:propstake/utils/snack_message.dart';
 import 'package:propstake/utils/string_extensions.dart';
 import 'package:propstake/widget/price_widget.dart';
 
+import '../../../data/model/cart_model.dart';
 import '../../../data/model/transaction_response.dart';
 import '../../../gen/assets.gen.dart';
+import '../../../utils/widget_extensions.dart';
+import '../../../widget/success_screen.dart';
+import '../bottom_nav.ui.dart';
 import 'auto_invest/auto_invest.ui.dart';
 import 'deposit/deposit.ui.dart';
 import 'faq_details/faq_detail_page.dart';
@@ -21,6 +27,54 @@ import 'transaction_history/transaction_history.ui.dart';
 import 'withdraw/withdraw.ui.dart';
 
 class MyInvestHomeViewModel extends BaseViewModel {
+
+  submit(){
+    navigationService.navigateToRoute(
+        SuccessScreen(
+          onTap:()=> navigationService.navigateToAndRemoveUntilWidget(BottomNavigationScreen(initialIndex: 1,)),
+          title: LocaleData.oncePaymentIsConfirmed.convertString(),
+          body: "",
+        )
+    );
+  }
+
+  popInfo(){
+    popDialog(
+      // barrierDismissible: true,
+        oneButton: true,
+        width: width(navigationService.context)-100.sp,
+        title: LocaleData.paymentInformation.convertString(),
+        subTitle: LocaleData.paymentDetailsInfo.convertString()
+    );
+  }
+
+  submitPayment(List<TempCart> items, String currentPrice)async{
+    startLoader();
+    try {
+      await walletService.submitPayment(currentPrice: currentPrice, items: items);
+      submit();
+    } catch (err) {
+      showCustomToast("Error making payment");
+    } finally {
+      stopLoader();
+      notifyListeners();
+    }
+  }
+
+  onInit(){
+    Future.delayed(Duration(milliseconds: 300),popInfo);
+  }
+
+  confirm(List<TempCart> items, String currentPrice){
+    popDialog(
+      // barrierDismissible: true,
+      // oneButton: false,
+      width: width(navigationService.context)-100.sp,
+      title: LocaleData.confirmPayment.convertString(),
+      subTitle: LocaleData.confirmPaymentInfo.convertString(),
+      onTap: ()=> submitPayment(items, currentPrice)
+    );
+  }
 
   List<Transaction> transactionsData = [];
 

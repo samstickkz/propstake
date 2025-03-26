@@ -82,7 +82,35 @@ class WalletService {
       return false;
     }
   }
-  
+
+  Future<bool> submitPayment({required String currentPrice, required List<TempCart> items}) async {
+    try {
+
+      List<Map<String, dynamic>> itemsData = [];
+
+      for (TempCart item in items) {
+        itemsData.add(jsonDecode(jsonEncode(item)));
+      }
+
+      // Create cart item object with item reference
+      Map<String, dynamic> cartItem = {
+        "tempID": generateRandomChatId(), // Store user ID for ownership
+        "userId": userService.user.email,
+        "carts": itemsData,
+        "amountSelected": currentPrice,    // Default quantity (can be updated)
+        "addedAt": DateTime.now().toString() // Timestamp for tracking
+      };
+
+      // Add to "carts" collection
+      await firestore.collection("sales").add(cartItem);
+
+      return true;
+    } catch (e) {
+      AppLogger.debug("Error adding cart item: $e");
+      return false;
+    }
+  }
+
   Future<bool> updateCartItem({required TempCart cart}) async {
     try {
 

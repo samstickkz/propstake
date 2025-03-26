@@ -4,6 +4,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:propstake/app_theme/palette.dart';
 import 'package:propstake/gen/assets.gen.dart';
 import 'package:propstake/localization/locales.dart';
+import 'package:propstake/locator.dart';
+import 'package:propstake/ui/base/base-vm.dart';
 import 'package:propstake/ui/home/properties/properies.vm.dart';
 import 'package:propstake/utils/string_extensions.dart';
 import 'package:propstake/utils/widget_extensions.dart';
@@ -18,7 +20,9 @@ import '../../../../utils/snack_message.dart';
 import '../../../../widget/app_card.dart';
 import '../../../../widget/success_screen.dart';
 import '../../../../widget/svg_builder.dart';
+import '../../../base/base-ui.dart';
 import '../../bottom_nav.ui.dart';
+import '../my_investment.vm.dart';
 
 class AccountDetailScreen extends StatelessWidget {
   final List<TempCart>? cart;
@@ -26,64 +30,59 @@ class AccountDetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBars(
-        text: LocaleData.accountDetails.convertString(),
+    return BaseView<MyInvestHomeViewModel>(
+      onModelReady: (m)=> m.onInit(),
+      builder: (model, theme) => Scaffold(
+        appBar: AppBars(
+          text: LocaleData.accountDetails.convertString(),
+        ),
+        body: ListView(
+          padding: 16.sp.padA,
+          children: [
+            AppText(LocaleData.copyDetailsAndMakePayment.convertString()),
+            16.sp.sbH,
+            AccountOptionWidget(
+              title: LocaleData.amount.convertString(),
+              value: cart == null || (cart??[]).isEmpty? "": (cart??[]).fold(0, (sum, item) => sum + int.parse(item.amountSelected ?? "0")).toString(),
+              isPrice: true,
+              currency: Currency.naira,
+            ),
+            AccountOptionWidget(
+              title: LocaleData.accountName.convertString(),
+              value: "NPJ Luxury Properties Ltd",
+            ),
+            AccountOptionWidget(
+              title: LocaleData.accountNumber.convertString(),
+              value: "2004749140",
+              copy: true,
+            ),
+            AccountOptionWidget(
+              title: LocaleData.bankName.convertString(),
+              value: "FCMB Bank",
+            ),
+            AccountOptionWidget(
+              title: LocaleData.addMemoPleaseAddMemoToTheTransaction.convertString(),
+              value: cart == null? "prop-manny" : cart!.map((item) => item.id).join("-"),
+              copy: true,
+            ),
+            30.sp.sbH,
+            if(cart != null)...[
+              AppText(
+                LocaleData.clickHereAfterYouMakeTheTransfer.convertString(),
+                align: TextAlign.center,
+                weight: FontWeight.w500,
+              ),
+              10.sp.sbH,
+              AppButton.fullWidth(
+                isLoading: model.isLoading,
+                text: LocaleData.iHaveMadeTheTransfer.convertString(),
+                onTap: ()=> model.confirm(cart??[], (cart??[]).fold(0, (sum, item) => sum + int.parse(item.amountSelected ?? "0")).toString()),
+              ),
+            ],
+            100.sp.sbH,
+          ],
+        ),
       ),
-      body: ListView(
-        padding: 16.sp.padA,
-        children: [
-          AppText(LocaleData.copyDetailsAndMakePayment.convertString()),
-          16.sp.sbH,
-          AccountOptionWidget(
-            title: LocaleData.amount.convertString(),
-            value: cart == null || (cart??[]).isEmpty? "": (cart??[]).fold(0, (sum, item) => sum + int.parse(item.amountSelected ?? "0")).toString(),
-            isPrice: true,
-            currency: Currency.naira,
-          ),
-          AccountOptionWidget(
-            title: LocaleData.accountName.convertString(),
-            value: "NPJ Luxury Properties Ltd",
-          ),
-          AccountOptionWidget(
-            title: LocaleData.accountNumber.convertString(),
-            value: "2004749140",
-            copy: true,
-          ),
-          AccountOptionWidget(
-            title: LocaleData.bankName.convertString(),
-            value: "FCMB Bank",
-          ),
-          AccountOptionWidget(
-            title: LocaleData.addMemoPleaseAddMemoToTheTransaction.convertString(),
-            value: cart == null? "prop-manny" : cart!.map((item) => item.id).join("-"),
-            copy: true,
-          ),
-          30.sp.sbH,
-          AppText(
-            LocaleData.clickHereAfterYouMakeTheTransfer.convertString(),
-            align: TextAlign.center,
-            weight: FontWeight.w500,
-          ),
-          10.sp.sbH,
-          AppButton.fullWidth(
-            isLoading: false,
-            text: LocaleData.iHaveMadeTheTransfer.convertString(),
-            onTap: submit,
-          ),
-          100.sp.sbH,
-        ],
-      ),
-    );
-  }
-
-  submit(){
-    navigationService.navigateToRoute(
-        SuccessScreen(
-          onTap:()=> navigationService.navigateToAndRemoveUntilWidget(BottomNavigationScreen(initialIndex: 1,)),
-          title: "Payment confirmed",
-          body: "",
-        )
     );
   }
 }
@@ -151,7 +150,7 @@ class AccountOptionWidget extends StatelessWidget {
                 InkWell(
                   onTap: (){
                     FlutterClipboard.copy(value).then(( val ) => showCustomToast(
-                      "${LocaleData.accountNumber.convertString() == title? LocaleData.accountNumber.convertString(): value}${LocaleData.copiedToClipboard.convertString()}",
+                      "${LocaleData.accountNumber.convertString() == title? LocaleData.accountNumber.convertString(): LocaleData.addMemoPleaseAddMemoToTheTransaction.convertString() == title? LocaleData.memeo.convertString(): value}${LocaleData.copiedToClipboard.convertString()}",
                       success: true
                     ));
                   },
@@ -170,5 +169,15 @@ class AccountOptionWidget extends StatelessWidget {
         ],
       ),
     );
+  }
+}
+
+
+class InfoPageOne extends StatelessWidget {
+  const InfoPageOne({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const Placeholder();
   }
 }

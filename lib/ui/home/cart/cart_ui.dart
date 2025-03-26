@@ -129,7 +129,7 @@ class CartScreen extends StatelessWidget {
                                 // ),
                                 Expanded(
                                   child: Form(
-                                    key: model.formKey,
+                                    key: model.formKeys[index],
                                     child: AppTextField(
                                       fillColor: fadeBackground(isAppDark(context)),
                                       onChanged:(v)=> model.onchange(index, v),

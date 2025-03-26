@@ -18,6 +18,7 @@ class CartViewModel extends BaseViewModel {
   List<TempCart> cartItems = [];
   List<TextEditingController> controllers = [];  // Add controllers list
   List<String> values = [];
+  List<GlobalKey<FormState>> formKeys = [];
 
   onInit() async {
     startLoader();
@@ -25,7 +26,7 @@ class CartViewModel extends BaseViewModel {
 
     // Initialize controllers with existing values
     controllers = List.generate(cartItems.length, (index) => TextEditingController(text: cartItems[index].amountSelected ?? ""));
-
+    formKeys = List.generate(cartItems.length, (_) => GlobalKey<FormState>());
     values = cartItems.map((element) => element.amountSelected ?? "").toList();
     stopLoader();
     notifyListeners();
@@ -36,7 +37,7 @@ class CartViewModel extends BaseViewModel {
       values[index] = value;
       controllers[index].text = value;  // Ensure the controller updates
     }
-    formKey.currentState!.validate();
+    formKeys[index].currentState?.validate(); // ✅ Validate with per-form key
     notifyListeners();
   }
 

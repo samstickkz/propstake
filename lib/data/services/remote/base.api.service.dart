@@ -148,6 +148,7 @@ Future<bool> refreshAuthToken() async {
 
 errorHandler(DioException e,  ErrorInterceptorHandler handler) async {
   AppLogger.debug("STATUS CODE::: ${e.response?.statusCode}");
+  AppLogger.debug("DATA CODE::: ${e.response?.data}");
   switch (e.type) {
     case DioExceptionType.connectionError:
     case DioExceptionType.sendTimeout:
