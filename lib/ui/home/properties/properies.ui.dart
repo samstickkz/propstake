@@ -387,7 +387,6 @@ class PropertiesHomeScreen extends StatelessWidget {
                                     children: [
                                       PriceWidget(
                                         value: property.amountFunded,
-                                        currency: Currency.naira,
                                         color: primaryColor,
                                         size: 16.49.sp,
                                         weight: FontWeight.w900,
@@ -447,7 +446,7 @@ class PropertiesHomeScreen extends StatelessWidget {
                                               color: stateColor11(theme.isDark),
                                             ),
                                             AppText(
-                                              (property.returnPercentageFiveYears??0).toStringAsFixed(0),
+                                              "${(property.returnPercentageFiveYears??0).toStringAsFixed(0)}%",
                                               size: 10.99.sp,
                                               weight: FontWeight.w500,
                                               color: stateColor11(theme.isDark),
@@ -465,7 +464,7 @@ class PropertiesHomeScreen extends StatelessWidget {
                                               color: stateColor11(theme.isDark),
                                             ),
                                             AppText(
-                                              (property.returnPercentagePerYear??0).toStringAsFixed(0),
+                                              "${(property.returnPercentagePerYear??0).toStringAsFixed(0)}%",
                                               size: 10.99.sp,
                                               weight: FontWeight.w500,
                                               color: stateColor11(theme.isDark),
@@ -475,7 +474,7 @@ class PropertiesHomeScreen extends StatelessWidget {
                                         ),
                                       ],
                                     ),
-                                  )
+                                  ),
                                 ],
                               )
                             ],

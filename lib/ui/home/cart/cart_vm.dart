@@ -5,10 +5,14 @@ import 'package:flutter/material.dart';
 import 'package:propstake/ui/base/base-vm.dart';
 import 'package:propstake/utils/app_logger.dart';
 import 'package:propstake/utils/constants.dart';
+import 'package:propstake/utils/snack_message.dart';
 import 'package:propstake/utils/string_extensions.dart';
 
 import '../../../data/model/cart_model.dart';
+import '../../../data/model/propert_response.dart';
 import '../../../localization/locales.dart';
+import '../../../widget/success_screen.dart';
+import '../bottom_nav.ui.dart';
 import '../my_investment/deposit/account_details.ui.dart';
 import '../properties/properies.vm.dart';
 
@@ -74,9 +78,45 @@ class CartViewModel extends BaseViewModel {
     }
   }
 
+  goToSuccess(){
+    navigationService.navigateToRoute(
+        SuccessScreen(
+          onTap:()=> navigationService.navigateToAndRemoveUntilWidget(BottomNavigationScreen(initialIndex: 1,)),
+          title: "Payment confirmed",
+          body: "You payment will be confirmed and you will get a mail form us confirming your payment",
+        )
+    );
+  }
+
+  submit({
+    required PropertyResponse property,
+    required num price,
+    required String paymentType,
+    required String wallet,
+    required String id,
+  }) async {
+    startLoader();
+    try{
+      bool res = await walletService.transaction(
+        property: property,
+        currentPrice: price,
+        id: id,
+        paymentType: paymentType,
+        wallet: wallet
+      );
+      stopLoader();
+      if(res){
+        goToSuccess();
+      }
+    }catch (err){
+      AppLogger.debug("Error o paymennt :: ${err.toString()}");
+      stopLoader();
+    }
+  }
+
 
   checkOut(){
-    navigationService.navigateToRoute(AccountDetailScreen(cart: cartItems,));
+    // navigationService.navigateToRoute(AccountDetailScreen(cart: cartItems,));
   }
 
   Future<void> updateCartItem(TempCart cart) async {

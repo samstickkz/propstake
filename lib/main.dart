@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -103,33 +105,51 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-        create: (_) => ThemeModel(),
-        child: Consumer<ThemeModel>(
-            builder: (context, themeProvider, child) {
-              return OKToast(
-                  child: ScreenUtilInit(
-                    //setup to fit into bigger screens
-                    designSize: const Size(428, 926),
-                    minTextAdapt: true,
-                    splitScreenMode: true,
-                    builder: (BuildContext context, Widget? child) {
-                      return MaterialApp(
-                        debugShowCheckedModeBanner: false,
-                        navigatorKey: locator<NavigationService>().navigatorKey,
-                        scaffoldMessengerKey: locator<NavigationService>().snackBarKey,
-                        title: "PropStake",
-                        theme: AppTheme.themeData(false),
-                        darkTheme: AppTheme.themeData(true),
-                        themeMode: themeProvider.themeMode,
-                        home: const SplashScreen(),
-                        supportedLocales: locator<LocaleService>().localization.supportedLocales,
-                        localizationsDelegates: locator<LocaleService>().localization.localizationsDelegates,
-                      );
-                    },
-                  ));
-            }
-        )
+    return Platform.isIOS? buildChangeNotifierProvider(): AnnotatedRegion(
+      value: SystemUiOverlayStyle(
+        // Customize system UI overlay
+        statusBarColor: Colors.transparent,
+        systemNavigationBarColor: Colors.white, // Match your nav bar color
+        systemNavigationBarDividerColor: null,
+        statusBarIconBrightness: Brightness.light,
+      ),
+      child: Padding(
+        padding: EdgeInsets.only(
+          bottom: MediaQuery.of(context).viewPadding.bottom,
+        ),
+        child: buildChangeNotifierProvider(),
+      ),
     );
+  }
+
+  ChangeNotifierProvider<ThemeModel> buildChangeNotifierProvider() {
+    return ChangeNotifierProvider(
+      create: (_) => ThemeModel(),
+      child: Consumer<ThemeModel>(
+          builder: (context, themeProvider, child) {
+            return OKToast(
+                child: ScreenUtilInit(
+                  //setup to fit into bigger screens
+                  designSize: const Size(428, 926),
+                  minTextAdapt: true,
+                  splitScreenMode: true,
+                  builder: (BuildContext context, Widget? child) {
+                    return MaterialApp(
+                      debugShowCheckedModeBanner: false,
+                      navigatorKey: locator<NavigationService>().navigatorKey,
+                      scaffoldMessengerKey: locator<NavigationService>().snackBarKey,
+                      title: "PropStake",
+                      theme: AppTheme.themeData(false),
+                      darkTheme: AppTheme.themeData(true),
+                      themeMode: themeProvider.themeMode,
+                      home: const SplashScreen(),
+                      supportedLocales: locator<LocaleService>().localization.supportedLocales,
+                      localizationsDelegates: locator<LocaleService>().localization.localizationsDelegates,
+                    );
+                  },
+                ));
+          }
+      )
+  );
   }
 }

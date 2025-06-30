@@ -68,7 +68,7 @@ class TransactionHomeScreen extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 AppText(
-                                  model.transactionsData[index].description??"",
+                                  model.properties.firstWhere((t)=> t.id == model.transactionsData[index].product?.id).name??"",
                                   weight: FontWeight.w500,
                                   size: 14.sp,
                                 ),
@@ -76,14 +76,14 @@ class TransactionHomeScreen extends StatelessWidget {
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [
                                     PriceWidget(
-                                      value: model.transactionsData[index].rewardAmount,
+                                      value: model.transactionsData[index].amountSelected,
                                       size: 12.sp,
                                       currency: Currency.dollar,
                                       roundUp: true,
                                       useSymbol: false,
                                     ),
                                     AppText(
-                                      model.getTextFromDateTime(DateTime.parse(model.transactionsData[index].createdAt?? DateTime.now().toString())),
+                                      model.getTextFromDateTime(model.transactionsData[index].addedAt?? DateTime.now()),
                                       size: 10.sp,
                                     )
                                   ],

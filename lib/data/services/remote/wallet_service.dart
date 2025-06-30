@@ -69,7 +69,7 @@ class WalletService {
         "tempID": generateRandomChatId(), // Store user ID for ownership
         "userId": userService.user.email,
         "product": jsonDecode(jsonEncode(property)),
-        "amountSelected": currentPrice,    // Default quantity (can be updated)
+        "amountSelected": currentPrice,
         "addedAt": DateTime.now().toString() // Timestamp for tracking
       };
 
@@ -82,7 +82,58 @@ class WalletService {
       return false;
     }
   }
-  
+
+  Future<bool> transaction({
+    required PropertyResponse property,
+    required num currentPrice,
+    required String id,
+    required String wallet,
+    required String paymentType,
+  }) async {
+    try {
+
+      final docRef = FirebaseFirestore.instance
+          .collection("new")
+          .doc(property.id??"");
+
+      Map<String, dynamic> cartItem = {
+        "tempID": id,
+        "userId": userService.user.email,
+        "paymentType": paymentType,
+        "wallet": wallet,
+        "product": docRef,
+        "status": "pending",
+        "amountSelected": currentPrice,
+        "addedAt": DateTime.now().toString()
+      };
+
+      Map<String, dynamic> values = {
+        "tempID": id,
+        "userId": userService.user.email,
+        "amountSelected": currentPrice,
+        "paymentType": paymentType,
+        "status": "pending",
+        "wallet": wallet,
+        "addedAt": DateTime.now().toString()
+      };
+
+
+      // Add to "carts" collection
+      await firestore.collection("transactions").add(cartItem);
+
+      await FirebaseFirestore.instance.collection("new").doc(property.id).update({
+        "sale": FieldValue.arrayUnion([values]),
+        "amountFunded": (property.amountFunded??0) + currentPrice
+      });
+
+      return true;
+    } catch (e) {
+      AppLogger.debug("Error adding cart item: $e");
+      return false;
+    }
+  }
+
+
   Future<bool> updateCartItem({required TempCart cart}) async {
     try {
 
@@ -131,6 +182,38 @@ class WalletService {
   }
 
   // Fetch list of users
+  Future<List<TempTransactions>> fetchTransactions() async {
+    try {
+      List<TempTransactions> properties = [];
+
+      QuerySnapshot querySnapshot = await firestore.collection("transactions").get(GetOptions(source: Source.server));
+
+      List<Map<String, dynamic>> data = querySnapshot.docs.map((doc) {
+        Map<String, dynamic> docData = Map<String, dynamic>.from(doc.data() as Map<String, dynamic>);
+        docData['id'] = doc.id;  // Add document ID to the map
+        return docData;
+      }).toList();
+
+      print(data);
+
+      for (var dat in data) {
+        try {
+          properties.add(TempTransactions.fromJson(dat)); // Ensure this method works correctly
+        } catch (e) {
+          AppLogger.debug("Error parsing transaction: $e | Data: $dat");
+        }
+      }
+      List<TempTransactions> personalCart = properties.where((test)=> test.userId == userService.user.email).toList();
+      userService.updateTransactions(personalCart);
+      AppLogger.debug("Carts length ::: ${properties.length}");
+      return personalCart;
+    } catch (e) {
+      AppLogger.debug("Error fetching properties: $e");
+      return [];
+    }
+  }
+
+  // Fetch list of users
   Future<List<PropertyResponse>> fetchProperties() async {
     try {
       List<PropertyResponse> propertiez = [];
@@ -147,7 +230,7 @@ class WalletService {
       AppLogger.debug("Property ::: ${data.length}");
 
       for (var dat in data) {
-        AppLogger.debug("Property per ::: ${dat}");
+        AppLogger.debug("Property per ::: $dat");
 
         try {
           propertiez.add(PropertyResponse.fromJson(dat)); // Ensure this method works correctly

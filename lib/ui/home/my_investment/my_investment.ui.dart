@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:propstake/app_theme/palette.dart';
 import 'package:propstake/localization/locales.dart';
-import 'package:propstake/locator.dart';
 import 'package:propstake/utils/constants.dart';
 import 'package:propstake/utils/string_extensions.dart';
 import 'package:propstake/utils/widget_extensions.dart';
@@ -103,7 +102,7 @@ class MyInvestHomeScreen extends StatelessWidget {
                   children: [
                     InkWell(
                       borderRadius: BorderRadius.circular(65.sp/2),
-                      onTap: model.goToDeposit,
+                      // onTap: model.goToDeposit,
                       child: Container(
                         height: 65.sp,
                         width: 65.sp,
@@ -208,7 +207,7 @@ class MyInvestHomeScreen extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     AppText(
-                                      model.transactionsData[index].description??"",
+                                      model.properties.firstWhere((t)=> t.id == model.transactionsData[index].product?.id).name??"",
                                       weight: FontWeight.w500,
                                       size: 14.sp,
                                     ),
@@ -216,14 +215,13 @@ class MyInvestHomeScreen extends StatelessWidget {
                                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                       children: [
                                         PriceWidget(
-                                          value: model.transactionsData[index].rewardAmount,
+                                          value: model.transactionsData[index].amountSelected??"",
                                           size: 12.sp,
-                                          currency: Currency.naira,
                                           roundUp: true,
                                           useSymbol: false,
                                         ),
                                         AppText(
-                                          model.getTextFromDateTime(DateTime.parse(model.transactionsData[index].createdAt?? DateTime.now().toString())),
+                                          model.getTextFromDateTime(model.transactionsData[index].addedAt?? DateTime.now()),
                                           size: 10.sp,
                                         )
                                       ],
@@ -239,63 +237,63 @@ class MyInvestHomeScreen extends StatelessWidget {
                     ),
                   ),
                   30.sp.sbH,
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      AppText(
-                        LocaleData.frequentlyAskedQuestion.convertString(),
-                        weight: FontWeight.w700,
-                        size: 16.sp,
-                        isTitle: true,
-                      ),
-                    ],
-                  ),
-                  16.sp.sbH,
-                  SizedBox(
-                    height: 92.sp,
-                    width: width(context),
-                    child: ListView.builder(
-                      // itemExtentBuilder: (index, value){
-                      //   print(index);
-                      // },
-                        scrollDirection: Axis.horizontal,
-                        itemCount: locator<ProfileHomeViewModel>().faqs.length,
-                        itemBuilder: (_, i){
-                          return AppCard(
-                            onTap: ()=> model.goFaqDetail(locator<ProfileHomeViewModel>().faqs[i]),
-                            heights: height(context),
-                            widths: 139.sp,
-                            margin: 16.sp.padR,
-                            backgroundImage: i%2 == 0? Assets.png.backOne.path : Assets.png.backTwo.path,
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    SvgBuilder(Assets.svg.money, size: 16.sp,),
-                                    SvgBuilder(Assets.svg.arrowRightWhite, size: 16.sp,),
-                                  ],
-                                ),
-                                Expanded(
-                                  child: Align(
-                                    alignment: Alignment.centerLeft,
-                                    child: AppText(
-                                      locator<ProfileHomeViewModel>().faqs[i].title,
-                                      weight: FontWeight.w500,
-                                      size: 10.sp,
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          );
-                        }
-                    ),
-                  ),
+                  // Row(
+                  //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  //   crossAxisAlignment: CrossAxisAlignment.center,
+                  //   children: [
+                  //     AppText(
+                  //       LocaleData.frequentlyAskedQuestion.convertString(),
+                  //       weight: FontWeight.w700,
+                  //       size: 16.sp,
+                  //       isTitle: true,
+                  //     ),
+                  //   ],
+                  // ),
+                  // 16.sp.sbH,
+                  // SizedBox(
+                  //   height: 92.sp,
+                  //   width: width(context),
+                  //   child: ListView.builder(
+                  //     // itemExtentBuilder: (index, value){
+                  //     //   print(index);
+                  //     // },
+                  //       scrollDirection: Axis.horizontal,
+                  //       itemCount: locator<ProfileHomeViewModel>().faqs.length,
+                  //       itemBuilder: (_, i){
+                  //         return AppCard(
+                  //           onTap: ()=> model.goFaqDetail(locator<ProfileHomeViewModel>().faqs[i]),
+                  //           heights: height(context),
+                  //           widths: 139.sp,
+                  //           margin: 16.sp.padR,
+                  //           backgroundImage: i%2 == 0? Assets.png.backOne.path : Assets.png.backTwo.path,
+                  //           child: Column(
+                  //             mainAxisAlignment: MainAxisAlignment.center,
+                  //             crossAxisAlignment: CrossAxisAlignment.center,
+                  //             children: [
+                  //               Row(
+                  //                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  //                 children: [
+                  //                   SvgBuilder(Assets.svg.money, size: 16.sp,),
+                  //                   SvgBuilder(Assets.svg.arrowRightWhite, size: 16.sp,),
+                  //                 ],
+                  //               ),
+                  //               Expanded(
+                  //                 child: Align(
+                  //                   alignment: Alignment.centerLeft,
+                  //                   child: AppText(
+                  //                     locator<ProfileHomeViewModel>().faqs[i].title,
+                  //                     weight: FontWeight.w500,
+                  //                     size: 10.sp,
+                  //                     color: Colors.white,
+                  //                   ),
+                  //                 ),
+                  //               ),
+                  //             ],
+                  //           ),
+                  //         );
+                  //       }
+                  //   ),
+                  // ),
                 ],
               ),
             ),

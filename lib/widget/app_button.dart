@@ -27,6 +27,7 @@ class AppButton extends StatelessWidget {
   final Color? borderColor;
   final Color? backGroundColor;
   final Color? textColor;
+  final Color? iconColor;
   final String? text;
   final Widget? child;
   final EdgeInsetsGeometry? padding;
@@ -62,6 +63,7 @@ class AppButton extends StatelessWidget {
     this.svgImage, 
     this.pngImage,
     this.iconSize,
+    this.iconColor,
   });
 
   /// Factory constructors for different styles
@@ -78,6 +80,7 @@ class AppButton extends StatelessWidget {
     Color? borderColor,
     Widget? child,
     Color? textColor,
+    Color? iconColor,
     String? svgImage,
   }) {
     return AppButton(
@@ -91,6 +94,7 @@ class AppButton extends StatelessWidget {
       borderWidth: borderWith?? (borderColor != null? 0.5.sp : 0.0),
       useSecondaryColor: useSecondaryColor,
       borderColor: borderColor,
+      iconColor: iconColor,
       gradient: false,
       padding: 16.sp.padH,
       textSize: textSize?? 12.0,
@@ -106,6 +110,7 @@ class AppButton extends StatelessWidget {
     String? pngImage,
     Widget? child,
     Color? textColor,
+    Color? iconColor,
     double? textSize,
     String? svgImage,
     double? heights,
@@ -123,6 +128,7 @@ class AppButton extends StatelessWidget {
       height: heights?? (isFullWidth? 52.sp : 48.sp),
       borderColor: borderColor,
       textColor: textColor,
+      iconColor: iconColor,
       gradient: false,
       pngImage: pngImage,
       svgImage: svgImage,
@@ -142,6 +148,7 @@ class AppButton extends StatelessWidget {
     double? textSize,
     Widget? child,
     Color? textColor,
+    Color? iconColor,
     String? svgImage,
   }) {
     return AppButton(
@@ -153,6 +160,7 @@ class AppButton extends StatelessWidget {
       height: heights?? (isFullWidth? 52.sp : 48.sp),
       borderColor: borderColor,
       textColor: textColor,
+      iconColor: iconColor,
       gradient: false,
       textSize: textSize,
       pngImage: pngImage,
@@ -169,6 +177,7 @@ class AppButton extends StatelessWidget {
     bool useSecondaryColor = false,
     Color? backgroundColor,
     Color? textColor,
+    Color? iconColor,
     String? pngImage,
     String? svgImage,
     double? borderWith,
@@ -186,6 +195,7 @@ class AppButton extends StatelessWidget {
       svgImage: svgImage,
       fontWeight: fontWeight,
       textColor: textColor,
+      iconColor: iconColor,
       textSize: textSize,
       widths: double.maxFinite,
       borderWidth: borderWith?? (borderColor != null? 1.sp : 0.0),
@@ -236,6 +246,7 @@ class AppButton extends StatelessWidget {
                     child: SvgBuilder(
                       svgImage!,
                       size: iconSize ?? 20.sp,
+                      color: iconColor,
                     ),
                   ),
                 ] else ...[
@@ -244,6 +255,7 @@ class AppButton extends StatelessWidget {
                     child: ImageBuilder(
                       pngImage!,
                       size: iconSize ?? 20.sp,
+                      color: iconColor,
                     ),
                   ),
                 ],
@@ -301,6 +313,7 @@ class AppButton extends StatelessWidget {
                     child: SvgBuilder(
                       svgImage!,
                       size: iconSize ?? 20.sp,
+                      color: iconColor,
                     ),
                   ),
                 ] else ...[
@@ -309,6 +322,7 @@ class AppButton extends StatelessWidget {
                     child: ImageBuilder(
                       pngImage!,
                       size: iconSize ?? 20.sp,
+                      color: iconColor,
                     ),
                   ),
                 ],

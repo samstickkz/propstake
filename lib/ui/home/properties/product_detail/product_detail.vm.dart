@@ -14,6 +14,7 @@ import '../../../../utils/app_logger.dart';
 import '../../../../utils/constants.dart';
 import '../../../../widget/price_widget.dart';
 import '../../cart/cart_ui.dart';
+import '../../my_investment/deposit/account_details.ui.dart';
 import '../../my_investment/faq_details/faq_detail_page.dart';
 import '../../profile/profile_home.vm.dart';
 
@@ -27,16 +28,17 @@ class ProductDetailViewModel extends BaseViewModel {
 
 
   addToCart(PropertyResponse property) async {
-    startLoader();
-    await walletService.addCartItem(currentPrice: currentPrice.text.trim(), property: property!).then((val) async {
-      if(val){
-        await walletService.fetchCarts();
-      }
-    });
-    stopLoader();
-    notifyListeners();
+    navigationService.navigateToRoute(AccountDetailScreen(
+      propertyResponse: property,
+      price: num.tryParse(currentPrice.text.trim()) ?? 0.0,
+    ));
+  }
 
-    navigationService.navigateToRoute(CartScreen());
+  checkOut(PropertyResponse property){
+    navigationService.navigateToRoute(AccountDetailScreen(
+      propertyResponse: property,
+      price: num.tryParse(currentPrice.text.trim()) ?? 0.0,
+    ));
   }
 
 

@@ -66,7 +66,7 @@ class ContactUsScreen extends StatelessWidget {
                 svgImage: Assets.svg.whatsapp,
                 text: LocaleData.contactUsOnWhatsapp.convertString(),
                 onTap: (){
-                  launchUrlString("https://api.whatsapp.com/send?phone=2348024590076&text=Hello%20PropStake");
+                  launchUrlString("https://api.whatsapp.com/send?phone=+974451311386&text=Hello%20PropStake");
                 },
               ),
               30.sp.sbH,
