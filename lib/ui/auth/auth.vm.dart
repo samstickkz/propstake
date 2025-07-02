@@ -40,6 +40,7 @@ class AuthViewModel extends BaseViewModel {
 
   TextEditingController upEmailController = TextEditingController();
   TextEditingController upPasswordController = TextEditingController();
+  TextEditingController upReferralController = TextEditingController();
   TextEditingController upConfirmPasswordController = TextEditingController();
 
   TextEditingController inEmailController = TextEditingController();
@@ -210,7 +211,8 @@ class AuthViewModel extends BaseViewModel {
       var res = await authenticationService.signUp(
         email: upEmailController.text.trim(),
         password: upPasswordController.text.trim(),
-        confirmPassword: upConfirmPasswordController.text.trim()
+        confirmPassword: upConfirmPasswordController.text.trim(),
+        referralCode: upReferralController.text.trim()
       );
       if(res.isRight()){
         stopLoader();

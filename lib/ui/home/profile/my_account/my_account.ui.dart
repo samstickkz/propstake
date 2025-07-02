@@ -179,11 +179,11 @@ class MyAccountScreen extends StatelessWidget {
                 isLoading: model.isLoading
             ),
             40.sp.sbH,
-            SingleOptionCard(
-              onTap: (){},
-              text: LocaleData.investmentLimit.convertString(),
-              svg: Assets.svg.myInvestment,
-            )
+            // SingleOptionCard(
+            //   onTap: (){},
+            //   text: LocaleData.investmentLimit.convertString(),
+            //   svg: Assets.svg.myInvestment,
+            // )
           ],
         ),
       ),

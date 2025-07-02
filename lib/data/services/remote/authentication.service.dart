@@ -25,6 +25,7 @@ class AuthenticationService {
   Future<Either<ResModel, ResModel>> signUp({
     required String email,
     required String password,
+    String? referralCode,
     required String confirmPassword,
   }) async {
     try {
@@ -32,7 +33,7 @@ class AuthenticationService {
         "email": email,
         "password": password,
         "confirmPassword": password,
-        "returnUrl": "",
+        "referral": referralCode,
         "acceptpolicy": true
       });
       ResModel signUpResponse = ResModel.fromJson(jsonDecode(response.data));

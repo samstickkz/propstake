@@ -65,6 +65,13 @@ class SignUpForm extends StatelessWidget {
           ),
           20.sp.sbH,
           AppTextField(
+            controller: model.upReferralController,
+            hintText: LocaleData.referralCode.convertString(),
+            hint: LocaleData.enterReferralCode.convertString(),
+            onChanged: model.onChangedUp,
+          ),
+          20.sp.sbH,
+          AppTextField(
             controller: model.upConfirmPasswordController,
             validator: (val)=> confirmPasswordValidator(model.upPasswordController, model.upConfirmPasswordController),
             isPassword: true,

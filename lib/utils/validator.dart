@@ -187,6 +187,7 @@ class UsernameInputFormatter extends TextInputFormatter {
   }
 }
 
+
 class IpAddressInputFormatter extends TextInputFormatter {
   @override
   TextEditingValue formatEditUpdate(

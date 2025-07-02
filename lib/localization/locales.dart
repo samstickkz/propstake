@@ -153,6 +153,7 @@ mixin LocaleData {
   static const String investmentLimit = 'investmentLimit';
   static const String address = 'address';
   static const String totalInvestment = 'totalInvestment';
+  static const String totalInvestmentOnly = 'totalInvestmentOnly';
   static const String availableToInvest = 'availableToInvest';
   static const String estimatedROI5Years = 'estimatedROI5Years';
   static const String estimatedROI10Years = 'estimatedROI10Years';
@@ -365,10 +366,14 @@ mixin LocaleData {
   static const String aboutUsInfo = 'aboutUsInfo';
   static const String prostakeYourGatewayToSmart = 'prostakeYourGatewayToSmart';
   static const String contactUsOnWhatsapp = 'contactUsOnWhatsapp';
+  static const String referralCode = 'referralCode';
+  static const String enterReferralCode = 'enterReferralCode';
 
 
   static const Map<String, dynamic> en = {
     completed: "Completed",
+    referralCode: "Referral Code",
+    enterReferralCode: "Enter Referral Code",
     contactUsOnWhatsapp: "Contact Us on Whatsapp",
     propertyAlreadyInCart: "Property already in cart go to Cart to update",
     propertyAddedToCart: "Property added to cart",
@@ -644,6 +649,7 @@ mixin LocaleData {
     investmentLimit: "Investment Limit",
     address: "Your address",
     totalInvestment: "Total investment: \$200",
+    totalInvestmentOnly: "Total investment",
     availableToInvest: "Available to invest: \$1000",
     estimatedROI5Years: "Total Estimated ROI in 5 years: \$1000",
     estimatedROI10Years: "Total Estimated ROI in 10 years: \$1000",

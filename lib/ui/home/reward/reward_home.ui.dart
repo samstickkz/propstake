@@ -49,51 +49,51 @@ class RewardHomeScreen extends StatelessWidget {
         body: ListView(
           padding: EdgeInsets.only(left: 16.sp, right: 16.sp, top: 16.sp, bottom: 150.sp),
           children: [
-            AppCard(
-              onTap: model.goToAllTiersScreen,
-              heights: 129.sp,
-              child: Row(
-                spacing: 16.sp,
-                children: [
-                  SvgBuilder(model.currentTier.image, size: 80.sp),
-                  Expanded(child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          AppText(
-                            model.currentTier.name,
-                            size: 16.47.sp,
-                            weight: FontWeight.w700,
-                            isTitle: true
-                          ),
-                          SvgBuilder(Assets.svg.arrowRight, color: stateColor12(isAppDark(context)),),
-                        ]
-                      ),
-                      ProgressAppIndicator(
-                        rank: model.currentTier.rank/4,
-                      ),
-                      Row(
-                        spacing: 10.sp,
-                        children: [
-                          SvgBuilder(
-                            Assets.svg.autoStars,
-                            size: 20.sp,
-                          ),
-                          Expanded(child: AppText(
-                            LocaleData.startInvestingToUpgradeYourTier.convertString(),
-                            size: 11.sp,
-                            color: stateColor12(isAppDark(context)),
-                          ))
-                        ],
-                      )
-                    ],
-                  ))
-                ],
-              ),
-            ),
-            30.sp.sbH,
+            // AppCard(
+            //   onTap: model.goToAllTiersScreen,
+            //   heights: 129.sp,
+            //   child: Row(
+            //     spacing: 16.sp,
+            //     children: [
+            //       SvgBuilder(model.currentTier.image, size: 80.sp),
+            //       Expanded(child: Column(
+            //         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            //         children: [
+            //           Row(
+            //             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //             children: [
+            //               AppText(
+            //                 model.currentTier.name,
+            //                 size: 16.47.sp,
+            //                 weight: FontWeight.w700,
+            //                 isTitle: true
+            //               ),
+            //               SvgBuilder(Assets.svg.arrowRight, color: stateColor12(isAppDark(context)),),
+            //             ]
+            //           ),
+            //           ProgressAppIndicator(
+            //             rank: model.currentTier.rank/4,
+            //           ),
+            //           Row(
+            //             spacing: 10.sp,
+            //             children: [
+            //               SvgBuilder(
+            //                 Assets.svg.autoStars,
+            //                 size: 20.sp,
+            //               ),
+            //               Expanded(child: AppText(
+            //                 LocaleData.startInvestingToUpgradeYourTier.convertString(),
+            //                 size: 11.sp,
+            //                 color: stateColor12(isAppDark(context)),
+            //               ))
+            //             ],
+            //           )
+            //         ],
+            //       ))
+            //     ],
+            //   ),
+            // ),
+            // 30.sp.sbH,
             AppText(
               LocaleData.myEarnings.convertString(),
               isTitle: true,
@@ -128,7 +128,6 @@ class RewardHomeScreen extends StatelessWidget {
                                       children: [
                                         PriceWidget(
                                           value: model.bonuses[index].value,
-                                          currency: model.bonuses[index].currency,
                                           color: Colors.white,
                                           size: 15.17.sp,
                                           weight: FontWeight.w700,

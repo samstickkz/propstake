@@ -1,16 +1,23 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:clipboard/clipboard.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:pretty_qr_code/pretty_qr_code.dart';
 import 'package:propstake/app_theme/palette.dart';
+import 'package:propstake/data/model/propert_response.dart';
 import 'package:propstake/gen/assets.gen.dart';
 import 'package:propstake/localization/locales.dart';
+import 'package:propstake/ui/base/base-ui.dart';
+import 'package:propstake/ui/home/cart/cart_vm.dart';
 import 'package:propstake/ui/home/properties/properies.vm.dart';
 import 'package:propstake/utils/string_extensions.dart';
+import 'package:propstake/utils/validator.dart';
 import 'package:propstake/utils/widget_extensions.dart';
 import 'package:propstake/widget/app_button.dart';
 import 'package:propstake/widget/appbar_widget.dart';
 import 'package:propstake/widget/apptexts.dart';
 import 'package:propstake/widget/price_widget.dart';
+import 'package:propstake/widget/text_field.dart';
 
 import '../../../../data/model/cart_model.dart';
 import '../../../../utils/constants.dart';
@@ -21,69 +28,193 @@ import '../../../../widget/svg_builder.dart';
 import '../../bottom_nav.ui.dart';
 
 class AccountDetailScreen extends StatelessWidget {
-  final List<TempCart>? cart;
-  const AccountDetailScreen({super.key, this.cart});
+  final PropertyResponse? propertyResponse;
+  final num? price;
+  const AccountDetailScreen({super.key, this.propertyResponse, this.price});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBars(
-        text: LocaleData.accountDetails.convertString(),
-      ),
-      body: ListView(
-        padding: 16.sp.padA,
-        children: [
-          AppText(LocaleData.copyDetailsAndMakePayment.convertString()),
-          16.sp.sbH,
-          AccountOptionWidget(
-            title: LocaleData.amount.convertString(),
-            value: cart == null || (cart??[]).isEmpty? "": (cart??[]).fold(0, (sum, item) => sum + int.parse(item.amountSelected ?? "0")).toString(),
-            isPrice: true,
-            currency: Currency.naira,
+    return BaseView<CartViewModel>(
+      onModelReady: (m)=> m.detailIit(),
+      builder: (model, theme) {
+        return Scaffold(
+          appBar: AppBars(
+            text: LocaleData.accountDetails.convertString(),
           ),
-          AccountOptionWidget(
-            title: LocaleData.accountName.convertString(),
-            value: "NPJ Luxury Properties Ltd",
+          body: DefaultTabController(
+            length: 2,
+            child: Column(
+              children: [
+                TabBar(
+                  tabs: [
+                    Tab(text: "Fiat (Naira)",),
+                    Tab(text: "Crypto",),
+                  ],
+                  dividerColor: Theme.of(context).disabledColor.withValues(alpha: 0.5),
+                  indicatorSize: TabBarIndicatorSize.tab,
+                ),
+                Expanded(
+                  child: TabBarView(
+                    children: [
+                      ListView(
+                        padding: 16.sp.padA,
+                        children: [
+                          AppText(LocaleData.copyDetailsAndMakePayment.convertString()),
+                          16.sp.sbH,
+                          if(price!=null)
+                          AccountOptionWidget(
+                            title: LocaleData.amount.convertString(),
+                            value: price!.toStringAsFixed(2),
+                            isPrice: true,
+                            currency: Currency.dollar,
+                          ) else ...[
+                            AppTextField(
+                              validator: numberValidator,
+                              onChanged: model.onChanged,
+                              controller: model.controller,
+                              inputFormatters: [
+                                NumericTextFormatter()
+                              ],
+                              contentPadding: 10.sp.padA,
+                              hint: LocaleData.selectAmount.convertString(),
+                              prefixIcon: Padding(
+                                padding: 8.sp.padH,
+                                child: AppText(
+                                  "\$",
+                                  isTitle: true,
+                                  color: primaryColor,
+                                  family: "inter",
+                                ),
+                              ),
+                            ),
+                            16.sp.sbH
+                          ],
+                          AccountOptionWidget(
+                            title: LocaleData.accountName.convertString(),
+                            value: "NPJ Luxury Properties Ltd",
+                          ),
+                          AccountOptionWidget(
+                            title: LocaleData.accountNumber.convertString(),
+                            value: "2004749140",
+                            copy: true,
+                          ),
+                          AccountOptionWidget(
+                            title: LocaleData.bankName.convertString(),
+                            value: "FCMB Bank",
+                          ),
+                          AccountOptionWidget(
+                            title: LocaleData.addMemoPleaseAddMemoToTheTransaction.convertString(),
+                            value: propertyResponse?.id?? model.id,
+                            copy: true,
+                          ),
+                          30.sp.sbH,
+                          AppText(
+                            LocaleData.clickHereAfterYouMakeTheTransfer.convertString(),
+                            align: TextAlign.center,
+                            weight: FontWeight.w500,
+                          ),
+                          10.sp.sbH,
+                          AppButton.fullWidth(
+                            isLoading: false,
+                            text: LocaleData.iHaveMadeTheTransfer.convertString(),
+                            onTap: price != null ||model.controller.text.trim().isNotEmpty? ()=> model.submit(
+                              property: propertyResponse,
+                              price: price ?? num.tryParse(model.controller.text.trim())?? 0,
+                              paymentType: "FIAT",
+                              wallet: "FCMB - 2004749140",
+                              id: model.id
+                            ) : null,
+                          ),
+                          100.sp.sbH,
+                        ],
+                      ),
+                      ListView(
+                        padding: 16.sp.padH,
+                        children: [
+                          AppText(LocaleData.copyDetailsAndMakePayment.convertString()),
+                          16.sp.sbH,
+                          if(price!=null)
+                            AccountOptionWidget(
+                              title: LocaleData.amount.convertString(),
+                              value: price!.toStringAsFixed(2),
+                              isPrice: true,
+                              currency: Currency.dollar,
+                            ) else ...[
+                            AppTextField(
+                              validator: numberValidator,
+                              onChanged: model.onChanged,
+                              controller: model.controller,
+                              inputFormatters: [
+                                NumericTextFormatter()
+                              ],
+                              contentPadding: 10.sp.padA,
+                              hint: LocaleData.selectAmount.convertString(),
+                              prefixIcon: Padding(
+                                padding: 8.sp.padH,
+                                child: AppText(
+                                  "\$",
+                                  isTitle: true,
+                                  color: primaryColor,
+                                  family: "inter",
+                                ),
+                              ),
+                            ),
+                            16.sp.sbH
+                          ],
+                          ListView.builder(
+                            padding: 16.sp.padV,
+                            shrinkWrap: true,
+                            physics: const NeverScrollableScrollPhysics(),
+                            itemCount: crypto.length,
+                            itemBuilder: (_, i) {
+                              return AppCard(
+                                margin: i == 2? null: 10.sp.padB,
+                                bordered: true,
+                                child: Column(
+                                  spacing: 16.sp,
+                                  children: [
+                                    Row(
+                                      children: [
+                                        AppText(crypto[i].name, isTitle: true,)
+                                      ],
+                                    ),
+                                    SizedBox(
+                                      height: 250.sp,
+                                      child: PrettyQrView.data(
+                                        data: crypto[i].value,
+                                      ),
+                                    ),
+                                    AccountOptionWidget(
+                                      title: LocaleData.address.convertString(),
+                                      value: crypto[i].value,
+                                      copy: true,
+                                      border: false,
+                                    ),
+                                    AppButton.fullWidth(
+                                      isLoading: model.isLoading,
+                                      text: LocaleData.done.convertString(),
+                                        onTap: price != null ||model.controller.text.trim().isNotEmpty? ()=> model.submit(
+                                          price: price ?? num.tryParse(model.controller.text.trim())?? 0,
+                                          paymentType: "CRYPTO",
+                                          wallet: "${crypto[i].name} - ${crypto[i].value}",
+                                          id: model.id
+                                      ): null
+                                    )
+                                  ],
+                                ),
+                              );
+                            }
+                          )
+                        ],
+                      )
+                    ]
+                  ),
+                )
+              ],
+            )
           ),
-          AccountOptionWidget(
-            title: LocaleData.accountNumber.convertString(),
-            value: "2004749140",
-            copy: true,
-          ),
-          AccountOptionWidget(
-            title: LocaleData.bankName.convertString(),
-            value: "FCMB Bank",
-          ),
-          AccountOptionWidget(
-            title: LocaleData.addMemoPleaseAddMemoToTheTransaction.convertString(),
-            value: cart == null? "prop-manny" : cart!.map((item) => item.id).join("-"),
-            copy: true,
-          ),
-          30.sp.sbH,
-          AppText(
-            LocaleData.clickHereAfterYouMakeTheTransfer.convertString(),
-            align: TextAlign.center,
-            weight: FontWeight.w500,
-          ),
-          10.sp.sbH,
-          AppButton.fullWidth(
-            isLoading: false,
-            text: LocaleData.iHaveMadeTheTransfer.convertString(),
-            onTap: submit,
-          ),
-          100.sp.sbH,
-        ],
-      ),
-    );
-  }
-
-  submit(){
-    navigationService.navigateToRoute(
-        SuccessScreen(
-          onTap:()=> navigationService.navigateToAndRemoveUntilWidget(BottomNavigationScreen(initialIndex: 1,)),
-          title: "Payment confirmed",
-          body: "",
-        )
+        );
+      }
     );
   }
 }
@@ -92,6 +223,7 @@ class AccountOptionWidget extends StatelessWidget {
   final String title;
   final String value;
   final bool isPrice;
+  final bool border;
   final bool copy;
   final Currency? currency;
 
@@ -101,6 +233,7 @@ class AccountOptionWidget extends StatelessWidget {
     required this.value,
     this.isPrice = false,
     this.copy = false,
+    this.border = true,
     this.currency
   });
 
@@ -109,12 +242,12 @@ class AccountOptionWidget extends StatelessWidget {
     return Container(
       margin: 16.sp.padV,
       decoration: BoxDecoration(
-        border: Border(
+        border: border? Border(
           bottom: BorderSide(
             color: stateColor5(isAppDark(context)),
             width: 1.sp
           )
-        )
+        ): null
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -171,4 +304,35 @@ class AccountOptionWidget extends StatelessWidget {
       ),
     );
   }
+}
+
+List<CryptoMap> crypto = [
+  CryptoMap(
+    name: "USDT TRC20",
+    value: "TQD7BAMqmnd4oxniCgnJbo2oJKzbSRVLMZ",
+    logo: "https://cryptologos.cc/logos/tether-usdt-logo.png?v=040"
+  ),
+  CryptoMap(
+      name: "USDT Bep20",
+      value: "0x0055eda96506afe0f0b577be9f8e0d34f5ee1417",
+    logo: "https://cryptologos.cc/logos/tether-usdt-logo.png?v=040"
+  ),
+  CryptoMap(
+    name: "Solana",
+    value: "Dcg26An2oig7LU5WR6pR7bwnYwDxjtqcfowv53smR6qh",
+    logo: "https://cryptologos.cc/logos/solana-sol-logo.png?v=040"
+  ),
+];
+
+
+class CryptoMap {
+  final String name;
+  final String value;
+  final String logo;
+
+  CryptoMap({
+    required this.name,
+    required this.value,
+    required this.logo,
+  });
 }

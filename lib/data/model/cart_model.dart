@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:propstake/data/model/propert_response.dart';
 
 List<TempCart> getCartResponseDataListFromJson(String str) =>
@@ -79,4 +80,45 @@ class TempCart {
     amountSelected = am;
   }
 }
+
+
+
+class TempTransactions {
+  final String? id;
+  final String? userId;
+  final String? status;
+  final double? amountSelected;
+  final String? paymentType;
+  final String? wallet;
+  final String? tempID;
+  final DateTime? addedAt;
+  final DocumentReference? product;
+
+  TempTransactions({
+    this.id,
+    this.userId,
+    this.status,
+    this.amountSelected,
+    this.paymentType,
+    this.wallet,
+    this.tempID,
+    this.addedAt,
+    this.product,
+  });
+
+  factory TempTransactions.fromJson(Map<String, dynamic> json) {
+    return TempTransactions(
+      id: json['id'],
+      userId: json['userId'],
+      status: json['status'],
+      amountSelected: (json['amountSelected'] as num?)?.toDouble(),
+      paymentType: json['paymentType'],
+      wallet: json['wallet'],
+      tempID: json['tempID'],
+      // addedAt: (json['addedAt'] as Timestamp?)?.toDate() ?? DateTime.tryParse(json['addedAt'].toString()),
+      product: json['product'] as DocumentReference?,
+    );
+  }
+}
+
 
