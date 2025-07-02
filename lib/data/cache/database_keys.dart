@@ -3,7 +3,9 @@ class StorageKey {
   static const String userTableKey = 'user';
   static const String appAllCurrencyList = 'appAllCurrencyList';
   static const String tokenTableKey = '/token';
+  static const String walletBalance = '/Wallet/balance';
   static const String bioDataInfo = '/bioDataInfo';
+  static const String referralCode = '/referralCode';
   static const String refreshTokenKey = '/refresh_token';
   static const String appFirstTimeKey = 'isFirstTime';
   static const String fcmToken = 'FCMTOKEN';

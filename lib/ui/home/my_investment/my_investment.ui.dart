@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:propstake/app_theme/palette.dart';
 import 'package:propstake/localization/locales.dart';
-import 'package:propstake/locator.dart';
 import 'package:propstake/utils/constants.dart';
 import 'package:propstake/utils/string_extensions.dart';
 import 'package:propstake/utils/widget_extensions.dart';
@@ -23,6 +22,8 @@ class MyInvestHomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BaseView<MyInvestHomeViewModel>(
+      useFullScreenLoader: true,
+      onModelReady: (m)=> m.init(),
       builder: (model, theme)=> Scaffold(
         appBar: AppBars(
           noLeading: true,
@@ -35,9 +36,6 @@ class MyInvestHomeScreen extends StatelessWidget {
               height: 158.sp,
               width: width(context),
               child: ListView.builder(
-                // itemExtentBuilder: (index, value){
-                //   print(index);
-                // },
                 scrollDirection: Axis.horizontal,
                 padding: 16.sp.padL,
                 itemCount: model.myBalance.length,
@@ -63,7 +61,6 @@ class MyInvestHomeScreen extends StatelessWidget {
                           isTitle: true,
                           color: Colors.white,
                           useSymbol: false,
-                          roundUp: true,
                         )
                       ],
                     ),
@@ -184,11 +181,20 @@ class MyInvestHomeScreen extends StatelessWidget {
                     ],
                   ),
                   16.sp.sbH,
+                  if(model.transactionsData.isEmpty)
+                  AppCard(
+                    bordered: true,
+                    borderColor: gray5(isAppDark(context)),
+                    heights: 150.sp,
+                    child: Center(
+                      child: AppText("No transaction",),
+                    ),
+                  ) else
                   AppCard(
                     padding: 0.sp.padA,
                     child: Column(
                       children: List.generate(
-                        model.transactions.length,
+                        model.transactionsData.length,
                         (index){
                           return Container(
                             padding: EdgeInsets.symmetric(
@@ -197,20 +203,20 @@ class MyInvestHomeScreen extends StatelessWidget {
                             ),
                             decoration: BoxDecoration(
                               border: Border(
-                                bottom: index == (model.transactions.length-1)? BorderSide.none : BorderSide(color: stateColor4(isAppDark(context)))
+                                bottom: index == (model.transactionsData.length-1)? BorderSide.none : BorderSide(color: stateColor4(isAppDark(context)))
                               )
                             ),
                             child: Row(
                               spacing: 16.sp,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                SvgBuilder(model.transactions[index]["image"], size: 32.sp,),
+                                SvgBuilder(Assets.svg.invest, size: 32.sp,),
                                 Expanded(child: Column(
                                   spacing: 4.sp,
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     AppText(
-                                      model.transactions[index]["title"],
+                                      model.properties.firstWhere((t)=> t.id == model.transactionsData[index].product?.id).name??"",
                                       weight: FontWeight.w500,
                                       size: 14.sp,
                                     ),
@@ -218,14 +224,13 @@ class MyInvestHomeScreen extends StatelessWidget {
                                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                       children: [
                                         PriceWidget(
-                                          value: model.transactions[index]["value"],
+                                          value: model.transactionsData[index].amountSelected??"",
                                           size: 12.sp,
-                                          currency: Currency.dollar,
                                           roundUp: true,
                                           useSymbol: false,
                                         ),
                                         AppText(
-                                          model.getTextFromDateTime(model.transactions[index]["dateTime"]),
+                                          model.getTextFromDateTime(model.transactionsData[index].addedAt?? DateTime.now()),
                                           size: 10.sp,
                                         )
                                       ],
@@ -241,63 +246,63 @@ class MyInvestHomeScreen extends StatelessWidget {
                     ),
                   ),
                   30.sp.sbH,
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      AppText(
-                        LocaleData.frequentlyAskedQuestion.convertString(),
-                        weight: FontWeight.w700,
-                        size: 16.sp,
-                        isTitle: true,
-                      ),
-                    ],
-                  ),
-                  16.sp.sbH,
-                  SizedBox(
-                    height: 92.sp,
-                    width: width(context),
-                    child: ListView.builder(
-                      // itemExtentBuilder: (index, value){
-                      //   print(index);
-                      // },
-                        scrollDirection: Axis.horizontal,
-                        itemCount: locator<ProfileHomeViewModel>().faqs.length,
-                        itemBuilder: (_, i){
-                          return AppCard(
-                            onTap: ()=> model.goFaqDetail(locator<ProfileHomeViewModel>().faqs[i]),
-                            heights: height(context),
-                            widths: 139.sp,
-                            margin: 16.sp.padR,
-                            backgroundImage: i%2 == 0? Assets.png.backOne.path : Assets.png.backTwo.path,
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    SvgBuilder(Assets.svg.money, size: 16.sp,),
-                                    SvgBuilder(Assets.svg.arrowRightWhite, size: 16.sp,),
-                                  ],
-                                ),
-                                Expanded(
-                                  child: Align(
-                                    alignment: Alignment.centerLeft,
-                                    child: AppText(
-                                      locator<ProfileHomeViewModel>().faqs[i].title,
-                                      weight: FontWeight.w500,
-                                      size: 10.sp,
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          );
-                        }
-                    ),
-                  ),
+                  // Row(
+                  //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  //   crossAxisAlignment: CrossAxisAlignment.center,
+                  //   children: [
+                  //     AppText(
+                  //       LocaleData.frequentlyAskedQuestion.convertString(),
+                  //       weight: FontWeight.w700,
+                  //       size: 16.sp,
+                  //       isTitle: true,
+                  //     ),
+                  //   ],
+                  // ),
+                  // 16.sp.sbH,
+                  // SizedBox(
+                  //   height: 92.sp,
+                  //   width: width(context),
+                  //   child: ListView.builder(
+                  //     // itemExtentBuilder: (index, value){
+                  //     //   print(index);
+                  //     // },
+                  //       scrollDirection: Axis.horizontal,
+                  //       itemCount: locator<ProfileHomeViewModel>().faqs.length,
+                  //       itemBuilder: (_, i){
+                  //         return AppCard(
+                  //           onTap: ()=> model.goFaqDetail(locator<ProfileHomeViewModel>().faqs[i]),
+                  //           heights: height(context),
+                  //           widths: 139.sp,
+                  //           margin: 16.sp.padR,
+                  //           backgroundImage: i%2 == 0? Assets.png.backOne.path : Assets.png.backTwo.path,
+                  //           child: Column(
+                  //             mainAxisAlignment: MainAxisAlignment.center,
+                  //             crossAxisAlignment: CrossAxisAlignment.center,
+                  //             children: [
+                  //               Row(
+                  //                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  //                 children: [
+                  //                   SvgBuilder(Assets.svg.money, size: 16.sp,),
+                  //                   SvgBuilder(Assets.svg.arrowRightWhite, size: 16.sp,),
+                  //                 ],
+                  //               ),
+                  //               Expanded(
+                  //                 child: Align(
+                  //                   alignment: Alignment.centerLeft,
+                  //                   child: AppText(
+                  //                     locator<ProfileHomeViewModel>().faqs[i].title,
+                  //                     weight: FontWeight.w500,
+                  //                     size: 10.sp,
+                  //                     color: Colors.white,
+                  //                   ),
+                  //                 ),
+                  //               ),
+                  //             ],
+                  //           ),
+                  //         );
+                  //       }
+                  //   ),
+                  // ),
                 ],
               ),
             ),

@@ -153,6 +153,7 @@ mixin LocaleData {
   static const String investmentLimit = 'investmentLimit';
   static const String address = 'address';
   static const String totalInvestment = 'totalInvestment';
+  static const String totalInvestmentOnly = 'totalInvestmentOnly';
   static const String availableToInvest = 'availableToInvest';
   static const String estimatedROI5Years = 'estimatedROI5Years';
   static const String estimatedROI10Years = 'estimatedROI10Years';
@@ -166,9 +167,28 @@ mixin LocaleData {
   static const String done = 'done';
   static const String faqQuestion1 = 'faqQuestion1';
   static const String faqAnswer1 = 'faqAnswer1';
+  static const String faqAnswer11 = 'faqAnswer11';
+  static const String faqAnswer12 = 'faqAnswer12';
+  static const String faqAnswer10 = 'faqAnswer10';
+  static const String faqAnswer2 = 'faqAnswer2';
+  static const String faqAnswer3 = 'faqAnswer3';
+  static const String faqAnswer4 = 'faqAnswer4';
+  static const String faqAnswer5 = 'faqAnswer5';
+  static const String faqAnswer6 = 'faqAnswer6';
+  static const String faqAnswer7 = 'faqAnswer7';
+  static const String faqAnswer8 = 'faqAnswer8';
+  static const String faqAnswer9 = 'faqAnswer9';
   static const String faqQuestion2 = 'faqQuestion2';
   static const String faqQuestion3 = 'faqQuestion3';
   static const String faqQuestion4 = 'faqQuestion4';
+  static const String faqQuestion5 = 'faqQuestion5';
+  static const String faqQuestion6 = 'faqQuestion6';
+  static const String faqQuestion7 = 'faqQuestion7';
+  static const String faqQuestion8 = 'faqQuestion8';
+  static const String faqQuestion9 = 'faqQuestion9';
+  static const String faqQuestion10 = 'faqQuestion10';
+  static const String faqQuestion11 = 'faqQuestion11';
+  static const String faqQuestion12 = 'faqQuestion12';
   static const String logoutPrompt = 'logoutPrompt';
   static const String chooseYourCurrency = 'chooseYourCurrency';
   static const String chooseYourLanguage = 'chooseYourLanguage';
@@ -273,11 +293,123 @@ mixin LocaleData {
   static const String clickHereAfterYouMakeTheTransfer = 'clickHereAfterYouMakeTheTransfer';
   static const String transferFundsFromYourLocalOrInternationalBankAccounts = 'transferFundsFromYourLocalOrInternationalBankAccounts';
   static const String browseThroughAVarietyOfProperties = 'browseThroughAVarietyOfProperties';
+  static const String aboutTiers = 'aboutTiers';
+  static const String journeyToEliteRewards = 'journeyToEliteRewards';
+  static const String bronzeTier = 'bronzeTier';
+  static const String silverTier = 'silverTier';
+  static const String goldTier = 'goldTier';
+  static const String platinumTier = 'platinumTier';
+  static const String amountInvested = 'amountInvested';
+  static const String investToReach = 'investToReach';
+  static const String benefits = 'benefits';
+  static const String cashbackOnInvestments = 'cashbackOnInvestments';
+  static const String basicSupport = 'basicSupport';
+  static const String prioritySupport = 'prioritySupport';
+  static const String referralBonusBoost = 'referralBonusBoost';
+  static const String higherCashbackReturns = 'higherCashbackReturns';
+  static const String premiumSupport = 'premiumSupport';
+  static const String earlyAccessToNewDeals = 'earlyAccessToNewDeals';
+  static const String enhancedReferralRewards = 'enhancedReferralRewards';
+  static const String howToUpgrade = 'howToUpgrade';
+  static const String investMore = 'investMore';
+  static const String joinPromotions = 'joinPromotions';
+  static const String myEarnings = 'myEarnings';
+  static const String cashback = 'cashback';
+  static const String promotions = 'promotions';
+  static const String referAndEarn = 'referAndEarn';
+  static const String shareUniqueCode = 'shareUniqueCode';
+  static const String howToEarnMore = 'howToEarnMore';
+  static const String investingInNewProperties = 'investingInNewProperties';
+  static const String invitingFriends = 'invitingFriends';
+  static const String participatingInPromotions = 'participatingInPromotions';
+  static const String settingUpAutoInvestPlans = 'settingUpAutoInvestPlans';
+  static const String yourJourneyToEliteReward = 'yourJourneyToEliteReward';
+  static const String discoverHowYourTierSystem = 'discoverHowYourTierSystem';
+  static const String getStartedWithBasicBenefitsAsYouBegin = 'getStartedWithBasicBenefitsAsYouBegin';
+  static const String enjoyIncreasedCashBackAndBetter = 'enjoyIncreasedCashBackAndBetter';
+  static const String accessEarlyPropertyDealsPriority = 'accessEarlyPropertyDealsPriority';
+  static const String unlockTopTierBenefitsIncludingPersonalizedAdvice = 'unlockTopTierBenefitsIncludingPersonalizedAdvice';
+  static const String basicSupportInfo = 'basicSupportInfo';
+  static const String cashbackOnInvestmentsInfo = 'cashbackOnInvestmentsInfo';
+  static const String prioritySupportInfo = 'prioritySupportInfo';
+  static const String referralBonusBoostInfo = 'referralBonusBoostInfo';
+  static const String higherCashbackReturnsInfo = 'higherCashbackReturnsInfo';
+  static const String premiumSupportInfo = 'premiumSupportInfo';
+  static const String earlyAccessToNewDealsInfo = 'earlyAccessToNewDealsInfo';
+  static const String enhancedReferralRewardsInfo = 'enhancedReferralRewardsInfo';
+  static const String startInvestingToUpgradeYourTier = 'startInvestingToUpgradeYourTier';
+  static const String amountToBeInvestedIn12Months = 'amountToBeInvestedIn12Months';
+  static const String toReach = 'toReach';
+  static const String investedAbove = 'investedAbove';
+  static const String referralNumber = 'referralNumber';
+  static const String spreadTheWordAboutProstake = 'spreadTheWordAboutProstake';
+  static const String amountRequiredToUpgrade = 'amountRequiredToUpgrade';
+  static const String inviteFriend = 'inviteFriend';
+  static const String referralCodeCopped = 'referralCodeCopped';
+  static const String rented = 'rented';
+  static const String sale = 'sale';
+  static const String fiveYearTotalReturn = 'fiveYearTotalReturn';
+  static const String yearlyReturns = 'yearlyReturns';
+  static const String takeATour = 'takeATour';
+  static const String investors = 'Investors';
+  static const String remainingInvestmentAmount = 'remainingInvestmentAmount';
+  static const String cartAmount = 'cartAmount';
+  static const String remove = 'remove';
+  static const String addProperties = 'addProperties';
+  static const String checkOut = 'checkOut';
+  static const String addToCart = 'addToCart';
+  static const String favouriteProperties = 'favouriteProperties';
+  static const String yourSavedPropertiesAtAGlance = 'yourSavedPropertiesAtAGlance';
+  static const String selectAmount = 'selectAmount';
+  static const String propertyAlreadyInCart = 'propertyAlreadyInCart';
+  static const String propertyAddedToCart = 'propertyAddedToCart';
+  static const String aboutUsInfo = 'aboutUsInfo';
+  static const String prostakeYourGatewayToSmart = 'prostakeYourGatewayToSmart';
+  static const String contactUsOnWhatsapp = 'contactUsOnWhatsapp';
+  static const String referralCode = 'referralCode';
+  static const String enterReferralCode = 'enterReferralCode';
+
 
   static const Map<String, dynamic> en = {
     completed: "Completed",
+    referralCode: "Referral Code",
+    enterReferralCode: "Enter Referral Code",
+    contactUsOnWhatsapp: "Contact Us on Whatsapp",
+    propertyAlreadyInCart: "Property already in cart go to Cart to update",
+    propertyAddedToCart: "Property added to cart",
+    selectAmount: "Select Amount",
+    addToCart: "Add to Cart",
+    takeATour: "Tour the Property",
+    rented: "Rented",
+    prostakeYourGatewayToSmart: "PropStake – Your Gateway to Smart Real Estate Investment.",
+    favouriteProperties: "Favorite Properties",
+    yourSavedPropertiesAtAGlance: "Your saved properties at a glance. Easily access and invest in your top picks.",
+    investors: "Investors",
+    remainingInvestmentAmount: "Remaining investment amount",
+    cartAmount: "Cart(%a)",
+    remove: "Remove",
+    addProperties: "Add Properties",
+    checkOut: "Checkout",
+    sale: "Sale",
+    fiveYearTotalReturn: "5 year total return",
+    yearlyReturns: "Yearly return",
+    referralCodeCopped: "Referral Code Copied Successfully",
+    inviteFriend: "Invite Friends",
+    spreadTheWordAboutProstake: "Spread the word about Propstake",
+    amountRequiredToUpgrade: "\$%a investment is required to reach %a.",
+    referralNumber: "%a referrals",
+    investedAbove: "Invested Above",
+    toReach: "to Reach ",
+    yourJourneyToEliteReward: "Your Journey to Elite Rewards",
+    discoverHowYourTierSystem: "Discover how our tier system works and the exclusive benefits you can unlock as you invest more with us. Your tier not only reflects your commitment but also opens the door to enhanced rewards, higher cashback, and premium support.",
+    getStartedWithBasicBenefitsAsYouBegin: "Get started with basic benefits as you begin your investment journey.",
+    enjoyIncreasedCashBackAndBetter: "Enjoy increased cashback and better referral bonuses to boost your portfolio.",
+    accessEarlyPropertyDealsPriority: "Access early property deals, priority support, and higher rewards with every investment.",
+    unlockTopTierBenefitsIncludingPersonalizedAdvice: "Unlock top-tier benefits including personalized advice, exclusive events, and maximum rewards.",
     copiedToClipboard: " Copied to clipboard",
     older: "Older",
+    amountToBeInvestedIn12Months: "Amount to be invested in 12 months",
+    startInvestingToUpgradeYourTier: "Start investing to upgrade your tier",
     comingSoon: "Coming Soon",
     clickHereAfterYouMakeTheTransfer: "Click here after you have made the transfer",
     yuan: "CNY",
@@ -517,6 +649,7 @@ mixin LocaleData {
     investmentLimit: "Investment Limit",
     address: "Your address",
     totalInvestment: "Total investment: \$200",
+    totalInvestmentOnly: "Total investment",
     availableToInvest: "Available to invest: \$1000",
     estimatedROI5Years: "Total Estimated ROI in 5 years: \$1000",
     estimatedROI10Years: "Total Estimated ROI in 10 years: \$1000",
@@ -528,12 +661,70 @@ mixin LocaleData {
     yourMessage: "Your message",
     messageSent: "Message sent",
     done: "Done",
-    faqQuestion1: "What is the purpose of the investment limit?",
-    faqAnswer1: "The investment limit ensures compliance with financial regulations and responsible investing. It helps protect investors while maintaining platform integrity.",
-    faqQuestion2: "How is my investment limit calculated?",
-    faqQuestion3: "When does my annual investment limit reset?",
-    faqQuestion4: "Can I increase my investment limit?",
+    faqQuestion1: "What is PropStake?",
+    faqQuestion2: "How does PropStake work?",
+    faqQuestion3: "Who can invest with PropStake?",
+    faqQuestion4: "What is the minimum deposit to invest?",
+    faqQuestion5: "Can I invest multiple times?",
+    faqQuestion6: "What are the benefits of investing with PropStake?",
+    faqQuestion7: "How do I start investing?",
+    faqQuestion8: "How secure is my investment?",
+    faqQuestion9: "Can I sell my stake in a property?",
+    faqQuestion10: "How are returns distributed?",
+    faqQuestion11: "Are there any hidden fees?",
+    faqQuestion12: "How do I contact customer support?",
+    faqAnswer1: "PropStake is a real estate investment platform that allows individuals to invest in premium properties through fractional ownership. It is a product of NPJ, designed to make property investment accessible, secure, and rewarding.",
+    faqAnswer2: "PropStake enables users to invest in real estate by purchasing a stake in properties. Investors earn returns from rental income and potential property appreciation over time",
+    faqAnswer3: "Anyone above the legal age for investment in their country can invest in PropStake. Whether you're a first-time investor or an experienced one, our platform simplifies the process",
+    faqAnswer4: "The minimum amount required to start investing with PropStake is ₦50,000. This allows investors to take their first step into real estate with a small, manageable stake.",
+    faqAnswer5: "Yes! Investors can choose to invest multiple times in the same property or across different properties, increasing their stake and potential returns over time.",
+    faqAnswer6: ". Affordable entry into real estate investment \n. Passive income from rental earnings\n. Portfolio diversification\n. Hassle-free property management handled by NPJ",
+    faqAnswer7: "Simply sign up on our platform, browse available properties, choose your preferred investment, and purchase a stake. Your earnings will be credited periodically based on rental income and appreciation.",
+    faqAnswer8: "We prioritize transparency and security. Properties are legally verified, and all transactions are recorded on a secure system to ensure accountability.",
+    faqAnswer9: "Yes, PropStake allows investors to exit their investments by selling their stake to other investors or through buy-back options where applicable",
+    faqAnswer10: "Earnings from rental income are distributed periodically (monthly or quarterly) based on the investor’s stake percentage. Appreciation returns are realized when a property is sold or revalued.",
+    faqAnswer11: "No, we maintain a transparent fee structure. Any applicable charges, such as management or transaction fees, will be clearly outlined before you invest.",
+    faqAnswer12: "You can reach our support team via email, phone, or our in-app chat feature for any inquiries or assistance.",
     logoutPrompt: "Log out of your account?",
+    aboutTiers: "About Tiers",
+    journeyToEliteRewards: "Your Journey to Elite Rewards",
+    bronzeTier: "Bronze Tier",
+    silverTier: "Silver Tier",
+    goldTier: "Gold Tier",
+    platinumTier: "Platinum Tier",
+    amountInvested: "Amount invested in the last 12 months",
+    investToReach: "Invest %a to reach %a",
+    benefits: "Benefits",
+    cashbackOnInvestments: "Cashback on Investments",
+    basicSupport: "Basic Support",
+    prioritySupport: "Priority Support",
+    referralBonusBoost: "Referral Bonus Boost",
+    higherCashbackReturns: "Higher Cashback Returns",
+    premiumSupport: "Premium Support",
+    earlyAccessToNewDeals: "Early Access to New Deals",
+    enhancedReferralRewards: "Enhanced Referral Rewards",
+    cashbackOnInvestmentsInfo: "Earn %a% back on every investment you make.",
+    basicSupportInfo: "Get email and in-app chat support for any inquiries.",
+    prioritySupportInfo: "Get faster response times from our support team, ensuring quicker assistance.",
+    referralBonusBoostInfo: "Earn better referral bonuses.",
+    higherCashbackReturnsInfo: "Earn a higher cashback percentage on your investments.",
+    premiumSupportInfo: "Enjoy expedited responses and dedicated support channels.",
+    earlyAccessToNewDealsInfo: "Get first dibs on select high-potential properties before they go public.",
+    enhancedReferralRewardsInfo: "Earn boosted referral bonuses for every successful invitation.",
+    howToUpgrade: "How to Upgrade",
+    investMore: "Invest More",
+    joinPromotions: "Join Promotions",
+    myEarnings: "My Earnings",
+    cashback: "Cashback",
+    promotions: "Promotions",
+    referAndEarn: "Refer and Earn",
+    shareUniqueCode: "Share your unique code with friends to earn more!",
+    howToEarnMore: "How to earn more",
+    investingInNewProperties: "Investing in new properties",
+    invitingFriends: "Inviting friends (referrals)",
+    participatingInPromotions: "Participating in promotional events",
+    settingUpAutoInvestPlans: "Setting up auto-invest plans",
+    aboutUsInfo: "we believe in making real estate investment seamless, accessible, and rewarding. As a product of NPJ, we are committed to bridging the gap between property ownership and financial growth, offering individuals the opportunity to invest in premium real estate with ease. \n\nOur platform is designed to empower investors by providing fractional ownership options, transparent processes, and data-driven insights, ensuring that real estate investment is no longer limited to a select few. Whether you're a seasoned investor or just starting out, PropStake simplifies property investment, allowing you to grow your wealth with confidence.\n\nBacked by NPJ's expertise in property management and hospitality, we combine innovation with industry knowledge to deliver a secure, user-friendly, and profitable investment experience. Join us as we revolutionize real estate investment, one stake at a time.\n",
 
 
   };

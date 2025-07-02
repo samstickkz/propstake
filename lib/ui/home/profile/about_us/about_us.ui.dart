@@ -23,9 +23,7 @@ class AboutUsScreen extends StatelessWidget {
         body: ListView(
           padding: 16.sp.padA,
           children: [
-            AppCard(
-              child: AppText(LocaleData.loremIpsumPlaceholder.convertString()),
-            )
+            AppText(LocaleData.aboutUsInfo.convertString())
           ],
         ),
       ),

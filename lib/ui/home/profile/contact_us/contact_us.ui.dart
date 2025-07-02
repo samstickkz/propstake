@@ -9,7 +9,9 @@ import 'package:propstake/widget/app_button.dart';
 import 'package:propstake/widget/appbar_widget.dart';
 import 'package:propstake/widget/apptexts.dart';
 import 'package:propstake/widget/text_field.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
+import '../../../../gen/assets.gen.dart';
 import '../../../base/base-ui.dart';
 import 'contact_us.vm.dart';
 
@@ -57,6 +59,15 @@ class ContactUsScreen extends StatelessWidget {
                 isLoading: model.isLoading,
                 onTap: model.formKey.currentState?.validate()== true? (){} : null,
                 text: LocaleData.submit.convertString(),
+              ),
+              30.sp.sbH,
+              AppButton.transparent(
+                isLoading: false,
+                svgImage: Assets.svg.whatsapp,
+                text: LocaleData.contactUsOnWhatsapp.convertString(),
+                onTap: (){
+                  launchUrlString("https://api.whatsapp.com/send?phone=+974451311386&text=Hello%20PropStake");
+                },
               ),
               30.sp.sbH,
 

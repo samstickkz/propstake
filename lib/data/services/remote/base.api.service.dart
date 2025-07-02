@@ -182,6 +182,7 @@ errorHandler(DioException e,  ErrorInterceptorHandler handler) async {
               requestOptions: e.requestOptions), requestOptions:  e.requestOptions)
           );
         case 401:
+          userService.logout();
           return handler.next(DioException(response: Response(data: {"message": "Authorization error"},
               requestOptions: e.requestOptions), requestOptions:  e.requestOptions)
           );

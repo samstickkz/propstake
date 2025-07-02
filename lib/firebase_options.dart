@@ -64,7 +64,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '1061435600391',
     projectId: 'propstake-67d27',
     storageBucket: 'propstake-67d27.firebasestorage.app',
-    androidClientId: '1061435600391-bpj04dhr27njan2ci910ff5ibtv7gsf4.apps.googleusercontent.com',
+    androidClientId: '1061435600391-7ngcbkhboeusj8cahk0djagshqb02bkh.apps.googleusercontent.com',
     iosClientId: '1061435600391-vbkgg27ft38mgh98i4dt7tvb8tc7j9r5.apps.googleusercontent.com',
     iosBundleId: 'com.prostake.app',
   );

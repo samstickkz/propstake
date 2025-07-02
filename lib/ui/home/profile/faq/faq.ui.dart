@@ -53,7 +53,7 @@ class FAQScreen extends StatelessWidget {
                   ),
                   if(model.faqs[index].isOpen)...[
                     10.sp.sbH,
-                    AppText(model.faqs[index].body)
+                    AppText(model.faqs[index].body, family: "Inter",)
                   ]
                 ],
               )

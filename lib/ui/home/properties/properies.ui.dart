@@ -1,7 +1,9 @@
 import 'package:animate_do/animate_do.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:propstake/app_theme/palette.dart';
+import 'package:propstake/data/model/propert_response.dart';
 import 'package:propstake/gen/assets.gen.dart';
 import 'package:propstake/localization/locales.dart';
 import 'package:propstake/ui/base/base-ui.dart';
@@ -26,6 +28,8 @@ class PropertiesHomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BaseView<PropertiesViewModel>(
+      useFullScreenLoader: true,
+      onModelReady: (m)=> m.init(),
       builder: (model, theme)=> Scaffold(
         appBar: AppBars(
           noLeading: true,
@@ -46,12 +50,21 @@ class PropertiesHomeScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 AppCard(
-                  onTap: (){},
+                  onTap: model.goToBookMark,
                   heights: 35.sp,
                   widths: 35.sp,
                   padding: 5.5.sp.padA,
                   radius: 40.r,
-                  child: SvgBuilder(Assets.svg.loveOutline),
+                  child: SvgBuilder(Assets.svg.loveOutline, color: black(theme.isDark),),
+                ),
+                16.sp.sbW,
+                AppCard(
+                  onTap: model.goToCart,
+                  heights: 35.sp,
+                  widths: 35.sp,
+                  padding: 5.5.sp.padA,
+                  radius: 40.r,
+                  child: SvgBuilder(Assets.svg.cart, color: black(theme.isDark),),
                 ),
                 16.sp.sbW,
                 AppCard(
@@ -60,7 +73,7 @@ class PropertiesHomeScreen extends StatelessWidget {
                   widths: 35.sp,
                   padding: 5.5.sp.padA,
                   radius: 40.r,
-                  child: SvgBuilder(Assets.svg.loveOutline),
+                  child: SvgBuilder(Assets.svg.notificationBell, color: black(theme.isDark),),
                 ),
                 16.sp.sbW,
               ],
@@ -140,76 +153,79 @@ class PropertiesHomeScreen extends StatelessWidget {
                             SizedBox(
                               height: 103.sp,
                               width: width(context),
-                              child: PageView.builder(
-                                  itemCount: 3,
-                                  controller: PageController(initialPage: 0, viewportFraction: 0.7),
-                                  scrollDirection: Axis.horizontal,
-                                  onPageChanged: model.onChangeIndex,
-                                  itemBuilder: (_, i){
-                                    return AppCard(
-                                      backgroundImage: Assets.png.houseFrame.path,
-                                      widths: 286.sp,
-                                      margin: 16.sp.padR,
-                                      padding: 0.0.padA,
-                                      child: Container(
-                                        height: height(context),
-                                        width: width(context),
-                                        decoration: BoxDecoration(
-                                            gradient: LinearGradient(colors: [Colors.transparent, Colors.black87])
-                                        ),
-                                        child: Row(
-                                          children: [
-                                            Expanded(
-                                                flex: 3,
-                                                child: 0.sp.sbH
-                                            ),
-                                            Expanded(
-                                                flex: 2,
-                                                child: Padding(
-                                                  padding: 8.sp.padV,
-                                                  child: Column(
-                                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                                    children: [
-                                                      AppText(
-                                                        "Palm Harbor",
-                                                        color: Colors.white,
-                                                        size: 13.61.sp,
-                                                        weight: FontWeight.w700,
-                                                      ),
-                                                      AppText(
-                                                        "2699 Green Valley, Highland Lake, FL",
-                                                        color: Colors.white,
-                                                        size: 8.67.sp,
-                                                        weight: FontWeight.w500,
-                                                      ),
-                                                      Spacer(),
-                                                      PriceWidget(
-                                                        currency: Currency.dollar,
-                                                        value: 2095,
-                                                        weight: FontWeight.w900,
-                                                        roundUp: true,
-                                                        color: Colors.white,
-                                                      ),
-                                                      AppText(
-                                                        convertListString(LocaleData.percentageFunded.convertString(), data: ["20"]),
-                                                        color: Colors.white,
-                                                        size: 8.67.sp,
-                                                        weight: FontWeight.w500,
-                                                      ),
-
-                                                    ],
-                                                  ),
-                                                )
-                                            )
-                                          ],
-                                        ),
+                              child: ListView.builder(
+                                padding: 16.sp.padL,
+                                itemCount: model.properties.length,
+                                scrollDirection: Axis.horizontal,
+                                itemBuilder: (_, i){
+                                  PropertyResponse property = model.properties[i];
+                                  return AppCard(
+                                    backgroundImage: property.images.isEmpty? Assets.png.houseFrame.path: property.images[0],
+                                    widths: 286.sp,
+                                    margin: 16.sp.padR,
+                                    padding: 0.0.padA,
+                                    child: Container(
+                                      height: height(context),
+                                      width: width(context),
+                                      decoration: BoxDecoration(
+                                          gradient: LinearGradient(colors: [Colors.transparent, Colors.black87])
                                       ),
-                                    );
-                                  }
+                                      child: Row(
+                                        children: [
+                                          Expanded(
+                                              flex: 3,
+                                              child: 0.sp.sbH
+                                          ),
+                                          Expanded(
+                                              flex: 2,
+                                              child: Padding(
+                                                padding: 8.sp.padV,
+                                                child: Column(
+                                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                                  children: [
+                                                    AppText(
+                                                      property.name??"",
+                                                      color: Colors.white,
+                                                      size: 13.61.sp,
+                                                      maxLine: 2,
+                                                      weight: FontWeight.w700,
+                                                      height: 1.1,
+                                                    ),
+                                                    AppText(
+                                                      property.location??"",
+                                                      maxLine: 2,
+                                                      color: Colors.white,
+                                                      size: 8.67.sp,
+                                                      weight: FontWeight.w500,
+                                                      height: 1.1,
+                                                    ),
+                                                    Spacer(),
+                                                    PriceWidget(
+                                                      currency: Currency.naira,
+                                                      value: 2095,
+                                                      weight: FontWeight.w900,
+                                                      roundUp: true,
+                                                      color: Colors.white,
+                                                      height: 1.1,
+                                                    ),
+                                                    AppText(
+                                                      convertListString(LocaleData.percentageFunded.convertString(), data: [(((property.amountFunded??0)/(property.totalCost??0))*100).toInt()]),
+                                                      color: Colors.white,
+                                                      size: 8.67.sp,
+                                                      weight: FontWeight.w500,
+                                                    ),
+
+                                                  ],
+                                                ),
+                                              )
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                  );
+                                }
                               ),
                             ),
-                            10.sp.sbH,
-                            DotIndicators(total: 3, current: model.initialIndex),
                             20.sp.sbH,
                             Padding(
                               padding: 16.sp.padH,
@@ -248,10 +264,11 @@ class PropertiesHomeScreen extends StatelessWidget {
           },
           body: ListView.builder(
             padding: EdgeInsets.only(left: 16.sp, right: 16.sp, top: 16.sp, bottom: 120.sp),
-            itemCount: 3,
+            itemCount: model.properties.length,
             itemBuilder: (_, i){
+              PropertyResponse property = model.properties[i];
               return AppCard(
-                heights: 385.h,
+                onTap: ()=> model.goToPropertyDetail(property),
                 bordered: true,
                 margin: 20.sp.padB,
                 padding: 0.0.padA,
@@ -264,190 +281,202 @@ class PropertiesHomeScreen extends StatelessWidget {
                       height: 168.h,
                       width: width(context),
                       decoration: BoxDecoration(
-                        image: DecorationImage(
-                          image: AssetImage(Assets.png.backgroudTemp.path),
-                          fit: BoxFit.fill
-                        )
+                          image: DecorationImage(
+                              image: CachedNetworkImageProvider(property.images.isEmpty? "": property.images[0]),
+                              fit: BoxFit.fill
+                          )
                       ),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
-                          SvgBuilder(Assets.svg.love)
+                          InkWell(
+                            onTap: ()=> model.saveUnsavedProperties(property),
+                            child: SvgBuilder(
+                              Assets.svg.love,
+                              size: 25.sp,
+                              color: userService.bookMarks.any((test)=> test.id == property.id)? red9(isAppDark(context)): null,
+                            ),
+                          )
                         ],
                       ),
                     ),
-                    Expanded(
-                      child: Padding(
-                        padding: 14.sp.padA,
-                        child: Column(
-                          children: [
-                            Row(
-                              children: [
-                                Padding(
-                                  padding: 20.sp.padR,
-                                  child: Row(
-                                    children: [
-                                      SvgBuilder(
-                                        Assets.svg.bed,
-                                        size: 16.sp,
-                                      ),
-                                      5.sp.sbW,
-                                      AppText(
-                                        convertListString(LocaleData.bedsNumber.convertString(), data: [3]),
-                                        size: 13.sp,
-                                        weight: FontWeight.w500,
-                                        color: stateColor12(isAppDark(context)),
-                                      )
-                                    ],
-                                  ),
-                                ),
-                                Padding(
-                                  padding: 20.sp.padR,
-                                  child: Row(
-                                    children: [
-                                      SvgBuilder(
-                                        Assets.svg.document,
-                                        size: 16.sp,
-                                      ),
-                                      5.sp.sbW,
-                                      AppText(
-                                        "Rented",
-                                        size: 13.sp,
-                                        weight: FontWeight.w500,
-                                        color: stateColor12(isAppDark(context)),
-                                      )
-                                    ],
-                                  ),
-                                ),
-                                Padding(
-                                  padding: 20.sp.padR,
-                                  child: Row(
-                                    children: [
-                                      SvgBuilder(
-                                        Assets.svg.location,
-                                        size: 16.sp,
-                                      ),
-                                      5.sp.sbW,
-                                      AppText(
-                                        "USA",
-                                        size: 13.sp,
-                                        weight: FontWeight.w500,
-                                        color: stateColor12(isAppDark(context)),
-                                      )
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ),
-                            Divider(),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.stretch,
-                              children: [
-                                AppText(
-                                  "Palm Harbor",
-                                  size: 15.6.sp,
-                                  weight: FontWeight.w700,
-                                  color: stateColor12(theme.isDark),
-                                ),
-                                AppText(
-                                  "2699 Green Valley, Highland Lake, FL",
-                                  size: 10.99.sp,
-                                  weight: FontWeight.w500,
-                                  color: stateColor11(theme.isDark),
-                                ),
-                                10.sp.sbH,
-                                Row(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    Padding(
+                      padding: 14.sp.padA,
+                      child: Column(
+                        children: [
+                          Row(
+                            children: [
+                              Padding(
+                                padding: 20.sp.padR,
+                                child: Row(
                                   children: [
-                                    PriceWidget(
-                                      value: 2095,
-                                      currency: Currency.dollar,
-                                      color: primaryColor,
-                                      size: 16.49.sp,
-                                      weight: FontWeight.w900,
-                                      roundUp: true,
+                                    SvgBuilder(
+                                      Assets.svg.bed,
+                                      size: 16.sp,
                                     ),
+                                    5.sp.sbW,
                                     AppText(
-                                      convertListString(LocaleData.percentageFunded.convertString(), data: [20]),
-                                      size: 10.99.sp,
+                                      convertListString(LocaleData.bedsNumber.convertString(), data: [property.bedAmount??0]),
+                                      size: 13.sp,
                                       weight: FontWeight.w500,
-                                      color: stateColor11(theme.isDark),
+                                      color: stateColor12(isAppDark(context)),
+                                    )
+                                  ],
+                                ),
+                              ),
+                              Padding(
+                                padding: 20.sp.padR,
+                                child: Row(
+                                  children: [
+                                    SvgBuilder(
+                                      Assets.svg.document,
+                                      size: 16.sp,
+                                    ),
+                                    5.sp.sbW,
+                                    AppText(
+                                      property.forRent == true? LocaleData.rented.convertString(): LocaleData.sale.convertString(),
+                                      size: 13.sp,
+                                      weight: FontWeight.w500,
+                                      color: stateColor12(isAppDark(context)),
+                                    )
+                                  ],
+                                ),
+                              ),
+                              Padding(
+                                padding: 20.sp.padR,
+                                child: Row(
+                                  children: [
+                                    SvgBuilder(
+                                      Assets.svg.location,
+                                      size: 16.sp,
+                                    ),
+                                    5.sp.sbW,
+                                    AppText(
+                                      property.country??"",
+                                      size: 13.sp,
+                                      weight: FontWeight.w500,
+                                      color: stateColor12(isAppDark(context)),
+                                    )
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                          Divider(),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: [
+                              AppText(
+                                property.name??"",
+                                size: 15.6.sp,
+                                weight: FontWeight.w700,
+                                color: stateColor12(theme.isDark),
+                              ),
+                              AppText(
+                                property.location??"",
+                                size: 10.99.sp,
+                                weight: FontWeight.w500,
+                                color: stateColor11(theme.isDark),
+                              ),
+                              10.sp.sbH,
+                              Row(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  PriceWidget(
+                                    value: property.amountFunded,
+                                    color: primaryColor,
+                                    size: 16.49.sp,
+                                    weight: FontWeight.w900,
+                                    roundUp: true,
+                                  ),
+                                  AppText(
+                                    convertListString(LocaleData.percentageFunded.convertString(), data: [(((property.amountFunded??0)/(property.totalCost??0))*100).toInt()]),
+                                    size: 10.99.sp,
+                                    weight: FontWeight.w500,
+                                    color: stateColor11(theme.isDark),
+                                  ),
+                                ],
+                              ),
+                              5.sp.sbH,
+                              AppCard(
+                                heights: 5.sp,
+                                padding: 0.sp.padA,
+                                color: Color(0xFFD9D9D9),
+                                child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Expanded(
+                                      child: LayoutBuilder(
+                                          builder: (context, constraint) {
+                                            double width =  ((property.amountFunded??0)/(property.totalCost??0)) * constraint.maxWidth;
+                                            return Row(
+                                              mainAxisAlignment: MainAxisAlignment.start,
+                                              children: [
+                                                AppCard(
+                                                  expandable: true,
+                                                  heights: 5.sp,
+                                                  widths: width,
+                                                  color: primaryColor,
+                                                ),
+                                              ],
+                                            );
+                                          }
+                                      ),
                                     ),
                                   ],
                                 ),
-                                5.sp.sbH,
-                                AppCard(
-                                  heights: 5.sp,
-                                  padding: 0.sp.padA,
-                                  color: Color(0xFFD9D9D9),
-                                  child: Row(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      Expanded(
-                                        child: AppCard(
-                                          heights: 5.sp,
-                                          color: primaryColor,
+                              ),
+                              Divider(),
+                              AppCard(
+                                bordered: true,
+                                borderColor: Theme.of(context).disabledColor.withValues(alpha: 0.4),
+                                padding: 8.sp.padA,
+                                child: Column(
+                                  children: [
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        AppText(
+                                          LocaleData.fiveYearTotalReturn.convertString(),
+                                          size: 10.99.sp,
+                                          weight: FontWeight.w500,
+                                          color: stateColor11(theme.isDark),
                                         ),
-                                      ),
-                                      Expanded(
-                                        flex: ((80/100)*4).toInt(),
-                                        child: 0.0.sbH
-                                      )
-                                    ],
-                                  ),
+                                        AppText(
+                                          "${(property.returnPercentageFiveYears??0).toStringAsFixed(0)}%",
+                                          size: 10.99.sp,
+                                          weight: FontWeight.w500,
+                                          color: stateColor11(theme.isDark),
+                                        ),
+
+                                      ],
+                                    ),
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        AppText(
+                                          LocaleData.yearlyReturns.convertString(),
+                                          size: 10.99.sp,
+                                          weight: FontWeight.w500,
+                                          color: stateColor11(theme.isDark),
+                                        ),
+                                        AppText(
+                                          "${(property.returnPercentagePerYear??0).toStringAsFixed(0)}%",
+                                          size: 10.99.sp,
+                                          weight: FontWeight.w500,
+                                          color: stateColor11(theme.isDark),
+                                        ),
+
+                                      ],
+                                    ),
+                                  ],
                                 ),
-                                Divider(),
-                                AppCard(
-                                  bordered: true,
-                                  borderColor: Theme.of(context).disabledColor.withValues(alpha: 0.4),
-                                  padding: 8.sp.padA,
-                                  child: Column(
-                                    children: [
-                                      Row(
-                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          AppText(
-                                            "5 year total return",
-                                            size: 10.99.sp,
-                                            weight: FontWeight.w500,
-                                            color: stateColor11(theme.isDark),
-                                          ),
-                                          AppText(
-                                            "50%",
-                                            size: 10.99.sp,
-                                            weight: FontWeight.w500,
-                                            color: stateColor11(theme.isDark),
-                                          ),
-
-                                        ],
-                                      ),
-                                      Row(
-                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          AppText(
-                                            "Yearly return",
-                                            size: 10.99.sp,
-                                            weight: FontWeight.w500,
-                                            color: stateColor11(theme.isDark),
-                                          ),
-                                          AppText(
-                                            "20%",
-                                            size: 10.99.sp,
-                                            weight: FontWeight.w500,
-                                            color: stateColor11(theme.isDark),
-                                          ),
-
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                )
-                              ],
-                            )
-                          ],
-                        ),
-                      )
+                              ),
+                            ],
+                          )
+                        ],
+                      ),
                     )
                   ],
                 ),

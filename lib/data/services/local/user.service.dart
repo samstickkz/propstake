@@ -3,13 +3,23 @@ import 'dart:developer';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:propstake/data/model/wallet_response_model.dart';
+import 'package:propstake/localization/locales.dart';
+import 'package:propstake/locator.dart';
+import 'package:propstake/ui/base/base-vm.dart';
 import 'package:propstake/utils/app_logger.dart';
 import 'package:propstake/utils/dartz.x.dart';
+import 'package:propstake/utils/snack_message.dart';
+import 'package:propstake/utils/string_extensions.dart';
 
 import '../../../ui/auth/auth.ui.dart';
+import '../../../ui/home/properties/properies.vm.dart';
 import '../../../utils/constants.dart';
 import '../../cache/database_keys.dart';
+import '../../model/cart_model.dart';
 import '../../model/get_user_model.dart';
+import '../../model/login_auth_model.dart';
+import '../../model/propert_response.dart';
 
 
 class UserService extends ChangeNotifier {
@@ -18,7 +28,46 @@ class UserService extends ChangeNotifier {
   bool isDoctor = false;
   bool rememberMe = false;
   String userId = "";
+  String? referralCode;
   num price = 10000;
+  num? userBalance;
+  List<PropertyResponse> bookMarks = [];
+  List<TempCart> cartItems = [];
+  List<TempTransactions> transactions = [];
+
+  removeFromCart(TempCart cart){
+    cartItems.removeWhere((test)=> test.id == cart.id);
+    notifyListeners();
+  }
+
+  saveCart(TempCart cart){
+    if(cartItems.any((test)=> test.product?.id == cart.product?.id)){
+      showCustomToast(LocaleData.propertyAlreadyInCart.convertString());
+    }else{
+      cartItems.add(cart);
+      showCustomToast(LocaleData.propertyAddedToCart.convertString(), success: true);
+    }
+    notifyListeners();
+  }
+
+  updateCarts(List<TempCart> carts){
+    cartItems = carts;
+    notifyListeners();
+  }
+
+  updateTransactions(List<TempTransactions> carts){
+    transactions = carts;
+    notifyListeners();
+  }
+
+  saveUnSaveBookMark(PropertyResponse property){
+    if(bookMarks.any((test)=> test.id == property.id)){
+      bookMarks.removeWhere((test)=> test.id == property.id);
+    }else{
+      bookMarks.add(property);
+    }
+    notifyListeners();
+  }
 
 
   changeUserType(bool doctor){
@@ -56,11 +105,61 @@ class UserService extends ChangeNotifier {
     }else{
       isUserLoggedIn = true;
       await getStoreUser();
+      await getSavedBValance();
+      await getSavedReferralCode();
+      locator<BaseViewModel>().getWallet();
     }
     log("ACCESS TOKEN (AUTH)::: $userToken");
     log("Is User Logged In:::: $isUserLoggedIn");
 
     notifyListeners();
+  }
+
+  saveWalletBalance(BalanceResponse balance) async {
+    if(balance.data != null){
+      var res = await storageService.storeItem(key: StorageKey.walletBalance, value: jsonEncode(balance));
+      if(res){
+        userBalance = balance.data ?? userBalance;
+      }
+    }
+    notifyListeners();
+  }
+
+  saveReferralCode(LoginAuthModel balance) async {
+    try{
+      if(balance.data != null){
+        var res = await storageService.storeItem(key: StorageKey.referralCode, value: balance.data);
+        if(res){
+          referralCode = balance.data ?? referralCode;
+        }
+      }
+    }catch(err){
+      AppLogger.debug("Error ::: $err");
+    }
+
+    notifyListeners();
+  }
+
+  Future<num?> getSavedBValance() async {
+    String? res = await storageService.read(key: StorageKey.walletBalance);
+    if(res != null){
+      userBalance = BalanceResponse.fromJson(jsonDecode(res)).data ?? userBalance;
+    }else {
+      await walletService.getWallet();
+    }
+    notifyListeners();
+    return userBalance;
+  }
+
+  Future<String?> getSavedReferralCode() async {
+    String? res = await storageService.read(key: StorageKey.referralCode);
+    if(res != null){
+      referralCode = res;
+    } else {
+      await authenticationService.getReferralCode();
+    }
+    notifyListeners();
+    return referralCode;
   }
 
 
@@ -69,6 +168,8 @@ class UserService extends ChangeNotifier {
     await storageService.deleteItem(key: StorageKey.userTableKey);
     await storageService.deleteItem(key: StorageKey.refreshTokenKey);
     await storageService.deleteItem(key: StorageKey.tokenTableKey);
+    await storageService.deleteItem(key: StorageKey.walletBalance);
+    await storageService.deleteItem(key: StorageKey.referralCode);
     isUserLoggedIn = false;
     user = User();
     notifyListeners();

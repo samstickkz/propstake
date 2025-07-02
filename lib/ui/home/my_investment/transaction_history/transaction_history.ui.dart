@@ -7,6 +7,7 @@ import 'package:propstake/utils/widget_extensions.dart';
 import 'package:propstake/widget/appbar_widget.dart';
 
 import '../../../../app_theme/palette.dart';
+import '../../../../gen/assets.gen.dart';
 import '../../../../widget/app_card.dart';
 import '../../../../widget/apptexts.dart';
 import '../../../../widget/price_widget.dart';
@@ -19,6 +20,8 @@ class TransactionHomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BaseView<MyInvestHomeViewModel>(
+      onModelReady: (m)=>m.init(),
+      useFullScreenLoader: true,
       builder: (model, theme)=> Scaffold(
         appBar: AppBars(
           text: LocaleData.transactionHistory.convertString(),
@@ -43,7 +46,7 @@ class TransactionHomeScreen extends StatelessWidget {
               padding: 0.sp.padA,
               child: Column(
                 children: List.generate(
-                    model.transactions.length,
+                    model.transactionsData.length,
                         (index){
                       return Container(
                         padding: EdgeInsets.symmetric(
@@ -52,20 +55,20 @@ class TransactionHomeScreen extends StatelessWidget {
                         ),
                         decoration: BoxDecoration(
                             border: Border(
-                                bottom: index == (model.transactions.length-1)? BorderSide.none : BorderSide(color: stateColor4(isAppDark(context)))
+                                bottom: index == (model.transactionsData.length-1)? BorderSide.none : BorderSide(color: stateColor4(isAppDark(context)))
                             )
                         ),
                         child: Row(
                           spacing: 16.sp,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            SvgBuilder(model.transactions[index]["image"], size: 32.sp,),
+                            SvgBuilder(Assets.svg.invest, size: 32.sp,),
                             Expanded(child: Column(
                               spacing: 4.sp,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 AppText(
-                                  model.transactions[index]["title"],
+                                  model.properties.firstWhere((t)=> t.id == model.transactionsData[index].product?.id).name??"",
                                   weight: FontWeight.w500,
                                   size: 14.sp,
                                 ),
@@ -73,84 +76,14 @@ class TransactionHomeScreen extends StatelessWidget {
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [
                                     PriceWidget(
-                                      value: model.transactions[index]["value"],
+                                      value: model.transactionsData[index].amountSelected,
                                       size: 12.sp,
                                       currency: Currency.dollar,
                                       roundUp: true,
                                       useSymbol: false,
                                     ),
                                     AppText(
-                                      model.getTextFromDateTime(model.transactions[index]["dateTime"]),
-                                      size: 10.sp,
-                                    )
-                                  ],
-                                )
-                              ],
-                            ))
-
-                          ],
-                        ),
-                      );
-                    }
-                ),
-              ),
-            ),
-            30.sp.sbH,
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                AppText(
-                  LocaleData.older.convertString(),
-                  weight: FontWeight.w700,
-                  size: 16.sp,
-                  isTitle: true,
-                ),
-              ],
-            ),
-            16.sp.sbH,
-            AppCard(
-              padding: 0.sp.padA,
-              child: Column(
-                children: List.generate(
-                    model.transactions.length,
-                        (index){
-                      return Container(
-                        padding: EdgeInsets.symmetric(
-                            horizontal: 10.sp,
-                            vertical: 16.sp
-                        ),
-                        decoration: BoxDecoration(
-                            border: Border(
-                                bottom: index == (model.transactions.length-1)? BorderSide.none : BorderSide(color: stateColor4(isAppDark(context)))
-                            )
-                        ),
-                        child: Row(
-                          spacing: 16.sp,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            SvgBuilder(model.transactions[index]["image"], size: 32.sp,),
-                            Expanded(child: Column(
-                              spacing: 4.sp,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                AppText(
-                                  model.transactions[index]["title"],
-                                  weight: FontWeight.w500,
-                                  size: 14.sp,
-                                ),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    PriceWidget(
-                                      value: model.transactions[index]["value"],
-                                      size: 12.sp,
-                                      currency: Currency.dollar,
-                                      roundUp: true,
-                                      useSymbol: false,
-                                    ),
-                                    AppText(
-                                      model.getTextFromDateTime(model.transactions[index]["dateTime"]),
+                                      model.getTextFromDateTime(model.transactionsData[index].addedAt?? DateTime.now()),
                                       size: 10.sp,
                                     )
                                   ],
