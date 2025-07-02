@@ -102,7 +102,7 @@ class MyInvestHomeScreen extends StatelessWidget {
                   children: [
                     InkWell(
                       borderRadius: BorderRadius.circular(65.sp/2),
-                      // onTap: model.goToDeposit,
+                      onTap: model.goToDeposit,
                       child: Container(
                         height: 65.sp,
                         width: 65.sp,
@@ -181,6 +181,15 @@ class MyInvestHomeScreen extends StatelessWidget {
                     ],
                   ),
                   16.sp.sbH,
+                  if(model.transactionsData.isEmpty)
+                  AppCard(
+                    bordered: true,
+                    borderColor: gray5(isAppDark(context)),
+                    heights: 150.sp,
+                    child: Center(
+                      child: AppText("No transaction",),
+                    ),
+                  ) else
                   AppCard(
                     padding: 0.sp.padA,
                     child: Column(

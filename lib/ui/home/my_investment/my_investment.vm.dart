@@ -78,7 +78,7 @@ class MyInvestHomeViewModel extends BaseViewModel {
 
   start()async{
     balance = totalInvestment();
-    myBalance = myBalance = [
+    myBalance = [
       {
         "title": LocaleData.totalInvestmentOnly.convertString(),
         "value": balance ?? 0,
@@ -128,7 +128,21 @@ class MyInvestHomeViewModel extends BaseViewModel {
   num? balance;
 
   List<Map<String, dynamic>> myBalance = [
-
+    {
+      "title": LocaleData.totalBalance.convertString(),
+      "value": 0,
+      "currency": Currency.naira
+    },
+    {
+      "title": "USD Balance",
+      "value": 0,
+      "currency": Currency.naira
+    },
+    {
+      "title": "NGN Balance",
+      "value": 0,
+      "currency": Currency.naira
+    },
   ];
 
   // List<Map<String, dynamic>> transactions = [
@@ -178,9 +192,9 @@ class MyInvestHomeViewModel extends BaseViewModel {
     navigationService.navigateToRoute(TransactionHomeScreen());
   }
 
-  // goToDeposit()async {
-  //   navigationService.navigateToRoute(AccountDetailScreen());
-  // }
+  goToDeposit()async {
+    navigationService.navigateToRoute(AccountDetailScreen());
+  }
 
   goToWithdraw()async {
     navigationService.navigateToRoute(WithdrawScreen());

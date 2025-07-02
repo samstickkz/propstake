@@ -84,7 +84,7 @@ class WalletService {
   }
 
   Future<bool> transaction({
-    required PropertyResponse property,
+    PropertyResponse? property,
     required num currentPrice,
     required String id,
     required String wallet,
@@ -92,16 +92,14 @@ class WalletService {
   }) async {
     try {
 
-      final docRef = FirebaseFirestore.instance
-          .collection("new")
-          .doc(property.id??"");
-
       Map<String, dynamic> cartItem = {
         "tempID": id,
         "userId": userService.user.email,
         "paymentType": paymentType,
         "wallet": wallet,
-        "product": docRef,
+        "product": property?.id != null? FirebaseFirestore.instance
+            .collection("new")
+            .doc(property?.id??"") : null,
         "status": "pending",
         "amountSelected": currentPrice,
         "addedAt": DateTime.now().toString()
@@ -121,10 +119,12 @@ class WalletService {
       // Add to "carts" collection
       await firestore.collection("transactions").add(cartItem);
 
-      await FirebaseFirestore.instance.collection("new").doc(property.id).update({
-        "sale": FieldValue.arrayUnion([values]),
-        "amountFunded": (property.amountFunded??0) + currentPrice
-      });
+      if(property?.id != null){
+        await FirebaseFirestore.instance.collection("new").doc(property?.id).update({
+          "sale": FieldValue.arrayUnion([values]),
+          "amountFunded": (property?.amountFunded??0) + currentPrice
+        });
+      }
 
       return true;
     } catch (e) {

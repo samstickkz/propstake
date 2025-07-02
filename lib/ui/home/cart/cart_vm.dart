@@ -23,6 +23,18 @@ class CartViewModel extends BaseViewModel {
   List<TextEditingController> controllers = [];  // Add controllers list
   List<String> values = [];
 
+  String id = "";
+  detailIit() async {
+    id = getRandomString(24);
+  }
+
+  onChangeTap(int i){
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      formKey.currentState!.validate();
+      notifyListeners();
+    });
+  }
+
   onInit() async {
     startLoader();
     cartItems = await walletService.fetchCarts();
@@ -41,6 +53,11 @@ class CartViewModel extends BaseViewModel {
       controllers[index].text = value;  // Ensure the controller updates
     }
     formKey.currentState!.validate();
+    notifyListeners();
+  }
+
+  TextEditingController controller =  TextEditingController();
+  onChanged(String? value,) {
     notifyListeners();
   }
 
@@ -89,7 +106,7 @@ class CartViewModel extends BaseViewModel {
   }
 
   submit({
-    required PropertyResponse property,
+    PropertyResponse? property,
     required num price,
     required String paymentType,
     required String wallet,

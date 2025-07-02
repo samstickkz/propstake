@@ -11,11 +11,13 @@ import 'package:propstake/ui/base/base-ui.dart';
 import 'package:propstake/ui/home/cart/cart_vm.dart';
 import 'package:propstake/ui/home/properties/properies.vm.dart';
 import 'package:propstake/utils/string_extensions.dart';
+import 'package:propstake/utils/validator.dart';
 import 'package:propstake/utils/widget_extensions.dart';
 import 'package:propstake/widget/app_button.dart';
 import 'package:propstake/widget/appbar_widget.dart';
 import 'package:propstake/widget/apptexts.dart';
 import 'package:propstake/widget/price_widget.dart';
+import 'package:propstake/widget/text_field.dart';
 
 import '../../../../data/model/cart_model.dart';
 import '../../../../utils/constants.dart';
@@ -26,13 +28,14 @@ import '../../../../widget/svg_builder.dart';
 import '../../bottom_nav.ui.dart';
 
 class AccountDetailScreen extends StatelessWidget {
-  final PropertyResponse propertyResponse;
-  final num price;
-  const AccountDetailScreen({super.key, required this.propertyResponse, required this.price});
+  final PropertyResponse? propertyResponse;
+  final num? price;
+  const AccountDetailScreen({super.key, this.propertyResponse, this.price});
 
   @override
   Widget build(BuildContext context) {
     return BaseView<CartViewModel>(
+      onModelReady: (m)=> m.detailIit(),
       builder: (model, theme) {
         return Scaffold(
           appBar: AppBars(
@@ -58,12 +61,34 @@ class AccountDetailScreen extends StatelessWidget {
                         children: [
                           AppText(LocaleData.copyDetailsAndMakePayment.convertString()),
                           16.sp.sbH,
+                          if(price!=null)
                           AccountOptionWidget(
                             title: LocaleData.amount.convertString(),
-                            value: price.toStringAsFixed(2),
+                            value: price!.toStringAsFixed(2),
                             isPrice: true,
                             currency: Currency.dollar,
-                          ),
+                          ) else ...[
+                            AppTextField(
+                              validator: numberValidator,
+                              onChanged: model.onChanged,
+                              controller: model.controller,
+                              inputFormatters: [
+                                NumericTextFormatter()
+                              ],
+                              contentPadding: 10.sp.padA,
+                              hint: LocaleData.selectAmount.convertString(),
+                              prefixIcon: Padding(
+                                padding: 8.sp.padH,
+                                child: AppText(
+                                  "\$",
+                                  isTitle: true,
+                                  color: primaryColor,
+                                  family: "inter",
+                                ),
+                              ),
+                            ),
+                            16.sp.sbH
+                          ],
                           AccountOptionWidget(
                             title: LocaleData.accountName.convertString(),
                             value: "NPJ Luxury Properties Ltd",
@@ -79,7 +104,7 @@ class AccountDetailScreen extends StatelessWidget {
                           ),
                           AccountOptionWidget(
                             title: LocaleData.addMemoPleaseAddMemoToTheTransaction.convertString(),
-                            value: propertyResponse.id??"",
+                            value: propertyResponse?.id?? model.id,
                             copy: true,
                           ),
                           30.sp.sbH,
@@ -92,13 +117,13 @@ class AccountDetailScreen extends StatelessWidget {
                           AppButton.fullWidth(
                             isLoading: false,
                             text: LocaleData.iHaveMadeTheTransfer.convertString(),
-                            onTap: ()=> model.submit(
+                            onTap: price != null ||model.controller.text.trim().isNotEmpty? ()=> model.submit(
                               property: propertyResponse,
-                              price: price,
+                              price: price ?? num.tryParse(model.controller.text.trim())?? 0,
                               paymentType: "FIAT",
                               wallet: "FCMB - 2004749140",
-                              id: DateTime.now().toIso8601String()+getRandomString(15)
-                            ),
+                              id: model.id
+                            ) : null,
                           ),
                           100.sp.sbH,
                         ],
@@ -108,12 +133,34 @@ class AccountDetailScreen extends StatelessWidget {
                         children: [
                           AppText(LocaleData.copyDetailsAndMakePayment.convertString()),
                           16.sp.sbH,
-                          AccountOptionWidget(
-                            title: LocaleData.amount.convertString(),
-                            value: price.toStringAsFixed(2),
-                            isPrice: true,
-                            currency: Currency.dollar,
-                          ),
+                          if(price!=null)
+                            AccountOptionWidget(
+                              title: LocaleData.amount.convertString(),
+                              value: price!.toStringAsFixed(2),
+                              isPrice: true,
+                              currency: Currency.dollar,
+                            ) else ...[
+                            AppTextField(
+                              validator: numberValidator,
+                              onChanged: model.onChanged,
+                              controller: model.controller,
+                              inputFormatters: [
+                                NumericTextFormatter()
+                              ],
+                              contentPadding: 10.sp.padA,
+                              hint: LocaleData.selectAmount.convertString(),
+                              prefixIcon: Padding(
+                                padding: 8.sp.padH,
+                                child: AppText(
+                                  "\$",
+                                  isTitle: true,
+                                  color: primaryColor,
+                                  family: "inter",
+                                ),
+                              ),
+                            ),
+                            16.sp.sbH
+                          ],
                           ListView.builder(
                             padding: 16.sp.padV,
                             shrinkWrap: true,
@@ -146,13 +193,12 @@ class AccountDetailScreen extends StatelessWidget {
                                     AppButton.fullWidth(
                                       isLoading: model.isLoading,
                                       text: LocaleData.done.convertString(),
-                                      onTap: ()=>  model.submit(
-                                          property: propertyResponse,
-                                          price: price,
+                                        onTap: price != null ||model.controller.text.trim().isNotEmpty? ()=> model.submit(
+                                          price: price ?? num.tryParse(model.controller.text.trim())?? 0,
                                           paymentType: "CRYPTO",
                                           wallet: "${crypto[i].name} - ${crypto[i].value}",
-                                          id: DateTime.now().toIso8601String()+getRandomString(15)
-                                      )
+                                          id: model.id
+                                      ): null
                                     )
                                   ],
                                 ),

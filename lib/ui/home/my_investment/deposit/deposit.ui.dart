@@ -28,7 +28,7 @@ class DepositScreen extends StatelessWidget {
           AppText(LocaleData.chooseAPaymentMethodThatWorksBestForYou.convertString()),
           16.sp.sbH,
           AppCard(
-            // onTap: ()=> navigationService.navigateToRoute(AccountDetailScreen()),
+            onTap: ()=> navigationService.navigateToRoute(AccountDetailScreen()),
             color: stateColor3(isAppDark(context)),
               padding: EdgeInsets.symmetric(
                   horizontal: 10.sp,
