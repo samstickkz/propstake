@@ -64,9 +64,9 @@ class AccountDetailScreen extends StatelessWidget {
                           if(price!=null)
                           AccountOptionWidget(
                             title: LocaleData.amount.convertString(),
-                            value: price!.toStringAsFixed(2),
+                            value: (price!*1525).toStringAsFixed(2),
                             isPrice: true,
-                            currency: Currency.dollar,
+                            currency: Currency.naira,
                           ) else ...[
                             AppTextField(
                               validator: numberValidator,
@@ -75,12 +75,13 @@ class AccountDetailScreen extends StatelessWidget {
                               inputFormatters: [
                                 NumericTextFormatter()
                               ],
+                              keyboardType: TextInputType.number,
                               contentPadding: 10.sp.padA,
                               hint: LocaleData.selectAmount.convertString(),
                               prefixIcon: Padding(
                                 padding: 8.sp.padH,
                                 child: AppText(
-                                  "\$",
+                                  "₦",
                                   isTitle: true,
                                   color: primaryColor,
                                   family: "inter",
@@ -119,7 +120,7 @@ class AccountDetailScreen extends StatelessWidget {
                             text: LocaleData.iHaveMadeTheTransfer.convertString(),
                             onTap: price != null ||model.controller.text.trim().isNotEmpty? ()=> model.submit(
                               property: propertyResponse,
-                              price: price ?? num.tryParse(model.controller.text.trim())?? 0,
+                              price: price ?? (num.tryParse(model.controller.text.trim())?? 0)/ 1525,
                               paymentType: "FIAT",
                               wallet: "FCMB - 2004749140",
                               id: model.id
@@ -144,6 +145,7 @@ class AccountDetailScreen extends StatelessWidget {
                               validator: numberValidator,
                               onChanged: model.onChanged,
                               controller: model.controller,
+                              keyboardType: TextInputType.number,
                               inputFormatters: [
                                 NumericTextFormatter()
                               ],
