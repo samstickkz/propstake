@@ -216,7 +216,7 @@ class MyInvestHomeScreen extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     AppText(
-                                      model.properties.firstWhere((t)=> t.id == model.transactionsData[index].product?.id).name??"",
+                                      model.properties.any((t)=> t.id == model.transactionsData[index].product?.id)?model.properties.firstWhere((t)=> t.id == model.transactionsData[index].product?.id).name??"": "Transfer",
                                       weight: FontWeight.w500,
                                       size: 14.sp,
                                     ),
