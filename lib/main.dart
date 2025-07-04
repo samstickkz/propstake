@@ -136,7 +136,7 @@ class _MyAppState extends State<MyApp> {
     // Initialize and check login Status
     await configureLocalization();
 
-    await NotificationService.initialize();
+    // await NotificationService.initialize();
   }
 
   @override
