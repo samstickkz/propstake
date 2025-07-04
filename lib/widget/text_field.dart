@@ -50,6 +50,7 @@ class AppTextField extends StatefulWidget {
   final Function(String)? onFieldSubmitted;
   final Function(String)? onChanged;
   final TextEditingController? controller;
+  final TextStyle? errorStyle;
   final TextInputAction? textInputAction;
   final TextInputType? keyboardType;
 
@@ -91,7 +92,8 @@ class AppTextField extends StatefulWidget {
         this.autoValidateMode,
         this.borderRadius,
         this.bodyTextColor,
-        this.textInputAction, this.prefixIcon
+        this.textInputAction, this.prefixIcon,
+        this.errorStyle
       });
 
   @override
@@ -234,7 +236,7 @@ class _AppTextFieldState extends State<AppTextField> {
                     label: widget.label,
                     labelText: widget.labelText,
                     contentPadding: widget.contentPadding,
-                  errorStyle: Theme.of(context).inputDecorationTheme.errorStyle?.copyWith(
+                  errorStyle: widget.errorStyle?? Theme.of(context).inputDecorationTheme.errorStyle?.copyWith(
                     fontSize: !widget.showError? 0.sp: null,
 
                   )

@@ -32,7 +32,7 @@ class TransactionResponse {
   Map<String, dynamic> toJson() => {
     "successful": successful,
     "message": message,
-    "data": data.map((x) => x?.toJson()).toList(),
+    "data": data.map((x) => x.toJson()).toList(),
   };
 
   @override

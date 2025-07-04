@@ -66,10 +66,6 @@ class ProfilePic extends StatelessWidget {
     //   return result;
     // }
 
-    Uint8List decodeBase64Image(String base64String) {
-      return base64Decode(base64String);
-    }
-
 
     String getInitials() {
       List<String> names = username != null? username!.split(" ") : (user.fname==null? []:  ("${user.fname??""} ${user.lname??""}").split(' ')); // Split the names by space
@@ -111,24 +107,24 @@ class ProfilePic extends StatelessWidget {
                 shape: BoxShape.circle,
                 color: primaryColor,
                 // borderRadius: circleShape? BorderRadius.circular(size?? 42.sp) : BorderRadius.circular((size?? 42.sp)/5.25),
-                image: userImage == null? null:
+                image: (userImage??"").isEmpty? null:
                 // user.img !=null?
-                userImage.startsWith("http")?
+                (userImage??"").startsWith("http")?
                 DecorationImage(
                   image:  CachedNetworkImageProvider(
-                      userImage,
+                    userImage??"",
                   ),
                   fit: fit?? BoxFit.fill
                 ):
                 DecorationImage(
-                  image: FileImage(File(userImage!)),
+                  image: FileImage(File(userImage??"")),
                   fit: fit?? BoxFit.fill
                 ),
               ),
               child: Stack(
                 alignment: Alignment.center,
                 children: [
-                  if(userImage != null) 0.0.sp.sbH else AppText(
+                  if((userImage??"").isNotEmpty) 0.0.sp.sbH else AppText(
                     getInitials(),
                     size: textSize?? (size?? 40.sp) * 0.4, weight: FontWeight.w700,
                     color: Colors.white,

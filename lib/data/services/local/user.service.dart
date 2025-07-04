@@ -33,6 +33,7 @@ class UserService extends ChangeNotifier {
   num? userBalance;
   List<PropertyResponse> bookMarks = [];
   List<TempCart> cartItems = [];
+  List<TempTransactions> transactions = [];
 
   removeFromCart(TempCart cart){
     cartItems.removeWhere((test)=> test.id == cart.id);
@@ -51,6 +52,11 @@ class UserService extends ChangeNotifier {
 
   updateCarts(List<TempCart> carts){
     cartItems = carts;
+    notifyListeners();
+  }
+
+  updateTransactions(List<TempTransactions> carts){
+    transactions = carts;
     notifyListeners();
   }
 

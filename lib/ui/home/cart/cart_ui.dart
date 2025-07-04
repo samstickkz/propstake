@@ -138,7 +138,7 @@ class CartScreen extends StatelessWidget {
                                       prefixIcon: Padding(
                                         padding: 8.sp.padH,
                                         child: AppText(
-                                          "₦",
+                                          "\$",
                                           isTitle: true,
                                           color: primaryColor,
                                           family: "inter",
@@ -171,11 +171,14 @@ class CartScreen extends StatelessWidget {
                           Divider(
                             height: 1.sp,
                           ),
-                          AppButton.transparent(
+                          AppButton.fullWidth(
+                            isLoading: false,
+                            backgroundColor: red11(false),
                             text: LocaleData.remove.convertString(),
+                            iconColor: stateColor1(false),
                             svgImage: Assets.svg.trash,
                             onTap: ()=> model.removeFromCart(cart),
-                            textColor: stateColor11(isAppDark(context)),
+                            textColor: stateColor1(false),
                           )
                         ],
                       ),

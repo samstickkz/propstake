@@ -267,7 +267,6 @@ class ProductDetailScreen extends StatelessWidget {
                                           size: 10.99.sp,
                                           roundUp: true,
                                           weight: FontWeight.w500,
-                                          currency: Currency.naira,
                                           color: stateColor11(theme.isDark),
                                         ),
                     
@@ -284,7 +283,7 @@ class ProductDetailScreen extends StatelessWidget {
                                           color: stateColor11(theme.isDark),
                                         ),
                                         AppText(
-                                          (property.returnPercentageFiveYears??0).toStringAsFixed(0),
+                                          "${(property.returnPercentageFiveYears??0).toStringAsFixed(0)}%",
                                           size: 10.99.sp,
                                           weight: FontWeight.w500,
                                           color: stateColor11(theme.isDark),
@@ -303,7 +302,7 @@ class ProductDetailScreen extends StatelessWidget {
                                           color: stateColor11(theme.isDark),
                                         ),
                                         AppText(
-                                          (property.returnPercentagePerYear??0).toStringAsFixed(0),
+                                          "${(property.returnPercentagePerYear??0).toStringAsFixed(0)}%",
                                           size: 10.99.sp,
                                           weight: FontWeight.w500,
                                           color: stateColor11(theme.isDark),
@@ -315,61 +314,61 @@ class ProductDetailScreen extends StatelessWidget {
                                 ),
                               ),
                               20.sp.sbH,
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  AppText(
-                                    LocaleData.frequentlyAskedQuestion.convertString(),
-                                    weight: FontWeight.w700,
-                                    size: 16.sp,
-                                    isTitle: true,
-                                  ),
-                                ],
-                              ),
-                              16.sp.sbH,
-                              SizedBox(
-                                height: 92.sp,
-                                width: width(context),
-                                child: ListView.builder(
-                                  shrinkWrap: true,
-                                  scrollDirection: Axis.horizontal,
-                                  itemCount: locator<ProfileHomeViewModel>().faqs.length,
-                                  itemBuilder: (_, i){
-                                      return AppCard(
-                                        onTap: ()=> model.goFaqDetail(locator<ProfileHomeViewModel>().faqs[i]),
-                                        heights: height(context),
-                                        widths: 139.sp,
-                                        margin: 16.sp.padR,
-                                        backgroundImage: i%2 == 0? Assets.png.backOne.path : Assets.png.backTwo.path,
-                                        child: Column(
-                                          mainAxisAlignment: MainAxisAlignment.center,
-                                          crossAxisAlignment: CrossAxisAlignment.center,
-                                          children: [
-                                            Row(
-                                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                              children: [
-                                                SvgBuilder(Assets.svg.money, size: 16.sp,),
-                                                SvgBuilder(Assets.svg.arrowRightWhite, size: 16.sp,),
-                                              ],
-                                            ),
-                                            Expanded(
-                                              child: Align(
-                                                alignment: Alignment.centerLeft,
-                                                child: AppText(
-                                                  locator<ProfileHomeViewModel>().faqs[i].title,
-                                                  weight: FontWeight.w500,
-                                                  size: 10.sp,
-                                                  color: Colors.white,
-                                                ),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      );
-                                    }
-                                ),
-                              ),
+                              // Row(
+                              //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              //   crossAxisAlignment: CrossAxisAlignment.center,
+                              //   children: [
+                              //     AppText(
+                              //       LocaleData.frequentlyAskedQuestion.convertString(),
+                              //       weight: FontWeight.w700,
+                              //       size: 16.sp,
+                              //       isTitle: true,
+                              //     ),
+                              //   ],
+                              // ),
+                              // 16.sp.sbH,
+                              // SizedBox(
+                              //   height: 92.sp,
+                              //   width: width(context),
+                              //   child: ListView.builder(
+                              //     shrinkWrap: true,
+                              //     scrollDirection: Axis.horizontal,
+                              //     itemCount: locator<ProfileHomeViewModel>().faqs.length,
+                              //     itemBuilder: (_, i){
+                              //         return AppCard(
+                              //           onTap: ()=> model.goFaqDetail(locator<ProfileHomeViewModel>().faqs[i]),
+                              //           heights: height(context),
+                              //           widths: 139.sp,
+                              //           margin: 16.sp.padR,
+                              //           backgroundImage: i%2 == 0? Assets.png.backOne.path : Assets.png.backTwo.path,
+                              //           child: Column(
+                              //             mainAxisAlignment: MainAxisAlignment.center,
+                              //             crossAxisAlignment: CrossAxisAlignment.center,
+                              //             children: [
+                              //               Row(
+                              //                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              //                 children: [
+                              //                   SvgBuilder(Assets.svg.money, size: 16.sp,),
+                              //                   SvgBuilder(Assets.svg.arrowRightWhite, size: 16.sp,),
+                              //                 ],
+                              //               ),
+                              //               Expanded(
+                              //                 child: Align(
+                              //                   alignment: Alignment.centerLeft,
+                              //                   child: AppText(
+                              //                     locator<ProfileHomeViewModel>().faqs[i].title,
+                              //                     weight: FontWeight.w500,
+                              //                     size: 10.sp,
+                              //                     color: Colors.white,
+                              //                   ),
+                              //                 ),
+                              //               ),
+                              //             ],
+                              //           ),
+                              //         );
+                              //       }
+                              //   ),
+                              // ),
                             ],
                           ),
                         )
@@ -405,13 +404,14 @@ class ProductDetailScreen extends StatelessWidget {
                                     prefixIcon: Padding(
                                       padding: 8.sp.padH,
                                       child: AppText(
-                                        "₦",
+                                        "\$",
                                         isTitle: true,
                                         color: primaryColor,
                                         family: "inter",
                                       ),
                                     ),
                                     keyboardType: TextInputType.number,
+                                    errorStyle: TextStyle(fontSize: 0),
                                     controller: model.currentPrice,
                                     validator: (v)=> model.validator(v, property),
                                     fillColor: fadeBackground(isAppDark(context)),
@@ -424,7 +424,7 @@ class ProductDetailScreen extends StatelessWidget {
                                       isLoading: model.isLoading,
                                       text: LocaleData.addToCart.convertString(),
                                       onTap: model.formKey.currentState?.validate() != true? null: ()=> model.addToCart(property),
-                                      height: 60.sp,
+                                      height: 40.sp,
                                     )
                                 )
                               ],
