@@ -12,6 +12,7 @@ class ActionBottomSheet extends StatelessWidget {
   final Widget? body;
   final String? subTitle;
   final bool useGradient;
+  final bool oneButton;
   final Color? confirmButtonColor;
   final double? width;
   final String? cancelButtonText;
@@ -38,6 +39,7 @@ class ActionBottomSheet extends StatelessWidget {
     this.child,
     this.confirmButtonColor,
     this.useGradient = false,
+    this.oneButton = false,
     this.padding, this.width,
   });
 
@@ -94,21 +96,23 @@ class ActionBottomSheet extends StatelessWidget {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
-                          Expanded(
-                            child: AppButton.fullWidth(
-                              isLoading: false,
-                              height: 48.sp,
-                              backgroundColor: stateColor3(isAppDark(context)),
-                              fontWeight: FontWeight.w600,
-                              textColor: stateColor12(isAppDark(context)),
-                              text: cancelButtonText?? "Cancel",
-                              onTap: (){
-                                Navigator.of(context).pop();
-                                cancelTap ==null? null: cancelTap!();
-                              },
-                              borderColor: stateColor4(isAppDark(context)),
-                            ),
-                          ),
+                          if(!oneButton)...[
+                            Expanded(
+                              child: AppButton.fullWidth(
+                                isLoading: false,
+                                height: 48.sp,
+                                backgroundColor: stateColor3(isAppDark(context)),
+                                fontWeight: FontWeight.w600,
+                                textColor: stateColor12(isAppDark(context)),
+                                text: cancelButtonText?? "Cancel",
+                                onTap: (){
+                                  Navigator.of(context).pop();
+                                  cancelTap ==null? null: cancelTap!();
+                                },
+                                borderColor: stateColor4(isAppDark(context)),
+                              ),
+                            )
+                          ],
                           10.0.sbW,
                           Expanded(
                             child: AppButton.fullWidth(

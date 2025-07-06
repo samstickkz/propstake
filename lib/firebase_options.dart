@@ -71,13 +71,13 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions macos = FirebaseOptions(
     apiKey: 'AIzaSyBo70hlZFKyQ198Zw47MgrM2bdSsXyRRdY',
-    appId: '1:1061435600391:ios:091d597f3cbd7538b604a2',
+    appId: '1:1061435600391:ios:1937cd63508bb692b604a2',
     messagingSenderId: '1061435600391',
     projectId: 'propstake-67d27',
     storageBucket: 'propstake-67d27.firebasestorage.app',
-    androidClientId: '1061435600391-bpj04dhr27njan2ci910ff5ibtv7gsf4.apps.googleusercontent.com',
-    iosClientId: '1061435600391-joeu690dkl1lbhpdjobpgk9eilgrnj3l.apps.googleusercontent.com',
-    iosBundleId: 'com.example.propstake',
+    androidClientId: '1061435600391-7ngcbkhboeusj8cahk0djagshqb02bkh.apps.googleusercontent.com',
+    iosClientId: '1061435600391-4pc2odho453t9uaja8nht2d5h4cc47cv.apps.googleusercontent.com',
+    iosBundleId: 'com.prostake.propstake',
   );
 
   static const FirebaseOptions windows = FirebaseOptions(

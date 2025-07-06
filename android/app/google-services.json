@@ -47,10 +47,10 @@
               "client_type": 3
             },
             {
-              "client_id": "1061435600391-joeu690dkl1lbhpdjobpgk9eilgrnj3l.apps.googleusercontent.com",
+              "client_id": "1061435600391-4pc2odho453t9uaja8nht2d5h4cc47cv.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.example.propstake"
+                "bundle_id": "com.prostake.propstake"
               }
             }
           ]
