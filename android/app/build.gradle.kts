@@ -8,7 +8,7 @@ plugins {
 android {
     namespace = "com.prostake.app"
     compileSdk = 35
-    ndkVersion = "27.0.12077973"
+    ndkVersion = "26.1.10909125"
 
     compileOptions {
         isCoreLibraryDesugaringEnabled = true
