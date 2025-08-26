@@ -27,40 +27,37 @@ class BottomNavigationScreen extends StatelessWidget {
               width: width(context),
               child: model.index == 4? ProfileHomeScreen(goToEdit: goToProfile,): model.screens[model.index],
             ),
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: Padding(
-                padding: EdgeInsets.only(left: 20.sp, right: 20.sp, bottom: 20.sp),
-                child: AppCard(
-                  heights: 66.sp,
-                  radius: 12.sp,
-                  padding: 8.sp.padA,
-                  color: isAppDark(context)?
-                  Color(0xFF181818) :
-                  Color(0xFFF6F6F6),
-                  child: Column(
-                    children: [
-                      Expanded(
-                        child: Row(
-                          children: List.generate(
-                            model.navs.length,
-                            (index){
-                              return BottomNavView(
-                                index: index,
-                                currentIndex: model.index,
-                                onTap: model.changeIndex,
-                                navType: model.navs[index],
-                              );
-                            }
-                          ),
-                        ),
-                      ),
-                    ],
+          ],
+        ),
+        bottomNavigationBar: AppCard(
+          heights: 75.sp,
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(12.sp),
+            topRight: Radius.circular(12.sp),
+          ),
+          padding: 8.sp.padA,
+          color: isAppDark(context)?
+          Color(0xFF181818) :
+          Color(0xFFF6F6F6),
+          child: Column(
+            children: [
+              Expanded(
+                child: Row(
+                  children: List.generate(
+                      model.navs.length,
+                          (index){
+                        return BottomNavView(
+                          index: index,
+                          currentIndex: model.index,
+                          onTap: model.changeIndex,
+                          navType: model.navs[index],
+                        );
+                      }
                   ),
                 ),
               ),
-            )
-          ],
+            ],
+          ),
         ),
       ),
     );
@@ -87,33 +84,37 @@ class BottomNavView extends StatelessWidget {
       child: InkWell(
         splashColor: Colors.transparent,
         onTap: ()=> onTap(index),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            SvgBuilder(index == currentIndex? navType.activeIcon : navType.inActiveIcon),
-            Row(
-              children: [
-                Expanded(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      SizedBox(
-                        height: 14.sp,
-                        child: AppText(
-                          navType.name,
-                          maxLine: 1,
-                          size: 10.27.sp,
-                          weight: FontWeight.w700,
-                          color: index == currentIndex? primaryColor: null,
+        child: Padding(
+          padding: 8.sp.padB,
+          child: Column(
+            spacing: 5.sp,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SvgBuilder(index == currentIndex? navType.activeIcon : navType.inActiveIcon),
+              Row(
+                children: [
+                  Expanded(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        SizedBox(
+                          height: 14.sp,
+                          child: AppText(
+                            navType.name,
+                            maxLine: 1,
+                            size: 10.27.sp,
+                            weight: FontWeight.w700,
+                            color: index == currentIndex? primaryColor: null,
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                ),
-              ],
-            )
-          ],
+                ],
+              )
+            ],
+          ),
         ),
       ),
     );

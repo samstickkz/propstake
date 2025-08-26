@@ -58,6 +58,7 @@ class CartViewModel extends BaseViewModel {
   }
 
   TextEditingController controller =  TextEditingController();
+  TextEditingController controller2 =  TextEditingController();
   onChanged(String? value,) {
     notifyListeners();
   }
