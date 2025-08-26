@@ -11,7 +11,7 @@
 .buildlog/
 .history
 .svn/
-.bashs
+.bash
 .env
 .swiftpm/
 migrate_working_dir/

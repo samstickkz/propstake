@@ -30,6 +30,9 @@ class MyInvestHomeViewModel extends BaseViewModel {
   List<TempTransactions> transactionsData = [];
 
   double totalInvestment() =>
+      transactionsData.where((i)=> (i.status??"").toLowerCase() == "success").fold(0.0, (a, t) => a + (t.amountSelected ?? 0));
+
+  double pendingInvestment() =>
       transactionsData.fold(0.0, (a, t) => a + (t.amountSelected ?? 0));
 
   String getTextFromDateTime(DateTime dateTime){
@@ -82,6 +85,11 @@ class MyInvestHomeViewModel extends BaseViewModel {
       {
         "title": LocaleData.totalInvestmentOnly.convertString(),
         "value": balance ?? 0,
+        "currency": Currency.dollar
+      },
+      {
+        "title": "Pending Balance",
+        "value": pendingInvestment(),
         "currency": Currency.dollar
       },
       {

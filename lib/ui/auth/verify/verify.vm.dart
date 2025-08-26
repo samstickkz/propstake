@@ -108,13 +108,16 @@ class VerifyUserViewModel extends BaseViewModel {
     } else {
       notifyListeners();
     }
+    if(reasons == VerificationReason.reValidate){
+      await resentConfirmEmail();
+    }
     notifyListeners();
   }
 
   TextEditingController codeController = TextEditingController();
 
   confirm() async {
-    if(reason == VerificationReason.login){
+    if(reason == VerificationReason.login || reason == VerificationReason.reValidate){
       verifyUser();
     }else if(reason == VerificationReason.forgetPassword){
       confirmEmail();

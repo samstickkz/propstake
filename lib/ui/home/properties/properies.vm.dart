@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:propstake/data/model/propert_response.dart';
@@ -30,6 +32,8 @@ class PropertiesViewModel extends BaseViewModel {
         return docData;
       }).toList();
 
+      print("Property Lengthsss ::: ${data.length}");
+
       for (var dat in data) {
 
         try {
@@ -41,7 +45,7 @@ class PropertiesViewModel extends BaseViewModel {
           }
           notifyListeners();
         } catch (e) {
-          AppLogger.debug("Error parsing PropertyResponse: $e | Data: $dat");
+          AppLogger.debug("Error parsing PropertyResponse: $e | Data: ${jsonEncode(dat)}");
         }
       }
 
@@ -52,6 +56,7 @@ class PropertiesViewModel extends BaseViewModel {
 
   init()async{
     startLoader();
+    // properties = await walletService.fetchProperties();
     listenToFirestore();
     stopLoader();
     notifyListeners();

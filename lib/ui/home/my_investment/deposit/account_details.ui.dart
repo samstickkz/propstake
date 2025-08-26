@@ -144,7 +144,7 @@ class AccountDetailScreen extends StatelessWidget {
                             AppTextField(
                               validator: numberValidator,
                               onChanged: model.onChanged,
-                              controller: model.controller,
+                              controller: model.controller2,
                               keyboardType: TextInputType.number,
                               inputFormatters: [
                                 NumericTextFormatter()
@@ -184,6 +184,9 @@ class AccountDetailScreen extends StatelessWidget {
                                       height: 250.sp,
                                       child: PrettyQrView.data(
                                         data: crypto[i].value,
+                                        decoration: PrettyQrDecoration(
+                                          background: isAppDark(context)? black(isAppDark(context)): Colors.transparent
+                                        )
                                       ),
                                     ),
                                     AccountOptionWidget(
