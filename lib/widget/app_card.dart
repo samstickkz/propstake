@@ -83,7 +83,7 @@ class AppCard extends StatelessWidget {
             ),
             border: bordered == true
               ? Border.all(
-              color: borderColor ?? Theme.of(context).shadowColor.withOpacity(0.6),
+              color: borderColor ?? Theme.of(context).shadowColor.withValues(alpha: 0.6),
               width: borderWidth ?? 1.sp)
               : null
           ),

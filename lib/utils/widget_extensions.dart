@@ -1,7 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:propstake/utils/constants.dart';
 
 //TODO: uncomment if using a pdf functionality
 // import 'package:pdf/pdf.dart';

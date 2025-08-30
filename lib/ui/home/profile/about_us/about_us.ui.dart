@@ -3,7 +3,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:propstake/localization/locales.dart';
 import 'package:propstake/utils/string_extensions.dart';
 import 'package:propstake/utils/widget_extensions.dart';
-import 'package:propstake/widget/app_card.dart';
 import 'package:propstake/widget/appbar_widget.dart';
 import 'package:propstake/widget/apptexts.dart';
 

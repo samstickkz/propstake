@@ -7,11 +7,8 @@ import 'package:propstake/utils/widget_extensions.dart';
 import 'package:propstake/widget/app_button.dart';
 import 'package:propstake/widget/apptexts.dart';
 import 'package:propstake/widget/auth_appbar.dart';
-import 'package:propstake/widget/svg_builder.dart';
 import 'package:animate_do/animate_do.dart';
 
-import '../../../gen/assets.gen.dart';
-import '../../../utils/constants.dart';
 import '../../../widget/text_field.dart';
 import '../../base/base-ui.dart';
 import '../auth.vm.dart';

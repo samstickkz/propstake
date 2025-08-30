@@ -13,7 +13,6 @@ import '../../cache/database_keys.dart';
 
 Future<void> handleBackgroundMessage(RemoteMessage message) async{
 
-  print("NOTIFICATION RECIEVED");
 
   NotificationService.handleMessage(message);
 }
@@ -35,6 +34,8 @@ class NotificationService{
         var res = await FirebaseMessaging.instance.getAPNSToken();
         if(res!=null){
           var response  = await FirebaseMessaging.instance.getToken();
+          // print("FCM Token: $response");
+
           if(response!=null){
             AppLogger.debug("FCM TOKEN:: $response");
             await storageService.storeItem(key: StorageKey.fcmToken);
@@ -49,6 +50,8 @@ class NotificationService{
         var response  = await FirebaseMessaging.instance.getToken();
         if(response!=null){
           AppLogger.debug("FCM TOKEN:: $response");
+          // print("FCM Token (Android): $response");
+
           await storageService.storeItem(key: StorageKey.fcmToken);
         }else{
           AppLogger.debug("NO FCM TOKEN");
@@ -66,7 +69,7 @@ class NotificationService{
         provisional: false,
         critical: false
     )?? false;
-    print("Is notification allowed::: $isAllowed");
+    // print("Is notification allowed::: $isAllowed");
 
     var androidInitialize = const AndroidInitializationSettings('mipmap/ic_launcher');
     var iOSInitialize = DarwinInitializationSettings(
@@ -95,7 +98,7 @@ class NotificationService{
     );
 
     FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) async {
-      print("Tapped");
+      // print("Tapped");
     });
 
     // FirebaseMessaging.onMessageOpenedApp

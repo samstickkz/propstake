@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:clipboard/clipboard.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -9,7 +8,6 @@ import 'package:propstake/gen/assets.gen.dart';
 import 'package:propstake/localization/locales.dart';
 import 'package:propstake/ui/base/base-ui.dart';
 import 'package:propstake/ui/home/cart/cart_vm.dart';
-import 'package:propstake/ui/home/properties/properies.vm.dart';
 import 'package:propstake/utils/string_extensions.dart';
 import 'package:propstake/utils/validator.dart';
 import 'package:propstake/utils/widget_extensions.dart';
@@ -19,13 +17,9 @@ import 'package:propstake/widget/apptexts.dart';
 import 'package:propstake/widget/price_widget.dart';
 import 'package:propstake/widget/text_field.dart';
 
-import '../../../../data/model/cart_model.dart';
-import '../../../../utils/constants.dart';
 import '../../../../utils/snack_message.dart';
 import '../../../../widget/app_card.dart';
-import '../../../../widget/success_screen.dart';
 import '../../../../widget/svg_builder.dart';
-import '../../bottom_nav.ui.dart';
 
 class AccountDetailScreen extends StatelessWidget {
   final PropertyResponse? propertyResponse;

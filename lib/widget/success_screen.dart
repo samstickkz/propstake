@@ -7,7 +7,6 @@ import '../gen/assets.gen.dart';
 import '/utils/string_extensions.dart';
 import '/utils/widget_extensions.dart';
 import 'app_button.dart';
-import 'appbar_widget.dart';
 import 'apptexts.dart';
 
 class SuccessScreen extends StatelessWidget {

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:propstake/app_theme/palette.dart';
 import 'package:propstake/utils/widget_extensions.dart';
 
@@ -70,7 +69,7 @@ class AppText extends Text {
           fontWeight: weight ?? (isBold == true ? FontWeight.w700 : null)
         ),
         textAlign: align ?? TextAlign.start,
-        selectionColor: Colors.grey.withOpacity(0.5),
+        selectionColor: Colors.grey.withValues(alpha:0.5),
         maxLines: maxLine,
       ),
     );

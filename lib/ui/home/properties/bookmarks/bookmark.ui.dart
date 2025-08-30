@@ -16,7 +16,6 @@ import '../../../../widget/price_widget.dart';
 import '../../../../widget/svg_builder.dart';
 import '../../../base/base-ui.dart';
 import '../product_detail/product_detail.vm.dart';
-import '../properies.vm.dart';
 
 class BookMarkScreen extends StatelessWidget {
   const BookMarkScreen({super.key});

@@ -14,7 +14,6 @@ import 'app_theme/app_theme.dart';
 import 'data/cache/config.dart';
 import 'data/services/local/locale.service.dart';
 import 'data/services/local/navigation/navigation_service.dart';
-import 'data/services/local/notification.service.dart';
 import 'data/services/local/theme.service.dart';
 import 'data/services/local/user.service.dart';
 import 'firebase_options.dart';

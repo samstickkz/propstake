@@ -13,7 +13,6 @@ import 'package:propstake/widget/svg_builder.dart';
 
 import '../../../gen/assets.gen.dart';
 import '../../base/base-ui.dart';
-import '../profile/profile_home.vm.dart';
 import 'my_investment.vm.dart';
 
 class MyInvestHomeScreen extends StatelessWidget {

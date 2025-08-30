@@ -210,12 +210,12 @@ class AppButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Color backgroundColor = backGroundColor ??(useSecondaryColor? Theme.of(context).colorScheme.secondary: primaryColor);
-    final Color disabledBackgroundColor = backgroundColor.withOpacity(0.5);
+    final Color disabledBackgroundColor = backgroundColor.withValues(alpha: 0.5);
     final Color borderClr =  borderColor ?? borderAppColor;
-    final Color disabledBorderColor = borderClr.withOpacity(0.4);
+    final Color disabledBorderColor = borderClr.withValues(alpha:0.4);
     // final Color textColors = textColor ?? ( backgroundColor == Theme.of(context).colorScheme.secondary || backgroundColor ==  stateColor2(isAppDark(context))? black(isAppDark(context)): (backgroundColor == stateColor12(isAppDark(context))? Theme.of(context).cardColor: Theme.of(context).unselectedWidgetColor));
     final Color textColors = textColor ?? (backgroundColor == stateColor4(isAppDark(context)) || backgroundColor == stateColor2(isAppDark(context))? black(isAppDark(context)): Colors.white);
-    final Color loadingTextColor = Colors.white.withOpacity(0.6);
+    final Color loadingTextColor = Colors.white.withValues(alpha:0.6);
 
     return isOutline || isTransparent? OutlinedButton(
         onPressed: isLoading ? null : onTap == null? null : (){

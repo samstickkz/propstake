@@ -26,7 +26,9 @@ class ContactUsScreen extends StatelessWidget {
         appBar: AppBars(
           text: LocaleData.contactUs.convertString(),
         ),
-        body: Form(
+        body:
+
+        Form(
           key: model.formKey,
           child: ListView(
             padding: 16.sp.padA,
@@ -71,9 +73,13 @@ class ContactUsScreen extends StatelessWidget {
               ),
               30.sp.sbH,
 
+
+
             ],
           ),
         ),
+
+
       ),
     );
   }

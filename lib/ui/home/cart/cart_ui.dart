@@ -13,7 +13,6 @@ import 'package:propstake/widget/text_field.dart';
 import '../../../data/model/cart_model.dart';
 import '../../../widget/appbar_widget.dart';
 import '../../base/base-ui.dart';
-import '../properties/properies.vm.dart';
 import 'cart_vm.dart';
 
 class CartScreen extends StatelessWidget {

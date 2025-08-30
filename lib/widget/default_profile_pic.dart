@@ -1,6 +1,4 @@
-import 'dart:convert';
 import 'dart:io';
-import 'dart:typed_data';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -9,7 +7,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../app_theme/palette.dart';
 import '../data/model/get_user_model.dart';
-import '../data/services/local/user.service.dart';
 import '../utils/widget_extensions.dart';
 import 'apptexts.dart';
 

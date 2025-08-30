@@ -96,7 +96,7 @@ class _DefaultPageState extends State<DefaultPage> {
 
       return file.path;
     } catch (e) {
-      print("Error writing file: $e");
+      // print("Error writing file: $e");
       throw Exception("Failed to write file");
     }
   }

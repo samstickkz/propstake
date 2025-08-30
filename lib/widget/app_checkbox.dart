@@ -132,7 +132,7 @@ class AppRadioButton extends StatelessWidget {
         decoration: BoxDecoration(
           color: value? Theme.of(context).primaryColor : null,
           shape: BoxShape.circle,
-          border: value? Border.all(width: 1.5.sp, color: Theme.of(context).disabledColor.withOpacity(0.3)):  Border.all(width: 1.sp, color: Theme.of(context).disabledColor),
+          border: value? Border.all(width: 1.5.sp, color: Theme.of(context).disabledColor.withValues(alpha:0.3)):  Border.all(width: 1.sp, color: Theme.of(context).disabledColor),
           ),
         ),
     );

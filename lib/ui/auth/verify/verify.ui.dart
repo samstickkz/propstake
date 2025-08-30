@@ -4,18 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:propstake/localization/locales.dart';
 import 'package:propstake/ui/base/base-ui.dart';
-import 'package:propstake/utils/constants.dart';
 import 'package:propstake/utils/string_extensions.dart';
-import 'package:propstake/utils/validator.dart';
 import 'package:propstake/widget/custom_pinfield.dart';
 
-import '../../../gen/assets.gen.dart';
 import '../../../utils/widget_extensions.dart';
 import '../../../widget/app_button.dart';
 import '../../../widget/apptexts.dart';
 import '../../../widget/auth_appbar.dart';
-import '../../../widget/svg_builder.dart';
-import '../../../widget/text_field.dart';
 import 'verify.vm.dart';
 
 class VerifyUserScreen extends StatelessWidget {

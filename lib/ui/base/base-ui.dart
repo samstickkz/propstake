@@ -100,7 +100,7 @@ class SmallLoader extends StatelessWidget {
           Container(
             height: 70,
             width: 70,
-            color: color!=null? (color!.withOpacity(0.3)) : Theme.of(context).primaryColor.withOpacity(0.3),
+            color: color!=null? (color!.withValues(alpha:0.3)) : Theme.of(context).primaryColor.withValues(alpha:0.3),
             child: Center(
                 child: SpinKitRing(
                   color: color ?? Theme.of(context).primaryColor,

@@ -1,4 +1,3 @@
-import 'package:animate_do/animate_do.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -14,7 +13,6 @@ import 'package:propstake/widget/app_button.dart';
 import 'package:propstake/widget/app_card.dart';
 import 'package:propstake/widget/apptexts.dart';
 import 'package:propstake/widget/default_profile_pic.dart';
-import 'package:propstake/widget/inidicator.dart';
 import 'package:propstake/widget/price_widget.dart';
 import 'package:propstake/widget/svg_builder.dart';
 import 'package:propstake/widget/text_field.dart';

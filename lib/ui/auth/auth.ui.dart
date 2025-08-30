@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:propstake/utils/widget_extensions.dart';
-import 'package:propstake/widget/app_button.dart';
-import 'package:propstake/widget/apptexts.dart';
+
 import 'package:propstake/widget/auth_appbar.dart';
-import 'package:propstake/widget/or_builder.dart';
-import 'package:propstake/widget/svg_builder.dart';
+
 import 'package:animate_do/animate_do.dart';
 
-import '../../gen/assets.gen.dart';
 import '../base/base-ui.dart';
 import 'auth.vm.dart';
 import 'widgets/sign_in_form.dart';

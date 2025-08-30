@@ -3,7 +3,6 @@ import 'dart:developer';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
-import 'package:flutter/material.dart';
 
 import '../../../utils/app_logger.dart';
 import '../../cache/config.dart';

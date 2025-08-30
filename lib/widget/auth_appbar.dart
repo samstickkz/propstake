@@ -5,7 +5,6 @@ import 'package:propstake/utils/constants.dart';
 import '../app_theme/palette.dart';
 import '../gen/assets.gen.dart';
 import '../utils/widget_extensions.dart';
-import 'apptexts.dart';
 import 'svg_builder.dart';
 
 class AppAppBar extends StatelessWidget implements PreferredSizeWidget {

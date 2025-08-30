@@ -6,7 +6,6 @@ import 'package:propstake/data/model/propert_response.dart';
 import 'package:propstake/ui/base/base-vm.dart';
 import 'package:propstake/utils/app_logger.dart';
 import 'package:propstake/utils/constants.dart';
-import 'package:propstake/widget/price_widget.dart';
 
 import '../cart/cart_ui.dart';
 import 'bookmarks/bookmark.ui.dart';
@@ -32,7 +31,7 @@ class PropertiesViewModel extends BaseViewModel {
         return docData;
       }).toList();
 
-      print("Property Lengthsss ::: ${data.length}");
+      // print("Property Lengthsss ::: ${data.length}");
 
       for (var dat in data) {
 

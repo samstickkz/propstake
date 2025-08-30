@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:propstake/ui/base/base-vm.dart';
 import 'package:propstake/utils/app_logger.dart';
 import 'package:propstake/utils/constants.dart';
-import 'package:propstake/utils/snack_message.dart';
 import 'package:propstake/utils/string_extensions.dart';
 
 import '../../../data/model/cart_model.dart';
@@ -13,8 +12,6 @@ import '../../../data/model/propert_response.dart';
 import '../../../localization/locales.dart';
 import '../../../widget/success_screen.dart';
 import '../bottom_nav.ui.dart';
-import '../my_investment/deposit/account_details.ui.dart';
-import '../properties/properies.vm.dart';
 
 class CartViewModel extends BaseViewModel {
   FirebaseFirestore firestore = FirebaseFirestore.instance;

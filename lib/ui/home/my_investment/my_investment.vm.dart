@@ -10,15 +10,12 @@ import 'package:propstake/ui/home/profile/profile_home.vm.dart';
 import 'package:propstake/utils/app_buttom_sheet.dart';
 import 'package:propstake/utils/app_logger.dart';
 import 'package:propstake/utils/constants.dart';
-import 'package:propstake/utils/dartz.x.dart';
 import 'package:propstake/utils/string_extensions.dart';
 import 'package:propstake/widget/price_widget.dart';
 
 import '../../../data/model/propert_response.dart';
-import '../../../data/model/transaction_response.dart';
-import '../../../gen/assets.gen.dart';
+
 import 'auto_invest/auto_invest.ui.dart';
-import 'deposit/deposit.ui.dart';
 import 'faq_details/faq_detail_page.dart';
 import 'my_investment.ui.dart';
 import 'transaction_history/transaction_history.ui.dart';

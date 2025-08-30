@@ -13,7 +13,6 @@ import 'package:propstake/widget/apptexts.dart';
 import 'package:propstake/widget/text_field.dart';
 
 import '../../../../gen/assets.gen.dart';
-import '../../../../utils/constants.dart';
 import '../../../../widget/app_card.dart';
 import '../../../../widget/default_profile_pic.dart';
 import '../../../../widget/svg_builder.dart';
