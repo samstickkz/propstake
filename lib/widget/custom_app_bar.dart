@@ -4,7 +4,7 @@ import 'package:propstake/app_theme/palette.dart';
 import 'package:propstake/utils/extension_functions.dart';
 import 'package:propstake/utils/widget_extensions.dart';
 
-import '../app_theme/app_theme.dart';
+
 import 'apptexts.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {

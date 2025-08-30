@@ -8,76 +8,89 @@ import '../../auth/auth.ui.dart';
 import '../../base/base-vm.dart';
 import '../../home/bottom_nav.ui.dart';
 import '../onboarding/onboarding.ui.dart';
+import 'dart:async';
 
 class SplashScreenViewModel extends BaseViewModel {
-
   late final AnimationController _controller;
-
-  init(TickerProvider vsync)async {
-
+  Timer? _timer;
+  init(TickerProvider vsync) async {
     _controller = AnimationController(vsync: vsync, duration: const Duration(seconds: 4))
       ..forward()
       ..addStatusListener((status) async {
         if (status == AnimationStatus.completed) {
-          // HANDLE NAVIGATION AFTER SPLASH SCREEN
           appRelaunch();
         }
       });
+
   }
 
-  changeLanguage(String? val){
-    if(val==null) return;
+  changeLanguage(String? val) {
+    if (val == null) return;
     localeService.saveLocale(val);
     notifyListeners();
   }
 
-
   Future<Object> appRelaunch() async {
-
-    // return navigationService.navigateToAndRemoveUntilWidget(const BottomNavigationScreen());
-
-    if(userService.isUserLoggedIn){
+    if (userService.isUserLoggedIn) {
       return navigationService.navigateToAndRemoveUntilWidget(const BottomNavigationScreen());
-    }else{
-      // return navigationService.navigateToAndRemoveUntilWidget(const AppBottomNavScreen());
+    } else {
       return navigationService.navigateToAndRemoveUntilWidget(const OnBoardingScreen());
     }
   }
 
-  goToAuth(bool isSignIn){
-    return navigationService.navigateToAndRemoveUntilWidget(AuthHomeScreen(isSignIn: isSignIn,));
+  goToAuth(bool isSignIn) {
+    return navigationService.navigateToAndRemoveUntilWidget(AuthHomeScreen(isSignIn: isSignIn));
   }
 
   int currentIndex = 0;
 
-  onPageChanged(int val){
+  onPageChanged(int val) {
     currentIndex = val;
     notifyListeners();
   }
-  
+
   List<OnboardingClass> onboardingData = [
-    OnboardingClass(image: Assets.png.onboardOne.path, title: LocaleData.smartRealEstateInvesting.convertString(), subTitle: LocaleData.ownAPieceOfRealEstate.convertString()),
-    OnboardingClass(image: Assets.png.onboardTwo.path, title: LocaleData.passiveIncomeMadeSimple.convertString(), subTitle: LocaleData.earnConsistentReturns.convertString()),
-    OnboardingClass(image: Assets.png.onboardThree.path, title: LocaleData.startWithJust100.convertString(), subTitle: LocaleData.noLargeDownPayments.convertString()),
+    OnboardingClass(
+      assetPath: Assets.png.onboardOne.path,
+      title: LocaleData.smartRealEstateInvesting.convertString(),
+      subTitle: LocaleData.ownAPieceOfRealEstate.convertString(),
+    ),
+    OnboardingClass(
+      assetPath: "assets/videos/dubai.mp4", //
+      title: "Experience Dubai",
+      subTitle: "Earnrental income from Dubai real estate market",
+    ),
+    OnboardingClass(
+      assetPath: Assets.png.onboardTwo.path,
+      title: LocaleData.passiveIncomeMadeSimple.convertString(),
+      subTitle: LocaleData.earnConsistentReturns.convertString(),
+    ),
+    OnboardingClass(
+      assetPath: Assets.png.onboardThree.path,
+      title: LocaleData.startWithJust100.convertString(),
+      subTitle: LocaleData.noLargeDownPayments.convertString(),
+    ),
   ];
 
   PageController controller = PageController();
 
-  changePage(int index){
-    controller.animateToPage(index, duration: Duration(microseconds: 200), curve: Curves.linear);
+  changePage(int index) {
+    controller.animateToPage(index, duration: const Duration(milliseconds: 200), curve: Curves.linear);
     notifyListeners();
   }
-
 }
 
 class OnboardingClass {
-  String image;
-  String title;
-  String subTitle;
+  final String assetPath;
+  final String title;
+  final String subTitle;
 
   OnboardingClass({
-    required this.image,
+    required this.assetPath,
     required this.title,
     required this.subTitle,
+    // required String image,
   });
+
+  bool get isVideo => assetPath.toLowerCase().endsWith(".mp4");
 }

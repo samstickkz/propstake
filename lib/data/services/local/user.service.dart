@@ -8,19 +8,18 @@ import 'package:propstake/localization/locales.dart';
 import 'package:propstake/locator.dart';
 import 'package:propstake/ui/base/base-vm.dart';
 import 'package:propstake/utils/app_logger.dart';
-import 'package:propstake/utils/dartz.x.dart';
+
 import 'package:propstake/utils/snack_message.dart';
 import 'package:propstake/utils/string_extensions.dart';
 
 import '../../../ui/auth/auth.ui.dart';
-import '../../../ui/home/properties/properies.vm.dart';
+
 import '../../../utils/constants.dart';
 import '../../cache/database_keys.dart';
 import '../../model/cart_model.dart';
 import '../../model/get_user_model.dart';
 import '../../model/login_auth_model.dart';
 import '../../model/propert_response.dart';
-
 
 class UserService extends ChangeNotifier {
   User user = User();
@@ -35,61 +34,71 @@ class UserService extends ChangeNotifier {
   List<TempCart> cartItems = [];
   List<TempTransactions> transactions = [];
 
-  removeFromCart(TempCart cart){
-    cartItems.removeWhere((test)=> test.id == cart.id);
+  removeFromCart(TempCart cart) {
+    cartItems.removeWhere((test) => test.id == cart.id);
     notifyListeners();
   }
 
-  saveCart(TempCart cart){
-    if(cartItems.any((test)=> test.product?.id == cart.product?.id)){
+  saveCart(TempCart cart) {
+    if (cartItems.any((test) => test.product?.id == cart.product?.id)) {
       showCustomToast(LocaleData.propertyAlreadyInCart.convertString());
-    }else{
+    } else {
       cartItems.add(cart);
-      showCustomToast(LocaleData.propertyAddedToCart.convertString(), success: true);
+      showCustomToast(
+        LocaleData.propertyAddedToCart.convertString(),
+        success: true,
+      );
     }
     notifyListeners();
   }
 
-  updateCarts(List<TempCart> carts){
+  updateCarts(List<TempCart> carts) {
     cartItems = carts;
     notifyListeners();
   }
 
-  updateTransactions(List<TempTransactions> carts){
+  updateTransactions(List<TempTransactions> carts) {
     transactions = carts;
     notifyListeners();
   }
 
-  saveUnSaveBookMark(PropertyResponse property){
-    if(bookMarks.any((test)=> test.id == property.id)){
-      bookMarks.removeWhere((test)=> test.id == property.id);
-    }else{
+  saveUnSaveBookMark(PropertyResponse property) {
+    if (bookMarks.any((test) => test.id == property.id)) {
+      bookMarks.removeWhere((test) => test.id == property.id);
+    } else {
       bookMarks.add(property);
     }
     notifyListeners();
   }
 
-
-  changeUserType(bool doctor){
+  changeUserType(bool doctor) {
     isDoctor = doctor;
     notifyListeners();
   }
 
   storeToken({required String? accessToken, String? refreshToken}) async {
-    await storageService.storeItem(key: StorageKey.tokenTableKey, value: accessToken);
-    if(refreshToken!=null){
-      await storageService.storeItem(key: StorageKey.refreshTokenKey, value: refreshToken);
+    await storageService.storeItem(
+      key: StorageKey.tokenTableKey,
+      value: accessToken,
+    );
+    if (refreshToken != null) {
+      await storageService.storeItem(
+        key: StorageKey.refreshTokenKey,
+        value: refreshToken,
+      );
     }
     isUserLoggedIn = true;
     user = User();
     notifyListeners();
   }
 
-
   storeUser({required User? users}) async {
-    if(users!=null){
-      var res = await storageService.storeItem(key: StorageKey.userTableKey, value: jsonEncode(users));
-      if(res){
+    if (users != null) {
+      var res = await storageService.storeItem(
+        key: StorageKey.userTableKey,
+        value: jsonEncode(users),
+      );
+      if (res) {
         user = users;
         AppLogger.debug("Name: ${user.email}");
       }
@@ -98,11 +107,13 @@ class UserService extends ChangeNotifier {
   }
 
   initializer() async {
-    String? userToken = await storageService.read(key: StorageKey.tokenTableKey);
-    if(userToken==null){
+    String? userToken = await storageService.read(
+      key: StorageKey.tokenTableKey,
+    );
+    if (userToken == null) {
       user = User();
       isUserLoggedIn = false;
-    }else{
+    } else {
       isUserLoggedIn = true;
       await getStoreUser();
       await getSavedBValance();
@@ -116,9 +127,12 @@ class UserService extends ChangeNotifier {
   }
 
   saveWalletBalance(BalanceResponse balance) async {
-    if(balance.data != null){
-      var res = await storageService.storeItem(key: StorageKey.walletBalance, value: jsonEncode(balance));
-      if(res){
+    if (balance.data != null) {
+      var res = await storageService.storeItem(
+        key: StorageKey.walletBalance,
+        value: jsonEncode(balance),
+      );
+      if (res) {
         userBalance = balance.data ?? userBalance;
       }
     }
@@ -126,14 +140,17 @@ class UserService extends ChangeNotifier {
   }
 
   saveReferralCode(LoginAuthModel balance) async {
-    try{
-      if(balance.data != null){
-        var res = await storageService.storeItem(key: StorageKey.referralCode, value: balance.data);
-        if(res){
+    try {
+      if (balance.data != null) {
+        var res = await storageService.storeItem(
+          key: StorageKey.referralCode,
+          value: balance.data,
+        );
+        if (res) {
           referralCode = balance.data ?? referralCode;
         }
       }
-    }catch(err){
+    } catch (err) {
       AppLogger.debug("Error ::: $err");
     }
 
@@ -142,9 +159,10 @@ class UserService extends ChangeNotifier {
 
   Future<num?> getSavedBValance() async {
     String? res = await storageService.read(key: StorageKey.walletBalance);
-    if(res != null){
-      userBalance = BalanceResponse.fromJson(jsonDecode(res)).data ?? userBalance;
-    }else {
+    if (res != null) {
+      userBalance =
+          BalanceResponse.fromJson(jsonDecode(res)).data ?? userBalance;
+    } else {
       await walletService.getWallet();
     }
     notifyListeners();
@@ -153,7 +171,7 @@ class UserService extends ChangeNotifier {
 
   Future<String?> getSavedReferralCode() async {
     String? res = await storageService.read(key: StorageKey.referralCode);
-    if(res != null){
+    if (res != null) {
       referralCode = res;
     } else {
       await authenticationService.getReferralCode();
@@ -161,7 +179,6 @@ class UserService extends ChangeNotifier {
     notifyListeners();
     return referralCode;
   }
-
 
   /// LOGOUT FUNCTION
   logout() async {
@@ -173,23 +190,24 @@ class UserService extends ChangeNotifier {
     isUserLoggedIn = false;
     user = User();
     notifyListeners();
-    navigationService.navigateToAndRemoveUntilWidget(const AuthHomeScreen(isSignIn: true,));
+    navigationService.navigateToAndRemoveUntilWidget(
+      const AuthHomeScreen(isSignIn: true),
+    );
   }
 
-
-  Future<User?> getStoreUser()  async {
+  Future<User?> getStoreUser() async {
     String? data = await storageService.readItem(key: StorageKey.userTableKey);
-    if(data==null){
+    if (data == null) {
       var response = await authenticationService.getUser();
-      if(response.isRight()){
+      if (response.isRight()) {
         notifyListeners();
         return user;
-      }else{
+      } else {
         user = User();
         notifyListeners();
         return null;
       }
-    }else{
+    } else {
       AppLogger.debug("User Data: $data");
       User userResponse = User.fromJson(jsonDecode(data));
       user = userResponse;
@@ -198,5 +216,4 @@ class UserService extends ChangeNotifier {
       return user;
     }
   }
-
 }

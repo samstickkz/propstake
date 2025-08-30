@@ -16,7 +16,7 @@ import '../../model/login_auth_model.dart';
 import '../../model/on_boarding_check_model.dart';
 import '../../model/update_user_model.dart';
 import 'base.api.service.dart';
-import 'dio_client_wrapper.dart';
+
 
 class AuthenticationService {
 
