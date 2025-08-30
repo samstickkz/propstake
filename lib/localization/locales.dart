@@ -718,7 +718,7 @@ mixin LocaleData {
     cashback: "Cashback",
     promotions: "Promotions",
     referAndEarn: "Refer and Earn",
-    shareUniqueCode: "Share your unique code with friends to earn more!",
+    shareUniqueCode: "Share your unique code with friends to earn 10% referral bonus!",
     howToEarnMore: "How to earn more",
     investingInNewProperties: "Investing in new properties",
     invitingFriends: "Inviting friends (referrals)",

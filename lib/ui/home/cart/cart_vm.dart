@@ -101,7 +101,7 @@ class CartViewModel extends BaseViewModel {
     navigationService.navigateToRoute(
         SuccessScreen(
           onTap:()=> navigationService.navigateToAndRemoveUntilWidget(BottomNavigationScreen(initialIndex: 1,)),
-          title: "Payment confirmed",
+          title: "Payment Processing",
           body: "You payment will be confirmed and you will get a mail form us confirming your payment",
         )
     );
