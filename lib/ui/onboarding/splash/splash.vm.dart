@@ -57,8 +57,8 @@ class SplashScreenViewModel extends BaseViewModel {
     ),
     OnboardingClass(
       assetPath: "assets/videos/dubai.mp4", //
-      title: "Experience Dubai",
-      subTitle: "Earnrental income from Dubai real estate market",
+      title: "Earn Globally",
+      subTitle: "Earn rental income from global real estate market",
     ),
     OnboardingClass(
       assetPath: Assets.png.onboardTwo.path,
